@@ -1,2 +1,2 @@
-# RTrain
-R training w/ Star Wars :rocket: :arrow_left: :computer: :bar_chart:
+# RTrain :rocket: :computer: :bar_chart:
+R training w/ Star Wars 

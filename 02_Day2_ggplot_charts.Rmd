@@ -1,0 +1,909 @@
+---
+title: "R Camp | day 2"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    number_sections: true
+    self_contained: false
+fontsize: 14pt
+monofont: Source Code Pro
+monofontoptions: Scale = 1.1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+knitr::opts_chunk$set(fig.width = 10, fig.height = 6) 
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+
+# Good morning, Detectives!
+
+<br>
+
+__Please connect to your computer__
+
+1. __Open__ the Start menu  \ \*_Click the Window’s logo on the bottom left of the screen_
+1. Select ` Remote Desktop Connection `
+1. Enter ` w7-your7digit# `
+1. Press _Connect_
+
+<br>
+
+__And open your RStudio project__
+
+1. __Open__ your project folder from last week.
+1. Double click the __.Rproj__ file to open RStudio.
+1. Relax.
+
+<p style="display:block; text-align:center;">
+<img src="https://pbs.twimg.com/media/DNhps0gUQAAcS55.jpg" width="520">
+</p>
+
+<br>
+
+## CAMP schedule
+
+__Day 1__
+
+1. Become a pet detective.
+1. Open new RStudio project and R script.
+1. Install new R packages.
+1. Read data into R.
+1. Arrange and filter your data.
+1. Solve a cat mystery.
+
+
+__Day 2__  
+
+1. Data transformations
+    - Add new columns.
+    - Summarize your data.
+    - Split groups and categories in your data.
+    - Save data.
+
+2. Make __plots__.
+    - Scatter plots and transparency.
+    - Add a smoothed trend line to the plot.
+    - Add titles, colors, and axis labels.
+    - Bar charts.
+    - Histograms.
+    - Box plots.
+    - Log transform your chart axis. 
+
+<br> 
+
+
+## Day 1 review
+
+
+### 1. Load your packages
+
+_Hint: Put the packages you need at the top of every script._
+```{r, eval = F}
+library("readr")
+library("dplyr")
+
+# Your code starts here.
+
+```
+
+<br>
+
+
+### 2. Load data with `read_csv()`
+```{r, eval = F}
+
+all_cats <- read_csv("data/missing_cat_list.csv")
+
+```
+
+<br>
+
+
+### 3. Sort and arrange your data with `arrange()`
+```{r, eval = F}
+
+# Sort from low to high
+arrange(all_cats, age)
+
+# Sort from high to low
+arrange(all_cats, desc(age))
+
+```
+
+<br>
+
+
+### 4. Filter your data with `filter()`
+
+_Hint: Numbers don't need quotes._
+```{r, eval = F}
+
+# Filter to cats 5 years old
+cats_5yo <- filter(all_cats, age == 5)
+
+# Filter to cats from UK or Australia
+cricket_cats <- filter(all_cats, country %in% c("UK", "Australia"))
+
+```
+
+<br>
+
+### 5. Questions from Day 1
+
+- Find new packages and functions
+    - Use __Cheatsheets__ to find common functions: 
+        - Go to _Help_ > _Cheatsheets_. 
+            - _Data Transformation_ is what we're learning now. 
+            - _Data Visualization_ is also good. 
+    - To search functions 
+        - [google.com](www.google.com)
+        - [stackoverflow.com](https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs) + use the `[r]` tag
+    - To search packages: [CRANsearcher](https://github.com/RhoInc/CRANsearcher)
+- Meet your _History_
+    - Push up in the console to scroll through your recent command history.
+- Get function help: `?arrange()` 
+- Learn more R? 
+    - R basics: https://tutorials.shinyapps.io/04-Programming-Basics/#section-welcome
+    - More `filter()`: https://jjallaire.shinyapps.io/learnr-tutorial-03a-data-manip-filter/
+    - [__R for Data Science__](http://r4ds.had.co.nz/) - is a great book that is online and teaches everything. 
+
+<br>
+
+
+# _Guess the Cat_ {-}
+
+![](https://i.upworthy.com/nugget/530baf6f46d669b92a00001f/guess-who-game-9e782ebefa57a5fea47e29386f99b356.jpg){width="250" align="right" style="margin-top: -20px; margin-left: 20px; margin-right: 36px;"}
+
+> "Are you the best cat detective out there?""
+
+Let's play a game to find out.
+
+<br>
+
+__The rules__  
+
+1. Scroll through the missing cat list and find a cat you like.
+1. __Don't let your neighbor see the cat you chose.__
+1. Take turns asking each other questions about their cat. 
+1. Use the answers you receive to build a big `filter()` function that you can use to narrow down the potential cats. 
+1. _Elusive_ answers are encouraged, depending on how nasty you're feeling.
+    - For example, if someone asks you _How grumpy is your cat?_ 
+    - You can respond _My cat's grumpiness is eqaul to two less than its age._ 
+    - Or if you're feeling generous you can give a more straightforward answer, such as _My cat's grumpiness is definitely not 2._
+1. The winner is the first to guess their neighbor's cat.
+    
+If you have time play another round. Best of 3? 
+
+<br>
+
+
+# Data transformation {-}
+
+
+#| You have Voicemail (1)
+<hr>
+
+Put your detective hat back on. Your neighbor just called and he shared some bad news. His cat has gone missing. He was so worked-up the only thing you could make out in the message was a description of how great his cat's personality was. Here are the few details you were able to jot down.
+
+_My neighbor's great cat:_
+
+> The cat's clumsiness and its greediness sum to more than 12.
+>
+> You could barely make this out, but you think the cat's grumpiness and playfulness only sum to 6. 
+>
+> And it's a female cat.
+>
+> Oh and the cat is the same age as your neighbor _(in human years)_, who is probably around 85, maybe younger.
+
+
+It sounds like we're going to need some math for this puzzle. Let's calculate some new columns with `mutate()` to help find your neighbor's cat.
+
+
+#| `mutate()`
+<hr>
+
+It's often useful to edit existing columns in a data frame or add new columns that are functions of existing columns. That’s the job of `mutate() `.
+
+## Get to know your data frame
+
+Before we go changing things in the data frame we'll need to get to know the column names and the tables dimensions a bit better. These quick functions are all great ways to describe your data frame.
+
+
+### Data frame details {-}
+
+- `names(all_cats)` show the column names
+
+- `nrow(all_cats)` number of rows 
+
+- `ncol(all_cats)` number of columns
+
+- `summary(all_cats)` summary of all columns
+
+- `glimpse(all_cats)` column names, plus a glimpse of first few values (requires loading _dplyr_ package)
+
+
+## Human years 
+
+In our work we often use `mutate` to calculate new units for measurments. In this case, let's estimate the cat ages in human years. We'll use the equation below to convert cat years to human years.
+
+> __Human years__ = Cat years * 4 + 20
+
+
+### Add human years {-}
+
+Use `mutate()` to add a column called `human_age` to the table _my_cat_.
+
+```{r, eval=F}
+
+all_cats <- mutate(all_cats, 
+                   human_age = age * 4 + 20)
+
+```
+
+<br>
+
+
+### Update a column {-}
+
+You can also add a `found_by` column. That way people will know where to send the reward money\$\$.
+```{r, eval=F}
+
+my_cat <- mutate(my_cat, 
+                 found_by = "Pet Detective Cooper")
+
+```
+
+<br>
+
+
+You can also use `mutate()` to update the value of a column that is already in your data frame.
+```{r, eval=F}
+
+my_cat <- mutate(my_cat, 
+                 found_by = "Nevermind, it's a secret")
+
+```
+
+
+### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> If you use `mutate()` and provide a single value for a column such as `found_by = "Pet Detective"`, then every row in the column you created will have that value. If you provide a vector of values, such as `human_age = cat_age * 4 + 20`, then the column you created will have a list of values that each correspond to the values in the vector you provided. If you provide a vector that has a different length than the number of rows in your data frame, you'll get an error telling you that the number of values you provide must be equal to the number of rows in your data frame or be a single value.
+
+
+
+## Find your neighbor's cat
+
+Now let's see if you can use `mutate()` to help match the description of the cat's personality.
+
+Here's a reminder of how your neighbor described his cat.
+
+> The cat's clumsiness and its greediness scores sum to more than 12.
+> You could barely make this out, but you think the cat's grumpiness and playfulness only sum to 6. 
+> It's a female cat.
+>
+> And the cat is the same age as him _(in human years)_, which is probably around 85, maybe less.
+
+Use `mutate()` to add columns to the missing cat list, and then `filter()` the new columns to narrow the list down to your neighbor's cat.
+
+Here's a snippet to get you started.
+```{r neighbor1, eval=F}
+
+library("dplyr")
+
+# Add columns to all_cats
+all_cats <- mutate(all_cats, 
+                  clumsy_and_greedy  = clumsy + greedy,
+                  grumpy_and_playful = grumpy + ...,
+                  human_age = age * 4 + ...
+                  )
+
+# Filter for cats matching neighbor's description
+filter(all_cats,
+         clumsy_and_greedy  > ...,
+         grumpy_and_playful == ...,
+         human_age > ...
+         )
+
+```
+<br>
+
+
+You can chain these two functions together and do everything in one go. For that you can use the `%>%` (pipe).
+
+
+![](https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png){width="115" align="left" style="margin-right:20px;"}
+
+<br>
+
+In a script the `%>%` is read as "and then". In the code below we are telling R to `mutate` the data __and then__ to `filter` it.
+
+<br>
+
+```{r neighbor2, eval=F}
+
+nei_cat <- mutate(all_cats, 
+                  clumsy_and_greedy  = clumsy + greedy,
+                  grumpy_and_playful = grumpy + playful,
+                  human_age = age * 4 + 20) %>%
+           filter(clumsy_and_greedy  > 12,
+                  grumpy_and_playful == 6,
+                  human_age > 80)
+
+```
+
+
+<div class = "quiz">
+### Pop Quiz, hotshot! {-}
+
+_What is the name of your friend's cat?_
+
+<input type="radio"> _Damon_          <br> 
+<input type="radio"> _Fluffy George_  <br> 
+<input type="radio"> _Stinkerbell_    <br> 
+<input type="radio"> _Precious Abe_   <br> 
+
+<br>
+
+<details>
+<summary class = "btn_code">_Show solution_</summary>
+<p>
+<i class="fa fa-check" aria-hidden="true" style="color: green;"></i> `Fluffy George`  
+
+_Breaking Meows! You rock!_
+
+</p></details></div>
+
+
+#| The case of the baby tigers &#x1F42F; &#x1F42F; 
+<hr>
+
+![](https://rforcats.net/assets/img/pipe_gif.gif){width="360"}
+
+<br>
+
+Sitting down for your morning coffee you notice the front page of the paper has a story on __cats!__   
+According to Phyllis Cattleby there's been a whole string of striped kittens gone missing. _This sounds like a case for a pet detective._
+
+Phyllis is pointing her finger at a circus that just came to town. A circus that seems to be drawing big crowds with their adorable and surprisingly tame "tiger babies". 
+
+> What evidence could we find in the cat database to support or refute the claim that the circus is stealing young striped cats?
+
+
+For this level of sleuthing we're going to need to __summarize__ our data.
+
+
+#| `summarize()` this
+<hr>
+
+![](images/summarize_diagram.png){width="490"}
+
+`summarize` allows you to apply a summary function like `median()` to a column and collapse your data down to a single row. To really dig into `summarize` you'll want to know some common summary functions, such as `sum()`, `mean()`, `median()`, `min()`, and `max()`.
+
+
+## `sum()` {-}
+
+Use `summarize()` and `sum()` to find the total of all `greedy` scores.
+
+```{r, eval=F}
+summarize(all_cats, total_greedy = sum(greedy))
+```
+
+
+## `mean()` {-}
+Use `summarize()` and `mean()` to calculate the mean level of grumpiness in all cats.
+
+```{r, eval=F}
+
+cat_summary <- summarize(all_cats, 
+                         mean_age = mean(age, na.rm = T))
+
+```
+
+<br>
+
+> Note the `na.rm = TRUE` in the `mean()` function. This tells R to ignore empty cells or missing values that show up in R as `NA`. If you leave `na.rm` out, the _mean_ funciton will return 'NA' when it finds a missing value in the data.
+
+
+## `median()` {-}
+Use summarize to calculate the _median_ level of grumpiness in all cats.
+
+`summarize(all_cats, median_grumpy = median(grumpy))`
+
+
+## `max()` {-}
+Use summarize to calculate the _maximum_ playful score for all cats.
+
+`all_cats %>% summarize(max_playful = max(playful))`
+
+
+## `min()` {-}
+Use summarize to calculate the _minimum_ playful score for all cats.
+
+`all_cats %>% summarize(min_playful = min(playful))`
+
+
+## `nth()` {-}
+Use summarize and `nth(name, 12)` to find the name of the _12th_ oldest cat in human years.   
+
+_Hint: Use `arrange()` first._
+
+`arrange(all_cats, desc(human_age)) %>% summarize(cat_name_2 = nth(name, 12))`
+
+
+
+## `sd()` {-}
+
+What is the _standard deviation_ of the grumpiness scores?
+
+`summarize(all_cats, stdev_grumpy = sd(grumpy))`
+
+
+## `quantile()` {-}
+
+_Quantiles_ are useful for finding the upper or lower range of a column. Use the `quantile()` function to find the the 5th and 95th quantile of the cat ages.
+
+```{r quants, eval = FALSE}
+
+summarize(all_cats, 
+          age_5th_pctile  = quantile(age, 0.05, na.rm = T),
+          age_95th_pctile = quantile(age, 0.95))
+```
+
+_Hint: add `na.rm = T` to `quantile()`._
+
+
+## `n()` {-}
+
+`n()` stands for _count_.
+
+Use summarize and `n()` to count the number of `"brown"` cats. 
+
+_Hint: Use `filter()` first._  
+
+`filter(all_cats, color == "brown") %>% summarize(cat_count = n())`
+
+<br>
+
+
+#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+
+Create a cat summary using 3 of the math functions above. 
+
+
+
+## Striped cats
+
+Now that we're equipped with some powerful tools, let's use `summarize()` to answer a few questions about the striped cats.
+
+_Is the age of missing `striped` cats lower than expected?_
+
+
+
+First find the median age for all the missing cats?
+```{r all_cats_age, eval = FALSE}
+
+summarize(all_cats, median_age = median(age, na.rm = T))
+
+```
+
+<br>
+
+
+Now, what is the median age for only striped cats?
+```{r striped_age, eval = FALSE}
+
+filter(all_cats, color == "striped") %>% summarize(striped_med_age = median(age, na.rm = T))
+
+```
+
+<br>
+
+
+_But are striped cats the only color group that is younger than average?_
+
+
+> Wouldn't it be great if we could easily find the age for every color of cat?
+
+
+#| `group_by()`
+<hr>
+
+Enter `group_by()` stage left. If you thought `summarize` was awesome, wait until you include `group_by` with your `summarize` commands. 
+
+Try using `group_by` with the column _color_ and then use `summarize` to count the number of cats in each group.  
+
+```{r grp-by-color, eval = FALSE}
+
+group_by(all_cats, color) %>% summarize(color_count  =  n()) %>% ungroup()
+
+```
+
+### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> Ending with `ungroup()` is good practice. This will prevent your data from staying grouped after the summarizing has been completed.
+
+<br>
+
+Well that's interesting, but not conclusive evidence. 
+
+> What about the age of the missing striped cats? Are they younger on average than all the other groups?
+
+Let's use `group_by` with the column _color_ again, but this time use `summarize` to find the `mean(age)` for each cat color. 
+
+```{r mean_age-by-color, eval = FALSE}
+
+group_by(all_cats, color) %>% 
+      summarize(mean_age =  mean(age, na.rm = T)) %>% ungroup()
+
+```
+
+<br>
+
+That's a lot of digits! 
+
+
+## `round()`
+
+You can round the ages to a certain number of digits using the `round()` function. We can finish by adding the `arrange()` function to sort the table by our new column.
+
+```{r mean_age-by-color-round, eval = FALSE}
+
+group_by(all_cats, color) %>% 
+  summarize(mean_age       =  mean(age, na.rm = T),
+            mean_age_round = round(mean_age, digits = 1)) %>%  
+  arrange(mean_age_round) %>% ungroup()
+
+```
+
+<br>
+
+__NOTE:__ The `round()` function in R does not automatically round values ending in 5 up, instead it uses scientific rounding. It rounds values ending in 5 to the nearest even number, so 2.5 rounded to the nearest whole number using `round()` is 2, and 3.5 rounded to the nearest whole number is 4. If you want to round all values ending in 5 up, then you'll have to use a rounding function from another package.
+
+
+
+### Now there's some good evidence!
+
+Why are the _striped_ cats so much younger? Are they being catnapped and sent to the circus? Let's put this piece of evidence in our back pocket for now. We can return to it after we learn to make some charts. Maybe then we'll be able to put together a convincing report to send to the police chief. 
+
+
+
+#| Save files
+<hr>
+
+Let's save the last summary table we created to a _CSV_. That way we can print it to have it __faxed__ to the police later. To save a data frame we'll use the `write_csv()` function from our favorite _readr_ package. 
+```{r, eval = F}
+
+# First give the new data a name
+ages_by_color <- group_by(all_cats, color) %>% 
+                    summarize(mean_age       =  mean(age, na.rm = T),
+                              mean_age_round = round(mean_age, digits = 1)) %>%  
+                    arrange(mean_age_round) %>% ungroup()
+
+# Write the file to your project folder
+write_csv(ages_by_color, "mean_cat_ages_by_color.csv")
+
+```
+
+
+
+### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> __Warning!__ R will overwrite a file if the file already exists in a folder. It will not ask for confirmation. You will not collect $200.
+>
+
+<br>
+
+
+#| Grouped `mutate()` 
+<br><hr>
+
+We can bring back `mutate` to add a column based on the grouped values in a data set. For example, you may want to add a column showing the average age by country to the whole table.  
+
+When you combine `group_by` and `mutate` the new column will be calculated based on the values within each group. 
+
+```{r mutate-age, eval=F}
+
+group_by(all_cats, country) %>% mutate(country_mean_age = mean(age, na.rm = T)) %>% ungroup()
+
+```
+
+<br>
+
+#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+
+Estimate the mean grumpiness for each group of cats with the same greediness score.
+
+<br>
+
+
+### Exercise 2 <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+
+Find the median grumpiness score for each country.
+
+```{r, eval=F}
+group_by(all_cats, country) %>% 
+  mutate(grumpy_by_country = median(grumpy, na.rm = T)) %>% 
+  ungroup()
+```
+
+
+
+
+
+## Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> 
+
+![](http://www.gifbin.com/bin/012012/1331836791_kittens_on_turntables.gif)  
+
+<br>
+
+Take 5 minutes to relax.
+
+<br><br><br>
+
+
+# Plots with _ggplot2_
+
+![](https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fd21ii91i3y6o6h.cloudfront.net%2Fgallery_images%2Ffrom_proof%2F9296%2Fmedium%2F1447173871%2Frstudio-hex-ggplot2-dot-psd.png&f=1){align="right" width="145" style="margin-right: 30px; margin-top: -28px;"}
+
+<br>
+Install _ggplot2_ using `install.packages("ggplot2")`.
+
+<br>
+
+
+## Load the movie data
+```{r}
+library("readr")
+library("dplyr")
+library("ggplot2")
+
+# Path to movie data
+movie_url <- "https://raw.githubusercontent.com/MPCA-air/RCamp/master/data/movies/IMDB.csv"
+
+
+# Read the IMDB movie data and save as `movies`
+movies <- read_csv(movie_url)
+
+```
+
+
+### Rename the column `color` to "movie_color".
+```{r}
+
+# Show column names
+#names(movies)
+
+# Rename the 'actor_1_name' column
+movies <- rename(movies, superstar = actor_1_name)
+```
+
+<br><br>
+
+
+## The 3 parts of a _ggplot_
+
+### 1. Set the base plot.
+```{r}
+ggplot(movies)
+```
+
+<br>
+
+> Note when we load the package it's `library ("ggplot2")` but when we use the function, it's `ggplot(movies)` without the 2 following ggplot. It's annoying, but that's the way it is.
+
+### 2. Set the X, Y _(aesthetics)_.
+_Aesthetics_ are the visual components from the data that you want to use in the chart. These also determine the dimensions of the plot.
+
+```{r}
+ggplot(movies, aes(x = movie_facebook_likes, y = gross_mil)) 
+```
+
+### 3. Add layers _(geometries)_.
+```{r}
+ggplot(movies, aes(x = movie_facebook_likes, y = gross_mil)) + 
+  geom_point()
+```
+
+<br>
+
+### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!
+> When you add more layers using `+`, remember to place it at the end of each new line.
+
+```{r, eval=F}
+# This will work
+ggplot() +
+  geom_point()
+
+# BUT this will give you a nasty error message
+ggplot()
+  + geom_point()
+
+```
+
+
+#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+
+Try making a scatterplot of any two columns.
+
+_Hint: Numeric variables will be more informative._
+```{r, eval=F}
+ggplot(movies, aes(x = ?column1, y = ?column2)) + geom_point()
+```
+
+## Scatterplots and point charts.
+
+Let's select only recent movies using `filter()`.
+```{r, eval = F}
+filter(movies, title_year >= 2010)
+```
+
+
+### To repeat the earlier chart with the filtered data use the `%>%` pipe.
+```{r}
+filter(movies, title_year >= 2010) %>%
+  ggplot(aes(x = movie_facebook_likes, y = gross_mil)) + 
+    geom_point()
+```
+
+
+### Add transparency to the points.
+```{r}
+filter(movies, title_year >= 2010) %>%
+  ggplot(aes(x = movie_facebook_likes, y = gross_mil)) + 
+    geom_point(alpha = 0.1) 
+```
+
+
+### Add a regression line.
+
+We can keep adding layers! You can build your plot sandwich as big as you like.  
+<br>
+
+![](http://3.bp.blogspot.com/-3neH1OJJkss/VdT0e7l_GrI/AAAAAAAABKs/8fJwUmRfCjs/s1600/54066b1cb96cd.jpg){width=300}
+
+<br>
+
+Use `geom_smooth()` to add a regression line.
+```{r}
+filter(movies, title_year >= 2010) %>% 
+  ggplot(aes(x = movie_facebook_likes, y = gross_mil)) + 
+    geom_point(alpha = 0.25) +
+    geom_smooth(method = "lm")
+```
+
+
+
+#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+ 
+Make a scatterplot of `imdb_score` and `gross_mil` with a fitted line showing the relationship. 
+
+
+<details>
+<summary class = "btn_code">_Show solution_</summary>
+<p>
+Stop cheating! Just kidding here's some code to help.
+```{r}
+filter(movies, title_year >= 2010) %>% 
+  ggplot(aes(x = imdb_score, y = gross_mil)) + 
+    geom_point(alpha = 0.25) +
+    geom_smooth(method = "lm")
+```
+</p></details>
+
+<br>
+
+
+## Histograms
+
+Now let's make some histograms showing how the total number of movies change over time. 
+```{r}
+ggplot(movies, aes(x = title_year)) + geom_histogram()
+```
+
+<br>
+
+To show the changes per decade we can break the years into groups of 10.
+```{r}
+ggplot(movies, aes(x = title_year)) + geom_histogram(binwidth = 10)
+```
+
+
+### Break it down by `movie_color`.
+
+You can assign different aesthetics to variables in the data set. The example below sets the `fill` color to variable `movie_color`. This will color code each color type, one color for black and white movies and one for color movies.
+```{r}
+ggplot(movies, aes(x = title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10)
+```
+
+
+### Move the bars side-by-side instead of stacked.
+
+It's difficult to see what's going on with the black and white films. Let's split the colors apart using `position_dodge()`.
+
+```{r}
+ggplot(movies, aes(x = title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10, position = "dodge")
+```
+
+
+### Split into separate charts for black and white vs. color
+
+Maybe it would work better to use two separate charts. For that we can use `facet_wrap()`.
+```{r}
+ggplot(movies, aes(x = title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10) +
+  facet_wrap(~ movie_color)
+```
+
+### Free y-axis 
+
+That is almost good. It's still hard to see the changes in black and white films. Let's make the y-axis independent for each group using `scales = "free_y"`. Type `?facet_wrap` to see more options.
+```{r}
+ggplot(movies, aes(title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10) +
+  facet_wrap(~ movie_color, scales = "free_y")
+```
+
+
+_Note: When the scales are not uniform, make sure to point this out to your readers. Otherwise people might assume the scales are the same. Then they would think there are just as many black and white films as color movies._  
+
+
+<br>
+
+#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+
+Make a histogram of the number of movies by decade with separate `fill` colors for each `content_rating`.   
+
+Decide which is the best way to present the bars: _stacked, side-by-side, or on separate charts._
+
+<br>
+
+<details>
+<summary class = "btn_code">_Show solution_</summary>
+<p>
+
+```{r, eval = F}
+
+# Stacked
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10) 
+
+# Side by side
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10, position = position_dodge()) 
+
+# Separate charts
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10) + 
+  facet_wrap( ~ content_rating)
+
+# Free scale it
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10) + 
+  facet_wrap( ~ content_rating, scales = "free_y")
+
+
+```
+</p></details>
+<br>
+
+
+# Day 2 homework
+
+1. Load some data into R from a recent project of yours.
+    - If you have data in Excel, you can export a _.CSV_ file by choosing "Save as" and selecting CSV from the file type menu.
+2. Create 2 types of plots using the data.
+3. Paste the function `runif(1)` into your console. 
+    - If the number you get is bigger than `0.2`, email your charts to the rest of the class.
+
+
+<br>
+
+# Return to [RCamp](index.html) {-}
+
+<br>

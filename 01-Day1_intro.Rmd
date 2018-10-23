@@ -1,0 +1,143 @@
+---
+title: "R Camp | day 1"
+output: 
+  html_document:
+    toc: false
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    number_sections: true
+    self_contained: false
+fontsize: 15pt
+monofont: Source Code Pro
+monofontoptions: Scale = 1.2
+---
+
+```{r setup, include=FALSE}
+library("rmarkdown")
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+
+# Welcome! {-}
+<hr>
+
+![](images/day1_bb8_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -10px;"}
+
+<br><br>
+
+__Please connect to your droid.__
+
+- __Open__ the Start menu  \ \*_Click the Window’s logo on the bottom left of the screen_
+- Select ` Remote Desktop Connection `
+- Enter ` w7-your7digit# ` or ` R32-your7digit# `
+- Press _Connect_
+- Relax...
+
+<br><br>
+
+# Good morning, Empire minions! {-}
+<hr>
+
+<div class="row3">
+
+<div class="column3" style="border: 0px solid grey;">
+<img src="images/planet_1.jpg" height="220" width="220"></a>
+</div>
+
+<div class="column3" style="border: 0px solid grey;">
+<img src="images/planet_2.jpg" height="220" width="220"></a>
+</div>
+
+<div class="column3" style="border: 0px solid grey;">
+<img src="images/planet_3.jpg" height="220"></a>
+</div>
+
+</div>
+
+<br>
+
+We are __Barbara__, __Kristie__, __Dorian__, and __Derek__.   
+
+We like __R__.
+
+We are not computer scientists. 
+
+We make lots of mistakes. You will see us make mistakes. Feel free to laugh at us. It's okay. Really.
+
+
+<br><br>
+
+
+### Who are you? {-}
+
+<br>
+
+#### You are the great cohort of &nbsp; <span style="font-size: 1.8em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> <span style="font-size: 2.7em;">2018</span><span style="font-size: 2em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> {-}
+
+
+```{r, include=F, eval=F}
+library("yarrr")
+library("wordcloud")
+library("wordcloud2")
+library("dplyr")
+
+set.seed(2)
+
+names <- c("Derek", "Kristie", "Barbara", "Dorian", "Daniel", "Nate", 
+           "Kristen", "Mark", "Bruce", "Eric", "Katie", "Hongming", 
+           "Jean", "Scott", "David", "James", "R", "2018")
+
+frequency <- c(as.numeric(sample(8:12, 16, replace = T)), 24,18)
+
+pirates <- piratepal("info2") 
+
+wordcloud(names, 
+          random.order = F, 
+          random.color = TRUE, 
+          scale        = c(4,1), 
+          freq         = frequency, 
+          colors       = pirates, 
+          vfont        = c("sans serif","bold"), 
+          rot.per      = 0.2,
+          size         = 0.1)
+
+wordcloud2(data.frame(word = names, freq = frequency), size = 1, color = 'random-dark')
+
+#letterCloud(data.frame(word = names, freq = frequency), word = "R", color = 'random-light', wordSize = 10)
+
+```
+
+![](images/name_cloud.png){width=75%}
+
+<br>
+
+You are the all in this together. Use each other as a resource. Share ideas, share code, collaborate. Make bad R jokes.   
+<br>
+
+__Here's one:__  _What be the pirate's favorite letter?_
+
+<br>
+
+![](http://photos1.blogger.com/x/blogger/1599/2546/1600/667273/R-is-for-Pirate.jpg){width="230"}
+
+<br>
+
+> _Just kidding. You'd think it'd be R, but 'tis the __C__ they truly love._
+
+<br>
+
+
+
+### <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:orange;"></i> Disclaimer {-}
+
+_Spelling is very important in R._
+
+
+![](https://blog.wdtinc.com/hs-fs/hubfs/blog-files/lightning_spelling.jpg?t=1509031247746&width=600&name=lightning_spelling.jpg)
+
+
+<br>
