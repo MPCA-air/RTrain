@@ -161,7 +161,7 @@ Maps and shapefiles
 
 <div style="height: 190px; max-height: 190px; width: 275px; max-width: 275px; position: relative;">
 
-<a href="01-workshop_tidy.html">
+<a href="https://mpca-air.github.io/RCamp/01-workshop_tidy.html">
 <img src="images/space_dog.gif" width="280" style="width: 275px; max-width: 275px;">
 </a>
 </div></div></div>
