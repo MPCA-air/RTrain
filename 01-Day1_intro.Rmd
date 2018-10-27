@@ -8,30 +8,33 @@ output:
     theme: readable
     highlight: tango
     css: css/camp_style.css
-    number_sections: true
+    number_sections: false
     self_contained: false
-fontsize: 15pt
+fontsize: 16pt
 monofont: Source Code Pro
-monofontoptions: Scale = 1.2
+monofontoptions: Scale = 1.3
 ---
 
+
 ```{r setup, include=FALSE}
-library("rmarkdown")
+library(rmarkdown)
+library(tidyverse)
+library(knitr)
 knitr::opts_chunk$set(echo = TRUE, error = TRUE)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 
-# Welcome! {-}
+# Welcome! 
 <hr>
 
 ![](images/day1_bb8_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -10px;"}
 
 <br><br>
 
-__Please connect to your droid.__
+__Please connect to your droid__
 
-- __Open__ the Start menu  \ \*_Click the Window’s logo on the bottom left of the screen_
+- Open the __Start menu__  (_Click the Windows logo on the bottom left of the screen_)
 - Select ` Remote Desktop Connection `
 - Enter ` w7-your7digit# ` or ` R32-your7digit# `
 - Press _Connect_
@@ -39,7 +42,7 @@ __Please connect to your droid.__
 
 <br><br>
 
-# Good morning, Empire minions! {-}
+# Good morning, Empire minions! 
 <hr>
 
 <div class="row3">
@@ -72,14 +75,10 @@ We make lots of mistakes. You will see us make mistakes. Feel free to laugh at u
 <br><br>
 
 
-### Who are you? {-}
-
-<br>
-
-#### You are the great cohort of &nbsp; <span style="font-size: 1.8em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> <span style="font-size: 2.7em;">2018</span><span style="font-size: 2em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> {-}
+### You are the great cohort of &nbsp; <span style="font-size: 1.6em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> <span style="font-size: 2em;">2018</span><span style="font-size: 1.6em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> {-}
 
 
-```{r, include=F, eval=F}
+```{r wordcloud, include=F, eval=F}
 library("yarrr")
 library("wordcloud")
 library("wordcloud2")
@@ -132,7 +131,7 @@ __Here's one:__  _What be the pirate's favorite letter?_
 
 
 
-### <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:orange;"></i> Disclaimer {-}
+### <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:orange;"></i> Disclaimer 
 
 _Spelling is very important in R._
 
@@ -141,3 +140,134 @@ _Spelling is very important in R._
 
 
 <br>
+
+
+# Why R? 
+
+## Data analysis in 7 steps 
+
+> 1. Read the data
+> 1. Stare at the data
+> 1. Clean the data
+> 1. Stare at the data harder
+> 1. Summarize the data
+> 1. __Share your work__
+> 1. Share the results
+
+
+```{r, include=F, eval=F}
+# <div class="alert alert-info"></div>
+```
+
+
+## Data analysis in R
+
+```{r create, include=F, eval=F}
+library(readxl)
+library(tidyverse)
+
+# Prepare example data
+aqs <- read_excel("data/2014_AQS_FondduLac.xlsx") %>%
+       mutate(Date = as.Date(Date))
+
+met <- read_csv("data/COQ 2014 Processed MET -ASOS.csv") %>% 
+       mutate(Date = as.Date(paste(Year, Month, Day, sep = "-")),
+              Month = as.numeric(Month),
+              Hour = as.numeric(Hour)) %>% 
+       group_by(Date, Month, Day, Hour) %>% 
+       summarize(TEMP_F = mean(TempF, na.rm = T))
+
+aqs <- left_join(aqs, met)
+
+aqs <- filter(aqs, Parameter == 88101, !is.na(TEMP_F))
+
+aqs <- rename(aqs, OZONE = Conc, YEAR = Year, SITE = site_catid) %>%
+       rowwise() %>%
+       mutate(YEAR = 2017 - sample(-1:1, 1),
+              Date = as.Date(paste(YEAR, Month, Day, sep = "-")))
+
+aqs <- aqs %>%
+       select(SITE, Date, Hour, OZONE, TEMP_F, everything()) %>%
+       filter(Month > 3, Month < 11) %>% 
+       group_by(SITE, Date) %>%
+       mutate(OZONE  = max(OZONE, na.rm = T),
+              TEMP_F = max(TEMP_F, na.rm = T)) %>% 
+       slice(1)
+
+write_csv(aqs, "data/OZONE_samples.csv")
+```
+
+
+### 1. Read the data
+
+```{r data}
+air_data <- read_csv("data/OZONE_samples.csv")
+```
+
+```{r tbl, include=F}
+air_data %>% sample_n(5) %>% select(SITE, Date, OZONE, TEMP_F) %>% kable()
+```
+
+
+### 2. View the data
+
+```{r view, message = F, fig.width=12, fig.height=4}
+ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
+    geom_point(alpha = 0.2, size = 2) +
+    geom_smooth(method = "lm")
+```
+
+
+### 3. Clean the data
+
+```{r clean}
+# Drop values out of range
+air_data <- air_data %>% filter(OZONE > 0, TEMP_F < 199) 
+```
+
+
+### 4. View the data harder
+
+```{r, fig.width=12, fig.height=4}
+ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
+    geom_point(alpha = 0.2, size = 2) +
+    geom_smooth(method = "lm") + 
+    facet_wrap(~SITE)
+```
+
+
+### 5. Summarize the data
+```{r summary}
+air_data <- air_data %>% 
+            group_by(SITE, YEAR) %>% 
+            summarize(AVG_OZONE = mean(OZONE) %>% round(2),
+                      AVG_TEMP  = mean(TEMP_F) %>% round(2))
+```
+
+```{r, include=F}
+air_data %>% kable()
+```
+
+
+### 6. Share your work
+
+![images/github_example.png]{style="width: 85%;"}
+
+
+###  7. Share the results
+
+__Save the final data table__
+```{r save-csv}
+air_data %>% write_csv("results/2015-17_ozone_summary.csv")
+```
+
+
+<br>
+
+__Save the site plot__
+```{r save-ch, message=F}
+ggsave("results/2015-2017 - Ozone vs Temp.pdf")
+```
+
+
+##

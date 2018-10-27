@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R Camp | day 1</title>
+
+<script src="01-Day1_junk_data_pt2_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="01-Day1_junk_data_pt2_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="01-Day1_junk_data_pt2_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="01-Day1_junk_data_pt2_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="01-Day1_junk_data_pt2_files/navigation-1.1/tabsets.js"></script>
+<link href="01-Day1_junk_data_pt2_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="01-Day1_junk_data_pt2_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="01-Day1_junk_data_pt2_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css\camp_style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Camp | day 1</h1>
+
+</div>
+
+
+<div id="filter" class="section level1">
+<h1><span class="header-section-number">1</span> | <code>filter()</code></h1>
+<hr>
+<p>The <code>filter()</code> function creates a subset of the data based on the value of one or more columns. Use <code>filter()</code> to answer the questions below.</p>
+<p><br></p>
+<p><em>What are the types of scrap collected from the planet Tatooine?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, source <span class="op">==</span><span class="st"> &quot;Tatooine&quot;</span>)</code></pre></div>
+<div id="pro-tip" class="section level3 unnumbered">
+<h3><i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p>We use a <code>==</code> (double equals sign) for comparing values. A <code>==</code> makes the comparison “is it equal to?” and returns a True or False answer. So the code above returns all the rows where the condition <code>source == &quot;Tatooine&quot;</code> is TRUE.</p>
+<p>A single equals sign (<code>=</code>) is used within functions to set options, for example <code>read_csv(file = &quot;mydata.csv&quot;)</code>. Don’t worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.</p>
+</blockquote>
+</div>
+<div id="comparisons" class="section level2">
+<h2><span class="header-section-number">1.1</span> Comparisons</h2>
+<p>To use filtering effectively you’ll want to know how to select observations using various comparison operators.</p>
+<p><em>Key comparison operators</em></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Symbol</th>
+<th align="left">Comparison</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>&gt;</code></td>
+<td align="left">greater than</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&gt;=</code></td>
+<td align="left">greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>&lt;</code></td>
+<td align="left">less than</td>
+</tr>
+<tr class="even">
+<td align="left"><code>&lt;=</code></td>
+<td align="left">less than or equal to</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>==</code></td>
+<td align="left">equal to</td>
+</tr>
+<tr class="even">
+<td align="left"><code>!=</code></td>
+<td align="left">not equal to</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>%in%</code></td>
+<td align="left">value is in a list</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>How many scrap trades were priced at over $1000?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, price <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000</span>)</code></pre></div>
+<pre><code>## Error in as.ts(x): object &#39;starwars_scrap&#39; not found</code></pre>
+<p><br></p>
+<p><em>What planets scrap datapads and hyperdrives (source planets)?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, items <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hyperdrive&quot;</span>, <span class="st">&quot;datapads&quot;</span>))</code></pre></div>
+<pre><code>## Error in as.ts(x): object &#39;starwars_scrap&#39; not found</code></pre>
+<p><br></p>
+<blockquote>
+<p><strong>What is that <code>c()</code> thing all about again?</strong></p>
+</blockquote>
+<p>You can put multiple values inside <code>c()</code> to make a vector of items. Each item in the vector is separated by a comma. Let’s create a short vector of your favorite colors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is an example vector</span>
+my_fave_colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;cornflower&quot;</span>)
+
+my_fave_colors</code></pre></div>
+<pre><code>## [1] &quot;green&quot;      &quot;orange&quot;     &quot;cornflower&quot;</code></pre>
+<p><br></p>
+<p>## Multiple filters</p>
+<p>### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}</p>
+<p>Create a small table called <code>highend_Tatooine_junk</code> that only has junk estimates from Tatooine and were priced at more than $500.</p>
+<p><em>Work with your neighbor to create the table.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, source <span class="op">==</span><span class="st"> &quot;Tatooine&quot;</span>, price ...)</code></pre></div>
+<div class="quiz">
+<p>### Pop Quiz, hotshot! {-}</p>
+<p><strong>Are there more total <code>hyperdrives</code> or <code>datapads</code>?</strong></p>
+<p><input type="radio"> <em>more hyperdrives</em> <br> <input type="radio"> <em>more datapads</em> <br> <input type="radio"> <em>same amount in both groups</em> <br></p>
+<p><br> <em>Hint: Start by creating a new tables called <code>hyperdrives</code> and <code>datapads</code> using a code to <code>filter(starwars_scrap, type == &quot;hyperdrive&quot;</code></em> <br></p>
+<details> <summary class = "btn_code"> <em>Show solution</em> </summary>
+<p>
+<p><i class="fa fa-check" aria-hidden="true" style="color: green;"></i> <code>more datapads</code></p>
+<p><em>There is a new light sabor in your future! Great job!</em></p>
+</p>
+</details>
+</div>
+<p>## Star Wars scrap challenge 🐱</p>
+<blockquote>
+<p>Ask your neighbor a question about the scrap data that requires the <strong>%in%</strong> operator.</p>
+<p>Try to answer your neighbor’s question.</p>
+</blockquote>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+<div id="update-from-the-new-republic-ray-needs-our-help." class="section level1">
+<h1><span class="header-section-number">2</span> | Update from the New Republic! Ray needs our help.</h1>
+<hr>
+<p><em>Let’s help Ray!</em></p>
+<p>Ray’s droid was able to download a large scrap transfer database from the notorious Junk Boss Unkar Plutt. We have already downloaded the whole data set and named it <em>starwars_scrap</em>. Your droid found a portion of the data. The data you have is from your home planet. You are especially interested in trying to influence Ray to trade with scrappers from your planet. You know she needs hyperdrives to fight for the New Republic. Look under your keyboard to find out the name of your planet of origin and download that specific data. <a href="https://github.com/MPCA-air/RTrain/tree/master/data/starwars_scrap_**.csv">Your Planet’s Star Wars Scrap Data Insert your planet for **</a>.</p>
+<p>To download, <strong>Right click</strong> on your planet’s file and select <strong>Save Link As…</strong>. Navigate to your project folder and save the file into a folder named <code>data\</code>.</p>
+<p><br></p>
+<p>Now you can read in the file with the scrap trading data for your home planet.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
+
+<span class="co"># Replace the `**` with your home planet&#39;s name</span>
+starwars_scrap_<span class="op">**</span><span class="st"> </span><span class="er">&lt;</span><span class="op">-</span><span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/starwars_scrap_**.csv&quot;</span>)</code></pre></div>
+<p><br></p>
+<p>Take a minute to look at your planet’s junk transactions. Can you guess the most profitable item from your home planet? Don’t guess, arrange and filter your data to find out!</p>
+<p><br></p>
+<div id="find-the-items" class="section level2">
+<h2><span class="header-section-number">2.1</span> Find the items</h2>
+<hr>
+<p><br></p>
+<p>__Use <code>arrange()</code> to find your planets most profitable scrap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">most_profit &lt;-<span class="st"> </span><span class="kw">arrange</span>(starwars_scrap_<span class="op">**</span>,
+                  <span class="kw">desc</span>(price)</code></pre></div>
+<p><br> Take a look at the first row in your table with the highest profit scrap. To which planet did your home planet sell that scrap?</p>
+<hr>
+<p>Almost there! Now you can use <code>filter()</code> to check if the full starwars_scrap table includes the planet that buys your planet’s most profitable scrap. Let’s hope so.</p>
+<div id="great-work" class="section level3 unnumbered">
+<h3>Great work!</h3>
+<p>You found a way to help Ray and help your home planet. We all have to survive right? You’ve earned a Star Wars film fan award!</p>
+<p><br></p>
+<details> <summary>
+<button class="btn_code">
+<strong>Receive your badge</strong>
+</button>
+</summary>
+<p>
+<p><img src="https://upload.wikimedia.org/wikipedia/en/6/6d/SWFFA.jpg" width="200" align="left" style="margin-top: -20px; margin-right: 30px;"></p>
+<p><br></p>
+<hr>
+</p>
+<p></details></p>
+<p><br></p>
+<p><span style="font-size: 22px;"> <i class="fa fa-group" aria-hidden="true" style="color:black;"></i>  <strong>Meet the scrapper planets</strong>   <i class="fa fa-group" aria-hidden="true" style="color:black;"></i></span></p>
+<p>Let’s introduce our home planets.</p>
+<div>
+<div class="figure">
+<img src="images/robot_1.jpg" align="left" style="margin-right:40px;" width="240" />
+
+</div>
+</div>
+<p>Possible topics:</p>
+<blockquote>
+<ul>
+<li>Your planet’s name and most notable environmental hazards.</li>
+<li>Your name.</li>
+<li>Something you want to learn to do with data?</li>
+</ul>
+</blockquote>
+<p><br><br></p>
+<blockquote>
+<p><i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> <strong>RECAP:</strong></p>
+<ul>
+<li><p>What packages have we added to our <code>library</code>?</p></li>
+<li><p>What new functions have we learned?</p></li>
+</ul>
+</blockquote>
+# Survey says {-}
+<hr>
+<p>On the <strong>front</strong> of your sticky note answer one of these:</p>
+<ul>
+<li>Something you really liked learning today?</li>
+<li>A useful thing you learned?</li>
+<li>A new skill you are you excited about using?</li>
+</ul>
+<p>On the <strong>back</strong>:</p>
+<ul>
+<li>A lingering question you have about the material.</li>
+<li>A topic that was confusing and could use more clarification?</li>
+</ul>
+<p>We will compile the questions and send out answers before next class. If you think of something later, please e-mail us any questions you have. If you’re uncertain about something I guarantee someone else is as well. So help a friend, and ask a question.</p>
+</div>
+</div>
+</div>
+<div id="shutdown-complete" class="section level1 unnumbered">
+<h1>Shutdown complete</h1>
+<p>When you close RStudio it will ask you about saving your <em>workspace</em> and other files. This can get tiresome after awhile. Follow the steps below to set these options once and for always.</p>
+<p>Turn off <strong>“Save Workspace”</strong></p>
+<ul>
+<li>Go to <strong>Tools</strong> on the top RStudio navigation bar.</li>
+<li>Choose <code>Global Options...</code>.</li>
+<li>On the first screen:</li>
+<li>Set <em>Save workspace to .RData on exit:</em> to “Never”.</li>
+<li>Uncheck <em>Always save history</em></li>
+<li>Uncheck <em>Restore .Rdata into workspace at startup</em></li>
+</ul>
+<div id="congratulations-youve-completed-day-1." class="section level2 unnumbered">
+<h2>Congratulations! You’ve completed day 1.</h2>
+<hr>
+<div class="figure">
+<img src="https://media1.tenor.com/images/ce269fabe989f148f84d339850ce9a8f/tenor.gif?itemid=3561486" />
+
+</div>
+<p><br></p>
+<p># Return to <a href="index.html">RCamp</a> {-}</p>
+<p><br></p>
+<p>## Saving file paths</p>
+<p>You can save the file path as an object, such as <code>starwars_scrap_file &lt;- &quot;data/starwars_scrap.csv&quot;</code>. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write <code>read.csv(starwars_scrap_file)</code>. This handy trick makes it easier for you or your coworker to update your code and use it with new data.</p>
+<details><summary class = "btn_code_blue"> Read a CSV file using base R </summary>
+<p>
+<p>Copy the code below to your R script and run the line with the <code>read.csv</code> function (Hit <strong>CTRL + ENTER</strong>). It will return a nice Star Wars data frame called <code>starwars_scrap</code>. The character string <code>&quot;data/starwars_scrap.csv&quot;</code> inside the parentheses of the <code>read.csv()</code> function is the path of the data file.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assign the file path character string as an object with the name cat_file.</span>
+starwars_scrap_file &lt;-<span class="st"> &quot;data/starwars_scrap.csv&quot;</span>
+
+
+<span class="co"># Use read.csv with the object cat_file which refers to &quot;data/starwars_scrap.csv&quot;</span>
+<span class="kw">read.csv</span>(starwars_scrap_file)</code></pre></div>
+<p><br></p>
+<p><strong>NOTE:</strong> The location of the CSV file above will only work if you have your project open. When your project is open, R sets the working directory automatically to your project folder. We will demonstrate reading a file directly from the X-drive a bit later.</p>
+<p><br></p>
+<hr>
+</p>
+<p></details></p>
+<p>## Get help on functions</p>
+<p>Let’s look a bit closer at the <code>read_csv()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_csv</span>(my_cat_file)
+
+<span class="co"># Get help</span>
+?read_csv</code></pre></div>
+<p><br></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

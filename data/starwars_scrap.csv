@@ -1,5 +1,5 @@
-source,destination,item,quantity,price
-Coruscant,Jakuu,hyperdrives,3,300
-Tatooine,Jakuu,datapads,100,25
-Naboo,Jakuu,hyperdrives,45,45
-Endor,Jakuu,hyperdrives,1,1e7
+source,destination,item,quantity,price,units,year,management
+Coruscant,Jakuu,hyperdrives,3,300,tons,New Republic,
+Tatooine,Jakuu,datapads,100,25,items,New Republic,
+Naboo,Jakuu,hyperdrives,45,45,tons,Empire,
+Endor,Jakuu,hyperdrives,1,1.00E+07,pounds,Old Republic,

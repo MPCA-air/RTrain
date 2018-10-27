@@ -18,30 +18,49 @@ hr {
 {
     float: left;
     margin-right: 1%;
-    margin-left: 2%;
+    margin-left: 2;
     width: 30%;
     overflow: hidden;
 }
 
+.column3-txt
+{
+    float: left;
+    margin-right: 1.3%;
+    margin-left: 0;
+    width: 32%;
+    overflow: hidden;
+}
 
 blockquote
 {
      background-color: #f0f7fb;
-     line-height: 22px;
+     border-radius: 25px;
      font-size: 15px;
+     line-height: 19px;
      overflow: hidden;
-     padding: 14px;
+     padding: 10px;
+     padding-top: 12px;
+     padding-bottom: 14px;
+     margin-top: 18px;
+     margin-bottom: 15px;
+     padding-left: 22px;
 }
 
 .note
 {
      background-color: #f0f7fb;
      border-left: solid 4px #3498db;
+     border-radius: 25px;
      font-size: 15px;
-     line-height: 22px;
+     line-height: 19px;
      overflow: hidden;
-     padding: 14px;
-     padding-bottom: 2px;
+     padding: 10px;
+     padding-top: 12px;
+     padding-bottom: 14px;
+     margin-top: 18px;
+     margin-bottom: 15px;
+     padding-left: 22px;
 }
 
 
@@ -49,11 +68,16 @@ blockquote
 {
      background-color: #d2f0c6;
      border-left: solid 5px #86af49;
-     font-size: 15px;
-     line-height: 22px;
+     border-radius: 25px;
+     font-size: 14px;
+     line-height: 16px;
      overflow: hidden;
-     padding: 14px;
-     padding-bottom: 2px;
+     padding: 10px;
+     padding-top: 12px;
+     padding-bottom: 14px;
+     margin-top: 10px;
+     margin-bottom: 12px;
+     padding-left: 22px;
 }
 
 
@@ -68,8 +92,8 @@ blockquote
      padding: 10px;
      padding-top: 0px;
      padding-bottom: 14px;
-     margin-top: 75px;
-     margin-bottom: 85px;
+     margin-top: 45px;
+     margin-bottom: 30px;
      padding-left: 22px;
 }
 
@@ -105,6 +129,20 @@ blockquote
       border-radius: 6px;
 }
 
+.btn_code_green {
+      display: inline-block;
+      padding: 6px 12px;
+      margin-bottom: 0;
+      font-size: 12px;
+      color: #fff;
+      background-color: #86af49;
+      border-color: #a0af49;
+      line-height: 1.43;
+      text-align: center;
+      border: 1px solid transparent;
+      border-radius: 6px;
+}
+
 .btn_code_blue {
       display: inline-block;
       padding: 6px 12px;
@@ -119,21 +157,21 @@ blockquote
       border-radius: 6px;
 }
 
-.btn_code:focus, .btn_code:active:focus, .btn_code.active:focus {
-    outline: 0 none;
-}
 
-.btn_code_blue:focus, .btn_code:active:focus, .btn_code.active:focus {
-    outline: 0 none;
-}
-
-.btn_code_blue:hover, .btn_code.hover {
-    background-color: #22527b;
-}
 
 .btn_code:hover, .btn_code.hover {
+    background-color: #e53283;
+}
+
+.btn_code_green:hover, .btn_code_green.hover {
+    background-color: #a0af49;
+}
+
+.btn_code_blue:hover, .btn_code_blue.hover {
     background-color: #22527b;
 }
+
+
 
 .toggle {
     height: 2.3em;
@@ -161,5 +199,3 @@ h3 {
 }
 
 /* Images */
-
-.day1 {  /*width: 220px; height: 220px; max-height: 220px; max-width: 220px; */}

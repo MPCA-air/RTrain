@@ -1,5 +1,5 @@
 ---
-title: "R Camp"
+title: "R Training"
 output: 
   html_document:
     theme: readable
@@ -23,7 +23,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ## Get R!
 <hr>
 
-Go to — [Install R](https://mpca-air.github.io/RCamp/00-Install.html) — for instructions on installing the latest and greatest version of __R__ and __RStudio__.  
+Go to — [Install R](https://mpca-air.github.io/RCamp/00-Install.html) — for instructions on installing the latest version of __R__ and __RStudio__.  
     
     
 ## Intro to R
@@ -72,62 +72,72 @@ __Day 3__
 
 
 <div class="row3" style = "margin-top: 30px;">
+<div class="column3-txt">
 
-<div class="column3">
+1. __Project__ launch
+    - Create a new project and R script
+    - Install new R packages
+    - Create variables, lists, data frames
+1. __Read data__ into R.
+    - Start with junk data
+    - Arrange and __filter__ data 
+    - Mine answers and outliers from the junk
+1. Data transformations
+    - Add __new columns__ and convert units
+    - Summarize the data
+    - Get answers for each group and category in the data
+    - Save data in various formats
 
-1. Create a new RStudio project and R script.
-1. Install new R packages.
-1. Create variables, lists, data frames.
-1. Read data into R.
-1. Arrange and filter your data. 
-1. Solve a cat mystery.
-1. Become a pet detective.
+Packages: `readr`, `dplyr`  
+Planets visited: `Jakku`
 
-Packages: `readr`, `dplyr`
 
 </div>
 
-<div class="column3"> 
+<div class="column3-txt">
 
-1. Data transformations
-    - Add new columns.
-    - Summarize your data.
-    - Split groups and categories in your data.
-    - Save data.
-
-2. Make __plots__.
-    - Scatter plots and transparency.
-    - Add a smoothed trend line to the plot.
-    - Add titles, colors, and axis labels.
-    - Bar charts.
-    - Histograms.
-
-Packages: `ggplot2`
+1. Make __plots__
+    - Scatter plots and box plots
+    - Trend lines
+    - Add titles, colors, and labels
+    - Histograms
+1. More __plots__
+    - Label points
+    - Log transformation
+    - Reference lines
+    - Save charts to different formats
+1. Flip tables from wide to long
+    
+Packages: `ggplot2`, `tidyr`  
+Planets visited: `Endor`  
 
 </div> 
 
-<div class="column3">
+<div class="column3-txt">
 
-1. Read data from Excel.
-1. Make more __plots__.
-    - Add titles, colors, and axis labels.
-    - Box plots.
-    - Bar plots.
-    - Label points.
-    - Log transform your chart axis. 
-    - Save charts to different formats.
-1. Connect to __TEMPO__.
-    - View tables.
-    - Read data.
+1. Make __maps__
+    - Reading/saving shapefiles
+    - Interactive web maps
+1. Pull data from __Excel__ and Access
+1. Connect to __databases__
+    - View tables
+    - Read data
+1. Save the __porgs__
+1. Working with __dates__
+    - Time/Twilight zones 
+1. __Your data__
+    - Create a report
+    - Clean your data
+    - Chart & map your data
+    - Summarize & save
 
-
-Packages: `readxl`, `tidyr`, `leaflet`, `RODBC`, `lubridate`
+Packages: `readxl`, `leaflet`, `lubridate`  
+Planets visited: `Ahch-To` 
 
 </div>
 </div>
  
-
-
+ 
 ## Workshops
 <hr>
 

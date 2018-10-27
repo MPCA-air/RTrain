@@ -1,0 +1,337 @@
+---
+title: "R Camp | day 1"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    number_sections: true
+    self_contained: false
+fontsize: 14pt
+monofont: Source Code Pro
+monofontoptions: Scale = 1.1
+---
+
+
+```{r setup, include=FALSE}
+library("rmarkdown")
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+
+#| `filter()`
+<hr>
+
+  The `filter()` function creates a subset of the data based on the value of one or more columns. Use `filter()` to answer the questions below.
+
+<br>
+
+  _What are the types of scrap collected from the planet Tatooine?_
+
+```{r filter12, eval = F}
+
+filter(starwars_scrap, source == "Tatooine")
+
+```
+
+
+### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> We use a `==` (double equals sign) for comparing values. A `==` makes the comparison "is it equal to?" and returns a True or False answer. So the code above returns all the rows where the condition `source == "Tatooine"` is TRUE.
+>
+  > A single equals sign (`=`) is used within functions to set options, for example `read_csv(file = "mydata.csv")`. Don't worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.
+
+
+## Comparisons
+
+To use filtering effectively you’ll want to know how to select observations using various comparison operators.
+
+_Key comparison operators_
+
+| Symbol| Comparison               |
+|:----|:------------------------|
+| `>`   | greater than             |
+| `>=`  | greater than or equal to |
+| `<`   | less than                |
+| `<=`  | less than or equal to    |
+| `==`  | equal to                 |
+| `!=`  | not equal to             |
+| `%in%`| value is in a list       |
+
+
+<br>
+
+How many scrap trades were priced at over $1000?
+
+```{r filter}
+
+filter(starwars_scrap, price > 1000)
+
+```
+
+
+<br>
+
+_What planets scrap datapads and hyperdrives (source planets)?_
+
+```{r filter_list}
+
+filter(starwars_scrap, items %in% c("hyperdrive", "datapads"))
+
+```
+
+<br>
+
+> __What is that `c()` thing all about again?__
+
+You can put multiple values inside `c()` to make a vector of items. Each item in the vector is separated by a comma. Let's create a short vector of your favorite colors.
+
+```{r colors22}
+# This is an example vector
+my_fave_colors <- c("green", "orange", "cornflower")
+
+my_fave_colors
+```
+
+<br>
+
+
+  ## Multiple filters
+
+  ### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+
+  Create a small table called `highend_Tatooine_junk` that only has junk estimates from Tatooine and were priced at more than $500.
+
+_Work with your neighbor to create the table._
+
+```{r filter2, eval = F}
+
+filter(starwars_scrap, source == "Tatooine", price ...)
+
+```
+
+
+<div class="quiz">
+  ### Pop Quiz, hotshot! {-}
+
+  __Are there more total `hyperdrives` or `datapads`?__
+
+<input type="radio"> _more hyperdrives_          <br>
+  <input type="radio"> _more datapads_               <br>
+  <input type="radio"> _same amount in both groups_ <br>
+
+
+  <br>
+  _Hint: Start by creating two new tables called `hyperdrives` and `datapads` using a code to `filter(starwars_scrap, type == "hyperdrive"`_
+<br>
+
+  <details>
+  <summary class = "btn_code"> _Show solution_ </summary>
+  <p>
+  <i class="fa fa-check" aria-hidden="true" style="color: green;"></i> `more datapads`
+
+_There is a new light sabor in your future! Great job!_
+
+
+</p></details></div>
+
+
+
+  ## Star Wars scrap challenge &#x1F431;
+
+  > Ask your neighbor a question about the scrap data that requires the __%in%__ operator.
+>
+  > Try to answer your neighbor's question.
+
+<br>
+
+<br>
+
+
+#| Update from the New Republic! Ray needs our help.
+<hr>
+
+_Let's help Ray!_
+
+Ray's droid was able to download a large scrap transfer database from the notorious Junk Boss Unkar Plutt. We have already downloaded the whole data set and named it _starwars_scrap_. Your droid found a portion of the data. The data you have is from your home planet, _and_ there is additional information in this data set about the hazards in your planet's environment. You are especially interested in trying to influence Ray to trade with scrappers from your planet. You know she needs hyperdrives and other items to build a star ship to fight for the New Republic. Look under your keyboard to find out the name of your planet of origin and download that specific data. [Insert your home planet's name for **](https://github.com/MPCA-air/RTrain/tree/master/data/starwars_scrap_**.csv).
+
+To download, __Right click__ on your planet's file and select __Save Link As...__. Navigate to your project folder and save the file into a folder named `data\`.
+
+<br>
+
+  Now you can read in the file with the scrap trading data for your home planet.
+```{r, eval=F}
+library("readr")
+
+# Replace the `**` with your home planet's name
+starwars_scrap_** <- read_csv("data/starwars_scrap_**.csv")
+
+```
+
+<br>
+
+  Take a minute to look at your planet's junk transactions. Can you guess the most profitable item from your home planet? Don't guess, arrange and filter your data to find out!
+
+<br>
+
+## Find the profitable scrap from your home planet.
+<hr>
+
+<br>
+
+  __Use `arrange()` to sort your planets scrap by price.
+```{r, eval=F}
+
+most_profit <- arrange(starwars_scrap_**,
+                  desc(price))
+
+```
+
+<br>
+Take a look at the first row in your table with the highest profit scrap. To which planet did your home planet sell that scrap?
+
+
+<hr>
+
+Almost there! Now you can use `filter()` to check if the full starwars_scrap table includes the planet that buys your planet's most profitable scrap. Let's hope so.
+
+
+### Great work! {-}
+You found a way to help Ray and help your home planet. We all have to survive right? You've earned a Star Wars film fan award!
+
+<br>
+
+  <details>
+  <summary><button class = "btn_code">__Receive your badge__</button></summary>
+  <p>
+
+
+  <img src="https://upload.wikimedia.org/wikipedia/en/6/6d/SWFFA.jpg" width="200" align="left" style="margin-top: -20px; margin-right: 30px;">
+
+  <br>
+
+  <hr>
+
+  </p></details>
+
+  <br>
+
+  <span style="font-size: 22px;"> <i class="fa fa-group" aria-hidden="true" style="color:black;"></i>&nbsp; __Meet the scrapper planets__ &nbsp; <i class="fa fa-group" aria-hidden="true" style="color:black;"></i></span>
+
+  Let's introduce our home planets.
+
+<div>
+![](images/robot_1.jpg){align="left" width="240" style="margin-right:40px;"}
+</div>
+
+Possible topics:
+
+> - Your planet's name and most notable environmental hazards.
+> - Your name.
+> - Something you want to learn to do with data?
+ 
+  <br><br>
+
+  > <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> __RECAP:__
+>
+  >
+  > - What packages have we added to our `library`?
+  >
+  > - What new functions have we learned?
+
+
+
+  # Survey says {-}
+  <hr>
+
+  On the __front__ of your sticky note answer one of these:
+
+  - Something you really liked learning today?
+  - A useful thing you learned?
+  - A new skill you are you excited about using?
+
+
+  On the __back__:
+
+  - A lingering question you have about the material.
+- A topic that was confusing and could use more clarification?
+
+
+  We will compile the questions and send out answers before next class. If you think of something later, please e-mail us any questions you have. If you're uncertain about something I guarantee someone else is as well. So help a friend, and ask a question.
+
+
+
+# Shutdown complete {-}
+
+When you close RStudio it will ask you about saving your _workspace_ and other files. This can get tiresome after awhile. Follow the steps below to set these options once and for always.
+
+Turn off __"Save Workspace"__
+
+- Go to __Tools__ on the top RStudio navigation bar.
+- Choose `Global Options...`.
+- On the first screen:
+- Set _Save workspace to .RData on exit:_ to "Never".
+- Uncheck _Always save history_
+- Uncheck _Restore .Rdata into workspace at startup_
+
+
+## Congratulations! You've completed day 1. {-}
+<hr>
+
+  ![](https://media1.tenor.com/images/ce269fabe989f148f84d339850ce9a8f/tenor.gif?itemid=3561486)
+
+<br>
+
+  # Return to [RCamp](index.html) {-}
+
+  <br>
+
+
+
+  ## Saving file paths
+
+  You can save the file path as an object, such as `starwars_scrap_file <- "data/starwars_scrap.csv"`. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write `read.csv(starwars_scrap_file)`. This handy trick makes it easier for you or your coworker to update your code and use it with new data.
+
+<details><summary class = "btn_code_blue"> Read a CSV file using base R </summary>
+  <p>
+
+  Copy the code below to your R script and run the line with the `read.csv` function (Hit __CTRL + ENTER__). It will return a nice Star Wars data frame called `starwars_scrap`. The character string `"data/starwars_scrap.csv"` inside the parentheses of the `read.csv()` function is the path of the data file.
+
+```{r starwars-csv2, eval=F}
+
+# Assign the file path character string as an object with the name cat_file.
+starwars_scrap_file <- "data/starwars_scrap.csv"
+
+
+# Use read.csv with the object cat_file which refers to "data/starwars_scrap.csv"
+read.csv(starwars_scrap_file)
+
+```
+
+<br>
+
+  __NOTE:__ The location of the CSV file above will only work if you have your project open. When your project is open, R sets the working directory automatically to your project folder. We will demonstrate reading a file directly from the X-drive a bit later.
+
+<br>
+
+  <hr>
+
+  </p></details>
+
+
+
+  ## Get help on functions
+
+  Let's look a bit closer at the `read_csv()` function.
+
+```{r, eval = F}
+read_csv(my_cat_file)
+
+# Get help
+?read_csv
+```
+
+<br>
