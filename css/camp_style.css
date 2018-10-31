@@ -18,7 +18,7 @@ hr {
 {
     float: left;
     margin-right: 1%;
-    margin-left: 2;
+    margin-left: 2%;
     width: 30%;
     overflow: hidden;
 }
@@ -35,7 +35,7 @@ hr {
 blockquote
 {
      background-color: #f0f7fb;
-     border-radius: 25px;
+     border-radius: 15px;
      font-size: 15px;
      line-height: 19px;
      overflow: hidden;
@@ -80,6 +80,20 @@ blockquote
      padding-left: 22px;
 }
 
+.data
+{
+     background-color: #d2f0c6;
+     border-left: solid 5px #86af49;
+     font-size: 15px;
+     line-height: 16px;
+     overflow: hidden;
+     padding: 5px;
+     padding-top: 5px;
+     padding-bottom: 5px;
+     margin-top: 10px;
+     margin-bottom: 12px;
+     padding-left: 22px;
+}
 
 .quiz
 {
@@ -197,5 +211,3 @@ h3 {
   margin-top: 26px;
   margin-bottom: 16px;
 }
-
-/* Images */

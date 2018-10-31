@@ -19,13 +19,8 @@
 <script src="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="01-Day1_junk_data_pt2_files/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="01-Day1_junk_data_pt2_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="01-Day1_junk_data_pt2_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="01-Day1_junk_data_pt2_files/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="01-Day1_junk_data_pt2_files/navigation-1.1/tabsets.js"></script>
-<link href="01-Day1_junk_data_pt2_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="01-Day1_junk_data_pt2_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="01-Day1_junk_data_pt2_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="01-Day1_junk_data_pt2_files/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -123,9 +118,6 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
-.html-widget {
-  margin-bottom: 20px;
-}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -147,101 +139,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="fluid-row" id="header">
@@ -252,24 +149,37 @@ div.tocify {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#filter"><span class="toc-section-number">1</span> | <code>filter()</code></a><ul>
+<li><a href="#comparisons"><span class="toc-section-number">1.1</span> Comparisons</a></li>
+<li><a href="#star-wars-scrap-challenge"><span class="toc-section-number">1.2</span> Star Wars scrap challenge 🐱</a></li>
+</ul></li>
+<li><a href="#update-from-the-new-republic-rey-needs-our-help."><span class="toc-section-number">2</span> | Update from the New Republic! Rey needs our help.</a></li>
+<li><a href="#glimpse"><span class="toc-section-number">3</span> | <code>glimpse()</code></a></li>
+<li><a href="#shutdown-complete">Shutdown complete</a><ul>
+<li><a href="#congratulations-youve-completed-day-1.">Congratulations! You’ve completed day 1.</a></li>
+</ul></li>
+</ul>
+</div>
 
 <div id="filter" class="section level1">
 <h1><span class="header-section-number">1</span> | <code>filter()</code></h1>
 <hr>
 <p>The <code>filter()</code> function creates a subset of the data based on the value of one or more columns. Use <code>filter()</code> to answer the questions below.</p>
 <p><br></p>
-<p><em>What are the types of scrap collected from the planet Tatooine?</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, source <span class="op">==</span><span class="st"> &quot;Tatooine&quot;</span>)</code></pre></div>
+<p><em>Do you remember we had that “All” category in the Star Wars scrap data? Let’s take a look at that.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, Origin <span class="op">==</span><span class="st"> &quot;All&quot;</span>)</code></pre></div>
 <div id="pro-tip" class="section level3 unnumbered">
 <h3><i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
 <blockquote>
-<p>We use a <code>==</code> (double equals sign) for comparing values. A <code>==</code> makes the comparison “is it equal to?” and returns a True or False answer. So the code above returns all the rows where the condition <code>source == &quot;Tatooine&quot;</code> is TRUE.</p>
-<p>A single equals sign (<code>=</code>) is used within functions to set options, for example <code>read_csv(file = &quot;mydata.csv&quot;)</code>. Don’t worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.</p>
+<p>We use a <code>==</code> (double equals sign) for comparing values. A <code>==</code> makes the comparison “is it equal to?” and returns a True or False answer. So the code above returns all the rows where the condition <code>Origin == &quot;All&quot;</code> is TRUE.</p>
+<p>A single equals sign (<code>=</code>) is used within functions to set options, for example <code>read_csv(file = &quot;starwars_scrap_jakku.csv&quot;)</code>. Don’t worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.</p>
 </blockquote>
 </div>
 <div id="comparisons" class="section level2">
 <h2><span class="header-section-number">1.1</span> Comparisons</h2>
-<p>To use filtering effectively you’ll want to know how to select observations using various comparison operators.</p>
+<p>To use filtering effectively youâll want to know how to select observations using various comparison operators.</p>
 <p><em>Key comparison operators</em></p>
 <table>
 <thead>
@@ -310,13 +220,43 @@ div.tocify {
 </tbody>
 </table>
 <p><br></p>
-<p>How many scrap trades were priced at over $1000?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, price <span class="op">&gt;</span><span class="st"> </span><span class="dv">1000</span>)</code></pre></div>
+<p>Now let’s look at that data again WITHOUT the <em>All</em> category. Then we will more easily be able to see the amounts. Look in the table above and find the <code>NOT</code> operator.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(starwars_scrap, Origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>)</code></pre></div>
 <pre><code>## Error in as.ts(x): object &#39;starwars_scrap&#39; not found</code></pre>
 <p><br></p>
-<p><em>What planets scrap datapads and hyperdrives (source planets)?</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, items <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hyperdrive&quot;</span>, <span class="st">&quot;datapads&quot;</span>))</code></pre></div>
-<pre><code>## Error in as.ts(x): object &#39;starwars_scrap&#39; not found</code></pre>
+<p><em>Now arrange your data in descending order by the amounts to confirm that the “All” category is gone. Then look at the data using the <code>head()</code> function</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(starwars_scrap, <span class="kw">desc</span>(Amount))</code></pre></div>
+<pre><code>## Error in arrange(starwars_scrap, desc(Amount)): could not find function &quot;arrange&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(starwars_scrap)</code></pre></div>
+<pre><code>## Error in head(starwars_scrap): object &#39;starwars_scrap&#39; not found</code></pre>
+<p><br></p>
+<p><em>Now let’s take another look at that bar chart. Is there anything else that is less than perfect with our data?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(starwars_scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Origin, <span class="dt">y =</span> Amount)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<pre><code>## Error in ggplot(starwars_scrap, aes(x = Origin, y = Amount)): could not find function &quot;ggplot&quot;</code></pre>
+<p>Something still might be hidden in the data that is unexpected. Take a look at the amount of items and chart them by the units field.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(<span class="dt">x =</span> Units, <span class="dt">y =</span> Amount)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<pre><code>## Error in ggplot(data, aes(x = Units, y = Amount)): could not find function &quot;ggplot&quot;</code></pre>
+<p>There is still an issue with the data. The item “tons” is written two ways. This happens when multiple field technicians collect data! We will deal with this a bit later. First, what happens if we want to filter for multiple fields and categories?</p>
+<p>## Multiple filters</p>
+<p>### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}</p>
+<p>Create a small table that includes all Retrorockets and Sublight drives that are priced higher than 500.00 credits. Name it <code>highend_starship_junk</code>.</p>
+<p><em>Work with your neighbor to create the table.</em></p>
+<p>Hint: You will need to use the <em>c()</em> function and the %in% operator.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">highend_starship_junk &lt;-<span class="st"> </span><span class="kw">filter</span>(starwars_scrap, Salvage <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Retrorocket&quot;</span>, <span class="st">&quot;Sublight drive&quot;</span>), Price_per_Ton <span class="op">&gt;</span><span class="st"> </span><span class="dv">500</span>)</code></pre></div>
+<div class="quiz">
+<p>### Pop Quiz, hotshot! {-}</p>
+<p><strong>Are there more total <code>Retrorockets</code> or <code>Sublight drives</code> over 500 credits?</strong></p>
+<p><input type="radio"> <em>more Retrorockets</em> <br> <input type="radio"> <em>more Sublight drives</em> <br> <input type="radio"> <em>same amount in both groups</em> <br></p>
+<p><br></p>
+<details> <summary class = "btn_code"> <em>Show solution</em> </summary>
+<p>
+<p><i class="fa fa-check" aria-hidden="true" style="color: green;"></i> <code>more Retrockets</code></p>
+<p><em>There is a new light sabor in your future! Great job!</em></p>
+</p>
+</details>
+</div>
 <p><br></p>
 <blockquote>
 <p><strong>What is that <code>c()</code> thing all about again?</strong></p>
@@ -328,60 +268,48 @@ my_fave_colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span cla
 my_fave_colors</code></pre></div>
 <pre><code>## [1] &quot;green&quot;      &quot;orange&quot;     &quot;cornflower&quot;</code></pre>
 <p><br></p>
-<p>## Multiple filters</p>
-<p>### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}</p>
-<p>Create a small table called <code>highend_Tatooine_junk</code> that only has junk estimates from Tatooine and were priced at more than $500.</p>
-<p><em>Work with your neighbor to create the table.</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(starwars_scrap, source <span class="op">==</span><span class="st"> &quot;Tatooine&quot;</span>, price ...)</code></pre></div>
-<div class="quiz">
-<p>### Pop Quiz, hotshot! {-}</p>
-<p><strong>Are there more total <code>hyperdrives</code> or <code>datapads</code>?</strong></p>
-<p><input type="radio"> <em>more hyperdrives</em> <br> <input type="radio"> <em>more datapads</em> <br> <input type="radio"> <em>same amount in both groups</em> <br></p>
-<p><br> <em>Hint: Start by creating a new tables called <code>hyperdrives</code> and <code>datapads</code> using a code to <code>filter(starwars_scrap, type == &quot;hyperdrive&quot;</code></em> <br></p>
-<details> <summary class = "btn_code"> <em>Show solution</em> </summary>
-<p>
-<p><i class="fa fa-check" aria-hidden="true" style="color: green;"></i> <code>more datapads</code></p>
-<p><em>There is a new light sabor in your future! Great job!</em></p>
-</p>
-</details>
 </div>
-<p>## Star Wars scrap challenge 🐱</p>
+<div id="star-wars-scrap-challenge" class="section level2">
+<h2><span class="header-section-number">1.2</span> Star Wars scrap challenge 🐱</h2>
 <blockquote>
-<p>Ask your neighbor a question about the scrap data that requires the <strong>%in%</strong> operator.</p>
-<p>Try to answer your neighbor’s question.</p>
+<p>Ask your neighbor a question about the scrap data that requires filter and the <strong>%in%</strong> operator. Try to answer your neighbor’s question.</p>
 </blockquote>
 <p><br></p>
 <p><br></p>
 </div>
 </div>
-<div id="update-from-the-new-republic-ray-needs-our-help." class="section level1">
-<h1><span class="header-section-number">2</span> | Update from the New Republic! Ray needs our help.</h1>
+<div id="update-from-the-new-republic-rey-needs-our-help." class="section level1">
+<h1><span class="header-section-number">2</span> | Update from the New Republic! Rey needs our help.</h1>
 <hr>
-<p><em>Let’s help Ray!</em></p>
-<p>Ray’s droid was able to download a large scrap transfer database from the notorious Junk Boss Unkar Plutt. We have already downloaded the whole data set and named it <em>starwars_scrap</em>. Your droid found a portion of the data. The data you have is from your home planet. You are especially interested in trying to influence Ray to trade with scrappers from your planet. You know she needs hyperdrives to fight for the New Republic. Look under your keyboard to find out the name of your planet of origin and download that specific data. <a href="https://github.com/MPCA-air/RTrain/tree/master/data/starwars_scrap_**.csv">Your Planet’s Star Wars Scrap Data Insert your planet for **</a>.</p>
-<p>To download, <strong>Right click</strong> on your planet’s file and select <strong>Save Link As…</strong>. Navigate to your project folder and save the file into a folder named <code>data\</code>.</p>
+<p><em>Let’s help Rey!</em></p>
+<p>Rey’s droid was able to download the full scrap transfer database from the notorious Junk Boss Unkar Plutt. We have already downloaded the data set in tons and named it <em>starwars_scrap</em>. You are especially interested in trying to influence Rey to trade with scrappers from your City on Jakku. You know Rey needs parts for her star ship to fight for the New Republic and of course she needs food. Look under your keyboard to find out the name of your City in Jakku.</p>
 <p><br></p>
-<p>Now you can read in the file with the scrap trading data for your home planet.</p>
+<p>First. Let’s read in the whole dataset. There are additional units of Salvage items beyond “tons”. It looks like we have lots of data cleaning to do!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
 
-<span class="co"># Replace the `**` with your home planet&#39;s name</span>
-starwars_scrap_<span class="op">**</span><span class="st"> </span><span class="er">&lt;</span><span class="op">-</span><span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/starwars_scrap_**.csv&quot;</span>)</code></pre></div>
+my_scrap_file &lt;-<span class="st"> &quot;data/starwars_scrap_jakku_full.csv&quot;</span>
+
+starwars_scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(my_scrap_file)</code></pre></div>
 <p><br></p>
-<p>Take a minute to look at your planet’s junk transactions. Can you guess the most profitable item from your home planet? Don’t guess, arrange and filter your data to find out!</p>
-<p><br></p>
-<div id="find-the-items" class="section level2">
-<h2><span class="header-section-number">2.1</span> Find the items</h2>
+</div>
+<div id="glimpse" class="section level1">
+<h1><span class="header-section-number">3</span> | <code>glimpse()</code></h1>
 <hr>
+<p>Take a minute to look at the full scrap transaction dataset. An R function called <em>glimpse()</em> will help us to start.</p>
 <p><br></p>
-<p>__Use <code>arrange()</code> to find your planets most profitable scrap.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">most_profit &lt;-<span class="st"> </span><span class="kw">arrange</span>(starwars_scrap_<span class="op">**</span>,
-                  <span class="kw">desc</span>(price)</code></pre></div>
-<p><br> Take a look at the first row in your table with the highest profit scrap. To which planet did your home planet sell that scrap?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(starwars_scrap)</code></pre></div>
+<p>You can see that the units in the full data set are in “Items”, “cubic Yards”; and you remember from before that there were also units of “TONS” and “Tons”.</p>
+<p><br></p>
+<p>__Use <code>filter()</code> and <code>arrange()</code> to sort your City’s scrap by price.</p>
+<p>Hint: First filter your data to include only your City from the Dest (Destination) column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_city_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(starwars_scrap, Dest <span class="op">==</span><span class="st"> &quot;&quot;</span>)
+
+my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(my_city_scrap, <span class="kw">desc</span>(Price_per_Ton))</code></pre></div>
+<p><br> Take a look at the first coouple of rows in your table to find the Salvage that fetches the highest prices.</p>
 <hr>
-<p>Almost there! Now you can use <code>filter()</code> to check if the full starwars_scrap table includes the planet that buys your planet’s most profitable scrap. Let’s hope so.</p>
 <div id="great-work" class="section level3 unnumbered">
 <h3>Great work!</h3>
-<p>You found a way to help Ray and help your home planet. We all have to survive right? You’ve earned a Star Wars film fan award!</p>
+<p>Hopefully you have found a way to help Rey and help your home City. We all have to survive right? You’ve earned a Star Wars film fan award!</p>
 <p><br></p>
 <details> <summary>
 <button class="btn_code">
@@ -396,22 +324,6 @@ starwars_scrap_<span class="op">**</span><span class="st"> </span><span class="e
 <p></details></p>
 <p><br></p>
 <p><span style="font-size: 22px;"> <i class="fa fa-group" aria-hidden="true" style="color:black;"></i>  <strong>Meet the scrapper planets</strong>   <i class="fa fa-group" aria-hidden="true" style="color:black;"></i></span></p>
-<p>Let’s introduce our home planets.</p>
-<div>
-<div class="figure">
-<img src="images/robot_1.jpg" align="left" style="margin-right:40px;" width="240" />
-
-</div>
-</div>
-<p>Possible topics:</p>
-<blockquote>
-<ul>
-<li>Your planet’s name and most notable environmental hazards.</li>
-<li>Your name.</li>
-<li>Something you want to learn to do with data?</li>
-</ul>
-</blockquote>
-<p><br><br></p>
 <blockquote>
 <p><i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> <strong>RECAP:</strong></p>
 <ul>
@@ -433,7 +345,6 @@ starwars_scrap_<span class="op">**</span><span class="st"> </span><span class="e
 <li>A topic that was confusing and could use more clarification?</li>
 </ul>
 <p>We will compile the questions and send out answers before next class. If you think of something later, please e-mail us any questions you have. If you’re uncertain about something I guarantee someone else is as well. So help a friend, and ask a question.</p>
-</div>
 </div>
 </div>
 <div id="shutdown-complete" class="section level1 unnumbered">
@@ -458,37 +369,11 @@ starwars_scrap_<span class="op">**</span><span class="st"> </span><span class="e
 <p><br></p>
 <p># Return to <a href="index.html">RCamp</a> {-}</p>
 <p><br></p>
-<p>## Saving file paths</p>
-<p>You can save the file path as an object, such as <code>starwars_scrap_file &lt;- &quot;data/starwars_scrap.csv&quot;</code>. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write <code>read.csv(starwars_scrap_file)</code>. This handy trick makes it easier for you or your coworker to update your code and use it with new data.</p>
-<details><summary class = "btn_code_blue"> Read a CSV file using base R </summary>
-<p>
-<p>Copy the code below to your R script and run the line with the <code>read.csv</code> function (Hit <strong>CTRL + ENTER</strong>). It will return a nice Star Wars data frame called <code>starwars_scrap</code>. The character string <code>&quot;data/starwars_scrap.csv&quot;</code> inside the parentheses of the <code>read.csv()</code> function is the path of the data file.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Assign the file path character string as an object with the name cat_file.</span>
-starwars_scrap_file &lt;-<span class="st"> &quot;data/starwars_scrap.csv&quot;</span>
-
-
-<span class="co"># Use read.csv with the object cat_file which refers to &quot;data/starwars_scrap.csv&quot;</span>
-<span class="kw">read.csv</span>(starwars_scrap_file)</code></pre></div>
-<p><br></p>
-<p><strong>NOTE:</strong> The location of the CSV file above will only work if you have your project open. When your project is open, R sets the working directory automatically to your project folder. We will demonstrate reading a file directly from the X-drive a bit later.</p>
-<p><br></p>
-<hr>
-</p>
-<p></details></p>
-<p>## Get help on functions</p>
-<p>Let’s look a bit closer at the <code>read_csv()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_csv</span>(my_cat_file)
-
-<span class="co"># Get help</span>
-?read_csv</code></pre></div>
-<p><br></p>
 </div>
 </div>
 
 
 
-</div>
-</div>
 
 </div>
 

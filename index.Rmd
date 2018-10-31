@@ -81,11 +81,11 @@ __Day 3__
 1. __Read data__ into R.
     - Start with junk data
     - Arrange and __filter__ data 
-    - Mine answers and outliers from the junk
+    - Mine for errors and outliers
 1. Data transformations
     - Add __new columns__ and convert units
-    - Summarize the data
-    - Get answers for each group and category in the data
+    - Summaries and statistics
+    - Answers for each group and category
     - Save data in various formats
 
 Packages: `readr`, `dplyr`  
@@ -102,8 +102,7 @@ Planets visited: `Jakku`
     - Add titles, colors, and labels
     - Histograms
 1. More __plots__
-    - Label points
-    - Log transformation
+    - Log transform
     - Reference lines
     - Save charts to different formats
 1. Flip tables from wide to long

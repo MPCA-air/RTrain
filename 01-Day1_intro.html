@@ -174,7 +174,7 @@ $(document).ready(function () {
 <p><br><br></p>
 </div>
 <div id="good-morning-empire-minions" class="section level1">
-<h1>Good morning, Empire minions!</h1>
+<h1>Good morning <em>Empire minions</em>!</h1>
 <hr>
 <div class="row3">
 <div class="column3" style="border: 0px solid grey;">
@@ -226,17 +226,18 @@ $(document).ready(function () {
 </div>
 <div id="why-r" class="section level1">
 <h1>Why R?</h1>
+<hr>
 <div id="data-analysis-in-7-steps" class="section level2">
 <h2>Data analysis in 7 steps</h2>
 <blockquote>
 <ol style="list-style-type: decimal">
 <li>Read the data</li>
-<li>Stare at the data</li>
+<li>Plot the data</li>
 <li>Clean the data</li>
-<li>Stare at the data harder</li>
+<li>View the data closer</li>
 <li>Summarize the data</li>
-<li><strong>Share your work</strong></li>
-<li>Share the results</li>
+<li>Save the results</li>
+<li><strong>Share</strong> your work with the world</li>
 </ol>
 </blockquote>
 </div>
@@ -264,24 +265,31 @@ $(document).ready(function () {
 ##   Day = col_character()
 ## )</code></pre>
 </div>
-<div id="view-the-data" class="section level3">
-<h3>2. View the data</h3>
+<div id="plot-the-data" class="section level3">
+<h3>2. Plot the data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(air_data, <span class="kw">aes</span>(<span class="dt">x =</span> TEMP_F, <span class="dt">y =</span> OZONE)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
 <p><img src="01-Day1_intro_files/figure-html/view-1.png" width="1152" /></p>
 </div>
 <div id="clean-the-data" class="section level3">
 <h3>3. Clean the data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Drop values out of range</span>
-air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(OZONE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, TEMP_F <span class="op">&lt;</span><span class="st"> </span><span class="dv">199</span>) </code></pre></div>
+air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(OZONE <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, TEMP_F <span class="op">&lt;</span><span class="st"> </span><span class="dv">199</span>) 
+
+<span class="co"># Convert all samples to PPB</span>
+air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">            </span><span class="kw">mutate</span>(<span class="dt">OZONE =</span> <span class="kw">ifelse</span>(UNITS <span class="op">==</span><span class="st"> &quot;PPM&quot;</span>, OZONE <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>, 
+                                  OZONE)) </code></pre></div>
 </div>
-<div id="view-the-data-harder" class="section level3">
-<h3>4. View the data harder</h3>
+<div id="view-the-data-closer" class="section level3">
+<h3>4. View the data closer</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(air_data, <span class="kw">aes</span>(<span class="dt">x =</span> TEMP_F, <span class="dt">y =</span> OZONE)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>SITE)</code></pre></div>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>SITE) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ozone increases with temperature&quot;</span>, 
+         <span class="dt">subtitle =</span> <span class="st">&quot;Observations from 2015-2017&quot;</span>)</code></pre></div>
 <p><img src="01-Day1_intro_files/figure-html/unnamed-chunk-2-1.png" width="1152" /></p>
 </div>
 <div id="summarize-the-data" class="section level3">
@@ -291,17 +299,21 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 <span class="st">            </span><span class="kw">summarize</span>(<span class="dt">AVG_OZONE =</span> <span class="kw">mean</span>(OZONE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>),
                       <span class="dt">AVG_TEMP  =</span> <span class="kw">mean</span>(TEMP_F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>))</code></pre></div>
 </div>
-<div id="share-your-work" class="section level3">
-<h3>6. Share your work</h3>
-<p>[images/github_example.png]{style=“width: 85%;”}</p>
-</div>
-<div id="share-the-results" class="section level3">
-<h3>7. Share the results</h3>
+<div id="save-the-results" class="section level3">
+<h3>6. Save the results</h3>
 <p><strong>Save the final data table</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">write_csv</span>(<span class="st">&quot;results/2015-17_ozone_summary.csv&quot;</span>)</code></pre></div>
 <p><br></p>
 <p><strong>Save the site plot</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;results/2015-2017 - Ozone vs Temp.pdf&quot;</span>)</code></pre></div>
+</div>
+<div id="share-it-with-the-world" class="section level3">
+<h3>7. Share it with the world</h3>
+<p><a href = "https://github.com/dKvale/ex__OZONE__Project"> <img src="images/github_example_ozone.png" style="width: 95%;" /> </a></p>
+<p><br><br></p>
+</div>
+<div id="lets-go-jump-to-r-training" class="section level3">
+<h3>Let’s go! Jump to <a href="https://mpca-air.github.io/RTrain/">R Training</a></h3>
 </div>
 </div>
 <div id="section" class="section level2">

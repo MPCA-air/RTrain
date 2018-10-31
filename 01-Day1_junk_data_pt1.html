@@ -256,132 +256,8 @@ div.tocify {
 <div id="data-exploration" class="section level1 unnumbered">
 <h1>Data exploration</h1>
 </div>
-<div id="pet-detective" class="section level1">
-<h1><span class="header-section-number">1</span> | Pet detective</h1>
-<hr>
-<div id="the-case-of-the-mopey-cat" class="section level2">
-<h2><span class="header-section-number">1.1</span> <em>The case of the mopey cat</em></h2>
-<p><img src="http://pre15.deviantart.net/653f/th/pre/i/2016/006/5/9/cat_in_the_rain_by_northumbrianartist-d9mzdda.jpg", align="right" width="250" style="margin-left:15px;"></p>
-<p>On your way home from work you find a <em>wet</em> and <em>mopey</em> cat sitting on your front stoop. Oh my! It looks so sad, maybe you can bring it inside and give it a treat.</p>
-<p>When you pick up the cat you notice a collar with a <strong>number</strong> on it.</p>
-<blockquote>
-<p><em>HINT: Your cat’s tag number is the same as the last digit of your birthday. Weird coincidence right?</em></p>
-</blockquote>
-<p>This gives you an idea! Your friend recently mentioned a list that has all the missing cats people have reported in the city. Maybe you can use the tag number to help find the lost kitty’s home.</p>
-<p><br></p>
-</div>
-<div id="its-inspector-time" class="section level2">
-<h2><span class="header-section-number">1.2</span> It’s inspector time!</h2>
-<div class="figure">
-<img src="http://orig00.deviantart.net/cf6c/f/2017/054/b/6/inspector_gadget_by_domejohnny-db04gni.png" align="right" style="-webkit-transform: scaleX(-1); transform: scaleX(-1); margin-right: 80px; margin-top: -10px" width="250" />
-
-</div>
-<p>Let’s get our script ready for some detective work. Since we bill by the hour we’re going to be very thorough with our documentation.</p>
-<p><strong>Script comments</strong></p>
-<p>Add a brief description of your new case to the top of the script using the comment symbol <code>#</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This file documents my search for the home of a lost cat I found this evening.</span>
-
-<span class="co"># What I know so far</span>
-animal  &lt;-<span class="st"> &quot;cat&quot;</span>
-
-tag_num &lt;-<span class="st"> </span><span class="dv">444</span>
-
-pet_detective &lt;-<span class="st"> &quot;Agent Cooper&quot;</span>
-
-<span class="co"># Next steps</span>
-<span class="co"># 1. Find the missing cat database.</span>
-<span class="co"># 2. Load the cat data.</span>
-<span class="co">#</span></code></pre></div>
-<p><br></p>
-<p>Now let’s find ourselves some clues.</p>
-</div>
-</div>
-<div id="all-the-cats" class="section level1">
-<h1><span class="header-section-number">2</span> | All the cats!</h1>
-<hr>
-<p>Thanks to your friend, you can download a list of all the missing cats in your town. Follow the steps below to read the cat data into R.</p>
-<div id="find-the-files-location" class="section level2 unnumbered">
-<h2>Find the file’s location</h2>
-<p>Open this URL in your browser <a href="https://github.com/MPCA-air/RCamp/tree/master/data" class="uri">https://github.com/MPCA-air/RCamp/tree/master/data</a>, and find the file <code>missing_cat_list.csv</code>. To download, <strong>Right click</strong> on your cat’s file and select <strong>Save Link As…</strong>. Navigate to your project folder and save the file into a folder named <code>data\</code>. Don’t have a <code>data</code> folder? Go ahead and create a new one.</p>
-</div>
-<div id="add-the-file-location-to-your-script" class="section level2 unnumbered">
-<h2>Add the file location to your script</h2>
-<p>Now you can paste the file’s location into the <code>read_csv()</code> function. Here’s a code snippet to get you started.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
-
-<span class="co"># Replace the `...` with the name of the file</span>
-all_cats_file &lt;-<span class="st"> &quot;data/...&quot;</span>
-
-
-<span class="co"># Replace the `...` with &#39;all_cats_file&#39;</span>
-all_cats &lt;-<span class="st"> </span><span class="kw">read_csv</span>(...)</code></pre></div>
-<br> <details> <summary class = "btn_code_blue"><em>Show full code</em></summary>
-<p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
-
-all_cats_file &lt;-<span class="st"> &quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Student Folder/missing_cat_list.csv&quot;</span>
-
-all_cats  &lt;-<span class="st"> </span><span class="kw">read_csv</span>(all_cats_file)</code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   name = col_character(),
-##   color = col_character(),
-##   age = col_integer(),
-##   gender = col_character(),
-##   country = col_character(),
-##   grumpy = col_integer(),
-##   fearful_of_people = col_integer(),
-##   playful = col_integer(),
-##   friendly_to_people = col_integer(),
-##   clumsy = col_integer(),
-##   greedy = col_integer(),
-##   owner_phone = col_character()
-## )</code></pre>
-<p><br></p>
-<hr>
-</p>
-<p></details></p>
-<p><br></p>
-<div class="tip">
-<p><strong>Copy a file’s location</strong></p>
-<p>In <em>Windows</em> there’s a handy trick to copy the path to a file on your computer:</p>
-<ul>
-<li>Hold Shift + Right click on the file name. Select “Copy as path” from the menu.</li>
-</ul>
-</div>
-<div id="pro-tip" class="section level3 unnumbered">
-<h3><i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
-<blockquote>
-<p>File paths in R use forward slashes (<code>/</code>). In Windows you’ll need to switch backslashes (<code>\</code>) to forward slashes (<code>/</code>). A file on your desktop located at <code>C:\Desktop\file.csv</code> would be read into R as <code>read_csv(&quot;C:/Desktop/file.csv&quot;)</code></p>
-<p>One trick to quickly fix a long path name is to press <strong>CTRL + F</strong>. Then you can use search tool to find any (<code>\</code>) and replace it with (<code>/</code>).</p>
-</blockquote>
-<p><br></p>
-</div>
-</div>
-<div id="view-the-cats" class="section level2 unnumbered">
-<h2>View the cats</h2>
-<p>Look in the upper right hand window of RStudio. This is the <em>Environment</em> window that shows all of the data frames you have created this session. You can see the names of the data frames, the number of observations (rows), and the number of variables (columns). This is helpful if you ever need to count your data (<em>Hint</em> <em>Hint</em>).</p>
-<p>To see <strong>all</strong> the cat data click on the table called <code>all_cats</code> in the <em>Environment</em> window.</p>
-<blockquote>
-<p>“There’s over 2,000 missing cats!”</p>
-</blockquote>
-<p>That’s a lot of cats. And there’s more bad news. There’s no column for tag numbers. So which cat is yours? Let’s see… Does your cat look more like a <em>Mr. Buttons</em> or a <em>Furry Potter</em>? That’s a tough call. We need more information!</p>
-<p>Let’s explore the missing cat data a bit more. Hopefully we can find some way to pick out your cat.</p>
-<div class="quiz">
-<h3 id="pop-quiz-hotshot" class="unnumbered">Pop Quiz, hotshot!</h3>
-<p><strong>What is the second column in the <code>all_cats</code> data frame?</strong></p>
-<p><input type="radio"> <em>age</em> <br> <input type="radio"> <em>gender</em> <br> <input type="radio"> <em>nametag</em> <br> <input type="radio"> <em>color</em> <br> <input type="radio"> <em>fur</em> <br></p>
-<br> <details> <summary class = "btn_code"><em>Show solution</em></summary>
-<p>
-<p><i class="fa fa-check" aria-hidden="true" style="color: green;"></i> <code>color</code></p>
-<p><em>You sure aren’t kitten around! Great work!</em></p>
-</p>
-</details>
-</div>
-</div>
-</div>
 <div id="dplyr" class="section level1">
-<h1><span class="header-section-number">3</span> | <strong>dplyr</strong></h1>
+<h1><span class="header-section-number">1</span> | <strong>dplyr</strong></h1>
 <hr>
 <div class="figure">
 <img src="https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" align="left" style="margin-right: 20px; margin-top: 8px" width="120" />
@@ -391,11 +267,7 @@ all_cats  &lt;-<span class="st"> </span><span class="kw">read_csv</span>(all_cat
 <p><em>You’ve unlocked a new package!</em></p>
 <p>The <em>dplyr</em> package is the go-to tool for exploring, re-arranging, and summarizing data.</p>
 <p><br><br></p>
-<p>Use <code>install.packages(&quot;dplyr&quot;)</code> to add <em>dplyr</em> to your detective library.</p>
-<p><br></p>
-<p><strong>Quick stretch break <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i></strong></p>
-<p>Stand up. Move around.</p>
-<p><br></p>
+<p>Use <code>install.packages(&quot;dplyr&quot;)</code> to add <em>dplyr</em> to your library.</p>
 <p><strong>Your analysis toolbox:</strong> The key <em>dplyr</em> functions</p>
 <table>
 <thead>
@@ -414,12 +286,12 @@ all_cats  &lt;-<span class="st"> </span><span class="kw">read_csv</span>(all_cat
 <td align="left">reorder or sort rows by value of a column</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>mutate()</code></td>
-<td align="left">Add new columns or update existing columns</td>
-</tr>
-<tr class="even">
 <td align="left"><code>filter()</code></td>
 <td align="left">pick a subset of rows by the value of a column</td>
+</tr>
+<tr class="even">
+<td align="left"><code>mutate()</code></td>
+<td align="left">Add new columns or update existing columns</td>
 </tr>
 <tr class="odd">
 <td align="left"><code>group_by()</code></td>
@@ -434,169 +306,127 @@ all_cats  &lt;-<span class="st"> </span><span class="kw">read_csv</span>(all_cat
 <p><br></p>
 </div>
 <div id="select" class="section level1">
-<h1><span class="header-section-number">4</span> | <code>select()</code></h1>
+<h1><span class="header-section-number">2</span> | <code>select()</code></h1>
 <hr>
 <p>Use the <code>select()</code> function to drop a column you no longer need, to select a few columns to create a new sub-table, or rearrange the order of your table’s columns.</p>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Salvage = col_character(),
+##   Origin = col_character(),
+##   Dest = col_character(),
+##   Amount = col_integer(),
+##   Units = col_character(),
+##   Price_per_Ton = col_double()
+## )</code></pre>
 <div id="drop-a-single-column-with-a-minus-sign" class="section level3 unnumbered">
 <h3>Drop a single column with a minus sign</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
 
-<span class="co"># Drop the grumpy column</span>
-<span class="kw">select</span>(all_cats, <span class="op">-</span>grumpy)</code></pre></div>
-<pre><code>## # A tibble: 2,785 x 11
-##    name      color            age gender country  fearful_of_peop~ playful
-##    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;               &lt;int&gt;   &lt;int&gt;
-##  1 Latte     grey and brown     3 Male   Austral~                2       5
-##  2 Othello   butterscotch      15 Female Thailand                1       7
-##  3 Hershey   tabby              5 Male   Peru                    1       6
-##  4 Aboulomri brown              3 Female UK                      1       2
-##  5 Scratches white             11 Male   Canada                  1       5
-##  6 Tuna      salt and pepp~    NA Male   Germany                 1       7
-##  7 Zonker    white              4 Female China                   5       5
-##  8 Ovidius   brown             10 Male   Spain                   2       5
-##  9 Delia     tabby              2 Female Canada                  4       5
-## 10 Hotdog    salt and pepp~     8 Female Spain                   4       6
-## # ... with 2,775 more rows, and 4 more variables:
-## #   friendly_to_people &lt;int&gt;, clumsy &lt;int&gt;, greedy &lt;int&gt;,
-## #   owner_phone &lt;chr&gt;</code></pre>
+<span class="co"># Drop the destination column</span>
+<span class="kw">select</span>(starwars_scrap, <span class="op">-</span>Dest)</code></pre></div>
+<pre><code>## # A tibble: 222 x 5
+##    Salvage                          Origin     Amount Units Price_per_Ton
+##    &lt;chr&gt;                            &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt;
+##  1 Flight recorder                  Outskirts     887 Tons           591.
+##  2 Proximity sensor                 Outskirts    7081 Tons          1229.
+##  3 Vitus-Series Attitude Thrusters  Reestki      4901 Tons           226.
+##  4 Aural sensor                     Tuanul        707 Tons           145.
+##  5 Electromagnetic discharge filter Tuanul        107 Tons           188.
+##  6 Proximity sensor                 Tuanul      32109 Tons          1229.
+##  7 Hyperdrive motivator             Tuanul        862 Tons          1485.
+##  8 Landing jet                      Reestki     13944 Tons          1497.
+##  9 Electromagnetic discharge filter Cratertown   7788 Tons           188.
+## 10 Sublight engine                  Outskirts   10642 Tons          7211.
+## # ... with 212 more rows</code></pre>
 </div>
 <div id="drop-multiple-columns-with--ccol_1-col_2-or--col1--col2" class="section level3 unnumbered">
 <h3>Drop multiple columns with <code>-c(col_1, col_2)</code> or <code>-col1, -col2</code></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Drop the grumpy and greedy columns</span>
-<span class="kw">select</span>(all_cats, <span class="op">-</span><span class="kw">c</span>(grumpy, greedy))</code></pre></div>
-<pre><code>## # A tibble: 2,785 x 10
-##    name      color            age gender country  fearful_of_peop~ playful
-##    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;               &lt;int&gt;   &lt;int&gt;
-##  1 Latte     grey and brown     3 Male   Austral~                2       5
-##  2 Othello   butterscotch      15 Female Thailand                1       7
-##  3 Hershey   tabby              5 Male   Peru                    1       6
-##  4 Aboulomri brown              3 Female UK                      1       2
-##  5 Scratches white             11 Male   Canada                  1       5
-##  6 Tuna      salt and pepp~    NA Male   Germany                 1       7
-##  7 Zonker    white              4 Female China                   5       5
-##  8 Ovidius   brown             10 Male   Spain                   2       5
-##  9 Delia     tabby              2 Female Canada                  4       5
-## 10 Hotdog    salt and pepp~     8 Female Spain                   4       6
-## # ... with 2,775 more rows, and 3 more variables:
-## #   friendly_to_people &lt;int&gt;, clumsy &lt;int&gt;, owner_phone &lt;chr&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Drop the grumpy and greedy columns</span>
-<span class="kw">select</span>(all_cats, <span class="op">-</span>grumpy, <span class="op">-</span>greedy)</code></pre></div>
-<pre><code>## # A tibble: 2,785 x 10
-##    name      color            age gender country  fearful_of_peop~ playful
-##    &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;               &lt;int&gt;   &lt;int&gt;
-##  1 Latte     grey and brown     3 Male   Austral~                2       5
-##  2 Othello   butterscotch      15 Female Thailand                1       7
-##  3 Hershey   tabby              5 Male   Peru                    1       6
-##  4 Aboulomri brown              3 Female UK                      1       2
-##  5 Scratches white             11 Male   Canada                  1       5
-##  6 Tuna      salt and pepp~    NA Male   Germany                 1       7
-##  7 Zonker    white              4 Female China                   5       5
-##  8 Ovidius   brown             10 Male   Spain                   2       5
-##  9 Delia     tabby              2 Female Canada                  4       5
-## 10 Hotdog    salt and pepp~     8 Female Spain                   4       6
-## # ... with 2,775 more rows, and 3 more variables:
-## #   friendly_to_people &lt;int&gt;, clumsy &lt;int&gt;, owner_phone &lt;chr&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Drop the destination and units columns</span>
+<span class="kw">select</span>(starwars_scrap, <span class="op">-</span><span class="kw">c</span>(Dest, Units))</code></pre></div>
+<pre><code>## # A tibble: 222 x 4
+##    Salvage                          Origin     Amount Price_per_Ton
+##    &lt;chr&gt;                            &lt;chr&gt;       &lt;int&gt;         &lt;dbl&gt;
+##  1 Flight recorder                  Outskirts     887          591.
+##  2 Proximity sensor                 Outskirts    7081         1229.
+##  3 Vitus-Series Attitude Thrusters  Reestki      4901          226.
+##  4 Aural sensor                     Tuanul        707          145.
+##  5 Electromagnetic discharge filter Tuanul        107          188.
+##  6 Proximity sensor                 Tuanul      32109         1229.
+##  7 Hyperdrive motivator             Tuanul        862         1485.
+##  8 Landing jet                      Reestki     13944         1497.
+##  9 Electromagnetic discharge filter Cratertown   7788          188.
+## 10 Sublight engine                  Outskirts   10642         7211.
+## # ... with 212 more rows</code></pre>
 </div>
 <div id="keep-only-three-columns" class="section level3 unnumbered">
 <h3>Keep only three columns</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keep the name, grumpy and greedy columns</span>
-<span class="kw">select</span>(all_cats, <span class="kw">c</span>(name, grumpy, greedy))</code></pre></div>
-<pre><code>## # A tibble: 2,785 x 3
-##    name      grumpy greedy
-##    &lt;chr&gt;      &lt;int&gt;  &lt;int&gt;
-##  1 Latte          2      2
-##  2 Othello        2      2
-##  3 Hershey        1      3
-##  4 Aboulomri      7      7
-##  5 Scratches      3      7
-##  6 Tuna           1      2
-##  7 Zonker         3      3
-##  8 Ovidius        3      6
-##  9 Delia          5      6
-## 10 Hotdog         3      3
-## # ... with 2,775 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Keep the Salvage, Amount and Price_per_Ton columns</span>
+<span class="kw">select</span>(starwars_scrap, <span class="kw">c</span>(Salvage, Amount, Price_per_Ton))</code></pre></div>
+<pre><code>## # A tibble: 222 x 3
+##    Salvage                          Amount Price_per_Ton
+##    &lt;chr&gt;                             &lt;int&gt;         &lt;dbl&gt;
+##  1 Flight recorder                     887          591.
+##  2 Proximity sensor                   7081         1229.
+##  3 Vitus-Series Attitude Thrusters    4901          226.
+##  4 Aural sensor                        707          145.
+##  5 Electromagnetic discharge filter    107          188.
+##  6 Proximity sensor                  32109         1229.
+##  7 Hyperdrive motivator                862         1485.
+##  8 Landing jet                       13944         1497.
+##  9 Electromagnetic discharge filter   7788          188.
+## 10 Sublight engine                   10642         7211.
+## # ... with 212 more rows</code></pre>
 </div>
 <div id="everything" class="section level3 unnumbered">
 <h3><code>everything()</code></h3>
-<p><code>select()</code> also works to change the order of columns. The code below moves the <code>age</code> and <code>country</code> columns directly after <code>name</code>, and then keeps <code>evertyhing()</code> else the same.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Move the `age` and `country` columns directly after `name`</span>
+<p><code>select()</code> also works to change the order of columns. The code below moves the <code>Units</code> and <code>Amount</code> columns directly after <code>Salvage</code>, and then keeps <code>evertyhing()</code> else the same.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the `Salvage`, `Units`, and `Amount` columns the first three columns</span>
 <span class="co"># Leave `everything()` else in the same order</span>
-<span class="kw">select</span>(all_cats, name, age, country, <span class="kw">everything</span>())</code></pre></div>
-<pre><code>## # A tibble: 2,785 x 12
-##    name      age country  color     gender grumpy fearful_of_peop~ playful
-##    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;            &lt;int&gt;   &lt;int&gt;
-##  1 Latte       3 Austral~ grey and~ Male        2                2       5
-##  2 Othello    15 Thailand buttersc~ Female      2                1       7
-##  3 Hershey     5 Peru     tabby     Male        1                1       6
-##  4 Aboulo~     3 UK       brown     Female      7                1       2
-##  5 Scratc~    11 Canada   white     Male        3                1       5
-##  6 Tuna       NA Germany  salt and~ Male        1                1       7
-##  7 Zonker      4 China    white     Female      3                5       5
-##  8 Ovidius    10 Spain    brown     Male        3                2       5
-##  9 Delia       2 Canada   tabby     Female      5                4       5
-## 10 Hotdog      8 Spain    salt and~ Female      3                4       6
-## # ... with 2,775 more rows, and 4 more variables:
-## #   friendly_to_people &lt;int&gt;, clumsy &lt;int&gt;, greedy &lt;int&gt;,
-## #   owner_phone &lt;chr&gt;</code></pre>
+<span class="kw">select</span>(starwars_scrap, <span class="kw">c</span>(Salvage, Units, Amount), <span class="kw">everything</span>())</code></pre></div>
+<pre><code>## # A tibble: 222 x 6
+##    Salvage                  Units Amount Origin   Dest       Price_per_Ton
+##    &lt;chr&gt;                    &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
+##  1 Flight recorder          Tons     887 Outskir~ Niima Out~          591.
+##  2 Proximity sensor         Tons    7081 Outskir~ Raiders            1229.
+##  3 Vitus-Series Attitude T~ Tons    4901 Reestki  Raiders             226.
+##  4 Aural sensor             Tons     707 Tuanul   Raiders             145.
+##  5 Electromagnetic dischar~ Tons     107 Tuanul   Niima Out~          188.
+##  6 Proximity sensor         Tons   32109 Tuanul   Trade car~         1229.
+##  7 Hyperdrive motivator     Tons     862 Tuanul   Trade car~         1485.
+##  8 Landing jet              Tons   13944 Reestki  Niima Out~         1497.
+##  9 Electromagnetic dischar~ Tons    7788 Cratert~ Raiders             188.
+## 10 Sublight engine          Tons   10642 Outskir~ Niima Out~         7211.
+## # ... with 212 more rows</code></pre>
 </div>
 </div>
-<div id="arrange" class="section level1">
-<h1><span class="header-section-number">5</span> | <code>arrange()</code></h1>
+<div id="arrange" class="section level1 unnumbered">
+<h1>| <code>arrange()</code></h1>
 <hr>
-<p>Use the <code>arrange()</code> function to sort data based on one or more of the columns in the table. Let’s use <code>arrange()</code> to answer some questions about the missing cats.</p>
-<ul>
-<li>Which cats are the most grumpy?</li>
-<li>Which cats are the oldest?</li>
-<li>Are there cats from Australia?</li>
-<li>What are the oldest cats from Australia?</li>
-</ul>
+<p>That’s helpful, but Rey wants to know what the highest priced Salvage items are. Use <code>arrange()</code> to find the Destination with the most highest priced Salvage item.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
 
-<span class="co"># Sort by the grumpy column</span>
-all_cats &lt;-<span class="st"> </span><span class="kw">arrange</span>(all_cats, grumpy)
+<span class="co"># find the least expensive Salvage items</span>
+starwars_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(starwars_scrap, Price_per_Ton)
 
-<span class="co"># Enter the table name to view the ordered data</span>
-all_cats</code></pre></div>
-<pre><code>## # A tibble: 2,785 x 12
-##    name     color      age gender country  grumpy fearful_of_peop~ playful
-##    &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;int&gt;            &lt;int&gt;   &lt;int&gt;
-##  1 Hershey  tabby        5 Male   Peru          1                1       6
-##  2 Tuna     salt an~    NA Male   Germany       1                1       7
-##  3 Ludwig   white       15 Male   Peru          1                3       6
-##  4 Beastie  peaches~    13 Male   Thailand      1                2       5
-##  5 Hayley   grey an~     1 Female USA           1                6       7
-##  6 Fuzzina~ peaches~     5 Male   New Zea~      1                2       6
-##  7 Desiree  black        9 Male   Thailand      1                1       7
-##  8 Zoloft   butters~    20 Female UK            1                2       7
-##  9 Dinky    salt an~     4 Male   Peru          1                1       7
-## 10 Butters~ brown        6 Male   Thailand      1                1       7
-## # ... with 2,775 more rows, and 4 more variables:
-## #   friendly_to_people &lt;int&gt;, clumsy &lt;int&gt;, greedy &lt;int&gt;,
-## #   owner_phone &lt;chr&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To sort in descending order (highest to lowest) </span>
-<span class="co"># Add desc() around the column name</span>
-all_cats &lt;-<span class="st"> </span><span class="kw">arrange</span>(all_cats, <span class="kw">desc</span>(grumpy))
+<span class="co"># View the top 6 rows using head()</span>
+<span class="kw">head</span>(starwars_scrap)</code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##   Salvage      Origin        Dest          Amount Units Price_per_Ton
+##   &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt;
+## 1 Aural sensor Tuanul        Raiders          707 Tons           145.
+## 2 Aural sensor Outskirts     Niima Outpost   3005 Tons           145.
+## 3 Aural sensor Tuanul        Raiders         6204 Tons           145.
+## 4 Aural sensor Tuanul        Raiders         3120 Tons           145.
+## 5 Aural sensor Blowback Town Niima Outpost   2312 Tons           145.
+## 6 Aural sensor Outskirts     Trade caravan   6272 Tons           145.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#find the most expensive Salvage items</span>
+starwars_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(starwars_scrap, <span class="kw">desc</span>(Price_per_Ton))
 
-
-<span class="co"># View the top 5 rows using head()</span>
-<span class="kw">head</span>(all_cats)</code></pre></div>
-<pre><code>## # A tibble: 6 x 12
-##   name    color         age gender country grumpy fearful_of_peop~ playful
-##   &lt;chr&gt;   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;            &lt;int&gt;   &lt;int&gt;
-## 1 Aboulo~ brown           3 Female UK           7                1       2
-## 2 Abigail grey and b~     5 Male   Canada       7                3       7
-## 3 Broody  brown          17 Female China        7                1       7
-## 4 Albert  butterscot~    15 Male   Canada       7                7       1
-## 5 Barbra  striped        11 Female Thaila~      7                1       6
-## 6 Alfred  peaches an~    14 Male   Peru         7                7       5
-## # ... with 4 more variables: friendly_to_people &lt;int&gt;, clumsy &lt;int&gt;,
-## #   greedy &lt;int&gt;, owner_phone &lt;chr&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Find the Aussie cats</span>
-
-
-<span class="co"># Find the ancient Aussie cats</span></code></pre></div>
-<p><br></p>
-<div id="pro-tip-1" class="section level3 unnumbered">
+<span class="co"># View the top 6 rows using head()</span>
+<span class="kw">head</span>(landing_jets)</code></pre></div>
+<pre><code>## Error in head(landing_jets): object &#39;landing_jets&#39; not found</code></pre>
+<p>Tell your neighbor the destination of the highest priced salvage items?</p>
+<div id="pro-tip" class="section level3 unnumbered">
 <h3><i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
 <blockquote>
 <p>When you save an arranged data table it maintains its order. This is perfect for sending people a quick <strong>Top 10</strong> list of pollutants or sites.</p>

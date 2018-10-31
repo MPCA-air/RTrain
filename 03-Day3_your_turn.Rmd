@@ -100,3 +100,16 @@ _Yes!! That was purrfect!_
 
 
 
+
+### Function arguments {-}
+
+For `read_csv()`, the character object argument _my_scrap_file_ is what the function uses to know where to find the data file. Functions often have more than one argument. Type `?read_csv` into your console to see help in the lower-right pane that describes all of the function’s arguments and what they do. 
+
+Many of the options have default arguments (such as `col_names = TRUE`) that the function uses if you don’t provide an alternative. A short scroll down in the help window will show you more details about the arguments and the values they take.
+
+> `function(arg1 = input1, arg2 = input2, arg3...)
+
+The _file_ argument tells us that the function expects a path to a file. It can be given many types of files, even a _ZIP_ file. Below that, you’ll see the _col_names_ argument. This argument takes either `TRUE`, `FALSE`, or a character vector of column names. The default is `TRUE`, which means the first row in the CSV will be used for the column names of your table. 
+
+<br>
+

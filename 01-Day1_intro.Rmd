@@ -10,9 +10,9 @@ output:
     css: css/camp_style.css
     number_sections: false
     self_contained: false
-fontsize: 16pt
+fontsize: 17pt
 monofont: Source Code Pro
-monofontoptions: Scale = 1.3
+monofontoptions: Scale = 1.4
 ---
 
 
@@ -42,7 +42,7 @@ __Please connect to your droid__
 
 <br><br>
 
-# Good morning, Empire minions! 
+# Good morning _Empire minions_! 
 <hr>
 
 <div class="row3">
@@ -143,16 +143,17 @@ _Spelling is very important in R._
 
 
 # Why R? 
+<hr>
 
 ## Data analysis in 7 steps 
 
 > 1. Read the data
-> 1. Stare at the data
+> 1. Plot the data
 > 1. Clean the data
-> 1. Stare at the data harder
+> 1. View the data closer
 > 1. Summarize the data
-> 1. __Share your work__
-> 1. Share the results
+> 1. Save the results
+> 1. __Share__ your work with the world
 
 
 ```{r, include=F, eval=F}
@@ -199,7 +200,6 @@ write_csv(aqs, "data/OZONE_samples.csv")
 
 
 ### 1. Read the data
-
 ```{r data}
 air_data <- read_csv("data/OZONE_samples.csv")
 ```
@@ -209,30 +209,35 @@ air_data %>% sample_n(5) %>% select(SITE, Date, OZONE, TEMP_F) %>% kable()
 ```
 
 
-### 2. View the data
-
+### 2. Plot the data
 ```{r view, message = F, fig.width=12, fig.height=4}
 ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
-    geom_point(alpha = 0.2, size = 2) +
+    geom_point(alpha = 0.2) +
     geom_smooth(method = "lm")
 ```
 
 
 ### 3. Clean the data
-
-```{r clean}
+```{r clean, eval=FALSE}
 # Drop values out of range
 air_data <- air_data %>% filter(OZONE > 0, TEMP_F < 199) 
+
+# Convert all samples to PPB
+air_data <- air_data %>% 
+            mutate(OZONE = ifelse(UNITS == "PPM", OZONE * 1000, 
+                                  OZONE)) 
 ```
 
 
-### 4. View the data harder
 
+### 4. View the data closer
 ```{r, fig.width=12, fig.height=4}
 ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
-    geom_point(alpha = 0.2, size = 2) +
+    geom_point(alpha = 0.2, size = 3) +
     geom_smooth(method = "lm") + 
-    facet_wrap(~SITE)
+    facet_wrap(~SITE) +
+    labs(title = "Ozone increases with temperature", 
+         subtitle = "Observations from 2015-2017")
 ```
 
 
@@ -249,12 +254,7 @@ air_data %>% kable()
 ```
 
 
-### 6. Share your work
-
-![images/github_example.png]{style="width: 85%;"}
-
-
-###  7. Share the results
+###  6. Save the results
 
 __Save the final data table__
 ```{r save-csv}
@@ -268,6 +268,21 @@ __Save the site plot__
 ```{r save-ch, message=F}
 ggsave("results/2015-2017 - Ozone vs Temp.pdf")
 ```
+
+
+
+### 7. Share it with the world
+
+<a href = "https://github.com/dKvale/ex__OZONE__Project">
+![](images/github_example_ozone.png){style="width: 95%;"}
+</a>
+
+<br><br>
+
+
+
+
+### Let's go! Jump to [R Training](https://mpca-air.github.io/RTrain/) 
 
 
 ##
