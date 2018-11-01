@@ -65,7 +65,7 @@ __Day 3__
 
 <div class="column3" style="border: 1px solid grey; height: 270px; max-height: 270px;">
 
-<a href="03-Day3_your_turn.html"><img src="images/day3_sq.png"></a>
+<a href=""><img src="images/day3_sq.png"></a>
 
 </div>
 </div>
