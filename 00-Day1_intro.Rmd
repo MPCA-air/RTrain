@@ -1,5 +1,5 @@
 ---
-title: "R Training| Intro"
+title: "R Training | Intro"
 output: 
   html_document:
     toc: false
@@ -38,11 +38,14 @@ __Please connect to your droid__
 - Select ` Remote Desktop Connection `
 - Enter ` w7-your7digit# ` or ` R32-your7digit# `
 - Press _Connect_
+- Open RStudio
 - Relax...
 
-<br><br>
+<br><br><br><br><br><br><br>
+<br><br><br>
 
-# Good morning _Empire minions_! 
+
+# Good morning _Empire minions!_ 
 <hr>
 
 <div class="row3">
@@ -52,7 +55,7 @@ __Please connect to your droid__
 </div>
 
 <div class="column4" style="border: 0px solid grey;">
-<img src="images/kristie.jpeg" height="220" width="200"></a>
+<img src="images/kristie.jpeg" height="240" width="200"></a>
 </div>
 
 <div class="column4" style="border: 0px solid grey;">
@@ -60,7 +63,7 @@ __Please connect to your droid__
 </div>
 
 <div class="column4" style="border: 0px solid grey;">
-<img src="images/derek.jpg" height="220" width="200"></a>
+<img src="images/derek.jpg" height="200" width="200"></a>
 </div>
 
 </div>
@@ -130,7 +133,7 @@ __Here's one:__  _What program do Jedi use to open PDF files?_
 ![](images/obi_wan.jpg){width="230"}
 
 
-> __A:__ _Adobe Wan Kenobi?_
+> __A:__ _Adobe Wan Kenobi_
 
 <br>
 
