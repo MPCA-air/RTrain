@@ -34,6 +34,11 @@ Install _ggplot2_ using `install.packages("ggplot2")`.
 <br>
 
 
+## Making a `ggplot()` sandwich {-}
+
+![](images/auto_plot.gif){width="800" style="float: right; margin-top: -20px;"}
+
+
 
 
 ## The 3 parts of a _ggplot_

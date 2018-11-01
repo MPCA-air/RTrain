@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R Training | Day 2</title>
+
+<script src="02_Day2_dplyr_ggplot_part0_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="02_Day2_dplyr_ggplot_part0_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="02_Day2_dplyr_ggplot_part0_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="02_Day2_dplyr_ggplot_part0_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="02_Day2_dplyr_ggplot_part0_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="02_Day2_dplyr_ggplot_part0_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="02_Day2_dplyr_ggplot_part0_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="02_Day2_dplyr_ggplot_part0_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="02_Day2_dplyr_ggplot_part0_files/navigation-1.1/tabsets.js"></script>
+<link href="02_Day2_dplyr_ggplot_part0_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="02_Day2_dplyr_ggplot_part0_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="02_Day2_dplyr_ggplot_part0_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css\camp_style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Training | Day 2</h1>
+
+</div>
+
+
+<div id="good-morning-young-jedis" class="section level2 unnumbered">
+<h2>Good morning young Jedis!</h2>
+<hr>
+<div class="figure">
+<img src="images/day2_bb8_sq.png" style="float: left; margin-right: 60px; margin-top: -10px;" width="260" />
+
+</div>
+<p><br><br></p>
+<p><strong>Please connect to your droid</strong></p>
+<ul>
+<li>Open the <strong>Start menu</strong> (<em>Click the Windows logo on the bottom left of the screen</em>)</li>
+<li>Select <code>Remote Desktop Connection</code></li>
+<li>Enter <code>w7-your7digit#</code> or <code>R32-your7digit#</code></li>
+<li>Press <em>Connect</em></li>
+</ul>
+<p><br><br><br></p>
+<p><strong>Open your RStudio project</strong></p>
+<ul>
+<li><strong>Open</strong> your project folder from last week</li>
+<li>Double click the <strong>.Rproj</strong> file to open RStudio</li>
+<li>Relax…</li>
+</ul>
+</div>
+<div id="day2-schedule" class="section level2 unnumbered">
+<h2>Day2 schedule</h2>
+<ol style="list-style-type: decimal">
+<li>Data transformations
+<ul>
+<li>Add new columns.</li>
+<li>Summarize your data.</li>
+<li>Split groups and categories in your data.</li>
+<li>Save data.</li>
+</ul></li>
+</ol>
+<div class="figure">
+<img src="images/starwars_sleeping.png" align="right" style="margin-top: -58px; margin-left: 20px; margin-right: 6px;" width="260" />
+
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Continue to make <strong>plots</strong>.
+<ul>
+<li>Scatter plots and transparency.</li>
+<li>Add a smoothed trend line to the plot.</li>
+<li>Add titles, colors, and axis labels.</li>
+<li>Bar charts.</li>
+<li>Histograms.</li>
+<li>Box plots.</li>
+<li>Log transform your chart axis.</li>
+</ul></li>
+</ol>
+</div>
+<div id="day-1-review" class="section level2 unnumbered">
+<h2>Day 1 review</h2>
+<hr>
+<div id="load-your-packages" class="section level3 unnumbered">
+<h3>1. Load your packages</h3>
+<p><em>Hint: Put the packages you need at the top of every script.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+
+<span class="co"># Your code starts here.</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="load-data-with-read_csv" class="section level3 unnumbered">
+<h3>2. Load data with <code>read_csv()</code></h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_scrap_data &lt;-<span class="st"> &quot;data/starwars_scrap_jakku_full.csv&quot;</span>
+scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(my_scrap_data)
+scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>)</code></pre></div>
+<p><br></p>
+<details><summary class = "btn_code_blue"> Read a CSV file using base R </summary>
+<p>
+<p>Sometimes there are more ways than one to solve puzzles in R. You don’t actually need a package to read csvs into R. You can do this in <em>base R</em>. Let’s not get carried away with all of the ways to do things, but just know—if one way doesn’t work or is too slow..there is always another way to go about things.</p>
+<p>Copy the code below to your R script and run the line with the <code>read.csv</code> function (Hit <strong>CTRL + ENTER</strong>). It will return the Star Wars scrap data <code>scrap</code>. The character string <code>&quot;~data/scrap.csv&quot;</code> inside the parentheses of the <code>read.csv()</code> function is the path of the data file.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">base_r_read_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R</span><span class="ch">\R</span><span class="st">Train - Star Wars/data/starwars_scrap_jakku_full.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="select-and-arrange-your-data" class="section level3 unnumbered">
+<h3>3. <code>select()</code> and <code>arrange()</code> your data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sort from low to high</span>
+<span class="kw">arrange</span>(scrap, Amount)
+
+<span class="co"># Sort from high to low</span>
+<span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(Amount))
+
+##Select just the Origin cities and Destination (receiving) groups
+<span class="kw">select</span>(scrap, <span class="kw">c</span>(Origin, Dest))</code></pre></div>
+<p><br></p>
+</div>
+<div id="filter-your-data-with-filter" class="section level3 unnumbered">
+<h3>4. Filter your data with <code>filter()</code></h3>
+<p><em>Hint: Numbers don’t need quotes.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Filter to Salvage items with Amounts of 299</span>
+scrap_<span class="dv">299</span> &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Amount <span class="op">==</span><span class="st"> </span><span class="dv">299</span>)
+
+<span class="co"># Filter to Salvage items that went to trade caravans and raiders</span>
+scrap_destination &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Dest <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Trade caravan&quot;</span>, <span class="st">&quot;Raiders&quot;</span>))</code></pre></div>
+<p><br></p>
+</div>
+<div id="questions-from-day-1" class="section level3 unnumbered">
+<h3>Questions from Day 1</h3>
+<ul>
+<li>Finding new packages and functions
+<ul>
+<li>Use <strong>Cheatsheets</strong> to find common functions:
+<ul>
+<li>Go to <em>Help</em> &gt; <em>Cheatsheets</em>.
+<ul>
+<li><em>Data Transformation</em> is what we’re learning now.</li>
+<li><em>Data Visualization</em> is also good.</li>
+</ul></li>
+</ul></li>
+<li>To search for functions
+<ul>
+<li><a href="www.google.com">google.com</a>: include <code>r</code> or <code>rstats</code> + <code>the question</code></li>
+<li><a href="https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs">stackoverflow.com</a> + use the <code>[r]</code> tag</li>
+</ul></li>
+<li>To search packages in R get the: <a href="https://github.com/RhoInc/CRANsearcher">CRANsearcher</a></li>
+</ul></li>
+<li>Where’s my <em>History</em>?
+<ul>
+<li>Push the <code>UP ARROW</code> in the console to scroll through your recent command history.</li>
+<li>Or select the <code>History</code> tab in the upper right next to the <code>Environment</code> tab.</li>
+</ul></li>
+<li>Get function help inside R: <code>?arrange()</code></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="data-transformation" class="section level1">
+<h1><span class="header-section-number">1</span> | Data transformation</h1>
+<hr>
+<div class="figure">
+<img src="images/starwars_cleandroid.jpg" style="float: right; margin-top: 10px; margin-left: 20px; margin-right: 36px;" width="250" />
+
+</div>
+<blockquote>
+<p>“How can we best help Rey?”&quot;</p>
+</blockquote>
+<p>We have several different units of scrap items. This means unit conversions are in our future! And, it sounds like we’re going to need some math for this puzzle. Let’s calculate some new columns to help prioritize scrap scavenging work.</p>
+<p><br><br></p>
+</div>
+<div id="mutate" class="section level1">
+<h1><span class="header-section-number">2</span> | <code>mutate()</code></h1>
+<hr>
+<p>It’s often useful to edit existing columns in a data frame or add new columns that are functions of existing columns. That’s the job of <code>mutate()</code>.</p>
+<div id="get-to-know-your-data-frame" class="section level2">
+<h2><span class="header-section-number">2.1</span> Get to know your data frame</h2>
+<p>Before we go changing things in the data frame we’ll need to know the column names and the tables dimensions a bit better. These quick functions are all great ways to describe your data frame.</p>
+<div id="data-frame-details" class="section level3 unnumbered">
+<h3>Data frame details</h3>
+<ul>
+<li><p><code>names(scrap)</code> show the column names</p></li>
+<li><p><code>nrow(scrap)</code> number of rows</p></li>
+<li><p><code>ncol(scrap)</code> number of columns</p></li>
+<li><p><code>summary(scrap)</code> summary of all columns</p></li>
+<li><p><code>glimpse(scrap)</code> column names, plus a glimpse of first few values (requires loading <em>dplyr</em> package)</p></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="add-a-constant-value-or-phrase-to-new-column" class="section level2">
+<h2><span class="header-section-number">2.2</span> Add a constant value or phrase to new column</h2>
+<p>First let’s add a column with our names, so that Rey will thank us personally on Liberation Day.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Type in your name and rank
+scrap &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap, <span class="dt">scrap_analyst =</span> <span class="st">&quot;Sergeant Derek&quot;</span>)</code></pre></div>
+</div>
+<div id="changing-or-modifying-an-existing-column" class="section level2">
+<h2><span class="header-section-number">2.3</span> Changing or modifying an existing column</h2>
+<hr>
+<p>Remember how that unit of Tons was written two ways: <em>TONS</em> and <em>Tons</em>? We can use <em>mutate</em> together with <em>tolower</em> to make sure all of the Salvage scrap is written in the same case. Case matters with R!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap, <span class="dt">Units =</span> <span class="kw">tolower</span>(Units))
+
+##toupper() will change all of the letters in a column to upper case.</code></pre></div>
+</div>
+<div id="tons-to-pounds-conversions" class="section level2">
+<h2><span class="header-section-number">2.4</span> Tons to pounds conversions</h2>
+<p>In our work we often use <code>mutate</code> to calculate new units for measurements. In this case, let’s estimate the pounds for scavenge items that are reported in tons.</p>
+<blockquote>
+<p><strong>Pounds</strong> = Scrap in Tons / 2000</p>
+</blockquote>
+<div id="convert-an-existing-column-to-pounds" class="section level3 unnumbered">
+<h3>Convert an existing column to pounds</h3>
+<p>Use <code>filter()</code> to subset our data down to the items reported in tons and then use <code>mutate()</code> to convert the Amount column to pounds and change the Units column to “pounds”.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap_pounds &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, <span class="dt">Units =</span> <span class="st">&quot;cubic yards&quot;</span>)
+
+scrap_pounds &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap_pounds, 
+                   <span class="dt">Amount =</span> Amount<span class="op">/</span><span class="dv">2000</span>,
+                   <span class="dt">Units =</span> <span class="st">&quot;pounds&quot;</span>)</code></pre></div>
+<p><br></p>
+</div>
+<div id="pro-tip" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p>If you use <code>mutate()</code> and provide a single value for a column such as <code>Salvage_Analyst = &quot;Sergeant Derek&quot;</code>, then every row in the column you created will have that value. If you provide a vector of values, such as <code>Amount = Amount/2000</code>, then the column you create will have a list of values that each correspond to the values in the vector you provided. If you provide a vector that has a different length than the number of rows in your data frame, you’ll get an error telling you that the number of values you provide must be equal to the number of rows in your data frame or be a single value.</p>
+</blockquote>
+</div>
+</div>
+<div id="find-your-neighbors-origin-city" class="section level2">
+<h2><span class="header-section-number">2.5</span> Find your neighbor’s Origin City</h2>
+<p>Now let’s see if you can use <code>mutate()</code> to help match the description of the Salvage from your City. Give your neighbor a series of clues about your origin city based on facts about the Salvage from that location.</p>
+<p>Here’s a hint for ways to describe your City by describing its Salvage scrap data.</p>
+<blockquote>
+<p>My City’s name starts with a T. My City sold more than 1000 Acceleration compensators to a Trade Caravan. The total price was at least 800 credits.</p>
+</blockquote>
+<p>Use <code>mutate()</code>, <code>filter()</code>, and <code>arrange()</code> to figure out a way of describing your City by its Salvage scrap. Then, provide this information to your neighbor and have them figure out what City you are from.</p>
+<p>Here’s a snippet to get you started.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+
+## Filter down your data to the type of salvage in the hint
+my_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Salvage <span class="op">==</span><span class="st"> &quot;Acceleration compensator&quot;</span>)
+
+##arrange the data by 
+my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(my_scrap, <span class="kw">desc</span>(Amount))</code></pre></div>
+<p><br></p>
+<p>I have now written my_scrap like a million times and I am sick of it. R is so stupid why do I have to type all the time? I have rebels to protect and I haven’t eaten in 2 days.</p>
+<p>You DON’T have to do that much typing. You can connect your functions if you are using the same data set.</p>
+<p>You can chain the <code>filter()</code> and <code>arrange()</code> functions together and do everything in one go. For that you can use the <code>%&gt;%</code> (pipe).</p>
+<div class="figure">
+<img src="https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png" align="left" style="margin-right:20px;" width="115" />
+
+</div>
+<p><br></p>
+<p>In a script the <code>%&gt;%</code> is read as “and then”. In the code below we are telling R to <code>mutate</code> the data <strong>and then</strong> to <code>filter</code> it.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Using the question Tuanul example above
+my_scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Salvage <span class="op">==</span><span class="st"> &quot;Acceleration compensator&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(my_scrap, <span class="kw">desc</span>(Amount))</code></pre></div>
+</div>
+</div>
+<div id="left_join" class="section level1">
+<h1><span class="header-section-number">3</span> | <code>left_join()</code></h1>
+<p>Remember our different unit issue? Well, we do not want to convert the units one by one, and guess what? Our droid found a unit converter table. This will make things way easier!</p>
+<div class="figure">
+<img src="images/left_join_image.png" width="490" />
+
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Name your table
+conversions &lt;-<span class="st"> &quot;data/conversion_table.csv&quot;</span>
+
+##Read in your table
+conversions &lt;-<span class="st"> </span><span class="kw">read_csv</span>(conversions)
+
+##Join the scrap to the conversion table
+<span class="co">#We can also drop the units column since its duplicated by the old data set and it&#39;s been corrected</span>
+scrap &lt;-<span class="st"> </span><span class="kw">left_join</span>(scrap, conversions, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Salvage&quot;</span> =<span class="st"> &quot;desc&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>units)</code></pre></div>
+<p><br></p>
+<p><strong>Hint:</strong> Remeber to type <code>?left_join</code> if you are wondering what the arguments are.</p>
+</div>
+<div id="ifelse" class="section level1">
+<h1><span class="header-section-number">4</span> | <code>ifelse()</code></h1>
+<hr>
+<p>Sometimes you may not want to add the same value to an entire column, in other words you want to <code>mutate()</code> conditionally. We can use <code>ifelse()</code> to do this.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Convert tons to pounds, but only if the units are not already in tons.
+scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">mutate</span>(<span class="dt">Ton_Conv =</span> <span class="kw">ifelse</span>(Units <span class="op">==</span><span class="st"> &#39;tons&#39;</span>, Amount, Amount <span class="op">*</span><span class="st"> </span>pounds <span class="op">/</span><span class="st"> </span><span class="dv">2000</span>))</code></pre></div>
+<p>Wow!! Congratulations of galactic proportions to you. We have a clean and tidy data set. Someday if we receive data to append, all we will do is re-run this script and in 5 seconds we will have a cleaned up data set again!</p>
+<p>We now have the amount of tons sold and the price per ton, but we want to know the total amount of credits for each transaction. How would we calculate that?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Calculate credits for each transaction
+scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Credits =</span> Ton_Conv <span class="op">*</span><span class="st"> </span>Price_per_Ton)</code></pre></div>
+<p>Now, we want to make some plots and really visualize this data, but Junk Bosses like old Unkar don’t usually ask us for the raw data. We as data analysts get questions like, What’s the highest number? What’s the lowest number? What is the mean tonnage from Cratertown? Fast! Faster!! So, let us move on to <em>summarize</em>.</p>
+</div>
+<div id="summarize-this" class="section level1">
+<h1><span class="header-section-number">5</span> | <code>summarize()</code> this</h1>
+<hr>
+<div class="figure">
+<img src="images/summarize_diagram.png" width="490" />
+
+</div>
+<p><code>summarize()</code> allows you to apply a summary function like <code>median()</code> to a column and collapse your data down to a single row. To really dig into <code>summarize</code> you’ll want to know some common summary functions, such as <code>sum()</code>, <code>mean()</code>, <code>median()</code>, <code>min()</code>, and <code>max()</code>.</p>
+<div id="sum" class="section level2 unnumbered">
+<h2><code>sum()</code></h2>
+<p>Use <code>summarize()</code> and <code>sum()</code> to find the total credits from all Salvage.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">Total_Credits =</span> <span class="kw">sum</span>(Credits))</code></pre></div>
+</div>
+<div id="mean" class="section level2 unnumbered">
+<h2><code>mean()</code></h2>
+<p>Use <code>summarize()</code> and <code>mean()</code> to calculate the <em>mean</em> weight in tons in the Salvage reports.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">mean_weight =</span> <span class="kw">mean</span>(Ton_Conv, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   mean_weight
+##         &lt;dbl&gt;
+## 1       3724.</code></pre>
+<p><br></p>
+<blockquote>
+<p>Note the <code>na.rm = TRUE</code> in the <code>mean()</code> function. This tells R to ignore empty cells or missing values that show up in R as <code>NA</code>. If you leave <code>na.rm</code> out, the <em>mean</em> funciton will return ‘NA’ when it finds a missing value in the data.</p>
+</blockquote>
+</div>
+<div id="median" class="section level2 unnumbered">
+<h2><code>median()</code></h2>
+<p>Use summarize to calculate the <em>median</em> weight in the Salvage reports.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">median_price =</span> <span class="kw">median</span>(Ton_Conv, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   median_price
+##          &lt;dbl&gt;
+## 1         1298</code></pre>
+</div>
+<div id="max" class="section level2 unnumbered">
+<h2><code>max()</code></h2>
+<p>Use summarize to calculate the <em>maximum</em> price per ton any scrapper got for their Salvage.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">max_price =</span> <span class="kw">max</span>(Price_per_Ton, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   max_price
+##       &lt;dbl&gt;
+## 1     7211.</code></pre>
+</div>
+<div id="min" class="section level2 unnumbered">
+<h2><code>min()</code></h2>
+<p>Use summarize to calculate the <em>minimum</em> price per ton any scrapper got for their Salvage.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">min_price =</span> <span class="kw">min</span>(Price_per_Ton, <span class="dt">na.rm =</span> T))</code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##   min_price
+##       &lt;dbl&gt;
+## 1      29.2</code></pre>
+</div>
+<div id="nth" class="section level2 unnumbered">
+<h2><code>nth()</code></h2>
+<p>Use <code>summarize()</code> and <code>nth(Origin, 12)</code> to find the name of the Origin City that got the <em>12th</em> highest scrapper haul.</p>
+<p><em>Hint: Use <code>arrange()</code> first.</em></p>
+<p><code>arrange(scrap, desc(Ton_Conv)) %&gt;% summarize(price_12 = nth(Origin, 12))</code></p>
+</div>
+<div id="sd" class="section level2 unnumbered">
+<h2><code>sd()</code></h2>
+<p>What is the <em>standard deviation</em> of the credits?</p>
+<p><code>summarize(scrap, stdev_Credits = sd(Credits))</code></p>
+</div>
+<div id="quantile" class="section level2 unnumbered">
+<h2><code>quantile()</code></h2>
+<p><em>Quantiles</em> are useful for finding the upper or lower range of a column. Use the <code>quantile()</code> function to find the the 5th and 95th quantile of the prices.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, 
+          <span class="dt">price_5th_pctile  =</span> <span class="kw">quantile</span>(Price_per_Ton, <span class="fl">0.05</span>, <span class="dt">na.rm =</span> T),
+          <span class="dt">price_95th_pctile =</span> <span class="kw">quantile</span>(Price_per_Ton, <span class="fl">0.95</span>))</code></pre></div>
+<p><em>Hint: add <code>na.rm = T</code> to <code>quantile()</code>.</em></p>
+</div>
+<div id="n" class="section level2 unnumbered">
+<h2><code>n()</code></h2>
+<p><code>n()</code> stands for <em>count</em>.</p>
+<p>Use summarize and <code>n()</code> to count the number of reported Salvage that went to a Niima outpost.</p>
+<p><em>Hint: Use <code>filter()</code> first.</em></p>
+<p><code>filter(scrap, Dest == &quot;Niima outpost&quot;) %&gt;% summarize(salvage_count = n())</code></p>
+<p><br></p>
+<div id="exercise" class="section level3 unnumbered">
+<h3><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<p>Create a Star Wars scrap summary using 3 of the math functions above.</p>
+<p><em>But wait! In the beginning, we decided we wanted to create a report about the Salvage from our Origin cities to help Rey determine who she should work with to get scrap for her star ship?</em></p>
+<blockquote>
+<p>Wouldn’t it be great if we could easily find the mean price for every Origin City? Bring on group_by()!</p>
+</blockquote>
+</div>
+</div>
+</div>
+<div id="group_by" class="section level1">
+<h1><span class="header-section-number">6</span> | <code>group_by()</code></h1>
+<hr>
+<p>Enter <code>group_by()</code> stage left. If you thought <code>summarize</code> was awesome, wait until you include <code>group_by</code> with your <code>summarize</code> commands.</p>
+<p>Try using <code>group_by</code> with the column <em>Origin</em> and then use <code>summarize</code> to count the number of Salvage reports from each planet.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">origin_count  =</span>  <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</code></pre></div>
+<div id="pro-tip-1" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p>Ending with <code>ungroup()</code> is good practice. This will prevent your data from staying grouped after the summarizing has been completed.</p>
+</blockquote>
+<p><br></p>
+<blockquote>
+<p>What about the mean of the prices that each Origin City got?</p>
+</blockquote>
+<p>Let’s use <code>group_by</code> with the column <em>Origin</em> again, but this time use <code>summarize</code> to find the <code>mean(Price_per_Ton)</code> for each Origin City.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">summarize</span>(<span class="dt">mean_price =</span>  <span class="kw">mean</span>(Price_per_Ton, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</code></pre></div>
+<p><br></p>
+<p>That’s a lot of digits!</p>
+</div>
+<div id="round" class="section level2">
+<h2><span class="header-section-number">6.1</span> <code>round()</code></h2>
+<p>You can round the prices to a certain number of digits using the <code>round()</code> function. We can finish by adding the <code>arrange()</code> function to sort the table by our new column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_price       =</span>  <span class="kw">mean</span>(Price_per_Ton, <span class="dt">na.rm =</span> T),
+            <span class="dt">mean_price_round =</span> <span class="kw">round</span>(Price_per_Ton, <span class="dt">digits =</span> <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">arrange</span>(mean_price_round) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</code></pre></div>
+<p><br></p>
+<p><strong>NOTE:</strong> The <code>round()</code> function in R does not automatically round values ending in 5 up, instead it uses scientific rounding. It rounds values ending in 5 to the nearest even number, so 2.5 rounded to the nearest whole number using <code>round()</code> is 2, and 3.5 rounded to the nearest whole number is 4. If you want to round all values ending in 5 up, then you’ll have to use a rounding function from another package.</p>
+</div>
+</div>
+<div id="save-files" class="section level1">
+<h1><span class="header-section-number">7</span> | Save files</h1>
+<hr>
+<p>Let’s save the last summary table we created to a <em>CSV</em>. That way we can print it to have it <strong>transmitted through Droid courier</strong> to Unkar. To save a data frame we’ll use the <code>write_csv()</code> function from our favorite <em>readr</em> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First give the new data a name</span>
+scrap_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_price       =</span>  <span class="kw">mean</span>(Price_per_Ton, <span class="dt">na.rm =</span> T),
+            <span class="dt">mean_price_round =</span> <span class="kw">round</span>(Price_per_Ton, <span class="dt">digits =</span> <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">arrange</span>(mean_price_round) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()
+
+<span class="co"># Write the file to your project folder</span>
+<span class="kw">write_csv</span>(scrap_summary, <span class="st">&quot;mean_prices_origin.csv&quot;</span>)</code></pre></div>
+<div id="pro-tip-2" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p><strong>Warning!</strong> R will overwrite a file if the file already exists in a folder. It will not ask for confirmation. You will not collect $200.</p>
+</blockquote>
+<p><br></p>
+</div>
+</div>
+<div id="grouped-mutate" class="section level1">
+<h1><span class="header-section-number">8</span> | Grouped <code>mutate()</code></h1>
+<br>
+<hr>
+<p>We can bring back <code>mutate</code> to add a column based on the grouped values in a data set. For example, you may want to add a column showing the mean price by country to the whole table.</p>
+<p>When you combine <code>group_by</code> and <code>mutate</code> the new column will be calculated based on the values within each group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">origin_mean_price =</span> <span class="kw">mean</span>(Price_per_Ton, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</code></pre></div>
+<p><br></p>
+<div id="exercise-1" class="section level3 unnumbered">
+<h3>Exercise <i class="fa fa-user-astronaut" aria-hidden="true" style="color: green"></i></h3>
+<p>Find the median weight for each Destination.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Dest) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">median_weight_dest =</span> <span class="kw">median</span>(Ton_Conv, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre></div>
+</div>
+<div id="break-time" class="section level2">
+<h2><span class="header-section-number">8.1</span> Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i></h2>
+<p><br></p>
+<p>Take 5 minutes to relax.</p>
+<p><br></p>
+</div>
+</div>
+<div id="ggplot" class="section level1">
+<h1><span class="header-section-number">9</span> | ggplot</h1>
+<p>All of this information is great, but Rey doesn’t have time to look at tables. Let’s visualize the data with some plots. Let’s go more in-depth into ggplot.</p>
+<div id="the-3-parts-of-a-ggplot" class="section level2">
+<h2><span class="header-section-number">9.1</span> The 3 parts of a <em>ggplot</em></h2>
+<div id="set-the-base-plot-the-dorian-plot." class="section level3">
+<h3><span class="header-section-number">9.1.1</span> 1. Set the base plot (the Dorian plot).</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap)</code></pre></div>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
+<p><br></p>
+<blockquote>
+<p>Note when we load the package it’s <code>library (&quot;ggplot2&quot;)</code> but when we use the function, it’s <code>ggplot(scrap)</code> without the 2 following ggplot. It’s annoying, but that’s the way it is.</p>
+</blockquote>
+</div>
+<div id="set-the-x-y-aesthetics." class="section level3">
+<h3><span class="header-section-number">9.1.2</span> 2. Set the X, Y <em>(aesthetics)</em>.</h3>
+<p><em>Aesthetics</em> are the visual components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits)) </code></pre></div>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
+</div>
+<div id="add-layers-geometries." class="section level3">
+<h3><span class="header-section-number">9.1.3</span> 3. Add layers <em>(geometries)</em>.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
+<p><br></p>
+<p>Now let’s use color to show the origins of the scrap</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">color =</span> Origin)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<p>This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">fill =</span> Origin)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;sum&quot;</span>)</code></pre></div>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

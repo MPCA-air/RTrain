@@ -1,5 +1,5 @@
 ---
-title: "R Camp | day 2"
+title: "R Training | Day 2"
 output: 
   html_document:
     toc: true
@@ -22,47 +22,38 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 
-# Good morning young Jedis!
+## Good morning young Jedis! {-}
+<hr>
 
-<br>
+![](images/day2_bb8_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -10px;"}
 
-__Please connect to your computer__
+<br><br>
 
-1. __Open__ the Start menu  \ \*_Click the Window’s logo on the bottom left of the screen_
-1. Select ` Remote Desktop Connection `
-1. Enter ` w7-your7digit# `
-1. Press _Connect_
+__Please connect to your droid__
 
-<br>
+- Open the __Start menu__  (_Click the Windows logo on the bottom left of the screen_)
+- Select ` Remote Desktop Connection `
+- Enter ` w7-your7digit# ` or ` R32-your7digit# `
+- Press _Connect_
 
-__And open your RStudio project__
+<br><br><br>
 
-1. __Open__ your project folder from last week.
-1. Double click the __.Rproj__ file to open RStudio.
-1. Relax.
+__Open your RStudio project__
 
-![](images/starwars_sleeping.png){width="250" align="right" style="margin-top: -20px; margin-left: 20px; margin-right: 36px;"}
-
-
-## CAMP schedule
-
-__Day 1__
-
-1. Become a a young Jedi scrap scavenger.
-1. Open new RStudio project and R script.
-1. Install new R packages.
-1. Read data into R.
-1. Arrange, select and filter your data.
-1. Find the messiness in your scrap dataset.
+- __Open__ your project folder from last week
+- Double click the __.Rproj__ file to open RStudio
+- Relax...
 
 
-__Day 2__  
+## Day2 schedule  {-}
 
 1. Data transformations
     - Add new columns.
     - Summarize your data.
     - Split groups and categories in your data.
     - Save data.
+    
+![](images/starwars_sleeping.png){width="260" align="right" style="margin-top: -58px; margin-left: 20px; margin-right: 6px;"}
 
 2. Continue to make __plots__.
     - Scatter plots and transparency.
@@ -72,17 +63,16 @@ __Day 2__
     - Histograms.
     - Box plots.
     - Log transform your chart axis. 
-
-<br> 
-
-
-## Day 1 review
+ 
 
 
-### 1. Load your packages
+## Day 1 review {-}
+<hr>
+
+### 1. Load your packages {-}
 
 _Hint: Put the packages you need at the top of every script._
-```{r, eval = F}
+```{r, eval = T}
 library("readr")
 library("dplyr")
 
@@ -93,176 +83,174 @@ library("dplyr")
 <br>
 
 
-### 2. Load data with `read_csv()`
-```{r, eval = F}
+### 2. Load data with `read_csv()` {-}
+```{r, eval = T}
 
-starwars_scrap <- read_csv("data/starwars_scrap_jakku_full.csv")
+my_scrap_data <- "data/starwars_scrap_jakku_full.csv"
+scrap <- read_csv(my_scrap_data)
+scrap <- filter(scrap, Origin != "All")
 
 ```
 
 <br>
 
 <details><summary class = "btn_code_blue"> Read a CSV file using base R </summary>
-  <p>
+<p>
 
 Sometimes there are more ways than one to solve puzzles in R. You don't actually need a package to read csvs into R. You can do this in _base R_. Let's not get carried away with all of the ways to do things, but just know---if one way doesn't work or is too slow..there is always another way to go about things.
 
-Copy the code below to your R script and run the line with the `read.csv` function (Hit __CTRL + ENTER__). It will return the Star Wars scrap data `starwars_scrap`. The character string `"~data/starwars_scrap.csv"` inside the parentheses of the `read.csv()` function is the path of the data file.
+Copy the code below to your R script and run the line with the `read.csv` function (Hit __CTRL + ENTER__). It will return the Star Wars scrap data `scrap`. The character string `"~data/scrap.csv"` inside the parentheses of the `read.csv()` function is the path of the data file.
 
 ```{r, base r read, eval = F, echo = T}
 base_r_read_data <- read.csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R\RTrain - Star Wars/data/starwars_scrap_jakku_full.csv")
 ```
 
-### 3. `select()` and `arrange()` your data
+### 3. `select()` and `arrange()` your data {-}
 ```{r select arrange review, eval = F}
 
 # Sort from low to high
-arrange(starwars_scrap, Amount)
+arrange(scrap, Amount)
 
 # Sort from high to low
-arrange(starwars_scrap, desc(Amount))
+arrange(scrap, desc(Amount))
 
 ##Select just the Origin cities and Destination (receiving) groups
-select(starwars_scrap, c(Origin, Dest))
+select(scrap, c(Origin, Dest))
 
 ```
 
 <br>
 
 
-### 4. Filter your data with `filter()`
+### 4. Filter your data with `filter()` {-}
 
 _Hint: Numbers don't need quotes._
 ```{r filter review, eval = F}
 
 # Filter to Salvage items with Amounts of 299
-scrap_299 <- filter(starwars_scrap, Amount == 299)
+scrap_299 <- filter(scrap, Amount == 299)
 
 # Filter to Salvage items that went to trade caravans and raiders
-scrap_destination <- filter(starwars_scrap, Dest %in% c("Trade caravan", "Raiders"))
+scrap_destination <- filter(scrap, Dest %in% c("Trade caravan", "Raiders"))
 
 ```
 
 <br>
 
-### 5. Questions from Day 1
+### Questions from Day 1 {-}
 
-- Find new packages and functions
+- Finding new packages and functions
     - Use __Cheatsheets__ to find common functions: 
         - Go to _Help_ > _Cheatsheets_. 
             - _Data Transformation_ is what we're learning now. 
             - _Data Visualization_ is also good. 
-    - To search functions 
-        - [google.com](www.google.com)
+    - To search for functions 
+        - [google.com](www.google.com): include `r` or `rstats` + `the question`
         - [stackoverflow.com](https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs) + use the `[r]` tag
-    - To search packages: [CRANsearcher](https://github.com/RhoInc/CRANsearcher)
-- Meet your _History_
-    - Push up in the console to scroll through your recent command history.
-- Get function help: `?arrange()` 
-- Learn more R? 
-    - R basics: https://tutorials.shinyapps.io/04-Programming-Basics/#section-welcome
-    - More `filter()`: https://jjallaire.shinyapps.io/learnr-tutorial-03a-data-manip-filter/
-    - [__R for Data Science__](http://r4ds.had.co.nz/) - is a great book that is online and teaches everything. 
+    - To search packages in R get the: [CRANsearcher](https://github.com/RhoInc/CRANsearcher)
+
+- Where's my _History_?
+    - Push the `UP ARROW` in the console to scroll through your recent command history.
+    - Or select the `History` tab in the upper right next to the `Environment` tab.
+    
+- Get function help inside R: `?arrange()` 
 
 <br>
 
 
-# _Let's tidy up our data_ {-}
+#| Data transformation 
+<hr>
 
-![](images/starwars_cleandroid.jpg){width="250" align="right" style="margin-top: -20px; margin-left: 20px; margin-right: 36px;"}
+![](images/starwars_cleandroid.jpg){width="250"  style="float: right; margin-top: 10px; margin-left: 20px; margin-right: 36px;"}
 
 
 > "How can we best help Rey?""
 
-Let's learn a new function to begin.
-
-<br>
-
-# Data transformation {-}
-
-
 We have several different units of scrap items. This means unit conversions are in our future! And, it sounds like we're going to need some math for this puzzle. Let's calculate some new columns to help prioritize scrap scavenging work.
+
+<br><br>
 
 
 #| `mutate()`
 <hr>
 
-It's often useful to edit existing columns in a data frame or add new columns that are functions of existing columns. That’s the job of `mutate() `.
+It's often useful to edit existing columns in a data frame or add new columns that are functions of existing columns. That's the job of `mutate() `.
 
 ## Get to know your data frame
 
-Before we go changing things in the data frame we'll need to get to know the column names and the tables dimensions a bit better. These quick functions are all great ways to describe your data frame.
+Before we go changing things in the data frame we'll need to know the column names and the tables dimensions a bit better. These quick functions are all great ways to describe your data frame.
 
 
 ### Data frame details {-}
 
-- `names(starwars_scrap)` show the column names
+- `names(scrap)` show the column names
 
-- `nrow(starwars_scrap)` number of rows 
+- `nrow(scrap)` number of rows 
 
-- `ncol(starwars_scrap)` number of columns
+- `ncol(scrap)` number of columns
 
-- `summary(starwars_scrap)` summary of all columns
+- `summary(scrap)` summary of all columns
 
-- `glimpse(starwars_scrap)` column names, plus a glimpse of first few values (requires loading _dplyr_ package)
+- `glimpse(scrap)` column names, plus a glimpse of first few values (requires loading _dplyr_ package)
 
 <br>
 
-##Add a new column to a constant variable
-First let's add a column with our names, so that Rey will thank us personally on Liberation Day 
+##Add a constant value or phrase to new column
+First let's add a column with our names, so that Rey will thank us personally on Liberation Day. 
 ```{r mutate1, echo = T, eval = T}
 
-##Make your name and rank your own
-starwars_scrap <- mutate(starwars_scrap, scrap_analyst = "Sergeant Derek")
+##Type in your name and rank
+scrap <- mutate(scrap, scrap_analyst = "Sergeant Derek")
 
 ```
 
-##Changing or modifying an existing column
-Remember how that unit of Tons was written two ways: *TONS* and *Tons*? We can use _mutate_ together with _tolower_ to make sure all of the Salvage scrap is in the same case. Case matters with R!
+## Changing or modifying an existing column
+<hr>
 
-```{r mutate1, echo = T, eval = T}
+Remember how that unit of Tons was written two ways: *TONS* and *Tons*? We can use _mutate_ together with _tolower_ to make sure all of the Salvage scrap is written in the same case. Case matters with R!
 
-starwars_scrap <- mutate(starwars_scrap, Units = tolower(Units))
+```{r mutate2, echo = T, eval = T}
 
+scrap <- mutate(scrap, Units = tolower(Units))
+
+##toupper() will change all of the letters in a column to upper case.
 ```
 
-## Cubic yards to tons conversions
+## Tons to pounds conversions
 
-In our work we often use `mutate` to calculate new units for measurements. In this case, let's estimate the tons for scavenge items that are reported in cubic yards. We will assume all the scrap that was reported in cubic yards is made of titanium metal.
+In our work we often use `mutate` to calculate new units for measurements. In this case, let's estimate the pounds for scavenge items that are reported in tons. 
 
-> __Tons__ = Scrap in cubic yards * 4.33
+> __Pounds__ = Scrap in Tons / 2000
 
 
-### Convert an existing column to tons {-}
+### Convert an existing column to pounds {-}
 
-Use `filter()` to subset our data down to the items reported in cubic tons and then use `mutate()` to convert the Amount column to tons and change the Units column to "tons".
+Use `filter()` to subset our data down to the items reported in tons and then use `mutate()` to convert the Amount column to pounds and change the Units column to "pounds".
 
 ```{r, eval=F}
 
-starwars_scrap_cubicyards <- filter(starwars_scrap, Units = "cubic yards")
+scrap_pounds <- filter(scrap, Units = "cubic yards")
 
-starwars_scrap_cubicyards <- mutate(starwars_scrap_cubicyards, 
-                   Amount = Amount * 4.33,
-                   Units = "tons")
+scrap_pounds <- mutate(scrap_pounds, 
+                   Amount = Amount/2000,
+                   Units = "pounds")
 ```
 
 <br>
 
 
-### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
-> If you use `mutate()` and provide a single value for a column such as `Salvage_Analyte = "Sergeant Derek"`, then every row in the column you created will have that value. If you provide a vector of values, such as `Amount = Amount * 4.33`, then the column you created will have a list of values that each correspond to the values in the vector you provided. If you provide a vector that has a different length than the number of rows in your data frame, you'll get an error telling you that the number of values you provide must be equal to the number of rows in your data frame or be a single value.
-
-
+### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> If you use `mutate()` and provide a single value for a column such as `Salvage_Analyst = "Sergeant Derek"`, then every row in the column you created will have that value. If you provide a vector of values, such as `Amount = Amount/2000`, then the column you create will have a list of values that each correspond to the values in the vector you provided. If you provide a vector that has a different length than the number of rows in your data frame, you'll get an error telling you that the number of values you provide must be equal to the number of rows in your data frame or be a single value.
 
 ## Find your neighbor's Origin City
 
-Now let's see if you can use `mutate()` to help match the description of the Salvage from your City.
+Now let's see if you can use `mutate()` to help match the description of the Salvage from your City. Give your neighbor a series of clues about your origin city based on facts about the Salvage from that location.
 
 Here's a hint for ways to describe your City by describing its Salvage scrap data.
 
 > My City's name starts with a T.
-> My City sold 1509 Acceleration compensators to a Trade Caravan. 
-> The total price was 843.46 credits.
+> My City sold more than 1000 Acceleration compensators to a Trade Caravan. 
+> The total price was at least 800 credits.
 
 Use `mutate()`, `filter()`, and `arrange()` to figure out a way of describing your City by its Salvage scrap. Then, provide this information to your neighbor and have them figure out what City you are from.
 
@@ -272,7 +260,7 @@ Here's a snippet to get you started.
 library("dplyr")
 
 ## Filter down your data to the type of salvage in the hint
-my_scrap <- filter(starwars_scrap, Salvage == "Acceleration compensator")
+my_scrap <- filter(scrap, Salvage == "Acceleration compensator")
 
 ##arrange the data by 
 my_scrap <- arrange(my_scrap, desc(Amount))
@@ -280,7 +268,7 @@ my_scrap <- arrange(my_scrap, desc(Amount))
 ```
 <br>
 
-I have now written my_scrap like a million times and I am sick of it. R is so stupid why do I have to type all the time? I have rebels to protect and I haven't eated in 2 days.
+I have now written my_scrap like a million times and I am sick of it. R is so stupid why do I have to type all the time? I have rebels to protect and I haven't eaten in 2 days.
 
 You DON'T have to do that much typing. You can connect your functions if you are using the same data set.
 
@@ -297,7 +285,7 @@ In a script the `%>%` is read as "and then". In the code below we are telling R 
 ```{r neighbor2, eval=F}
 
 ##Using the question Tuanul example above
-my_scrap <- starwars_scrap %>%
+my_scrap <- scrap %>%
   filter(Salvage == "Acceleration compensator") %>%
   arrange(my_scrap, desc(Amount))
 
@@ -316,55 +304,70 @@ conversions <- "data/conversion_table.csv"
 ##Read in your table
 conversions <- read_csv(conversions)
 
-##Join the starwars_scrap to the conversion table
+##Join the scrap to the conversion table
 #We can also drop the units column since its duplicated by the old data set and it's been corrected
-starwars_scrap <- left_join(starwars_scrap, conversions, by = c("Salvage" = "desc")) %>% 
+scrap <- left_join(scrap, conversions, by = c("Salvage" = "desc")) %>% 
   select(-units)
 
 ```
 
-#| `ifelse()`
+<br>
 
-Sometimes you may want to add a column with `mutate()` conditionally. We cna use `ifelse()` to do this.
+__Hint:__ Remeber to type `?left_join` if you are wondering what the arguments are.
+
+
+#| `ifelse()`
+<hr>
+
+Sometimes you may not want to add the same value to an entire column, in other words you want to `mutate()` conditionally. We can use `ifelse()` to do this.
 
 ```{r ifelse}
 
-##Convert tons to pounds, but only if the units are in pounds.
-starwars_scrap <- starwars_scrap %>% 
-  mutate(Ton_Conv = ifelse(Units == 'tons', Amount,
-                                          Amount*pounds/2000))
+##Convert tons to pounds, but only if the units are not already in tons.
+scrap <- scrap %>% 
+         mutate(Ton_Conv = ifelse(Units == 'tons', Amount, Amount * pounds / 2000))
 
 ```
 
 
 Wow!! Congratulations of galactic proportions to you. We have a clean and tidy data set. Someday if we receive data to append, all we will do is re-run this script and in 5 seconds we will have a cleaned up data set again!
 
-Now, we want to make some plots and really visulaize this data. People don't usually ask us for the raw data. We as data analysts get questions like, What's the highest number? What's the lowest number? What is the mean tonnage from Cratertown? So, let us move on to _summarise_.
+We now have the amount of tons sold and the price per ton, but we want to know the total amount of credits for each transaction. How would we calculate that?
+
+```{r}
+
+##Calculate credits for each transaction
+scrap <- scrap %>% 
+  mutate(Credits = Ton_Conv * Price_per_Ton)
+
+```
+
+Now, we want to make some plots and really visualize this data, but Junk Bosses like old Unkar don't usually ask us for the raw data. We as data analysts get questions like, What's the highest number? What's the lowest number? What is the mean tonnage from Cratertown? Fast! Faster!! So, let us move on to _summarize_.
 
 #| `summarize()` this
 <hr>
 
 ![](images/summarize_diagram.png){width="490"}
 
-`
+
 `summarize()` allows you to apply a summary function like `median()` to a column and collapse your data down to a single row. To really dig into `summarize` you'll want to know some common summary functions, such as `sum()`, `mean()`, `median()`, `min()`, and `max()`.
 
 
 ## `sum()` {-}
 
-Use `summarize()` and `sum()` to find the total price of all Salvage.
+Use `summarize()` and `sum()` to find the total credits from all Salvage.
 
 ```{r, eval=F}
-summarize(starwars_scrap, total_price = sum(Price_per_Ton))
+summarize(scrap, Total_Credits = sum(Credits))
 ```
 
 
 ## `mean()` {-}
-Use `summarize()` and `mean()` to calculate the _mean_ Amount in the Salvage reports.
+Use `summarize()` and `mean()` to calculate the _mean_ weight in tons in the Salvage reports.
 
 ```{r, eval=T}
 
-summarize(starwars_scrap, total_price = mean(Price_per_Ton, na.rm = T))
+summarize(scrap, mean_weight = mean(Ton_Conv, na.rm = T))
 
 ```
 
@@ -374,25 +377,25 @@ summarize(starwars_scrap, total_price = mean(Price_per_Ton, na.rm = T))
 
 
 ## `median()` {-}
-Use summarize to calculate the _median_ Amount in the Salvage reports.
+Use summarize to calculate the _median_ weight in the Salvage reports.
 
 ```{r, eval=T}
-summarize(starwars_scrap, median_price = median(Price_per_Ton, na.rm = T))
+summarize(scrap, median_price = median(Ton_Conv, na.rm = T))
 ```
 
 ## `max()` {-}
-Use summarize to calculate the _maximum_ price any scrapper got for their Salvage.
+Use summarize to calculate the _maximum_ price per ton any scrapper got for their Salvage.
 
 ```{r, eval=T}
-summarize(starwars_scrap, max_price = max(Price_per_Ton, na.rm = T))
+summarize(scrap, max_price = max(Price_per_Ton, na.rm = T))
 ```
 
 ## `min()` {-}
-Use summarize to calculate the _minimum_ price any scrapper got for their Salvage.
+Use summarize to calculate the _minimum_ price per ton any scrapper got for their Salvage.
 
 
 ```{r, eval=T}
-summarize(starwars_scrap, min_price = min(Price_per_Ton, na.rm = T))
+summarize(scrap, min_price = min(Price_per_Ton, na.rm = T))
 ```
 
 
@@ -401,15 +404,15 @@ Use `summarize()` and `nth(Origin, 12)` to find the name of the Origin City that
 
 _Hint: Use `arrange()` first._
 
-`arrange(starwars_scrap, desc(Price_per_Ton)) %>% summarize(price_12 = nth(Origin, 12))`
+`arrange(scrap, desc(Ton_Conv)) %>% summarize(price_12 = nth(Origin, 12))`
 
 
 
 ## `sd()` {-}
 
-What is the _standard deviation_ of the Amounts?
+What is the _standard deviation_ of the credits?
 
-`summarize(starwars_scrap, stdev_Amounts = sd(Amount))`
+`summarize(scrap, stdev_Credits = sd(Credits))`
 
 
 ## `quantile()` {-}
@@ -418,7 +421,7 @@ _Quantiles_ are useful for finding the upper or lower range of a column. Use the
 
 ```{r quants, eval = FALSE}
 
-summarize(starwars_scrap, 
+summarize(scrap, 
           price_5th_pctile  = quantile(Price_per_Ton, 0.05, na.rm = T),
           price_95th_pctile = quantile(Price_per_Ton, 0.95))
 ```
@@ -434,20 +437,20 @@ Use summarize and `n()` to count the number of reported Salvage that went to a N
 
 _Hint: Use `filter()` first._  
 
-`filter(starwars_scrap, Dest == "Niima outpost") %>% summarize(salvage_count = n())`
+`filter(scrap, Dest == "Niima outpost") %>% summarize(salvage_count = n())`
 
 <br>
 
 
-#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise  {-}
 
 Create a Star Wars scrap summary using 3 of the math functions above. 
 
 
-_But in the beginning, we decided we wanted to create a report about the Salvage from our Origin cities to help Rey determine who she should work withe to get scrap for her star ship?_
+_But wait! In the beginning, we decided we wanted to create a report about the Salvage from our Origin cities to help Rey determine who she should work with to get scrap for her star ship?_
 
 
-> Wouldn't it be great if we could easily find the mean price for every Origin City?
+> Wouldn't it be great if we could easily find the mean price for every Origin City? Bring on group_by()!
 
 
 #| `group_by()`
@@ -459,25 +462,23 @@ Try using `group_by` with the column _Origin_ and then use `summarize` to count 
 
 ```{r grp-by-origin, eval = FALSE}
 
-group_by(starwars_scrap, Origin) %>% summarize(origin_count  =  n()) %>% ungroup()
+group_by(scrap, Origin) %>% summarize(origin_count  =  n()) %>% ungroup()
 
 ```
 
-### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
 > Ending with `ungroup()` is good practice. This will prevent your data from staying grouped after the summarizing has been completed.
 
 <br>
 
-Who has the most scrap reports? 
+> What about the mean of the prices that each Origin City got?
 
-> What about the age of the missing striped cats? Are they younger on average than all the other groups?
+Let's use `group_by` with the column _Origin_ again, but this time use `summarize` to find the `mean(Price_per_Ton)` for each Origin City. 
 
-Let's use `group_by` with the column _color_ again, but this time use `summarize` to find the `mean(age)` for each cat color. 
+```{r mean_price-by-origin, eval = FALSE}
 
-```{r mean_age-by-color, eval = FALSE}
-
-group_by(all_cats, color) %>% 
-      summarize(mean_age =  mean(age, na.rm = T)) %>% ungroup()
+group_by(scrap, Origin) %>% 
+      summarize(mean_price =  mean(Price_per_Ton, na.rm = T)) %>% ungroup()
 
 ```
 
@@ -488,14 +489,14 @@ That's a lot of digits!
 
 ## `round()`
 
-You can round the ages to a certain number of digits using the `round()` function. We can finish by adding the `arrange()` function to sort the table by our new column.
+You can round the prices to a certain number of digits using the `round()` function. We can finish by adding the `arrange()` function to sort the table by our new column.
 
-```{r mean_age-by-color-round, eval = FALSE}
+```{r mean_price-by-Origin-round, eval = FALSE}
 
-group_by(all_cats, color) %>% 
-  summarize(mean_age       =  mean(age, na.rm = T),
-            mean_age_round = round(mean_age, digits = 1)) %>%  
-  arrange(mean_age_round) %>% ungroup()
+group_by(scrap, Origin) %>% 
+  summarize(mean_price       =  mean(Price_per_Ton, na.rm = T),
+            mean_price_round = round(Price_per_Ton, digits = 2)) %>%  
+  arrange(mean_price_round) %>% ungroup()
 
 ```
 
@@ -505,32 +506,26 @@ __NOTE:__ The `round()` function in R does not automatically round values ending
 
 
 
-### Now there's some good evidence!
-
-Why are the _striped_ cats so much younger? Are they being catnapped and sent to the circus? Let's put this piece of evidence in our back pocket for now. We can return to it after we learn to make some charts. Maybe then we'll be able to put together a convincing report to send to the police chief. 
-
-
-
 #| Save files
 <hr>
 
-Let's save the last summary table we created to a _CSV_. That way we can print it to have it __faxed__ to the police later. To save a data frame we'll use the `write_csv()` function from our favorite _readr_ package. 
+Let's save the last summary table we created to a _CSV_. That way we can print it to have it __transmitted through Droid courier__ to Unkar. To save a data frame we'll use the `write_csv()` function from our favorite _readr_ package. 
 ```{r, eval = F}
 
 # First give the new data a name
-ages_by_color <- group_by(all_cats, color) %>% 
-                    summarize(mean_age       =  mean(age, na.rm = T),
-                              mean_age_round = round(mean_age, digits = 1)) %>%  
-                    arrange(mean_age_round) %>% ungroup()
+scrap_summary <- group_by(scrap, Origin) %>% 
+  summarize(mean_price       =  mean(Price_per_Ton, na.rm = T),
+            mean_price_round = round(Price_per_Ton, digits = 2)) %>%  
+  arrange(mean_price_round) %>% ungroup()
 
 # Write the file to your project folder
-write_csv(ages_by_color, "mean_cat_ages_by_color.csv")
+write_csv(scrap_summary, "mean_prices_origin.csv")
 
 ```
 
 
 
-### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
 > __Warning!__ R will overwrite a file if the file already exists in a folder. It will not ask for confirmation. You will not collect $200.
 >
 
@@ -540,191 +535,88 @@ write_csv(ages_by_color, "mean_cat_ages_by_color.csv")
 #| Grouped `mutate()` 
 <br><hr>
 
-We can bring back `mutate` to add a column based on the grouped values in a data set. For example, you may want to add a column showing the average age by country to the whole table.  
+We can bring back `mutate` to add a column based on the grouped values in a data set. For example, you may want to add a column showing the mean price by country to the whole table.  
 
 When you combine `group_by` and `mutate` the new column will be calculated based on the values within each group. 
 
-```{r mutate-age, eval=F}
+```{r mutate-price, eval=F}
 
-group_by(all_cats, country) %>% mutate(country_mean_age = mean(age, na.rm = T)) %>% ungroup()
+group_by(scrap, Origin) %>% mutate(origin_mean_price = mean(Price_per_Ton, na.rm = T)) %>% ungroup()
 
 ```
 
 <br>
 
-#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
 
-Estimate the mean grumpiness for each group of cats with the same greediness score.
+### Exercise <i class="fa fa-user-astronaut" aria-hidden="true" style="color: green"></i> {-}
 
-<br>
-
-
-### Exercise 2 <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
-
-Find the median grumpiness score for each country.
+Find the median weight for each Destination.
 
 ```{r, eval=F}
-group_by(all_cats, country) %>% 
-  mutate(grumpy_by_country = median(grumpy, na.rm = T)) %>% 
+group_by(scrap, Dest) %>% 
+  mutate(median_weight_dest = median(Ton_Conv, na.rm = T)) %>% 
   ungroup()
 ```
 
 
 
-
-
 ## Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> 
-
-![](http://www.gifbin.com/bin/012012/1331836791_kittens_on_turntables.gif)  
 
 <br>
 
 Take 5 minutes to relax.
 
-<br><br><br>
-
-
-
-
 <br>
 
-Use `geom_smooth()` to add a regression line.
-```{r}
-filter(movies, title_year >= 2010) %>% 
-  ggplot(aes(x = movie_facebook_likes, y = gross_mil)) + 
-    geom_point(alpha = 0.25) +
-    geom_smooth(method = "lm")
+#| ggplot
+
+All of this information is great, but Rey doesn't have time to look at tables. Let's visualize the data with some plots. Let's go more in-depth into ggplot.
+
+## The 3 parts of a _ggplot_
+
+### 1. Set the base plot (the Dorian plot).
+
+```{r, echo=F}
+library(ggplot2)
 ```
 
 
-
-#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
- 
-Make a scatterplot of `imdb_score` and `gross_mil` with a fitted line showing the relationship. 
-
-
-<details>
-<summary class = "btn_code">_Show solution_</summary>
-<p>
-Stop cheating! Just kidding here's some code to help.
 ```{r}
-filter(movies, title_year >= 2010) %>% 
-  ggplot(aes(x = imdb_score, y = gross_mil)) + 
-    geom_point(alpha = 0.25) +
-    geom_smooth(method = "lm")
-```
-</p></details>
-
-<br>
-
-
-## Histograms
-
-Now let's make some histograms showing how the total number of movies change over time. 
-```{r}
-ggplot(movies, aes(x = title_year)) + geom_histogram()
+ggplot(scrap)
 ```
 
 <br>
 
-To show the changes per decade we can break the years into groups of 10.
-```{r}
-ggplot(movies, aes(x = title_year)) + geom_histogram(binwidth = 10)
-```
+> Note when we load the package it's `library ("ggplot2")` but when we use the function, it's `ggplot(scrap)` without the 2 following ggplot. It's annoying, but that's the way it is.
 
-
-### Break it down by `movie_color`.
-
-You can assign different aesthetics to variables in the data set. The example below sets the `fill` color to variable `movie_color`. This will color code each color type, one color for black and white movies and one for color movies.
-```{r}
-ggplot(movies, aes(x = title_year, fill = movie_color)) +
-  geom_histogram(binwidth = 10)
-```
-
-
-### Move the bars side-by-side instead of stacked.
-
-It's difficult to see what's going on with the black and white films. Let's split the colors apart using `position_dodge()`.
+### 2. Set the X, Y _(aesthetics)_.
+_Aesthetics_ are the visual components from the data that you want to use in the chart. These also determine the dimensions of the plot.
 
 ```{r}
-ggplot(movies, aes(x = title_year, fill = movie_color)) +
-  geom_histogram(binwidth = 10, position = "dodge")
+ggplot(scrap, aes(x = Dest, y = Credits)) 
 ```
 
-
-### Split into separate charts for black and white vs. color
-
-Maybe it would work better to use two separate charts. For that we can use `facet_wrap()`.
+### 3. Add layers _(geometries)_.
 ```{r}
-ggplot(movies, aes(x = title_year, fill = movie_color)) +
-  geom_histogram(binwidth = 10) +
-  facet_wrap(~ movie_color)
+ggplot(scrap, aes(x = Dest, y = Credits)) +
+  geom_point()
 ```
-
-### Free y-axis 
-
-That is almost good. It's still hard to see the changes in black and white films. Let's make the y-axis independent for each group using `scales = "free_y"`. Type `?facet_wrap` to see more options.
-```{r}
-ggplot(movies, aes(title_year, fill = movie_color)) +
-  geom_histogram(binwidth = 10) +
-  facet_wrap(~ movie_color, scales = "free_y")
-```
-
-
-_Note: When the scales are not uniform, make sure to point this out to your readers. Otherwise people might assume the scales are the same. Then they would think there are just as many black and white films as color movies._  
-
 
 <br>
 
-#### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+Now let's use color to show the origins of the scrap
 
-Make a histogram of the number of movies by decade with separate `fill` colors for each `content_rating`.   
-
-Decide which is the best way to present the bars: _stacked, side-by-side, or on separate charts._
-
-<br>
-
-<details>
-<summary class = "btn_code">_Show solution_</summary>
-<p>
-
-```{r, eval = F}
-
-# Stacked
-ggplot(movies, aes(title_year, fill = content_rating)) +
-  geom_histogram(binwidth = 10) 
-
-# Side by side
-ggplot(movies, aes(title_year, fill = content_rating)) +
-  geom_histogram(binwidth = 10, position = position_dodge()) 
-
-# Separate charts
-ggplot(movies, aes(title_year, fill = content_rating)) +
-  geom_histogram(binwidth = 10) + 
-  facet_wrap( ~ content_rating)
-
-# Free scale it
-ggplot(movies, aes(title_year, fill = content_rating)) +
-  geom_histogram(binwidth = 10) + 
-  facet_wrap( ~ content_rating, scales = "free_y")
-
-
+```{r}
+ggplot(scrap, aes(x = Dest, y = Credits, color = Origin)) +
+  geom_point()
 ```
-</p></details>
-<br>
+
+This is a too much detail. Let's make a bar chart and add up the sales to make it easier to understand.
+
+```{r}
+ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) +
+  geom_bar(stat = "sum")
+```
 
 
-# Day 2 homework
 
-1. Load some data into R from a recent project of yours.
-    - If you have data in Excel, you can export a _.CSV_ file by choosing "Save as" and selecting CSV from the file type menu.
-2. Create 2 types of plots using the data.
-3. Paste the function `runif(1)` into your console. 
-    - If the number you get is bigger than `0.2`, email your charts to the rest of the class.
-
-
-<br>
-
-# Return to [RCamp](index.html) {-}
-
-<br>

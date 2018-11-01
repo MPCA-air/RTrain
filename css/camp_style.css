@@ -23,6 +23,15 @@ hr {
     overflow: hidden;
 }
 
+.column4
+{
+    float: left;
+    margin-right: 1%;
+    margin-left: 0;
+    width: 24%;
+    overflow: hidden;
+}
+
 .column3-txt
 {
     float: left;
@@ -36,7 +45,7 @@ blockquote
 {
      background-color: #f0f7fb;
      border-radius: 15px;
-     font-size: 15px;
+     font-size: 16px;
      line-height: 19px;
      overflow: hidden;
      padding: 10px;
@@ -52,7 +61,7 @@ blockquote
      background-color: #f0f7fb;
      border-left: solid 4px #3498db;
      border-radius: 25px;
-     font-size: 15px;
+     font-size: 17px;
      line-height: 19px;
      overflow: hidden;
      padding: 10px;
@@ -69,8 +78,8 @@ blockquote
      background-color: #d2f0c6;
      border-left: solid 5px #86af49;
      border-radius: 25px;
-     font-size: 14px;
-     line-height: 16px;
+     font-size: 16px;
+     line-height: 19px;
      overflow: hidden;
      padding: 10px;
      padding-top: 12px;
@@ -84,8 +93,8 @@ blockquote
 {
      background-color: #d2f0c6;
      border-left: solid 5px #86af49;
-     font-size: 15px;
-     line-height: 16px;
+     font-size: 16px;
+     line-height: 18px;
      overflow: hidden;
      padding: 5px;
      padding-top: 5px;
@@ -100,12 +109,12 @@ blockquote
      background: #f5f5f5;
      border-left: solid 8px #ff3860; /* #00d1b2; */
      border-radius: 25px;
-     font-size: 14px;
-     line-height: 16px;
+     font-size: 15px;
+     line-height: 17px;
      overflow: hidden;
      padding: 10px;
      padding-top: 0px;
-     padding-bottom: 14px;
+     padding-bottom: 16px;
      margin-top: 45px;
      margin-bottom: 30px;
      padding-left: 22px;
