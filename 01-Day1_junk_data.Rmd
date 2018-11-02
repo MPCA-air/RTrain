@@ -109,6 +109,7 @@ These tabs allow you to view and open files in your current directory, view plot
 
 
 __Learn more R__
+
 - In your browser: [DataCamp Intro](https://campus.datacamp.com/courses/free-introduction-to-r/chapter-1-intro-to-basics-1?ex=1)
 - RStudio lessons: https://rstudio.github.io/learnr/examples.html
 - RStudio videos: https://tutorials.shinyapps.io/04-Programming-Basics/#section-welcome
@@ -125,7 +126,6 @@ __Searching online__
 - [google.com](www.google.com): include `r` or `rstats` + `the question`
 - [stackoverflow.com](https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs) + use the `[r]` tag
 
-
 __R community__
 
 - R Bloggers: https://www.r-bloggers.com/
@@ -135,6 +135,8 @@ __R community__
 <br>
 
 ## You are not alone in this universe {-}
+
+Growth of R Ladies groups
 
 ![](images/rladies_map.gif)
 
@@ -162,9 +164,9 @@ Let’s add some of our own style so we feel more at home. Follow these steps to
 #| First steps
 <hr>
 
-You can create objects and assign values to them using the "left arrow" `<- `, and more officially known as the _assignment operator_. Try adding the code below to your R script and creating an object called `wookie`.
+You can assign values to new objects using the "left arrow" `<- `, more officially known as the _assignment operator_. Try adding the code below to your R script and creating an object called `droid`.
 
-To run a line of code, move the cursor to that line and press __CTRL+ENTER__.
+To run a line of code in your script, move the cursor to that line and press __CTRL+ENTER__.
 
 ```{r names, eval = F}
 # Create a new object
@@ -229,7 +231,7 @@ rm(wookie2)
 <p>
 
 <div class="tip">
-Don’t worry about deleting data or making mistakes . When R loads data files it only copies the contents. All your original data files remain safe and won’t suffer from any accidental changes. If something disappears or goes wrong in R, it’s okay. You can always reload the data using your script. 
+Don’t worry about deleting data or objects, you can always recreate them! And when R loads data files it only copies the contents. All your original data files remain safe and won’t suffer from any accidental changes. If something disappears or goes wrong in R, it’s okay. You can always reload the data using your script. 
 </div>
 </p></details>
 
@@ -394,6 +396,7 @@ The text in the scripts with the `#` in front are called comments. A line that s
 
 Now that you know what objects are and how to create them, let’s learn how to use them in functions. Functions take one or more inputs called "arguments". They perform steps based on the arguments and usually return an output object. 
 
+<br>
 
 <details>
 <summary class = "btn_code_blue">_Clone Trooper function_</summary>
@@ -407,18 +410,15 @@ You can think of a function like a plan for making Clone Troopers.
 
 ```{r, eval=F} 
 
-create_clone(host  = "Jango Fett", 
-             modifications = c("accelerated growth", 
-                               "absolute loyalty", 
-                               "enhanced aggression"), 
-             opponents     = "Confederacy of Independent Systems")
+create_clones(host       = "Jango Fett", 
+              n_troopers = 2000)
 ```
 
 <br><br>
 
-The function above creates instructions to create Clone Troopers and provides several arguments: `genetic host`, `genetic modifications`, and assumed `opponents`). When we have more than one argument, we use a comma to separate them. With some luck, the function will sucessfully return a new object (an army of Clone Troopers).
+The function above creates Clone Troopers based on two arguments: the `host` and `n_troopers`. When we have more than one argument, we use a comma to separate them. With some luck, the function will sucessfully return a new object - a group of 2,000 Clone Troopers.
 
-<br><br><br><br>
+<br><br><br><br><br>
 
 <hr>
 
@@ -461,7 +461,7 @@ starwars_ages
 
 
 
-### Function summary {-}
+## Function summary {-}
 
 There are functions in R that are more complex but most boil down to the same general setup:
 
@@ -471,19 +471,21 @@ new_output <- function(argument_input1, argument_input2)
 
 We call a function and then add input arguments inside the parentheses. In exchange, the funciton returns an output object. You can make your own functions in R and name them almost anything you like, even `my_amazing_starwars_function()`.
 
+<br>
 
 <details>
 <summary class = "btn_code_blue"> __EXPLORE:__ What __arguments__ does my function have? </summary>
 <p>
 
-
-For `read_csv()`, the character object argument _my_scrap_file_ is what the function uses to know where to find the data file. Functions often have more than one argument. Type `?read_csv` into your console to see help in the lower-right pane that describes all of the function’s arguments and what they do. 
+<div class="note">
+Functions often have more than one argument. Type `?read_csv` into your console to see help in the lower-right pane that describes all of the function’s arguments and what they do. 
 
 Many of the options have default arguments (such as `col_names = TRUE`) that the function uses if you don’t provide an alternative. A short scroll down in the help window will show you more details about the arguments and the values they take.
 
-> `function(arg1 = input1, arg2 = input2, arg3...)`
+`function(arg1 = input1, arg2 = input2, arg3...)`
 
 The _file_ argument tells us that the function expects a path to a file. It can be given many types of files, even a _ZIP_ file. Below that, you’ll see the _col_names_ argument. This argument takes either `TRUE`, `FALSE`, or a character vector of column names. The default is `TRUE`, which means the first row in the CSV will be used for the column names of your table. 
+</div>
 
 </p></details>
 
@@ -540,7 +542,7 @@ kable(scrap)
 <p>
 
 <div class="tip">
-__BB8:__ _Beep boop. Beep._
+__BB8:__ _Beep boop Beep._
 
 __BB8:__ _I intercepted a large scrapper data set from droid 4 of Junk Boss Plutt._   
 
