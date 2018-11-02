@@ -43,7 +43,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 #| A new day
 <hr>
 
-Welcome to Jakku! You’ve just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. Rey needs money for food and parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar, and while we’re at it, find some great recycled star ship parts for ourselves.
+Welcome to Jakku! You’ve just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. And Rey needs some parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar and track down the parts we need.
 
 <br>
 
@@ -93,11 +93,11 @@ This is where you can edit your R scripts. The tabs at the top of the code edito
  
 __2. Console__ 
 
-This is where code is executed by the computer. It shows code that you have run and any errors, warnings, or other messages that result. You can input code directly into the console and run it, but it won’t be saved for later. That’s why we like to run all of our code directly from a script in the code editor anove.
+This is where code is executed by the computer. It shows code that you have run and any errors, warnings, or other messages that result. You can input code directly into the console and run it, but it won’t be saved for later. That’s why we like to run all of our code directly from a script in the code editor above.
  
 __3. Workspace__ 
 
-This pane shows all of the objects and functions that you’ve created, as well as a history of the code you’ve run during your current session. The environment tab shows all of the data, objects and functions that you’ve loaded. Note the _broom_ icon below the Connections tab. This cleans shop and allows you to clear out all of the objects in your workspace.
+This pane shows all of the objects and functions that you’ve created, as well as a history of the code you’ve run during your current session. The environment tab shows all of the data, objects and functions that you’ve loaded. Note the _broom_ icon below the Connections tab. This cleans shop and allows you to clear out all of the objects in your work space.
  
 __4. Plots and files__ 
 
@@ -243,7 +243,7 @@ Everything has a name in R and you can name things almost anything you like. You
 Sadly, there are a _few_ minor restrictions. Names cannot include spaces or special characters that might be found in math equations, like `+`, `-`, `*`, `\`, `/`, `=`, `!`, or `)`. 
 
 
-### Your turn! {-}
+### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise! {-}
 
 Try running some of these examples in your R console. Find new ways to create errors. The more broken the more better!
 ```{r, eval = F}
@@ -342,7 +342,7 @@ starwars_df
 
 <br>
 
-### Your turn {-}
+### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise! {-}
 
 > Create the same table above with a 3rd column showing their father’s names: `c("Darth", "Darth", "Unknown")`
 
@@ -416,7 +416,7 @@ create_clones(host       = "Jango Fett",
 
 <br><br>
 
-The function above creates Clone Troopers based on two arguments: the `host` and `n_troopers`. When we have more than one argument, we use a comma to separate them. With some luck, the function will sucessfully return a new object - a group of 2,000 Clone Troopers.
+The function above creates Clone Troopers based on two arguments: the `host` and `n_troopers`. When we have more than one argument, we use a comma to separate them. With some luck, the function will successfully return a new object - a group of 2,000 Clone Troopers.
 
 <br><br><br><br><br>
 
@@ -469,7 +469,7 @@ There are functions in R that are more complex but most boil down to the same ge
 new_output <- function(argument_input1, argument_input2)
 ```
 
-We call a function and then add input arguments inside the parentheses. In exchange, the funciton returns an output object. You can make your own functions in R and name them almost anything you like, even `my_amazing_starwars_function()`.
+We call a function and then add input arguments inside the parentheses. In exchange, the function returns an output object. You can make your own functions in R and name them almost anything you like, even `my_amazing_starwars_function()`.
 
 <br>
 
@@ -595,7 +595,7 @@ __Step 2:__
 - Close Excel (Click "Don’t Save" as much as you need to. Seriously, we just saved it. Why won’t Excel just leave us alone?)   
 
 
-Return to RStudio and open your project. Look at your _Files_ tab in the lower right window. Click on the _CSV_ file you savd and choose __View File__. Success!
+Return to RStudio and open your project. Look at your _Files_ tab in the lower right window. Click on the _CSV_ file you saved and choose __View File__. Success!
 
 <br>
 
@@ -744,9 +744,11 @@ You may be wondering why we included `skip =` for the skip argument, but only pr
 
 > `feed_creatures(porg = "small fish", ewok = "vegetables", tauntaun = "lichen")`.
 
-A shorthand way to write this would be `feed_creatures("small fish", "vegetables", "lichen")`. If we write `feed_creatures("vegetables", "lichen", "small fish")`, the function will send _vegetables_ to the porgs and _lichen_ to the Ewoks. No good. If you really wanted to write "lichen" second, you would need to tell R which food item belongs to each animal, such as `feed_creatures("small fish", tauntaun = "lichen", ewok = "vegetables")`.
+A shorthand way to write this would be `feed_creatures("small fish", "vegetables", "lichen")`. This works becuase all the arguments remain in the default order.
 
-The same thing goes for `read_csv()`. In `read_csv(my_scrap_file, column_names, skip = 1)`, R assumes the file is `my_scrap_file` and that the col_names should be set to `column_names`. The `skip =` argument has to be included explicitly because _skip_ is the __10th__ argument in `read_csv()`. If we don’t include `skip = `, R assumes the value we entered is meant for the function’s __3rd__ argument. 
+However, if we write `feed_creatures("vegetables", "lichen", "small fish")`, the function will send _vegetables_ to the porgs and _lichen_ to the Ewoks. That's no good. If we really want to write "lichen" second, we need to tell R which food item belongs to each animal, such as `feed_creatures("small fish", tauntaun = "lichen", ewok = "vegetables")`.
+
+The same thing goes for `read_csv()`. In `read_csv(scrap_file, column_names, skip = 1)`, R assumes the file is `scrap_file` and that the col_names should be set to `column_names`. The `skip =` argument has to be included explicitly because _skip_ is the __10th__ argument in `read_csv()`. If we don’t include `skip = `, R will assume the value we entered is meant for the function’s __3rd__ argument. 
 
 </p></details>
 
@@ -763,14 +765,14 @@ A shortcut to see all possible function arguments is to enter its name in the co
 ## Saving file paths
 <hr>
 
-You can also save file paths as objects, such as `scrap_file_path <- "data/starwars_scrap.csv"`. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write `read.csv(scrap_file_path)`. This handy trick makes it easier for you or your coworker to update your code and use it with new data.
+You can also save file paths as objects, such as `file_path <- "data/starwars_scrap_jakku.csv"`. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write `read_csv(file_path)`. This handy trick makes it easier for you or your coworker to update your code and use it with new data.
 
 ```{r, message=F}
 
 # Save the file path to an object you can use later
-scrap_file_path <- "data/starwars_scrap_jakku.csv"
+file_path <- "data/starwars_scrap_jakku.csv"
 
-scrap <- read_csv(scrap_file_path)
+scrap <- read_csv(file_path)
 ```
 
 
@@ -856,7 +858,7 @@ ggplot(scrap, aes(x = Origin, y = Amount)) + geom_col()
 Hmmm... Looks like there is an _All_ category that we should look into more.
 
 
-## Introductions _(first things last)_ {-}
+## Introductions _(first things first)_ {-}
 <hr>
 
 Let’s introduce ourselves and the data we love.
@@ -868,9 +870,10 @@ Let’s introduce ourselves and the data we love.
 
 > __Possible topics:__  
 >
-> - Your name.  
-> - Your fave Star Wars character.  
-> - What’s the messiest part of your environmental data? Or something you keep having to do over and over again? __Hint!__ _This is something we can work to automate on the third day._ 
+> - Your name  
+> - Your fave Star Wars character
+> - Type of data you have
+> - Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? __Hint!__ _This is something we can automate on the third day._ 
 
 
 ## Key terms {-}
@@ -959,7 +962,7 @@ select(scrap, c(Salvage, Amount, Price_per_Ton))
 
 # Make the `Salvage`, `Units`, and `Amount` columns the first three columns
 # Leave `everything()` else in the same order
-select(scrap, c(Salvage, Units, Amount), everything())
+select(scrap, Salvage, Units, Amount, everything())
 ```
 
 
@@ -969,17 +972,9 @@ select(scrap, c(Salvage, Units, Amount), everything())
 
 That’s helpful, but Rey wants to know what the highest priced Salvage items are. Use `arrange()` to find the origin city with the most highest priced Salvage item.
 
-```{r select arrange, warning = F, message = F}
-library("dplyr")
-
+```{r select-arrange, warning = F}
 # find the least expensive Salvage items
 scrap <- arrange(scrap, Price_per_Ton)
-
-# View the top 6 rows using head()
-head(scrap)
-
-#find the most expensive Salvage items
-scrap <- arrange(scrap, desc(Price_per_Ton))
 
 # View the top 6 rows using head()
 head(scrap)
@@ -987,8 +982,36 @@ head(scrap)
 
 <br>
 
-__Tell your neighbor the destination of the highest priced salvage items.__
+> __Well darn, that's not a very impressive price.__
 
+
+## Big things first: `desc()`  {-}
+
+To arrange a column in descending order we use: `desc(Price_per_Ton)`
+
+<br>
+
+<details>
+<summary class = "btn_code"> _Show code_ </summary>
+<p>
+```{r descend, warning = F}
+# Put most expensive items on top
+scrap <- arrange(scrap, desc(Price_per_Ton))
+
+# View the top 6 rows
+head(scrap)
+```
+
+</p></details>
+
+<br>
+
+
+### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
+
+Try arranging by more than one column (such as `Price` and `Amount`), what happens?
+
+<br>
 
 ### <i class="fas fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
 
@@ -1039,6 +1062,7 @@ _Key comparison operators_
 | `==`  | equal to                 |
 | `!=`  | not equal to             |
 | `%in%`| value is in a list       |
+| `between`| value within a range  |
 
 <br>
 
@@ -1085,7 +1109,7 @@ There is still an issue with the data. The item "tons" is written two ways. This
 <hr>
 
 
-### Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> {-}
+### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
 
 Create a new data frame that only includes `Retrorockets` and `Sublight drives` that are priced higher than 500 credits. Give it a detailed name, something like `highend_starship_junk`.
 
@@ -1151,6 +1175,7 @@ _There is a new light saber in your future! Great job!_
 
 __HINT:__ Ask about the __Most__ or __Least__ of something
 
+<br><br>
 
 <details>
 <summary class = "btn_code_blue"> __EXPLORE:__ _What is the __c()__ thing again?_ </summary>
@@ -1170,38 +1195,48 @@ fave_colors
 
 
 
-#| Update from the New Republic! 
+#| Update from BB8! 
 <hr>
 
-![](images/rey.jpg){width="250" align="right" style="margin-top: -20px; margin-left: 20px; margin-right: 36px;"}
+![](images/rey_bb8.jpg){width="270" align="right" style="margin-top: 0px; margin-left: 15px; margin-right: 0px;"}
 
 #### Rey needs our help. {-}
 
 _Let’s help Rey!_
 
-Rey’s droid was able to download the full scrap transfer database from the notorious Junk Boss Unkar Plutt. We have already downloaded the data set in tons and named it _scrap_. You are especially interested in trying to influence Rey to trade with scrappers from your City on Jakku. You know Rey needs parts for her star ship to fight for the New Republic and of course she needs food. 
+Rey’s droid was able to recover the full scrap data from the notorious Junk Boss Unkar Plutt. Check your folder for the new dataset named: `starwars_scrap_jakku_full.csv`. 
+
+You know Rey needs parts for her star ship. And you are especially interested in influencing Rey to trade with scrappers from your home City on Jakku. 
+
+<br>
 
 __Look under your keyboard to find the name of your City in Jakku.__
 
 <br>
 
-First. Let’s read in the whole dataset. There are additional units of Salvage items beyond "tons". It looks like we have lots of data cleaning to do!
+
+### More scrap {-}
+
+First, let’s read in the full dataset. 
 
 ```{r read full, eval=F}
 library("readr")
 
-my_scrap_file <- "data/starwars_scrap_jakku_full.csv"
+file_path <- "data/starwars_scrap_jakku_full.csv"
 
-scrap <- read_csv(my_scrap_file)
+scrap <- read_csv(file_path)
 
 ```
 
 <br>
 
+It looks like there are additional units of salvage items beyond "tons". We may have some data cleaning to do.
+
+
 #| `glimpse()`
 <hr>
 
-Take a minute to look at the full scrap transaction dataset. An R function called _glimpse()_ will help us to start.
+Take a minute to look at the full scrap transfer data. An R function called _glimpse()_ is a good place to start.
 
 <br>
 
@@ -1211,12 +1246,13 @@ glimpse(scrap)
 
 ```
 
+<br>
 
-You can see that the units in the full data set are in "Items", "Cubic Yards"; and you remember from before that there were also units of "TONS" and "Tons".
+You can see that the units in the full data set are in "Items", "Cubic Yards". And you remember from before that there were also units of "TONS" and "Tons".
 
 <br>
 
-### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise  {-}
+### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise  {-}
 
 Use `filter()` and `arrange()` to get a new data frame of your City’s scrap sorted by `Price_per_Ton`. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices. 
 

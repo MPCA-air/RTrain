@@ -270,7 +270,7 @@ div.tocify {
 <div id="a-new-day" class="section level1">
 <h1><span class="header-section-number">1</span> | A new day</h1>
 <hr>
-<p>Welcome to Jakku! You’ve just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. Rey needs money for food and parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar, and while we’re at it, find some great recycled star ship parts for ourselves.</p>
+<p>Welcome to Jakku! You’ve just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. And Rey needs some parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar and track down the parts we need.</p>
 <p><br></p>
 <p><strong>Start a new project</strong></p>
 <ul>
@@ -311,9 +311,9 @@ div.tocify {
 <p><strong>1. Code editor</strong></p>
 <p>This is where you can edit your R scripts. The tabs at the top of the code editor allow you to view scripts and data sets you have open. You can press <strong>CTRL+ENTER</strong> to run a block of code in your R script. We’ll spend most of our time here. It’s the homebase in RStudio.</p>
 <p><strong>2. Console</strong></p>
-<p>This is where code is executed by the computer. It shows code that you have run and any errors, warnings, or other messages that result. You can input code directly into the console and run it, but it won’t be saved for later. That’s why we like to run all of our code directly from a script in the code editor anove.</p>
+<p>This is where code is executed by the computer. It shows code that you have run and any errors, warnings, or other messages that result. You can input code directly into the console and run it, but it won’t be saved for later. That’s why we like to run all of our code directly from a script in the code editor above.</p>
 <p><strong>3. Workspace</strong></p>
-<p>This pane shows all of the objects and functions that you’ve created, as well as a history of the code you’ve run during your current session. The environment tab shows all of the data, objects and functions that you’ve loaded. Note the <em>broom</em> icon below the Connections tab. This cleans shop and allows you to clear out all of the objects in your workspace.</p>
+<p>This pane shows all of the objects and functions that you’ve created, as well as a history of the code you’ve run during your current session. The environment tab shows all of the data, objects and functions that you’ve loaded. Note the <em>broom</em> icon below the Connections tab. This cleans shop and allows you to clear out all of the objects in your work space.</p>
 <p><strong>4. Plots and files</strong></p>
 <p>These tabs allow you to view and open files in your current directory, view plots and other visual objects like maps, view installed packages, and access the Help window. If at anytime you’re unsure what a function or package does, enter it’s name after a question mark in the console. For example, try typing <code>?mean</code> in the console and then pressing <strong>ENTER</strong>.</p>
 </div>
@@ -432,8 +432,8 @@ wookie2  </code></pre></div>
 <h2><span class="header-section-number">2.1</span> Give it a name</h2>
 <p>Everything has a name in R and you can name things almost anything you like. You can even name your data <code>TOP_SECRET_shhhhhh...</code> or <code>Luke_I_am_your_father</code> or <code>data_McData_face</code>.</p>
 <p>Sadly, there are a <em>few</em> minor restrictions. Names cannot include spaces or special characters that might be found in math equations, like <code>+</code>, <code>-</code>, <code>*</code>, <code>\</code>, <code>/</code>, <code>=</code>, <code>!</code>, or <code>)</code>.</p>
-<div id="your-turn" class="section level3 unnumbered">
-<h3>Your turn!</h3>
+<div id="exercise" class="section level3 unnumbered">
+<h3><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise!</h3>
 <p>Try running some of these examples in your R console. Find new ways to create errors. The more broken the more better!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n wookies &lt;-<span class="st"> </span><span class="dv">5</span>
 
@@ -509,8 +509,8 @@ starwars_df</code></pre></div>
 ## 2     Leia   18
 ## 3 Han Solo   25</code></pre>
 <p><br></p>
-<div id="your-turn-1" class="section level3 unnumbered">
-<h3>Your turn</h3>
+<div id="exercise-1" class="section level3 unnumbered">
+<h3><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise!</h3>
 <blockquote>
 <p>Create the same table above with a 3rd column showing their father’s names: <code>c(&quot;Darth&quot;, &quot;Darth&quot;, &quot;Unknown&quot;)</code></p>
 </blockquote>
@@ -555,7 +555,7 @@ starwars_df<span class="op">$</span>ages</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">create_clones</span>(<span class="dt">host       =</span> <span class="st">&quot;Jango Fett&quot;</span>, 
               <span class="dt">n_troopers =</span> <span class="dv">2000</span>)</code></pre></div>
 <p><br><br></p>
-<p>The function above creates Clone Troopers based on two arguments: the <code>host</code> and <code>n_troopers</code>. When we have more than one argument, we use a comma to separate them. With some luck, the function will sucessfully return a new object - a group of 2,000 Clone Troopers.</p>
+<p>The function above creates Clone Troopers based on two arguments: the <code>host</code> and <code>n_troopers</code>. When we have more than one argument, we use a comma to separate them. With some luck, the function will successfully return a new object - a group of 2,000 Clone Troopers.</p>
 <p><br><br><br><br><br></p>
 <hr>
 </p>
@@ -587,7 +587,7 @@ ages_sum</code></pre></div>
 <h2>Function summary</h2>
 <p>There are functions in R that are more complex but most boil down to the same general setup:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">new_output &lt;-<span class="st"> </span><span class="cf">function</span>(argument_input1, argument_input2)</code></pre></div>
-<p>We call a function and then add input arguments inside the parentheses. In exchange, the funciton returns an output object. You can make your own functions in R and name them almost anything you like, even <code>my_amazing_starwars_function()</code>.</p>
+<p>We call a function and then add input arguments inside the parentheses. In exchange, the function returns an output object. You can make your own functions in R and name them almost anything you like, even <code>my_amazing_starwars_function()</code>.</p>
 <p><br></p>
 <details> <summary class = "btn_code_blue"> <strong>EXPLORE:</strong> What <strong>arguments</strong> does my function have? </summary>
 <p>
@@ -707,7 +707,7 @@ Electromagnetic filter,Tuanul,Niima Outpost,<span class="dv">107</span>,Tons,<sp
 </li>
 <li>Close Excel (Click “Don’t Save” as much as you need to. Seriously, we just saved it. Why won’t Excel just leave us alone?)</li>
 </ul>
-<p>Return to RStudio and open your project. Look at your <em>Files</em> tab in the lower right window. Click on the <em>CSV</em> file you savd and choose <strong>View File</strong>. Success!</p>
+<p>Return to RStudio and open your project. Look at your <em>Files</em> tab in the lower right window. Click on the <em>CSV</em> file you saved and choose <strong>View File</strong>. Success!</p>
 <p><br></p>
 <hr>
 </p>
@@ -842,8 +842,9 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 <blockquote>
 <p><code>feed_creatures(porg = &quot;small fish&quot;, ewok = &quot;vegetables&quot;, tauntaun = &quot;lichen&quot;)</code>.</p>
 </blockquote>
-<p>A shorthand way to write this would be <code>feed_creatures(&quot;small fish&quot;, &quot;vegetables&quot;, &quot;lichen&quot;)</code>. If we write <code>feed_creatures(&quot;vegetables&quot;, &quot;lichen&quot;, &quot;small fish&quot;)</code>, the function will send <em>vegetables</em> to the porgs and <em>lichen</em> to the Ewoks. No good. If you really wanted to write “lichen” second, you would need to tell R which food item belongs to each animal, such as <code>feed_creatures(&quot;small fish&quot;, tauntaun = &quot;lichen&quot;, ewok = &quot;vegetables&quot;)</code>.</p>
-<p>The same thing goes for <code>read_csv()</code>. In <code>read_csv(my_scrap_file, column_names, skip = 1)</code>, R assumes the file is <code>my_scrap_file</code> and that the col_names should be set to <code>column_names</code>. The <code>skip =</code> argument has to be included explicitly because <em>skip</em> is the <strong>10th</strong> argument in <code>read_csv()</code>. If we don’t include <code>skip =</code>, R assumes the value we entered is meant for the function’s <strong>3rd</strong> argument.</p>
+<p>A shorthand way to write this would be <code>feed_creatures(&quot;small fish&quot;, &quot;vegetables&quot;, &quot;lichen&quot;)</code>. This works becuase all the arguments remain in the default order.</p>
+<p>However, if we write <code>feed_creatures(&quot;vegetables&quot;, &quot;lichen&quot;, &quot;small fish&quot;)</code>, the function will send <em>vegetables</em> to the porgs and <em>lichen</em> to the Ewoks. That’s no good. If we really want to write “lichen” second, we need to tell R which food item belongs to each animal, such as <code>feed_creatures(&quot;small fish&quot;, tauntaun = &quot;lichen&quot;, ewok = &quot;vegetables&quot;)</code>.</p>
+<p>The same thing goes for <code>read_csv()</code>. In <code>read_csv(scrap_file, column_names, skip = 1)</code>, R assumes the file is <code>scrap_file</code> and that the col_names should be set to <code>column_names</code>. The <code>skip =</code> argument has to be included explicitly because <em>skip</em> is the <strong>10th</strong> argument in <code>read_csv()</code>. If we don’t include <code>skip =</code>, R will assume the value we entered is meant for the function’s <strong>3rd</strong> argument.</p>
 </p>
 <p></details></p>
 <p><br></p>
@@ -856,11 +857,11 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 <div id="saving-file-paths" class="section level2">
 <h2><span class="header-section-number">4.3</span> Saving file paths</h2>
 <hr>
-<p>You can also save file paths as objects, such as <code>scrap_file_path &lt;- &quot;data/starwars_scrap.csv&quot;</code>. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write <code>read.csv(scrap_file_path)</code>. This handy trick makes it easier for you or your coworker to update your code and use it with new data.</p>
+<p>You can also save file paths as objects, such as <code>file_path &lt;- &quot;data/starwars_scrap_jakku.csv&quot;</code>. Now you can use it as a shortcut to the location of your data. When you want to load the scrap table you can write <code>read_csv(file_path)</code>. This handy trick makes it easier for you or your coworker to update your code and use it with new data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save the file path to an object you can use later</span>
-scrap_file_path &lt;-<span class="st"> &quot;data/starwars_scrap_jakku.csv&quot;</span>
+file_path &lt;-<span class="st"> &quot;data/starwars_scrap_jakku.csv&quot;</span>
 
-scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(scrap_file_path)</code></pre></div>
+scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)</code></pre></div>
 <div class="quiz">
 <h3 id="pop-quiz-2" class="unnumbered">Pop Quiz!</h3>
 <p><br></p>
@@ -910,8 +911,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(scrap_file_
 <p><img src="01-Day1_junk_data_files/figure-html/unnamed-chunk-14-1.png" width="1152" /></p>
 <p>Hmmm… Looks like there is an <em>All</em> category that we should look into more.</p>
 </div>
-<div id="introductions-first-things-last" class="section level2 unnumbered">
-<h2>Introductions <em>(first things last)</em></h2>
+<div id="introductions-first-things-first" class="section level2 unnumbered">
+<h2>Introductions <em>(first things first)</em></h2>
 <hr>
 <p>Let’s introduce ourselves and the data we love.</p>
 <p><br></p>
@@ -922,11 +923,11 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(scrap_file_
 <blockquote>
 <p><strong>Possible topics:</strong></p>
 <ul>
-<li>Your name.<br />
+<li>Your name<br />
 </li>
-<li>Your fave Star Wars character.<br />
-</li>
-<li>What’s the messiest part of your environmental data? Or something you keep having to do over and over again? <strong>Hint!</strong> <em>This is something we can work to automate on the third day.</em></li>
+<li>Your fave Star Wars character</li>
+<li>Type of data you have</li>
+<li>Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? <strong>Hint!</strong> <em>This is something we can automate on the third day.</em></li>
 </ul>
 </blockquote>
 </div>
@@ -1058,7 +1059,7 @@ The key <em>dplyr</em> functions</p>
 <p><code>select()</code> also works to change the order of columns. The code below moves the <code>Units</code> and <code>Amount</code> columns directly after <code>Salvage</code>, and then keeps <code>evertyhing()</code> else the same.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the `Salvage`, `Units`, and `Amount` columns the first three columns</span>
 <span class="co"># Leave `everything()` else in the same order</span>
-<span class="kw">select</span>(scrap, <span class="kw">c</span>(Salvage, Units, Amount), <span class="kw">everything</span>())</code></pre></div>
+<span class="kw">select</span>(scrap, Salvage, Units, Amount, <span class="kw">everything</span>())</code></pre></div>
 <pre><code>## # A tibble: 222 x 6
 ##    Salvage                  Units Amount Origin   Dest       Price_per_Ton
 ##    &lt;chr&gt;                    &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;
@@ -1079,9 +1080,7 @@ The key <em>dplyr</em> functions</p>
 <h1><span class="header-section-number">8</span> | <code>arrange()</code></h1>
 <hr>
 <p>That’s helpful, but Rey wants to know what the highest priced Salvage items are. Use <code>arrange()</code> to find the origin city with the most highest priced Salvage item.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
-
-<span class="co"># find the least expensive Salvage items</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find the least expensive Salvage items</span>
 scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, Price_per_Ton)
 
 <span class="co"># View the top 6 rows using head()</span>
@@ -1095,10 +1094,20 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, Price
 ## 4 Aural sensor Tuanul        Raiders         3120 Tons           145.
 ## 5 Aural sensor Blowback Town Niima Outpost   2312 Tons           145.
 ## 6 Aural sensor Outskirts     Trade caravan   6272 Tons           145.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#find the most expensive Salvage items</span>
+<p><br></p>
+<blockquote>
+<p><strong>Well darn, that’s not a very impressive price.</strong></p>
+</blockquote>
+<div id="big-things-first-desc" class="section level2 unnumbered">
+<h2>Big things first: <code>desc()</code></h2>
+<p>To arrange a column in descending order we use: <code>desc(Price_per_Ton)</code></p>
+<p><br></p>
+<details> <summary class = "btn_code"> <em>Show code</em> </summary>
+<p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Put most expensive items on top</span>
 scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(Price_per_Ton))
 
-<span class="co"># View the top 6 rows using head()</span>
+<span class="co"># View the top 6 rows</span>
 <span class="kw">head</span>(scrap)</code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##   Salvage         Origin     Dest           Amount Units Price_per_Ton
@@ -1109,8 +1118,14 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 ## 4 Sublight engine Cratertown Raiders          6310 Tons          7211.
 ## 5 Sublight engine Tuanul     Trade caravan    3984 Tons          7211.
 ## 6 Sublight engine Cratertown Raiders           299 Tons          7211.</code></pre>
+</p>
+<p></details></p>
 <p><br></p>
-<p><strong>Tell your neighbor the destination of the highest priced salvage items.</strong></p>
+<div id="exercise-2" class="section level3 unnumbered">
+<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<p>Try arranging by more than one column (such as <code>Price</code> and <code>Amount</code>), what happens?</p>
+<p><br></p>
+</div>
 <div id="pro-tip-2" class="section level3 unnumbered">
 <h3><i class="fas fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
 <blockquote>
@@ -1120,6 +1135,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <div class="figure">
 <img src="images/boba_tea.jpg" width="300" />
 
+</div>
 </div>
 </div>
 </div>
@@ -1178,6 +1194,10 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <td align="left"><code>%in%</code></td>
 <td align="left">value is in a list</td>
 </tr>
+<tr class="even">
+<td align="left"><code>between</code></td>
+<td align="left">value within a range</td>
+</tr>
 </tbody>
 </table>
 <p><br></p>
@@ -1209,8 +1229,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <div id="multiple-filters" class="section level2">
 <h2><span class="header-section-number">9.2</span> Multiple filters</h2>
 <hr>
-<div id="exercise" class="section level3 unnumbered">
-<h3>Exercise <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i></h3>
+<div id="exercise-3" class="section level3 unnumbered">
+<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
 <p>Create a new data frame that only includes <code>Retrorockets</code> and <code>Sublight drives</code> that are priced higher than 500 credits. Give it a detailed name, something like <code>highend_starship_junk</code>.</p>
 <p><em>Work with your neighbor to create the table.</em></p>
 <details> <summary class = "btn_code_green"> <em>Show hint</em> </summary>
@@ -1251,6 +1271,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 </blockquote>
 <p><br></p>
 <p><strong>HINT:</strong> Ask about the <strong>Most</strong> or <strong>Least</strong> of something</p>
+<p><br><br></p>
 <details> <summary class = "btn_code_blue"> <strong>EXPLORE:</strong> <em>What is the <strong>c()</strong> thing again?</em> </summary>
 <p>
 <p>You can put multiple values inside <code>c()</code> to make a vector of items. Each item in the vector is separated by a comma. Let’s create a short vector of our favorite colors.</p>
@@ -1263,32 +1284,38 @@ fave_colors</code></pre></div>
 </p>
 <p></details></p>
 </div>
-<div id="update-from-the-new-republic" class="section level1">
-<h1><span class="header-section-number">10</span> | Update from the New Republic!</h1>
+<div id="update-from-bb8" class="section level1">
+<h1><span class="header-section-number">10</span> | Update from BB8!</h1>
 <hr>
 <div class="figure">
-<img src="images/rey.jpg" align="right" style="margin-top: -20px; margin-left: 20px; margin-right: 36px;" width="250" />
+<img src="images/rey_bb8.jpg" align="right" style="margin-top: 0px; margin-left: 15px; margin-right: 0px;" width="270" />
 
 </div>
 <div id="rey-needs-our-help." class="section level4 unnumbered">
 <h4>Rey needs our help.</h4>
 <p><em>Let’s help Rey!</em></p>
-<p>Rey’s droid was able to download the full scrap transfer database from the notorious Junk Boss Unkar Plutt. We have already downloaded the data set in tons and named it <em>scrap</em>. You are especially interested in trying to influence Rey to trade with scrappers from your City on Jakku. You know Rey needs parts for her star ship to fight for the New Republic and of course she needs food.</p>
+<p>Rey’s droid was able to recover the full scrap data from the notorious Junk Boss Unkar Plutt. Check your folder for the new dataset named: <code>starwars_scrap_jakku_full.csv</code>.</p>
+<p>You know Rey needs parts for her star ship. And you are especially interested in influencing Rey to trade with scrappers from your home City on Jakku.</p>
+<p><br></p>
 <p><strong>Look under your keyboard to find the name of your City in Jakku.</strong></p>
 <p><br></p>
-<p>First. Let’s read in the whole dataset. There are additional units of Salvage items beyond “tons”. It looks like we have lots of data cleaning to do!</p>
+</div>
+<div id="more-scrap" class="section level3 unnumbered">
+<h3>More scrap</h3>
+<p>First, let’s read in the full dataset.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
 
-my_scrap_file &lt;-<span class="st"> &quot;data/starwars_scrap_jakku_full.csv&quot;</span>
+file_path &lt;-<span class="st"> &quot;data/starwars_scrap_jakku_full.csv&quot;</span>
 
-scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(my_scrap_file)</code></pre></div>
+scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)</code></pre></div>
 <p><br></p>
+<p>It looks like there are additional units of salvage items beyond “tons”. We may have some data cleaning to do.</p>
 </div>
 </div>
 <div id="glimpse" class="section level1">
 <h1><span class="header-section-number">11</span> | <code>glimpse()</code></h1>
 <hr>
-<p>Take a minute to look at the full scrap transaction dataset. An R function called <em>glimpse()</em> will help us to start.</p>
+<p>Take a minute to look at the full scrap transfer data. An R function called <em>glimpse()</em> is a good place to start.</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(scrap)</code></pre></div>
 <pre><code>## Observations: 221
@@ -1299,10 +1326,11 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(my_scrap_fi
 ## $ Amount        &lt;int&gt; 32109, 26167, 22294, 20834, 20739, 20652, 18423,...
 ## $ Units         &lt;chr&gt; &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, ...
 ## $ Price_per_Ton &lt;dbl&gt; 1229.03, 281.01, 1229.03, 790.68, 1570.65, 420.3...</code></pre>
-<p>You can see that the units in the full data set are in “Items”, “Cubic Yards”; and you remember from before that there were also units of “TONS” and “Tons”.</p>
 <p><br></p>
-<div id="exercise-1" class="section level3 unnumbered">
-<h3><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<p>You can see that the units in the full data set are in “Items”, “Cubic Yards”. And you remember from before that there were also units of “TONS” and “Tons”.</p>
+<p><br></p>
+<div id="exercise-4" class="section level3 unnumbered">
+<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
 <p>Use <code>filter()</code> and <code>arrange()</code> to get a new data frame of your City’s scrap sorted by <code>Price_per_Ton</code>. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices.</p>
 <details> <summary class = "btn_code_green"> <em>Show hint</em> </summary>
 <p>
