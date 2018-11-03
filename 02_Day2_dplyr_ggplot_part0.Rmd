@@ -22,7 +22,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 
-## Good morning young Jedis! {-}
+## Good morning, young Jedis! {-}
 <hr>
 
 ![](images/day2_bb8_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -10px;"}
@@ -44,8 +44,25 @@ __Open your RStudio project__
 - Double click the __.Rproj__ file to open RStudio
 - Relax...
 
+<br>
 
-## Day2 schedule  {-}
+<details><summary class = "btn_code"> __Don't have a project yet?__ </summary><p>
+
+
+<a href="https://github.com/MPCA-air/RTrain/blob/master/data/junk_data.zip?raw=true"> <span class = "btn btn-info"> __DOWNLOAD__  </span></a> —  The Day 1 project files  
+
+- __Copy__ the "junk_data" folder to your Desktop 
+- __Open__ the folder
+- Double click the __.Rproj__ file to open RStudio
+
+<br>
+
+<hr>
+
+</p></details>
+
+
+## Day 2 schedule  {-}
 
 1. Data transformations
     - Add new columns.
