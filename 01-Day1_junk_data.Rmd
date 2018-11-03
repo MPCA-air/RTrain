@@ -33,7 +33,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ### Please power on your droid {-}
 
 <a href="https://github.com/MPCA-air/RTrain/blob/master/data/starwars_scrap_jakku.zip?raw=true">
-<span class = "btn_code_blue"> __DOWNLOAD__  </span></a> —  Day 1 data files
+<span class = "btn_code_blue"> __DOWNLOAD__  </span></a> —  The Day 1 data files
 
 
 
@@ -342,11 +342,33 @@ starwars_df
 
 <br>
 
-### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise! {-}
+### {- .tabset}
 
-> Create the same table above with a 3rd column showing their father’s names: `c("Darth", "Darth", "Unknown")`
-
+#### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise {-}
 <br>
+
+- Create the same table above with a 3rd column showing their father’s names: `c("Darth", "Darth", "Unknown")`
+
+<br><br><hr>
+
+#### Show hint {-}
+<br>
+```{r, eval = F}
+starwars_df <- data.frame(names   = starwars_names,
+                          ages    = starwars_ages,
+                          fathers = _____________)
+```
+<br><br><hr>
+
+#### Show code {-}
+<br>
+```{r, eval = F}
+starwars_df <- data.frame(names   = starwars_names,
+                          ages    = starwars_ages,
+                          fathers = c("Darth","Darth", "Unknown"))
+```
+<br><br><hr>
+
 
 ### Get values from a `$column_name`  {-}
 
@@ -451,13 +473,14 @@ sum(starwars_ages)
 
 <br>
 
+> __NOTE:__ The original `starwars_ages` vector hasn’t changed. Each function has its own "environment" and its calculations happen inside a bubble. In general, what happens inside a function won’t change your objects outside of the function. 
+
 
 ```{r}
 starwars_ages
 ```
 
 
-> __NOTE:__ The original `starwars_ages` vector hasn’t changed. Each function has its own "environment" and its calculations happen inside a bubble. In general, what happens inside a function won’t change your objects outside of the function. 
 
 
 
@@ -858,24 +881,6 @@ ggplot(scrap, aes(x = Origin, y = Amount)) + geom_col()
 Hmmm... Looks like there is an _All_ category that we should look into more.
 
 
-## Introductions _(first things first)_ {-}
-<hr>
-
-Let’s introduce ourselves and the data we love.
-
-<br>
-
-![](images/robot_1.jpg){align="left" width="272" style="margin-right:34px;"}
-
-
-> __Possible topics:__  
->
-> - Your name  
-> - Your fave Star Wars character
-> - Type of data you have
-> - Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? __Hint!__ _This is something we can automate on the third day._ 
-
-
 ## Key terms {-}
 <hr>
 
@@ -920,12 +925,6 @@ The key _dplyr_ functions
 
 Use the `select()` function to drop a column you no longer need, to select a few columns to create a new sub-table, or rearrange the order of your table’s columns.
 
-```{r read-again, message=F, warning=F, include=F}
-library(readr)
-library(ggplot2)
-my_scrap_file <- "data/starwars_scrap_jakku.csv"
-scrap <- read_csv(my_scrap_file)
-```
 
 
 ## Drop a single column with a minus sign: `-column_name` {-}
@@ -980,9 +979,9 @@ scrap <- arrange(scrap, Price_per_Ton)
 head(scrap)
 ```
 
-<br>
 
-> __Well darn, that's not a very impressive price.__
+
+#### Well darn, that's not a very impressive price. {-}
 
 
 ## Big things first: `desc()`  {-}
@@ -991,9 +990,6 @@ To arrange a column in descending order we use: `desc(Price_per_Ton)`
 
 <br>
 
-<details>
-<summary class = "btn_code"> _Show code_ </summary>
-<p>
 ```{r descend, warning = F}
 # Put most expensive items on top
 scrap <- arrange(scrap, desc(Price_per_Ton))
@@ -1002,12 +998,11 @@ scrap <- arrange(scrap, desc(Price_per_Ton))
 head(scrap)
 ```
 
-</p></details>
 
 <br>
 
 
-### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
+### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
 
 Try arranging by more than one column (such as `Price` and `Amount`), what happens?
 
@@ -1091,54 +1086,80 @@ head(scrap)
 
 Now let’s take another look at that bar chart. Is there anything else that is less than perfect with our data?
 
-```{r ggplot no All}
+```{r ggplot-noAll}
 ggplot(scrap, aes(x = Origin, y = Amount)) + geom_col()
 ``` 
 
 
-Something still might be hidden in the data that is unexpected. Take a look at the amount of items and chart them by the units field.
+Something still might be hidden in the data that is unexpected. Take a look at the amount of items in each units category.
 
-```{r ggplot Units}
+```{r ggplot-Units}
 ggplot(scrap, aes(x = Units, y = Amount)) + geom_col()
 ```
 
-There is still an issue with the data. The item "tons" is written two ways. This happens when multiple field technicians collect data! We will deal with this a bit later. First, what happens if we want to filter for multiple fields and categories?
+There is still an issue with the data. The item "tons" is written two ways. This happens when multiple field technicians collect data! We will deal with this a bit later. 
 
 
-## Multiple filters
+## Multiple filters 
 <hr>
 
+We can add multiple comparisons to `filter()` to further restrict the data we pull from a larger data set. Only the records that pass the conditions of all the comparisons will be pulled into the new data frame. 
 
-### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
+The code below filters the data to only scrap records originating in the `Outskirts` __AND__ sent to `Niima Outpost`.
+
+```{r filter-multi, eval=F}
+
+outskirts_to_niima <- filter(scrap, 
+                             Origin == "Outskirts", 
+                             Dest   == "Niima Outpost")
+```
+
+### {- .tabset}
+
+#### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-} 
+
+<br>
 
 Create a new data frame that only includes `Retrorockets` and `Sublight drives` that are priced higher than 500 credits. Give it a detailed name, something like `highend_starship_junk`.
 
-_Work with your neighbor to create the table._
+_Work with your neighbor to complete the code below and create the new data frame._
 
+```{r filter2, eval=F}
 
+highend_starship_junk <- filter(scrap, 
+                                _____________, 
+                                _____________)
+```
 
-<details>
-<summary class = "btn_code_green"> _Show hint_ </summary>
-<p>
-__HINT:__ You will need to use the `c(...)` function and the `%in%` operator.
+<br><br><hr>
 
+#### Show hint {-}
 <br>
-</p></details>
+
+__HINT:__ You can use `c(...)` and the `%in%` operator to test for multiple values.
+
+```{r filter-hint, eval=F}
+
+highend_starship_junk <- filter(scrap, 
+                                ________ %in% c("_______", "______"), 
+                                ________ > 500)
+
+```
+<br><br><hr>
 
 
-<details>
-<summary class = "btn_code"> _Show code_ </summary>
-<p>
-```{r filter2, eval = F}
+#### Show code {-}
+<br>
+```{r filter-code, eval = F}
 
 highend_starship_junk <- filter(scrap, 
                                 Salvage %in% c("Retrorocket", "Sublight drive"), 
                                 Price_per_Ton > 500)
 
 ```
-<br>
+<br><br><hr>
 
-</p></details>
+### {-}
 
 <div class="quiz">
 ### Pop Quiz, hotshot! {-}
@@ -1146,7 +1167,7 @@ highend_starship_junk <- filter(scrap,
 __Are there more total `Retrorockets` or `Sublight drives` over 500 credits?__
 
 <input type="radio"> _more Retrorockets_          <br>
-<input type="radio"> _more Sublight drives_               <br>
+<input type="radio"> _more Sublight drives_       <br>
 <input type="radio"> _same amount in both groups_ <br>
 
 
@@ -1175,23 +1196,7 @@ _There is a new light saber in your future! Great job!_
 
 __HINT:__ Ask about the __Most__ or __Least__ of something
 
-<br><br>
-
-<details>
-<summary class = "btn_code_blue"> __EXPLORE:__ _What is the __c()__ thing again?_ </summary>
-<p>
-
-You can put multiple values inside `c()` to make a vector of items. Each item in the vector is separated by a comma. Let’s create a short vector of our favorite colors.
-
-```{r colors22}
-# This is an example vector
-fave_colors <- c("green", "orange", "cornflower")
-
-fave_colors
-```
-
 <br>
-</p></details>
 
 
 
@@ -1252,34 +1257,48 @@ You can see that the units in the full data set are in "Items", "Cubic Yards". A
 
 <br>
 
-### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise  {-}
+### {- .tabset}
+
+#### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise  {-}
+<br>
 
 Use `filter()` and `arrange()` to get a new data frame of your City’s scrap sorted by `Price_per_Ton`. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices. 
 
+```{r, eval=F}
 
-<details>
-<summary class = "btn_code_green"> _Show hint_ </summary>
-<p>
-__Hint:__ First filter your data to include only your City in the `Origin` column.
+city_scrap <- filter(scrap, _________)
 
+arrange(city_scrap, _________)
+```
+
+<br><br><hr>
+
+#### Show hint {-}
 <br>
-</p></details>
 
-
-<details>
-<summary class = "btn_code"> _Show code_ </summary>
-<p>
+__Hint:__ First filter your data to include only your City in the `Origin` column.
 
 ```{r, eval=F}
 
-my_city_scrap <- filter(scrap, Origin == "...")
+city_scrap <- filter(scrap, Origin == "...")
 
-my_scrap <- arrange(my_city_scrap, desc(Price_per_Ton))
+my_scrap <- arrange(city_scrap, desc(_________))
+```
+
+<br><br><hr>
+
+#### Show code {-}
+<br>
+```{r, eval=F}
+
+city_scrap <- filter(scrap, Origin == "Outskirts")
+
+my_scrap <- arrange(city_scrap, desc(Price_per_Ton))
 
 ```
 
-<br>
-</p></details>
+<br><br><hr>
+
 
 
 ## Great work! {-}

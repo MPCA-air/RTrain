@@ -117,11 +117,31 @@ wordcloud2(data.frame(word = names, freq = frequency), size = 1, color = 'random
 
 ```
 
-![](images/name_cloud.png){width=75%}
+![](images/name_cloud.png){width=79%}
+
+
+## Introductions {-}
+<hr>
+
+Let’s introduce ourselves and the data we love.
 
 <br>
 
-You are the all in this together. Use each other as a resource. Share ideas, share code, collaborate. Make bad jokes.   
+![](images/robot_1.jpg){align="left" width="272" style="margin-right:34px;"}
+
+
+> __Possible topics:__  
+>
+> - Your name  
+> - Your fave Star Wars character
+> - Type of data you have
+> - Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? __Hint!__ _This is something we can automate on the third day._ 
+
+
+<br>
+
+You are the all in this together. Use each other as a resource. Share ideas, share code, collaborate. Make bad jokes. 
+
 <br>
 
 __Here's one:__  _What program do Jedi use to open PDF files?_

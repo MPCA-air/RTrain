@@ -200,12 +200,32 @@ $(document).ready(function () {
 <div id="you-are-the-great-cohort-of-2018" class="section level3 unnumbered">
 <h3>You are the great cohort of   <span style="font-size: 1.6em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> <span style="font-size: 2em;">2018</span><span style="font-size: 1.6em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span></h3>
 <div class="figure">
-<img src="images/name_cloud.png" style="width:75.0%" />
+<img src="images/name_cloud.png" style="width:79.0%" />
 
 </div>
+</div>
+<div id="introductions" class="section level2 unnumbered">
+<h2>Introductions</h2>
+<hr>
+<p>Let’s introduce ourselves and the data we love.</p>
 <p><br></p>
-<p>You are the all in this together. Use each other as a resource. Share ideas, share code, collaborate. Make bad jokes.<br />
-<br></p>
+<div class="figure">
+<img src="images/robot_1.jpg" align="left" style="margin-right:34px;" width="272" />
+
+</div>
+<blockquote>
+<p><strong>Possible topics:</strong></p>
+<ul>
+<li>Your name<br />
+</li>
+<li>Your fave Star Wars character</li>
+<li>Type of data you have</li>
+<li>Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? <strong>Hint!</strong> <em>This is something we can automate on the third day.</em></li>
+</ul>
+</blockquote>
+<p><br></p>
+<p>You are the all in this together. Use each other as a resource. Share ideas, share code, collaborate. Make bad jokes.</p>
+<p><br></p>
 <p><strong>Here’s one:</strong> <em>What program do Jedi use to open PDF files?</em></p>
 <p><br></p>
 <div class="figure">
@@ -216,7 +236,6 @@ $(document).ready(function () {
 <p><strong>A:</strong> <em>Adobe Wan Kenobi</em></p>
 </blockquote>
 <p><br></p>
-</div>
 <div id="disclaimer" class="section level3">
 <h3><i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:orange;"></i> Disclaimer</h3>
 <p><em>Spelling is very important in R.</em></p>
@@ -225,6 +244,7 @@ $(document).ready(function () {
 
 </div>
 <p><br></p>
+</div>
 </div>
 </div>
 <div id="why-r" class="section level1">
@@ -301,6 +321,7 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 <span class="st">            </span><span class="kw">group_by</span>(SITE, YEAR) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">            </span><span class="kw">summarize</span>(<span class="dt">AVG_OZONE =</span> <span class="kw">mean</span>(OZONE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>),
                       <span class="dt">AVG_TEMP  =</span> <span class="kw">mean</span>(TEMP_F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>))</code></pre></div>
+<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
 </div>
 <div id="save-the-results" class="section level3">
 <h3>6. Save the results</h3>

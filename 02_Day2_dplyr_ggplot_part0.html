@@ -280,6 +280,7 @@ div.tocify {
 <p>
 <p><a href="https://github.com/MPCA-air/RTrain/blob/master/data/junk_data.zip?raw=true"> <span class="btn btn-info"> <strong>DOWNLOAD</strong> </span></a> — The Day 1 project files</p>
 <ul>
+<li><strong>Open</strong> the <code>.zip</code> file</li>
 <li><strong>Copy</strong> the “junk_data” folder to your Desktop</li>
 <li><strong>Open</strong> the folder</li>
 <li>Double click the <strong>.Rproj</strong> file to open RStudio</li>
@@ -609,19 +610,20 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <p><code>filter(scrap, Dest == &quot;Niima outpost&quot;) %&gt;% summarize(salvage_count = n())</code></p>
 <p><br></p>
 <div id="exercise" class="section level3 unnumbered">
-<h3><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise</h3>
-<p>Create a Star Wars scrap summary using 3 of the math functions above.</p>
-<p><em>But wait! In the beginning, we decided we wanted to create a report about the Salvage from our Origin cities to help Rey determine who she should work with to get scrap for her star ship?</em></p>
-<blockquote>
-<p>Wouldn’t it be great if we could easily find the mean price for every Origin City? Bring on group_by()!</p>
-</blockquote>
+<h3><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<ul>
+<li>Create a Star Wars scrap summary using 3 of the math functions above.</li>
+</ul>
 </div>
 </div>
 </div>
 <div id="group_by" class="section level1">
 <h1><span class="header-section-number">6</span> | <code>group_by()</code></h1>
 <hr>
-<p>Enter <code>group_by()</code> stage left. If you thought <code>summarize</code> was awesome, wait until you include <code>group_by</code> with your <code>summarize</code> commands.</p>
+<blockquote>
+<p>Wouldn’t it be nice if we could easily find the mean price for every Origin City? It’s time for <code>group_by()</code>!</p>
+</blockquote>
+<p>If you thought <code>summarize</code> was awesome, wait until you include <code>group_by</code> with your <code>summarize</code> commands.</p>
 <p>Try using <code>group_by</code> with the column <em>Origin</em> and then use <code>summarize</code> to count the number of Salvage reports from each planet.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">origin_count  =</span>  <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</code></pre></div>
 <div id="pro-tip-1" class="section level3 unnumbered">
@@ -678,18 +680,31 @@ scrap_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(scr
 <p>When you combine <code>group_by</code> and <code>mutate</code> the new column will be calculated based on the values within each group.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Origin) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">origin_mean_price =</span> <span class="kw">mean</span>(Price_per_Ton, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ungroup</span>()</code></pre></div>
 <p><br></p>
-<div id="exercise-1" class="section level3 unnumbered">
-<h3>Exercise <i class="fa fa-user-astronaut" aria-hidden="true" style="color: green"></i></h3>
-<p>Find the median weight for each Destination.</p>
+<div id="section" class="section level3 unnumbered tabset">
+<h3></h3>
+<div id="exercise-1" class="section level4 unnumbered">
+<h4><i class="fa fa-user-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<p><br></p>
+<ul>
+<li>Find the median weight for each Destination.</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Dest) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">median_weight_dest =</span> <span class="kw">median</span>(Ton_Conv, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ungroup</span>()</code></pre></div>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">median_weight =</span> _________________)</code></pre></div>
+<br><br>
+<hr>
 </div>
-<div id="break-time" class="section level2">
-<h2><span class="header-section-number">8.1</span> Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i></h2>
+<div id="show-code" class="section level4 unnumbered">
+<h4>Show code</h4>
 <p><br></p>
-<p>Take 5 minutes to relax.</p>
-<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(scrap, Dest) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">median_weight =</span> <span class="kw">median</span>(Ton_Conv, <span class="dt">na.rm =</span> T))</code></pre></div>
+<br><br>
+<hr>
+</div>
+</div>
+<div id="break-time" class="section level2 unnumbered">
+<h2>Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i></h2>
+<p><br> Take 5 minutes to relax. <br></p>
 </div>
 </div>
 <div id="ggplot" class="section level1">
@@ -700,7 +715,7 @@ scrap_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(scr
 <div id="set-the-base-plot-the-dorian-plot." class="section level3">
 <h3><span class="header-section-number">9.1.1</span> 1. Set the base plot (the Dorian plot).</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap)</code></pre></div>
-<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
 <p><br></p>
 <blockquote>
 <p>Note when we load the package it’s <code>library (&quot;ggplot2&quot;)</code> but when we use the function, it’s <code>ggplot(scrap)</code> without the 2 following ggplot. It’s annoying, but that’s the way it is.</p>
@@ -710,22 +725,22 @@ scrap_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(scr
 <h3><span class="header-section-number">9.1.2</span> 2. Set the X, Y <em>(aesthetics)</em>.</h3>
 <p><em>Aesthetics</em> are the visual components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits)) </code></pre></div>
-<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
 </div>
 <div id="add-layers-geometries." class="section level3">
 <h3><span class="header-section-number">9.1.3</span> 3. Add layers <em>(geometries)</em>.</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
 <p><br></p>
 <p>Now let’s use color to show the origins of the scrap</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">color =</span> Origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
 <p>This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">fill =</span> Origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;sum&quot;</span>)</code></pre></div>
-<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
+<p><img src="02_Day2_dplyr_ggplot_part0_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
 </div>
 </div>
 </div>

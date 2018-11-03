@@ -263,7 +263,7 @@ div.tocify {
 <p><br><br><br><br><br></p>
 <div id="please-power-on-your-droid" class="section level3 unnumbered">
 <h3>Please power on your droid</h3>
-<p><a href="https://github.com/MPCA-air/RTrain/blob/master/data/starwars_scrap_jakku.zip?raw=true"> <span class="btn_code_blue"> <strong>DOWNLOAD</strong> </span></a> — Day 1 data files</p>
+<p><a href="https://github.com/MPCA-air/RTrain/blob/master/data/starwars_scrap_jakku.zip?raw=true"> <span class="btn_code_blue"> <strong>DOWNLOAD</strong> </span></a> — The Day 1 data files</p>
 <p><br><br><br><br></p>
 </div>
 </div>
@@ -509,12 +509,35 @@ starwars_df</code></pre></div>
 ## 2     Leia   18
 ## 3 Han Solo   25</code></pre>
 <p><br></p>
-<div id="exercise-1" class="section level3 unnumbered">
-<h3><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise!</h3>
-<blockquote>
-<p>Create the same table above with a 3rd column showing their father’s names: <code>c(&quot;Darth&quot;, &quot;Darth&quot;, &quot;Unknown&quot;)</code></p>
-</blockquote>
+<div id="section" class="section level3 unnumbered tabset">
+<h3></h3>
+<div id="exercise-1" class="section level4 unnumbered">
+<h4><i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise</h4>
 <p><br></p>
+<ul>
+<li>Create the same table above with a 3rd column showing their father’s names: <code>c(&quot;Darth&quot;, &quot;Darth&quot;, &quot;Unknown&quot;)</code></li>
+</ul>
+<br><br>
+<hr>
+</div>
+<div id="show-hint" class="section level4 unnumbered">
+<h4>Show hint</h4>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">names   =</span> starwars_names,
+                          <span class="dt">ages    =</span> starwars_ages,
+                          <span class="dt">fathers =</span> _____________)</code></pre></div>
+<br><br>
+<hr>
+</div>
+<div id="show-code" class="section level4 unnumbered">
+<h4>Show code</h4>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars_df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">names   =</span> starwars_names,
+                          <span class="dt">ages    =</span> starwars_ages,
+                          <span class="dt">fathers =</span> <span class="kw">c</span>(<span class="st">&quot;Darth&quot;</span>,<span class="st">&quot;Darth&quot;</span>, <span class="st">&quot;Unknown&quot;</span>))</code></pre></div>
+<br><br>
+<hr>
+</div>
 </div>
 <div id="get-values-from-a-column_name" class="section level3 unnumbered">
 <h3>Get values from a <code>$column_name</code></h3>
@@ -576,11 +599,11 @@ ages_sum</code></pre></div>
 <span class="kw">sum</span>(starwars_ages) </code></pre></div>
 <pre><code>## [1] 62</code></pre>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars_ages</code></pre></div>
-<pre><code>## [1] 19 18 25</code></pre>
 <blockquote>
 <p><strong>NOTE:</strong> The original <code>starwars_ages</code> vector hasn’t changed. Each function has its own “environment” and its calculations happen inside a bubble. In general, what happens inside a function won’t change your objects outside of the function.</p>
 </blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starwars_ages</code></pre></div>
+<pre><code>## [1] 19 18 25</code></pre>
 </div>
 </div>
 <div id="function-summary" class="section level2 unnumbered">
@@ -905,10 +928,10 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <div id="a-first-plot" class="section level2 unnumbered">
 <h2>A first plot</h2>
 <p>Here’s a quick chart of how many of each item we have in the dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-
-<span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Origin, <span class="dt">y =</span> Amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_col</span>()</code></pre></div>
-<p><img src="01-Day1_junk_data_files/figure-html/unnamed-chunk-14-1.png" width="1152" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Origin, <span class="dt">y =</span> Amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_col</span>()</code></pre></div>
+<p><img src="01-Day1_junk_data_files/figure-html/unnamed-chunk-16-1.png" width="1152" /></p>
 <p>Hmmm… Looks like there is an <em>All</em> category that we should look into more.</p>
 </div>
 <div id="introductions-first-things-first" class="section level2 unnumbered">
@@ -1094,16 +1117,13 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, Price
 ## 4 Aural sensor Tuanul        Raiders         3120 Tons           145.
 ## 5 Aural sensor Blowback Town Niima Outpost   2312 Tons           145.
 ## 6 Aural sensor Outskirts     Trade caravan   6272 Tons           145.</code></pre>
-<p><br></p>
-<blockquote>
-<p><strong>Well darn, that’s not a very impressive price.</strong></p>
-</blockquote>
+<div id="well-darn-thats-not-a-very-impressive-price." class="section level4 unnumbered">
+<h4>Well darn, that’s not a very impressive price.</h4>
+</div>
 <div id="big-things-first-desc" class="section level2 unnumbered">
 <h2>Big things first: <code>desc()</code></h2>
 <p>To arrange a column in descending order we use: <code>desc(Price_per_Ton)</code></p>
 <p><br></p>
-<details> <summary class = "btn_code"> <em>Show code</em> </summary>
-<p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Put most expensive items on top</span>
 scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(Price_per_Ton))
 
@@ -1118,11 +1138,9 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 ## 4 Sublight engine Cratertown Raiders          6310 Tons          7211.
 ## 5 Sublight engine Tuanul     Trade caravan    3984 Tons          7211.
 ## 6 Sublight engine Cratertown Raiders           299 Tons          7211.</code></pre>
-</p>
-<p></details></p>
 <p><br></p>
 <div id="exercise-2" class="section level3 unnumbered">
-<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<h3><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h3>
 <p>Try arranging by more than one column (such as <code>Price</code> and <code>Amount</code>), what happens?</p>
 <p><br></p>
 </div>
@@ -1229,24 +1247,46 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <div id="multiple-filters" class="section level2">
 <h2><span class="header-section-number">9.2</span> Multiple filters</h2>
 <hr>
-<div id="exercise-3" class="section level3 unnumbered">
-<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<p>We can add multiple comparisons to <code>filter()</code> to further restrict the data we pull from a larger data set. Only the records that pass through <strong>ALL</strong> comparisons as TRUE will be pulled into the new data frame. Each additional comparison is separated by a comma.</p>
+<p>The code below filters the data to only scrap records originating in the <code>Outskirts</code> <strong>AND</strong> sent to <code>Niima Outpost</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outskirts_to_niima &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
+                             Origin <span class="op">==</span><span class="st"> &quot;Outskirts&quot;</span>, 
+                             Dest   <span class="op">==</span><span class="st"> &quot;Niima Outpost&quot;</span>)</code></pre></div>
+<div id="section-1" class="section level3 unnumbered tabset">
+<h3></h3>
+<div id="exercise-3" class="section level4 unnumbered">
+<h4><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<p><br></p>
 <p>Create a new data frame that only includes <code>Retrorockets</code> and <code>Sublight drives</code> that are priced higher than 500 credits. Give it a detailed name, something like <code>highend_starship_junk</code>.</p>
-<p><em>Work with your neighbor to create the table.</em></p>
-<details> <summary class = "btn_code_green"> <em>Show hint</em> </summary>
-<p>
-<p><strong>HINT:</strong> You will need to use the <code>c(...)</code> function and the <code>%in%</code> operator.</p>
-<br>
-</p>
-<p></details></p>
-<details> <summary class = "btn_code"> <em>Show code</em> </summary>
-<p>
+<p><em>Work with your neighbor to complete the code below and create the new data frame.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">highend_starship_junk &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
+                                _____________, 
+                                _____________)</code></pre></div>
+<br><br>
+<hr>
+</div>
+<div id="show-hint-1" class="section level4 unnumbered">
+<h4>Show hint</h4>
+<p><br></p>
+<p><strong>HINT:</strong> You can use <code>c(...)</code> and the <code>%in%</code> operator to test for multiple values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">highend_starship_junk &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
+                                ________ <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;_______&quot;</span>, <span class="st">&quot;______&quot;</span>), 
+                                ________ <span class="op">&gt;</span><span class="st"> </span><span class="dv">500</span>)</code></pre></div>
+<br><br>
+<hr>
+</div>
+<div id="show-code-1" class="section level4 unnumbered">
+<h4>Show code</h4>
+<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">highend_starship_junk &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
                                 Salvage <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Retrorocket&quot;</span>, <span class="st">&quot;Sublight drive&quot;</span>), 
                                 Price_per_Ton <span class="op">&gt;</span><span class="st"> </span><span class="dv">500</span>)</code></pre></div>
-<p><br></p>
-</p>
-<p></details></p>
+<br><br>
+<hr>
+</div>
+</div>
+<div id="section-2" class="section level3 unnumbered">
+<h3></h3>
 <div class="quiz">
 <h3 id="pop-quiz-hotshot-1" class="unnumbered">Pop Quiz, hotshot!</h3>
 <p><strong>Are there more total <code>Retrorockets</code> or <code>Sublight drives</code> over 500 credits?</strong></p>
@@ -1271,18 +1311,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 </blockquote>
 <p><br></p>
 <p><strong>HINT:</strong> Ask about the <strong>Most</strong> or <strong>Least</strong> of something</p>
-<p><br><br></p>
-<details> <summary class = "btn_code_blue"> <strong>EXPLORE:</strong> <em>What is the <strong>c()</strong> thing again?</em> </summary>
-<p>
-<p>You can put multiple values inside <code>c()</code> to make a vector of items. Each item in the vector is separated by a comma. Let’s create a short vector of our favorite colors.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is an example vector</span>
-fave_colors &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;cornflower&quot;</span>)
-
-fave_colors</code></pre></div>
-<pre><code>## [1] &quot;green&quot;      &quot;orange&quot;     &quot;cornflower&quot;</code></pre>
-<br>
-</p>
-<p></details></p>
+<p><br></p>
 </div>
 <div id="update-from-bb8" class="section level1">
 <h1><span class="header-section-number">10</span> | Update from BB8!</h1>
@@ -1329,23 +1358,37 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <p><br></p>
 <p>You can see that the units in the full data set are in “Items”, “Cubic Yards”. And you remember from before that there were also units of “TONS” and “Tons”.</p>
 <p><br></p>
-<div id="exercise-4" class="section level3 unnumbered">
-<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<div id="section-3" class="section level3 unnumbered tabset">
+<h3></h3>
+<div id="exercise-4" class="section level4 unnumbered">
+<h4><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<p><br></p>
 <p>Use <code>filter()</code> and <code>arrange()</code> to get a new data frame of your City’s scrap sorted by <code>Price_per_Ton</code>. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices.</p>
-<details> <summary class = "btn_code_green"> <em>Show hint</em> </summary>
-<p>
-<p><strong>Hint:</strong> First filter your data to include only your City in the <code>Origin</code> column.</p>
-<br>
-</p>
-<p></details></p>
-<details> <summary class = "btn_code"> <em>Show code</em> </summary>
-<p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_city_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;...&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">city_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, _________)
 
-my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(my_city_scrap, <span class="kw">desc</span>(Price_per_Ton))</code></pre></div>
-<br>
-</p>
-<p></details></p>
+<span class="kw">arrange</span>(city_scrap, _________)</code></pre></div>
+<br><br>
+<hr>
+</div>
+<div id="show-hint-2" class="section level4 unnumbered">
+<h4>Show hint</h4>
+<p><br></p>
+<p><strong>Hint:</strong> First filter your data to include only your City in the <code>Origin</code> column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">city_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;...&quot;</span>)
+
+my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scrap, <span class="kw">desc</span>(_________))</code></pre></div>
+<br><br>
+<hr>
+</div>
+<div id="show-code-2" class="section level4 unnumbered">
+<h4>Show code</h4>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">city_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;Outskirts&quot;</span>)
+
+my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scrap, <span class="kw">desc</span>(Price_per_Ton))</code></pre></div>
+<br><br>
+<hr>
+</div>
 </div>
 <div id="great-work" class="section level2 unnumbered">
 <h2>Great work!</h2>

@@ -51,6 +51,7 @@ __Open your RStudio project__
 
 <a href="https://github.com/MPCA-air/RTrain/blob/master/data/junk_data.zip?raw=true"> <span class = "btn btn-info"> __DOWNLOAD__  </span></a> —  The Day 1 project files  
 
+- __Open__ the `.zip` file
 - __Copy__ the "junk_data" folder to your Desktop 
 - __Open__ the folder
 - Double click the __.Rproj__ file to open RStudio
@@ -459,21 +460,19 @@ _Hint: Use `filter()` first._
 <br>
 
 
-### <i class="fa fa-astronaut" aria-hidden="true" style="color: green"></i> Exercise  {-}
+### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
 
-Create a Star Wars scrap summary using 3 of the math functions above. 
+- Create a Star Wars scrap summary using 3 of the math functions above. 
 
-
-_But wait! In the beginning, we decided we wanted to create a report about the Salvage from our Origin cities to help Rey determine who she should work with to get scrap for her star ship?_
-
-
-> Wouldn't it be great if we could easily find the mean price for every Origin City? Bring on group_by()!
 
 
 #| `group_by()`
 <hr>
 
-Enter `group_by()` stage left. If you thought `summarize` was awesome, wait until you include `group_by` with your `summarize` commands. 
+> Wouldn't it be nice if we could easily find the mean price for every Origin City? It's time for `group_by()`!
+
+
+If you thought `summarize` was awesome, wait until you include `group_by` with your `summarize` commands. 
 
 Try using `group_by` with the column _Origin_ and then use `summarize` to count the number of Salvage reports from each planet.  
 
@@ -564,26 +563,34 @@ group_by(scrap, Origin) %>% mutate(origin_mean_price = mean(Price_per_Ton, na.rm
 
 <br>
 
+### {- .tabset}
 
-### Exercise <i class="fa fa-user-astronaut" aria-hidden="true" style="color: green"></i> {-}
+#### <i class="fa fa-user-starwars" aria-hidden="true" style="color: green"></i> Exercise  {-}
+<br>
 
-Find the median weight for each Destination.
+- Find the median weight for each Destination.
 
 ```{r, eval=F}
 group_by(scrap, Dest) %>% 
-  mutate(median_weight_dest = median(Ton_Conv, na.rm = T)) %>% 
-  ungroup()
+  mutate(median_weight = _________________)
 ```
 
+<br><br><hr>
 
-
-## Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> 
-
+#### Show code {-}
 <br>
 
-Take 5 minutes to relax.
+```{r, eval=F}
+group_by(scrap, Dest) %>% 
+  mutate(median_weight = median(Ton_Conv, na.rm = T))
+```
 
-<br>
+<br><br><hr>
+
+
+## Break time <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> {-}
+
+<br> Take 5 minutes to relax. <br>
 
 #| ggplot
 
