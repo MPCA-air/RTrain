@@ -1,5 +1,5 @@
 ---
-title: "R Training"
+title: "R | Training"
 output: 
   html_document:
     theme: readable
@@ -23,8 +23,14 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ## Get R!
 <hr>
 
-Go to — [Install R](https://mpca-air.github.io/RCamp/00-Install.html) — for instructions on installing the latest version of __R__ and __RStudio__.  
-    
+Go to — [Install R](https://mpca-air.github.io/RCamp/00-Install.html) — for instructions on installing the latest version of R and RStudio.  
+
+<br>  
+  
+#### Updates
+
+Go to — [Update R](https://mpca-air.github.io/RTrain/00-Update.html) — if you already have R installed but haven't used it in awhile.  
+  
     
 ## Intro to R
 <hr>
@@ -51,14 +57,14 @@ __Day 3__
 
 <div class="column3" style="border: 1px solid grey; height: 270px; max-height: 270px;">
 
-<a href="01-Day1_junk_data.html"><img src="images/day1_bb8_sq.png"></a>
+<a href="01-Day1.html"><img src="images/day1_bb8_sq.png"></a>
 
 </div>
 
 
 <div class="column3" style="border: 1px solid grey; height: 270px; max-height: 270px;">
 
-<a href="02_Day2_dplyr_ggplot_part0.html"><img src="images/day2_bb8_sq.png"></a>
+<a href="02_Day2.html"><img src="images/day2_bb8_sq.png"></a>
 
 </div>
 
@@ -142,7 +148,7 @@ Planets visited: `Ahch-To`
 ## Workshops
 <hr>
 
-Each workshop dives into more detail on a common data anlaysis or visualization task. 
+These workshops dive into more detail on a common data anlaysis or visualization task. 
 
 
 <div class="row3" style = "margin-top: 20px;">
@@ -150,7 +156,7 @@ Each workshop dives into more detail on a common data anlaysis or visualization 
 <div class="column3">
 <a href="01-workshop_tidy.html">
 <span style="margin-left: 30%;"><i class="fa fa-cogs" aria-hidden="true" style="color: gray;"></i> 
-Tidy data <i class="fa fa-cogs" aria-hidden="true" style="color: gray;"></i> 
+Messy data <i class="fa fa-cogs" aria-hidden="true" style="color: gray;"></i> 
 </span>
 </a></div>
 
@@ -161,9 +167,7 @@ Writing functions
 <div class="column3"><span style="margin-left: 34%;"> 
 Maps and shapefiles
 </span></div>
-
 </div>
-
 
 
 <div class = "row3">
@@ -181,13 +185,14 @@ Maps and shapefiles
 <div class="row3" style="margin-top: 30px;">
 <div class="column3">
 
+1. Turn messy data into a tidy table.
 1. Collapse data spread across many columns.
-1. Fill in empty rows from Excel.
-1. Reorder ggplots from highest to lowest.
-1. Read a whole folder of files at once.
-1. Clean spaces and special characters from column names.
+1. Order plots from highest to lowest.
+1. Read in a whole folder of files at once.
+1. Clean special characters from column names.
 1. Parse dates into season, month, quarter, day of the year.
 1. Read a set range of cells from Excel.
+1. Fill in empty rows from Excel.
 
 Packages: `tidyr`, `readxl`, `lubridate`, `forcats`, `ggplot2`
 

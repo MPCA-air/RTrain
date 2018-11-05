@@ -1,0 +1,246 @@
+---
+title: "R Training | Day 2"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    number_sections: true
+    self_contained: false
+fontsize: 14pt
+monofont: Source Code Pro
+monofontoptions: Scale = 1.1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+knitr::opts_chunk$set(fig.width = 11, fig.height = 6) 
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+my_scrap_data <- "data/starwars_scrap_jakku_full.csv"
+scrap <- read_csv(my_scrap_data)
+scrap <- filter(scrap, Origin != "All")
+```
+
+
+#| Make a `ggplot()` sandwich
+
+![](images/auto_plot.gif){width="800" style="float: right; margin-top: -20px;"}
+
+
+## The 3 ingredients of a `ggplot` {-}
+
+### 1. The base plot {-}
+```{r}
+ggplot(scrap)
+```
+
+<br>
+
+> Note when we load the package it's `library ("ggplot2")` but when we use the function, it's `ggplot(scrap)` without the 2 following ggplot. It's annoying, but that's the way it is.
+
+### 2. The X, Y _(aesthetics)_ {-}
+_Aesthetics_ are the components from the data that you want to use in the chart. These also determine the dimensions of the plot.
+
+```{r}
+ggplot(scrap, aes(x = Dest, y = Price_per_Ton)) 
+```
+
+### 3. The layers and _(geometries)_ {-}
+```{r}
+ggplot(scrap, aes(x = Dest, y = Price_per_Ton)) + 
+  geom_point()
+```
+
+<br>
+
+### <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!
+> When you add more layers using `+`, remember to place it at the end of each new line.
+
+```{r, eval=F}
+# This will work
+ggplot() +
+  geom_point()
+
+# BUT this will give you a nasty error message
+ggplot()
+  + geom_point()
+
+```
+
+
+#### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
+
+Try making a scatterplot of any two columns.
+
+_Hint: Numeric variables will be more informative._
+```{r, eval=F}
+ggplot(scrap, aes(x = ?column1, y = ?column2)) + geom_point()
+```
+
+# Scatterplots and point charts {-}
+
+Let's select only scrap from Outskirts using `filter()`.
+```{r, eval = F}
+filter(scrap, Origin == Outskirts)
+```
+
+
+### To repeat the earlier chart with the filtered data use the `%>%` pipe. {-}
+```{r}
+filter(scrap, Origin == "Outskirts") %>%
+  ggplot(aes(x = Dest, y = Price_per_Ton)) + 
+  geom_point()
+```
+
+
+### Add transparency to the points {-}
+```{r}
+filter(scrap, Origin == "Outskirts") %>%
+  ggplot(aes(x = Dest, y = Price_per_Ton)) + 
+  geom_point(alpha = 0.1)
+```
+
+
+### Add a regression line. {-}
+
+We can keep adding layers! You can build your plot sandwich as big as you like.  
+<br>
+
+![](http://3.bp.blogspot.com/-3neH1OJJkss/VdT0e7l_GrI/AAAAAAAABKs/8fJwUmRfCjs/s1600/54066b1cb96cd.jpg){width=300}
+
+<br>
+
+
+### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
+ 
+Make X plot.
+
+<details>
+<summary class = "btn_code"> _Show code_ </summary>
+<p>
+Here's some code to help.
+```{r}
+
+```
+</p></details>
+
+<br>
+
+
+## Histograms
+
+Now let's make some histograms showing how the total number of different items. 
+```{r}
+ggplot(scrap, aes(x = Amount)) + geom_histogram()
+```
+
+<br>
+
+To show the changes per decade we can break the years into groups of 10.
+```{r, eval=F}
+ggplot(movies, aes(x = title_year)) + geom_histogram(binwidth = 10)
+```
+
+
+### Break it down by `movie_color`
+
+You can assign different aesthetics to variables in the data set. The example below sets the `fill` color to variable `movie_color`. This will color code each color type, one color for black and white movies and one for color movies.
+```{r, eval=F}
+ggplot(movies, aes(x = title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10)
+```
+
+
+### Move the bars side-by-side instead of stacked
+
+It's difficult to see what's going on with the black and white films. Let's split the colors apart using `position_dodge()`.
+
+```{r, eval=F}
+ggplot(movies, aes(x = title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10, position = "dodge")
+```
+
+
+### Split into separate charts for black and white vs. color
+
+Maybe it would work better to use two separate charts. For that we can use `facet_wrap()`.
+```{r, eval=F}
+ggplot(movies, aes(x = title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10) +
+  facet_wrap(~ movie_color)
+```
+
+### Free y-axis 
+
+That is almost good. It's still hard to see the changes in black and white films. Let's make the y-axis independent for each group using `scales = "free_y"`. Type `?facet_wrap` to see more options.
+```{r, eval=F}
+ggplot(movies, aes(title_year, fill = movie_color)) +
+  geom_histogram(binwidth = 10) +
+  facet_wrap(~ movie_color, scales = "free_y")
+```
+
+
+_Note: When the scales are not uniform, make sure to point this out to your readers. Otherwise people might assume the scales are the same. Then they would think there are just as many black and white films as color movies._  
+
+
+<br>
+
+### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i>  Exercise {-}
+
+Make a histogram of the number of movies by decade with separate `fill` colors for each `content_rating`.   
+
+Decide which is the best way to present the bars: _stacked, side-by-side, or on separate charts._
+
+<br>
+
+<details>
+<summary class = "btn_code">_Show solution_</summary>
+<p>
+
+```{r, eval=F}
+
+# Stacked
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10) 
+
+# Side by side
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10, position = position_dodge()) 
+
+# Separate charts
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10) + 
+  facet_wrap( ~ content_rating)
+
+# Free scale it
+ggplot(movies, aes(title_year, fill = content_rating)) +
+  geom_histogram(binwidth = 10) + 
+  facet_wrap( ~ content_rating, scales = "free_y")
+
+```
+
+</p></details>
+<br>
+
+
+# Day 2 homework
+
+1. Load some data into R from a recent project of yours.
+    - If you have data in Excel, you can export a _.CSV_ file by choosing "Save as" and selecting CSV from the file type menu.
+2. Create 2 types of plots using the data.
+3. Paste the function `runif(1)` into your console. 
+    - If the number you get is bigger than `0.2`, email your charts to the rest of the class.
+
+
+<br>
+
+# Return to [RCamp](index.html) {-}
+
+<br>
