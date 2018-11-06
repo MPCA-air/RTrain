@@ -11,7 +11,7 @@
 
 
 
-<title>R Training | Day 2</title>
+<title>R Training | Day 2 -pt2</title>
 
 <script src="02_Day2_part1_files/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -248,43 +248,13 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">R Training | Day 2</h1>
+<h1 class="title toc-ignore">R Training | Day 2 -pt2</h1>
 
 </div>
 
 
-<div id="make-a-ggplot-sandwich" class="section level1">
-<h1><span class="header-section-number">1</span> | Make a <code>ggplot()</code> sandwich</h1>
-<div class="figure">
-<img src="images/auto_plot.gif" style="float: right; margin-top: -20px;" width="800" />
-
-</div>
-<div id="the-3-ingredients-of-a-ggplot" class="section level2 unnumbered">
-<h2>The 3 ingredients of a <code>ggplot</code></h2>
-<div id="the-base-plot" class="section level3 unnumbered">
-<h3>1. The base plot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap)</code></pre></div>
-<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-1-1.png" width="1056" /></p>
-<p><br></p>
-<blockquote>
-<p>Note when we load the package it’s <code>library (&quot;ggplot2&quot;)</code> but when we use the function, it’s <code>ggplot(scrap)</code> without the 2 following ggplot. It’s annoying, but that’s the way it is.</p>
-</blockquote>
-</div>
-<div id="the-x-y-aesthetics" class="section level3 unnumbered">
-<h3>2. The X, Y <em>(aesthetics)</em></h3>
-<p><em>Aesthetics</em> are the components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Price_per_Ton)) </code></pre></div>
-<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-2-1.png" width="1056" /></p>
-</div>
-<div id="the-layers-and-geometries" class="section level3 unnumbered">
-<h3>3. The layers and <em>(geometries)</em></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Price_per_Ton)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-3-1.png" width="1056" /></p>
-<p><br></p>
-</div>
-<div id="pro-tip" class="section level3">
-<h3><span class="header-section-number">1.0.1</span> <i class="fa fa-user-secret" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<div id="pro-tip" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
 <blockquote>
 <p>When you add more layers using <code>+</code>, remember to place it at the end of each new line.</p>
 </blockquote>
@@ -295,34 +265,27 @@ div.tocify {
 <span class="co"># BUT this will give you a nasty error message</span>
 <span class="kw">ggplot</span>()
   <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
-<div id="exercise" class="section level4 unnumbered">
-<h4>Exercise <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i></h4>
-<p>Try making a scatterplot of any two columns.</p>
-<p><em>Hint: Numeric variables will be more informative.</em></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> ?column1, <span class="dt">y =</span> ?column2)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 </div>
-</div>
-</div>
-<div id="scatterplots-and-point-charts." class="section level2">
-<h2><span class="header-section-number">1.1</span> Scatterplots and point charts.</h2>
+<div id="scatterplots-and-point-charts" class="section level1">
+<h1><span class="header-section-number">1</span> | Scatterplots and point charts</h1>
 <p>Let’s select only scrap from Outskirts using <code>filter()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> </span>Outskirts)</code></pre></div>
-<div id="to-repeat-the-earlier-chart-with-the-filtered-data-use-the-pipe." class="section level3">
-<h3><span class="header-section-number">1.1.1</span> To repeat the earlier chart with the filtered data use the <code>%&gt;%</code> pipe.</h3>
+<div id="to-repeat-the-earlier-chart-with-the-filtered-data-use-the-pipe" class="section level3 unnumbered">
+<h3>To repeat the earlier chart with the filtered data use the <code>%&gt;%</code> pipe</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;Outskirts&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Price_per_Ton)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-7-1.png" width="1056" /></p>
+<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-3-1.png" width="1056" /></p>
 </div>
-<div id="add-transparency-to-the-points." class="section level3">
-<h3><span class="header-section-number">1.1.2</span> Add transparency to the points.</h3>
+<div id="add-transparency-to-the-points" class="section level3 unnumbered">
+<h3>Add transparency to the points</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;Outskirts&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Price_per_Ton)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>)</code></pre></div>
-<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-8-1.png" width="1056" /></p>
+<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-4-1.png" width="1056" /></p>
 </div>
-<div id="add-a-regression-line." class="section level3">
-<h3><span class="header-section-number">1.1.3</span> Add a regression line.</h3>
+<div id="add-a-regression-line." class="section level3 unnumbered">
+<h3>Add a regression line.</h3>
 <p>We can keep adding layers! You can build your plot sandwich as big as you like.<br />
 <br></p>
 <div class="figure">
@@ -331,45 +294,46 @@ div.tocify {
 </div>
 <p><br></p>
 </div>
-<div id="exercise-1" class="section level3 unnumbered">
+<div id="exercise" class="section level3 unnumbered">
 <h3><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h3>
-<details> <summary class = "btn_code"><em>Show solution</em></summary>
+<p>Make X plot.</p>
+<details> <summary class = "btn_code"> <em>Show code</em> </summary>
 <p>
 <p>Here’s some code to help.</p>
 </p>
 <p></details></p>
 <p><br></p>
 </div>
-</div>
 <div id="histograms" class="section level2">
-<h2><span class="header-section-number">1.2</span> Histograms</h2>
+<h2><span class="header-section-number">1.1</span> Histograms</h2>
+<hr>
 <p>Now let’s make some histograms showing how the total number of different items.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
-<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-10-1.png" width="1056" /></p>
+<p><img src="02_Day2_part1_files/figure-html/unnamed-chunk-6-1.png" width="1056" /></p>
 <p><br></p>
 <p>To show the changes per decade we can break the years into groups of 10.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(movies, <span class="kw">aes</span>(<span class="dt">x =</span> title_year)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>)</code></pre></div>
-<div id="break-it-down-by-movie_color" class="section level3">
-<h3><span class="header-section-number">1.2.1</span> Break it down by <code>movie_color</code></h3>
+<div id="break-it-down-by-origin" class="section level3 unnumbered">
+<h3>Break it down by <code>Origin</code></h3>
 <p>You can assign different aesthetics to variables in the data set. The example below sets the <code>fill</code> color to variable <code>movie_color</code>. This will color code each color type, one color for black and white movies and one for color movies.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(movies, <span class="kw">aes</span>(<span class="dt">x =</span> title_year, <span class="dt">fill =</span> movie_color)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>)</code></pre></div>
 </div>
-<div id="move-the-bars-side-by-side-instead-of-stacked" class="section level3">
-<h3><span class="header-section-number">1.2.2</span> Move the bars side-by-side instead of stacked</h3>
+<div id="move-the-bars-side-by-side-instead-of-stacked" class="section level3 unnumbered">
+<h3>Move the bars side-by-side instead of stacked</h3>
 <p>It’s difficult to see what’s going on with the black and white films. Let’s split the colors apart using <code>position_dodge()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(movies, <span class="kw">aes</span>(<span class="dt">x =</span> title_year, <span class="dt">fill =</span> movie_color)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
 </div>
-<div id="split-into-separate-charts-for-black-and-white-vs.color" class="section level3">
-<h3><span class="header-section-number">1.2.3</span> Split into separate charts for black and white vs. color</h3>
+<div id="split-into-separate-charts-for-black-and-white-vs.color" class="section level3 unnumbered">
+<h3>Split into separate charts for black and white vs. color</h3>
 <p>Maybe it would work better to use two separate charts. For that we can use <code>facet_wrap()</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(movies, <span class="kw">aes</span>(<span class="dt">x =</span> title_year, <span class="dt">fill =</span> movie_color)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>movie_color)</code></pre></div>
 </div>
-<div id="free-y-axis" class="section level3">
-<h3><span class="header-section-number">1.2.4</span> Free y-axis</h3>
+<div id="free-y-axis" class="section level3 unnumbered">
+<h3>Free y-axis</h3>
 <p>That is almost good. It’s still hard to see the changes in black and white films. Let’s make the y-axis independent for each group using <code>scales = &quot;free_y&quot;</code>. Type <code>?facet_wrap</code> to see more options.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(movies, <span class="kw">aes</span>(title_year, <span class="dt">fill =</span> movie_color)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>) <span class="op">+</span>
@@ -377,7 +341,7 @@ div.tocify {
 <p><em>Note: When the scales are not uniform, make sure to point this out to your readers. Otherwise people might assume the scales are the same. Then they would think there are just as many black and white films as color movies.</em></p>
 <p><br></p>
 </div>
-<div id="exercise-2" class="section level3 unnumbered">
+<div id="exercise-1" class="section level3 unnumbered">
 <h3><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h3>
 <p>Make a histogram of the number of movies by decade with separate <code>fill</code> colors for each <code>content_rating</code>.</p>
 <p>Decide which is the best way to present the bars: <em>stacked, side-by-side, or on separate charts.</em></p>
@@ -405,21 +369,6 @@ div.tocify {
 <p></details> <br></p>
 </div>
 </div>
-</div>
-<div id="day-2-homework" class="section level1">
-<h1><span class="header-section-number">2</span> Day 2 homework</h1>
-<ol style="list-style-type: decimal">
-<li>Load some data into R from a recent project of yours.
-<ul>
-<li>If you have data in Excel, you can export a <em>.CSV</em> file by choosing “Save as” and selecting CSV from the file type menu.</li>
-</ul></li>
-<li>Create 2 types of plots using the data.</li>
-<li>Paste the function <code>runif(1)</code> into your console.
-<ul>
-<li>If the number you get is bigger than <code>0.2</code>, email your charts to the rest of the class.</li>
-</ul></li>
-</ol>
-<p><br></p>
 </div>
 <div id="return-to-rcamp" class="section level1 unnumbered">
 <h1>Return to <a href="index.html">RCamp</a></h1>

@@ -45,7 +45,7 @@ blockquote
 {
      background-color: #f0f7fb;
      border-radius: 15px;
-     font-size: 16px;
+     font-size: 17px;
      line-height: 19px;
      overflow: hidden;
      padding: 10px;
@@ -78,7 +78,7 @@ blockquote
      background-color: #d2f0c6;
      border-left: solid 5px #86af49;
      border-radius: 25px;
-     font-size: 16px;
+     font-size: 17px;
      line-height: 19px;
      overflow: hidden;
      padding: 10px;
@@ -93,7 +93,7 @@ blockquote
 {
      background-color: #d2f0c6;
      border-left: solid 5px #86af49;
-     font-size: 16px;
+     font-size: 17px;
      line-height: 18px;
      overflow: hidden;
      padding: 5px;
@@ -194,8 +194,6 @@ blockquote
     background-color: #22527b;
 }
 
-
-
 .toggle {
     height: 2.3em;
     overflow-y: hidden;
@@ -219,4 +217,8 @@ h2 {
 h3 {
   margin-top: 26px;
   margin-bottom: 16px;
+}
+
+body {
+  font-size: 18px;
 }

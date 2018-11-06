@@ -10,11 +10,10 @@ output:
     css: css/camp_style.css
     number_sections: true
     self_contained: false
-fontsize: 15pt
+fontsize: 18pt
 monofont: Source Code Pro
-monofontoptions: Scale = 1.2
+monofontoptions: Scale = 1.4
 ---
-
 
 ```{r setup, include=FALSE}
 library("rmarkdown")
@@ -134,7 +133,7 @@ __R community__
 
 <br>
 
-## You are not alone in this universe {-}
+## You are not alone in the universe {-}
 
 Growth of R Ladies groups
 
@@ -157,8 +156,7 @@ Let’s add some of our own style so we feel more at home. Follow these steps to
 5. Try 'solarized dark' when you’re ready to embrace winter.
 6. The default font and theme are 'Lucida Console' and 'TextMate'. 
 
-<br><br><br><br><br>
-
+<br>
 
 
 #| First steps
@@ -479,8 +477,6 @@ sum(starwars_ages)
 ```{r}
 starwars_ages
 ```
-
-
 
 
 
@@ -878,7 +874,7 @@ ggplot(scrap, aes(x = Origin, y = Amount)) + geom_col()
 
 ```
 
-Hmmm... Looks like there is an _All_ category that we should look into more.
+Hmmm... Looks like there is an **All** category that we should look into more.
 
 
 ## Key terms {-}
@@ -893,7 +889,7 @@ Hmmm... Looks like there is an _All_ category that we should look into more.
 #| __dplyr__
 <hr>
 
-![](https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png){width="120" align="left" style="margin-right: 20px; margin-top: 8px"}
+![](https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png){width="128" align="left" style="margin-right: 28px; margin-top: 8px; margin-bottom: 12px;"}
 
 <br>
 
@@ -908,26 +904,29 @@ Use `install.packages("dplyr")` to add _dplyr_ to your library.
 <br>
 
 __Your new analysis toolbox__  
-The key _dplyr_ functions
 
-| Function      | Job                                             |  
+| Function      | Job                                                 |  
 |:--------------|:----------------------------------------------------|  
 | `select()`    | Select individual columns to drop, keep, or reorder |  
 | `arrange()`   | Reorder or sort rows by value of a column           |  
 | `filter()`    | Pick a subset of rows by the value of a column      | 
 | `mutate()`    | Add new columns or update existing columns          | 
 | `group_by()`  | Split data into groups by values in a column        |  
-| `summarize()` | Calculate a single summary row for the entire table |   
+| `summarize()` | Calculate a single summary for the entire table |   
 
 
 #| `select()`
 <hr>
 
-Use the `select()` function to drop a column you no longer need, to select a few columns to create a new sub-table, or rearrange the order of your table’s columns.
+Use the `select()` function to:
+
+- Drop a column you no longer need
+- Pull-out a few columns to create a new table
+- Rearrange or change the order of columns
 
 
 
-## Drop a single column with a minus sign: `-column_name` {-}
+## Drop columns with a minus sign: `-column_name` {-}
 ```{r select, warning = F, message = F}
 library("dplyr")
 
@@ -941,7 +940,7 @@ select(scrap, -Dest)
 ```{r arrange2, warning = F, message = F}
 
 # Drop the destination and units columns
-select(scrap, -c(Dest, Units))
+select(scrap, -c(Dest, Units, Amount))
 ```
 
 
@@ -955,7 +954,7 @@ select(scrap, c(Salvage, Amount, Price_per_Ton))
 
 ## `everything()` {-}
 
-`select()` also works to change the order of columns. The code below moves the `Units` and `Amount` columns directly after `Salvage`, and then keeps `evertyhing()` else the same. 
+`select()` also works to change the order of columns. The code below puts the `Salvage` column first and then moves the `Units` and `Amount` columns directly after `Salvage`. We then keep `evertyhing()` else the same. 
 
 ```{r arrange4, warning = F, message = F}
 
@@ -980,6 +979,7 @@ head(scrap)
 ```
 
 
+<br>
 
 #### Well darn, that's not a very impressive price. {-}
 
@@ -987,8 +987,6 @@ head(scrap)
 ## Big things first: `desc()`  {-}
 
 To arrange a column in descending order we use: `desc(Price_per_Ton)`
-
-<br>
 
 ```{r descend, warning = F}
 # Put most expensive items on top
@@ -1004,7 +1002,9 @@ head(scrap)
 
 ### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
 
-Try arranging by more than one column (such as `Price` and `Amount`), what happens?
+Try arranging by more than one column (such as `Price_per_Ton` and `Amount`). What happens?
+
+__HINT:__ You can view the entire table by clicking on it in the upper-right _Environment_ tab.
 
 <br>
 
@@ -1021,11 +1021,7 @@ Try arranging by more than one column (such as `Price` and `Amount`), what happe
 #| `filter()`
 <hr>
 
-The `filter()` function creates a subset of the data based on the value of one or more columns. Use `filter()` to answer the questions below.
-
-<br>
-
-Do you remember we had that "All" category in the Star Wars scrap data? Let’s take a look at those records.
+The `filter()` function creates a subset of the data based on the value of one or more columns. Let's take a look at the "All" category records.
 
 ```{r filter12, eval = F}
 
@@ -1038,7 +1034,7 @@ filter(scrap, Origin == "All")
 
 > We use a `==` (double equals sign) for comparing values. A `==` makes the comparison "is it equal to?" and returns a True or False answer. So the code above returns all the rows where the condition `Origin == "All"` is TRUE.
 >
-> A single equals sign (`=`) is used within functions to set options, for example `read_csv(file = "starwars_scrap_jakku.csv")`. Don't worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.
+> A single equals sign `=` is used within functions to set options, for example `read_csv(file = "starwars_scrap_jakku.csv")`. Don't worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.
 
 
 ## Comparisons
@@ -1046,7 +1042,9 @@ filter(scrap, Origin == "All")
 
 To use filtering effectively you will want to know how to select observations using various comparison operators.
 
-_Key comparison operators_
+<br>
+
+__Key comparison operators__
 
 | Symbol| Comparison               |
 |:------|:-------------------------|
@@ -1057,7 +1055,6 @@ _Key comparison operators_
 | `==`  | equal to                 |
 | `!=`  | not equal to             |
 | `%in%`| value is in a list       |
-| `between`| value within a range  |
 
 <br>
 
@@ -1105,7 +1102,7 @@ There is still an issue with the data. The item "tons" is written two ways. This
 
 We can add multiple comparisons to `filter()` to further restrict the data we pull from a larger data set. Only the records that pass the conditions of all the comparisons will be pulled into the new data frame. 
 
-The code below filters the data to only scrap records originating in the `Outskirts` __AND__ sent to `Niima Outpost`.
+The code below filters the data to only scrap records originating in the `Outskirts` __AND__ destined for `Niima Outpost`.
 
 ```{r filter-multi, eval=F}
 
@@ -1120,7 +1117,7 @@ outskirts_to_niima <- filter(scrap,
 
 <br>
 
-Create a new data frame that only includes `Retrorockets` and `Sublight drives` that are priced higher than 500 credits. Give it a detailed name, something like `highend_starship_junk`.
+Create a new data frame that only includes `Retrorockets` and `Sublight drives` that are priced higher than 500 credits. Give the new data frame a detailed name, something like `highend_starship_junk`.
 
 _Work with your neighbor to complete the code below and create the new data frame._
 
@@ -1159,45 +1156,18 @@ highend_starship_junk <- filter(scrap,
 ```
 <br><br><hr>
 
+
 ### {-}
 
 <div class="quiz">
-### Pop Quiz, hotshot! {-}
+### The scrap challenge! <i class="fa fa-rocket" aria-hidden="true"></i> {-}
 
-__Are there more total `Retrorockets` or `Sublight drives` over 500 credits?__
-
-<input type="radio"> _more Retrorockets_          <br>
-<input type="radio"> _more Sublight drives_       <br>
-<input type="radio"> _same amount in both groups_ <br>
-
+1. Use `filter()` and multiple comparisons to isolate a single item you wish to buy in the data set. Bonus points for using `%in%`.
+2. Copy your super filter code and paste into an e-mail to your neighbor.
+3. Run your neighbor's code and confirm their wished-for salvage item.
 
 <br>
-  
-<details>
-<summary class = "btn_code"> _Show solution_ </summary>
-<p>
-<i class="fa fa-check" aria-hidden="true" style="color: green;"></i> `more Retrockets`
-
-_There is a new light saber in your future! Great job!_
-
-</p></details></div>
-
-<br>
-
-
-# The scrap challenge <i class="fa fa-rocket" aria-hidden="true"></i> {-}
-<hr>
-
-
-> Ask your neighbor a question about the scrap data that requires filter and the __%in%__ operator.
-> Try to answer your neighbor’s question.
-
-<br>
-
-__HINT:__ Ask about the __Most__ or __Least__ of something
-
-<br>
-
+</div>
 
 
 #| Update from BB8! 
@@ -1205,13 +1175,13 @@ __HINT:__ Ask about the __Most__ or __Least__ of something
 
 ![](images/rey_bb8.jpg){width="276" align="right" style="margin-top: 0px; margin-left: 15px; margin-right: 0px;"}
 
-BB8 was able to recover the full scrap data from the notorious Junk Boss Unkar Plutt. Check your folder for the new dataset named `starwars_scrap_jakku_full.csv`. 
+BB8 was able to recover the full scrap data from the notorious Junk Boss Unkar Plutt. Check your data folder for the new dataset named `starwars_scrap_jakku_full.csv`. 
 
 You already know Rey needs parts for her star ship. So let's see if you can sway Rey to trade with scrappers from your home City on Jakku. 
 
 <br>
 
-__Look under your keyboard to find the name of your City in Jakku.__
+> __Look under your keyboard to find the name of your City in Jakku.__
 
 <br>
 
@@ -1220,9 +1190,7 @@ __Look under your keyboard to find the name of your City in Jakku.__
 
 First, let’s read in the full dataset. 
 
-```{r read full, eval=F}
-library("readr")
-
+```{r read-full}
 file_path <- "data/starwars_scrap_jakku_full.csv"
 
 scrap <- read_csv(file_path)
@@ -1241,7 +1209,7 @@ Take a minute to look at the full scrap transfer data. An R function called _gli
 
 <br>
 
-```{r glimpse full, eval=T}
+```{r glimpse-full}
 
 glimpse(scrap)
 
@@ -1258,7 +1226,7 @@ You can see that the units in the full data set are in "Items", "Cubic Yards". A
 #### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise  {-}
 <br>
 
-Use `filter()` and `arrange()` to get a new data frame of your City’s scrap sorted by `Price_per_Ton`. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices. 
+Use `filter()` and `arrange()` to get a new data frame of scrap that originates from your City sorted by `Price_per_Ton`. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices. 
 
 ```{r, eval=F}
 
@@ -1297,6 +1265,40 @@ my_scrap <- arrange(city_scrap, desc(Price_per_Ton))
 
 
 
+<details>
+<summary class="btn_code_blue"> Challenge 2: Find your neighbor's `Origin` city </summary>
+<p>
+
+<br>
+
+Now let's see if you can use `mutate()` to help match the description of the Salvage from your City. Give your neighbor a series of clues about your origin city based on facts about the Salvage from that location.
+
+Here's a hint for ways to describe your City by describing its Salvage scrap data.
+
+> My City's name starts with a T.
+> My City sold more than 1000 Acceleration compensators to a Trade Caravan. 
+> The total price was at least 800 credits.
+
+Use `filter()`, and `arrange()` to describe your City by its Salvage scrap. Then, provide this information to your neighbor and have them figure out what City you are from.
+
+Here's a snippet to get you started.
+```{r neighbor1, eval=F}
+
+library("dplyr")
+
+## Filter down your data to the type of salvage in the hint
+my_scrap <- filter(scrap, Salvage == "Acceleration compensator")
+
+##arrange the data by 
+my_scrap <- arrange(my_scrap, desc(Amount))
+
+```
+<br>
+
+</p></details>
+
+
+
 ## Great work! {-}
 <hr>
 
@@ -1315,15 +1317,6 @@ You’ve earned a Star Wars film fan award! Hopefully you found a way to help Re
 
 </p></details>
 
-<br>
-
-
-### <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> __RECAP__ {-}
-
->
-> - What packages have we added to our `library`?
->
-> - What new functions have we learned?
 
 
 #| Shutdown complete 
@@ -1340,23 +1333,6 @@ Turn off __"Save Workspace"__
 - Uncheck _Restore .Rdata into workspace at startup_
 
 
-## Survey says {-}
-<hr>
-
-On the __front__ of your sticky note answer one of these:
-
-- Something you really liked learning today?
-- A useful thing you learned?
-- A new skill you are you excited about using?
-
-On the __back__:
-
-- A lingering question you have about the material.
-- A topic that was confusing and could use more clarification?
-
-
-We will compile the questions and send out answers before next class. If you think of something later, please e-mail us any questions you have. If you’re uncertain about something I guarantee someone else is as well. So help a friend, and ask a question.
-
 
 ## Congratulations! You’ve completed __Day 1__. {-}
 <hr>
@@ -1364,6 +1340,15 @@ We will compile the questions and send out answers before next class. If you thi
 ![](https://media1.tenor.com/images/ce269fabe989f148f84d339850ce9a8f/tenor.gif?itemid=3561486)
 
 <br>
+
+
+### <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> __RECAP__ {-}
+
+>
+> - What packages have we added to our `library`?
+>
+> - What new functions have we learned?
+
 
 
 # <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}

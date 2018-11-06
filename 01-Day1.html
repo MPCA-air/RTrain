@@ -347,8 +347,8 @@ div.tocify {
 </ul>
 <p><br></p>
 </div>
-<div id="you-are-not-alone-in-this-universe" class="section level2 unnumbered">
-<h2>You are not alone in this universe</h2>
+<div id="you-are-not-alone-in-the-universe" class="section level2 unnumbered">
+<h2>You are not alone in the universe</h2>
 <p>Growth of R Ladies groups</p>
 <div class="figure">
 <img src="images/rladies_map.gif" />
@@ -371,7 +371,7 @@ div.tocify {
 <li>Try ‘solarized dark’ when you’re ready to embrace winter.</li>
 <li>The default font and theme are ‘Lucida Console’ and ‘TextMate’.</li>
 </ol>
-<p><br><br><br><br><br></p>
+<p><br></p>
 </div>
 </div>
 <div id="first-steps" class="section level1">
@@ -932,7 +932,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 
 <span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Origin, <span class="dt">y =</span> Amount)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_col</span>()</code></pre></div>
 <p><img src="01-Day1_files/figure-html/unnamed-chunk-16-1.png" width="1152" /></p>
-<p>Hmmm… Looks like there is an <em>All</em> category that we should look into more.</p>
+<p>Hmmm… Looks like there is an <strong>All</strong> category that we should look into more.</p>
 </div>
 <div id="key-terms" class="section level2 unnumbered">
 <h2>Key terms</h2>
@@ -948,7 +948,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <h1><span class="header-section-number">6</span> | <strong>dplyr</strong></h1>
 <hr>
 <div class="figure">
-<img src="https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" align="left" style="margin-right: 20px; margin-top: 8px" width="120" />
+<img src="https://d33wubrfki0l68.cloudfront.net/071952491ec4a6a532a3f70ecfa2507af4d341f9/c167c/images/hex-dplyr.png" align="left" style="margin-right: 28px; margin-top: 8px; margin-bottom: 12px;" width="128" />
 
 </div>
 <p><br></p>
@@ -957,8 +957,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <p><br><br></p>
 <p>Use <code>install.packages(&quot;dplyr&quot;)</code> to add <em>dplyr</em> to your library.</p>
 <p><br></p>
-<p><strong>Your new analysis toolbox</strong><br />
-The key <em>dplyr</em> functions</p>
+<p><strong>Your new analysis toolbox</strong></p>
 <table>
 <thead>
 <tr class="header">
@@ -989,7 +988,7 @@ The key <em>dplyr</em> functions</p>
 </tr>
 <tr class="even">
 <td align="left"><code>summarize()</code></td>
-<td align="left">Calculate a single summary row for the entire table</td>
+<td align="left">Calculate a single summary for the entire table</td>
 </tr>
 </tbody>
 </table>
@@ -997,9 +996,14 @@ The key <em>dplyr</em> functions</p>
 <div id="select" class="section level1">
 <h1><span class="header-section-number">7</span> | <code>select()</code></h1>
 <hr>
-<p>Use the <code>select()</code> function to drop a column you no longer need, to select a few columns to create a new sub-table, or rearrange the order of your table’s columns.</p>
-<div id="drop-a-single-column-with-a-minus-sign--column_name" class="section level2 unnumbered">
-<h2>Drop a single column with a minus sign: <code>-column_name</code></h2>
+<p>Use the <code>select()</code> function to:</p>
+<ul>
+<li>Drop a column you no longer need</li>
+<li>Pull-out a few columns to create a new table</li>
+<li>Rearrange or change the order of columns</li>
+</ul>
+<div id="drop-columns-with-a-minus-sign--column_name" class="section level2 unnumbered">
+<h2>Drop columns with a minus sign: <code>-column_name</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
 
 <span class="co"># Drop the destination column</span>
@@ -1022,20 +1026,20 @@ The key <em>dplyr</em> functions</p>
 <div id="drop-multiple-columns-with--ccol_1-col_2-or--col1--col2" class="section level2 unnumbered">
 <h2>Drop multiple columns with <code>-c(col_1, col_2)</code> or <code>-col1, -col2</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Drop the destination and units columns</span>
-<span class="kw">select</span>(scrap, <span class="op">-</span><span class="kw">c</span>(Dest, Units))</code></pre></div>
-<pre><code>## # A tibble: 222 x 4
-##    Salvage                          Origin     Amount Price_per_Ton
-##    &lt;chr&gt;                            &lt;chr&gt;       &lt;int&gt;         &lt;dbl&gt;
-##  1 Flight recorder                  Outskirts     887          591.
-##  2 Proximity sensor                 Outskirts    7081         1229.
-##  3 Vitus-Series Attitude Thrusters  Reestki      4901          226.
-##  4 Aural sensor                     Tuanul        707          145.
-##  5 Electromagnetic discharge filter Tuanul        107          188.
-##  6 Proximity sensor                 Tuanul      32109         1229.
-##  7 Hyperdrive motivator             Tuanul        862         1485.
-##  8 Landing jet                      Reestki     13944         1497.
-##  9 Electromagnetic discharge filter Cratertown   7788          188.
-## 10 Sublight engine                  Outskirts   10642         7211.
+<span class="kw">select</span>(scrap, <span class="op">-</span><span class="kw">c</span>(Dest, Units, Amount))</code></pre></div>
+<pre><code>## # A tibble: 222 x 3
+##    Salvage                          Origin     Price_per_Ton
+##    &lt;chr&gt;                            &lt;chr&gt;              &lt;dbl&gt;
+##  1 Flight recorder                  Outskirts           591.
+##  2 Proximity sensor                 Outskirts          1229.
+##  3 Vitus-Series Attitude Thrusters  Reestki             226.
+##  4 Aural sensor                     Tuanul              145.
+##  5 Electromagnetic discharge filter Tuanul              188.
+##  6 Proximity sensor                 Tuanul             1229.
+##  7 Hyperdrive motivator             Tuanul             1485.
+##  8 Landing jet                      Reestki            1497.
+##  9 Electromagnetic discharge filter Cratertown          188.
+## 10 Sublight engine                  Outskirts          7211.
 ## # ... with 212 more rows</code></pre>
 </div>
 <div id="keep-only-three-columns" class="section level2 unnumbered">
@@ -1059,7 +1063,7 @@ The key <em>dplyr</em> functions</p>
 </div>
 <div id="everything" class="section level2 unnumbered">
 <h2><code>everything()</code></h2>
-<p><code>select()</code> also works to change the order of columns. The code below moves the <code>Units</code> and <code>Amount</code> columns directly after <code>Salvage</code>, and then keeps <code>evertyhing()</code> else the same.</p>
+<p><code>select()</code> also works to change the order of columns. The code below puts the <code>Salvage</code> column first and then moves the <code>Units</code> and <code>Amount</code> columns directly after <code>Salvage</code>. We then keep <code>evertyhing()</code> else the same.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the `Salvage`, `Units`, and `Amount` columns the first three columns</span>
 <span class="co"># Leave `everything()` else in the same order</span>
 <span class="kw">select</span>(scrap, Salvage, Units, Amount, <span class="kw">everything</span>())</code></pre></div>
@@ -1097,13 +1101,13 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, Price
 ## 4 Aural sensor Tuanul        Raiders         3120 Tons           145.
 ## 5 Aural sensor Blowback Town Niima Outpost   2312 Tons           145.
 ## 6 Aural sensor Outskirts     Trade caravan   6272 Tons           145.</code></pre>
+<p><br></p>
 <div id="well-darn-thats-not-a-very-impressive-price." class="section level4 unnumbered">
 <h4>Well darn, that’s not a very impressive price.</h4>
 </div>
 <div id="big-things-first-desc" class="section level2 unnumbered">
 <h2>Big things first: <code>desc()</code></h2>
 <p>To arrange a column in descending order we use: <code>desc(Price_per_Ton)</code></p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Put most expensive items on top</span>
 scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(Price_per_Ton))
 
@@ -1121,7 +1125,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <p><br></p>
 <div id="exercise-2" class="section level3 unnumbered">
 <h3><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h3>
-<p>Try arranging by more than one column (such as <code>Price</code> and <code>Amount</code>), what happens?</p>
+<p>Try arranging by more than one column (such as <code>Price_per_Ton</code> and <code>Amount</code>). What happens?</p>
+<p><strong>HINT:</strong> You can view the entire table by clicking on it in the upper-right <em>Environment</em> tab.</p>
 <p><br></p>
 </div>
 <div id="pro-tip-2" class="section level3 unnumbered">
@@ -1140,22 +1145,21 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <div id="filter" class="section level1">
 <h1><span class="header-section-number">9</span> | <code>filter()</code></h1>
 <hr>
-<p>The <code>filter()</code> function creates a subset of the data based on the value of one or more columns. Use <code>filter()</code> to answer the questions below.</p>
-<p><br></p>
-<p>Do you remember we had that “All” category in the Star Wars scrap data? Let’s take a look at those records.</p>
+<p>The <code>filter()</code> function creates a subset of the data based on the value of one or more columns. Let’s take a look at the “All” category records.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;All&quot;</span>)</code></pre></div>
 <div id="pro-tip-3" class="section level3 unnumbered">
 <h3><i class="fas fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
 <blockquote>
 <p>We use a <code>==</code> (double equals sign) for comparing values. A <code>==</code> makes the comparison “is it equal to?” and returns a True or False answer. So the code above returns all the rows where the condition <code>Origin == &quot;All&quot;</code> is TRUE.</p>
-<p>A single equals sign (<code>=</code>) is used within functions to set options, for example <code>read_csv(file = &quot;starwars_scrap_jakku.csv&quot;)</code>. Don’t worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.</p>
+<p>A single equals sign <code>=</code> is used within functions to set options, for example <code>read_csv(file = &quot;starwars_scrap_jakku.csv&quot;)</code>. Don’t worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.</p>
 </blockquote>
 </div>
 <div id="comparisons" class="section level2">
 <h2><span class="header-section-number">9.1</span> Comparisons</h2>
 <hr>
 <p>To use filtering effectively you will want to know how to select observations using various comparison operators.</p>
-<p><em>Key comparison operators</em></p>
+<p><br></p>
+<p><strong>Key comparison operators</strong></p>
 <table>
 <thead>
 <tr class="header">
@@ -1192,10 +1196,6 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <td align="left"><code>%in%</code></td>
 <td align="left">value is in a list</td>
 </tr>
-<tr class="even">
-<td align="left"><code>between</code></td>
-<td align="left">value within a range</td>
-</tr>
 </tbody>
 </table>
 <p><br></p>
@@ -1228,7 +1228,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <h2><span class="header-section-number">9.2</span> Multiple filters</h2>
 <hr>
 <p>We can add multiple comparisons to <code>filter()</code> to further restrict the data we pull from a larger data set. Only the records that pass the conditions of all the comparisons will be pulled into the new data frame.</p>
-<p>The code below filters the data to only scrap records originating in the <code>Outskirts</code> <strong>AND</strong> sent to <code>Niima Outpost</code>.</p>
+<p>The code below filters the data to only scrap records originating in the <code>Outskirts</code> <strong>AND</strong> destined for <code>Niima Outpost</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">outskirts_to_niima &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
                              Origin <span class="op">==</span><span class="st"> &quot;Outskirts&quot;</span>, 
                              Dest   <span class="op">==</span><span class="st"> &quot;Niima Outpost&quot;</span>)</code></pre></div>
@@ -1237,7 +1237,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <div id="exercise-3" class="section level4 unnumbered">
 <h4><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
 <p><br></p>
-<p>Create a new data frame that only includes <code>Retrorockets</code> and <code>Sublight drives</code> that are priced higher than 500 credits. Give it a detailed name, something like <code>highend_starship_junk</code>.</p>
+<p>Create a new data frame that only includes <code>Retrorockets</code> and <code>Sublight drives</code> that are priced higher than 500 credits. Give the new data frame a detailed name, something like <code>highend_starship_junk</code>.</p>
 <p><em>Work with your neighbor to complete the code below and create the new data frame.</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">highend_starship_junk &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
                                 _____________, 
@@ -1268,30 +1268,16 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <div id="section-2" class="section level3 unnumbered">
 <h3></h3>
 <div class="quiz">
-<h3 id="pop-quiz-hotshot-1" class="unnumbered">Pop Quiz, hotshot!</h3>
-<p><strong>Are there more total <code>Retrorockets</code> or <code>Sublight drives</code> over 500 credits?</strong></p>
-<p><input type="radio"> <em>more Retrorockets</em> <br> <input type="radio"> <em>more Sublight drives</em> <br> <input type="radio"> <em>same amount in both groups</em> <br></p>
-<p><br></p>
-<details> <summary class = "btn_code"> <em>Show solution</em> </summary>
-<p>
-<p><i class="fa fa-check" aria-hidden="true" style="color: green;"></i> <code>more Retrockets</code></p>
-<p><em>There is a new light saber in your future! Great job!</em></p>
-</p>
-</details>
-</div>
+<h3 id="the-scrap-challenge" class="unnumbered">The scrap challenge! <i class="fa fa-rocket" aria-hidden="true"></i></h3>
+<ol style="list-style-type: decimal">
+<li>Use <code>filter()</code> and multiple comparisons to isolate a single item you wish to buy in the data set. Bonus points for using <code>%in%</code>.</li>
+<li>Copy your super filter code and paste into an e-mail to your neighbor.</li>
+<li>Run your neighbor’s code and confirm their wished-for salvage item.</li>
+</ol>
 <p><br></p>
 </div>
 </div>
 </div>
-<div id="the-scrap-challenge" class="section level1 unnumbered">
-<h1>The scrap challenge <i class="fa fa-rocket" aria-hidden="true"></i></h1>
-<hr>
-<blockquote>
-<p>Ask your neighbor a question about the scrap data that requires filter and the <strong>%in%</strong> operator. Try to answer your neighbor’s question.</p>
-</blockquote>
-<p><br></p>
-<p><strong>HINT:</strong> Ask about the <strong>Most</strong> or <strong>Least</strong> of something</p>
-<p><br></p>
 </div>
 <div id="update-from-bb8" class="section level1">
 <h1><span class="header-section-number">10</span> | Update from BB8!</h1>
@@ -1300,19 +1286,28 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <img src="images/rey_bb8.jpg" align="right" style="margin-top: 0px; margin-left: 15px; margin-right: 0px;" width="276" />
 
 </div>
-<p>BB8 was able to recover the full scrap data from the notorious Junk Boss Unkar Plutt. Check your folder for the new dataset named <code>starwars_scrap_jakku_full.csv</code>.</p>
+<p>BB8 was able to recover the full scrap data from the notorious Junk Boss Unkar Plutt. Check your data folder for the new dataset named <code>starwars_scrap_jakku_full.csv</code>.</p>
 <p>You already know Rey needs parts for her star ship. So let’s see if you can sway Rey to trade with scrappers from your home City on Jakku.</p>
 <p><br></p>
+<blockquote>
 <p><strong>Look under your keyboard to find the name of your City in Jakku.</strong></p>
+</blockquote>
 <p><br></p>
 <div id="more-scrap" class="section level3 unnumbered">
 <h3>More scrap</h3>
 <p>First, let’s read in the full dataset.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;readr&quot;</span>)
-
-file_path &lt;-<span class="st"> &quot;data/starwars_scrap_jakku_full.csv&quot;</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">file_path &lt;-<span class="st"> &quot;data/starwars_scrap_jakku_full.csv&quot;</span>
 
 scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   Salvage = col_character(),
+##   Origin = col_character(),
+##   Dest = col_character(),
+##   Amount = col_integer(),
+##   Units = col_character(),
+##   Price_per_Ton = col_double()
+## )</code></pre>
 <p><br></p>
 <p>It looks like there are additional units of salvage items beyond “tons”. We may have some data cleaning to do.</p>
 </div>
@@ -1323,14 +1318,14 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <p>Take a minute to look at the full scrap transfer data. An R function called <em>glimpse()</em> is a good place to start.</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(scrap)</code></pre></div>
-<pre><code>## Observations: 221
+<pre><code>## Observations: 574
 ## Variables: 6
-## $ Salvage       &lt;chr&gt; &quot;Proximity sensor&quot;, &quot;Dedicated energy receptor&quot;,...
-## $ Origin        &lt;chr&gt; &quot;Tuanul&quot;, &quot;Cratertown&quot;, &quot;Reestki&quot;, &quot;Reestki&quot;, &quot;O...
-## $ Dest          &lt;chr&gt; &quot;Trade caravan&quot;, &quot;Trade caravan&quot;, &quot;Trade caravan...
-## $ Amount        &lt;int&gt; 32109, 26167, 22294, 20834, 20739, 20652, 18423,...
-## $ Units         &lt;chr&gt; &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, &quot;Tons&quot;, ...
-## $ Price_per_Ton &lt;dbl&gt; 1229.03, 281.01, 1229.03, 790.68, 1570.65, 420.3...</code></pre>
+## $ Salvage       &lt;chr&gt; &quot;Electrotelescope&quot;, &quot;Atmospheric thrusters&quot;, &quot;Bu...
+## $ Origin        &lt;chr&gt; &quot;Outskirts&quot;, &quot;Cratertown&quot;, &quot;Cratertown&quot;, &quot;Blowba...
+## $ Dest          &lt;chr&gt; &quot;Trade caravan&quot;, &quot;Niima Outpost&quot;, &quot;Raiders&quot;, &quot;Tr...
+## $ Amount        &lt;int&gt; 8772, 25197, 4017, 4970, 887, 7081, 4689, 11677,...
+## $ Units         &lt;chr&gt; &quot;Items&quot;, &quot;Items&quot;, &quot;Cubic Yards&quot;, &quot;Items&quot;, &quot;Tons&quot;...
+## $ Price_per_Ton &lt;dbl&gt; 849.79, 56.21, 1004.83, 597.85, 590.93, 1229.03,...</code></pre>
 <p><br></p>
 <p>You can see that the units in the full data set are in “Items”, “Cubic Yards”. And you remember from before that there were also units of “TONS” and “Tons”.</p>
 <p><br></p>
@@ -1339,7 +1334,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <div id="exercise-4" class="section level4 unnumbered">
 <h4><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
 <p><br></p>
-<p>Use <code>filter()</code> and <code>arrange()</code> to get a new data frame of your City’s scrap sorted by <code>Price_per_Ton</code>. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices.</p>
+<p>Use <code>filter()</code> and <code>arrange()</code> to get a new data frame of scrap that originates from your City sorted by <code>Price_per_Ton</code>. Then take a look at the first couple of rows in your table to find the Salvage that fetches the highest prices.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">city_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, _________)
 
 <span class="kw">arrange</span>(city_scrap, _________)</code></pre></div>
@@ -1364,6 +1359,26 @@ my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scra
 my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scrap, <span class="kw">desc</span>(Price_per_Ton))</code></pre></div>
 <br><br>
 <hr>
+<details> <summary class="btn_code_blue"> Challenge 2: Find your neighbor’s <code>Origin</code> city </summary>
+<p>
+<p><br></p>
+<p>Now let’s see if you can use <code>mutate()</code> to help match the description of the Salvage from your City. Give your neighbor a series of clues about your origin city based on facts about the Salvage from that location.</p>
+<p>Here’s a hint for ways to describe your City by describing its Salvage scrap data.</p>
+<blockquote>
+<p>My City’s name starts with a T. My City sold more than 1000 Acceleration compensators to a Trade Caravan. The total price was at least 800 credits.</p>
+</blockquote>
+<p>Use <code>filter()</code>, and <code>arrange()</code> to describe your City by its Salvage scrap. Then, provide this information to your neighbor and have them figure out what City you are from.</p>
+<p>Here’s a snippet to get you started.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)
+
+## Filter down your data to the type of salvage in the hint
+my_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Salvage <span class="op">==</span><span class="st"> &quot;Acceleration compensator&quot;</span>)
+
+##arrange the data by 
+my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(my_scrap, <span class="kw">desc</span>(Amount))</code></pre></div>
+<p><br></p>
+</p>
+<p></details></p>
 </div>
 </div>
 <div id="great-work" class="section level2 unnumbered">
@@ -1381,16 +1396,6 @@ my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scra
 <p><br></p>
 </p>
 <p></details></p>
-<p><br></p>
-<div id="recap" class="section level3 unnumbered">
-<h3><i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> <strong>RECAP</strong></h3>
-<blockquote>
-<ul>
-<li><p>What packages have we added to our <code>library</code>?</p></li>
-<li><p>What new functions have we learned?</p></li>
-</ul>
-</blockquote>
-</div>
 </div>
 </div>
 <div id="shutdown-complete" class="section level1">
@@ -1405,22 +1410,6 @@ my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scra
 <li>Uncheck <em>Always save history</em></li>
 <li>Uncheck <em>Restore .Rdata into workspace at startup</em></li>
 </ul>
-<div id="survey-says" class="section level2 unnumbered">
-<h2>Survey says</h2>
-<hr>
-<p>On the <strong>front</strong> of your sticky note answer one of these:</p>
-<ul>
-<li>Something you really liked learning today?</li>
-<li>A useful thing you learned?</li>
-<li>A new skill you are you excited about using?</li>
-</ul>
-<p>On the <strong>back</strong>:</p>
-<ul>
-<li>A lingering question you have about the material.</li>
-<li>A topic that was confusing and could use more clarification?</li>
-</ul>
-<p>We will compile the questions and send out answers before next class. If you think of something later, please e-mail us any questions you have. If you’re uncertain about something I guarantee someone else is as well. So help a friend, and ask a question.</p>
-</div>
 <div id="congratulations-youve-completed-day-1." class="section level2 unnumbered">
 <h2>Congratulations! You’ve completed <strong>Day 1</strong>.</h2>
 <hr>
@@ -1429,6 +1418,15 @@ my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(city_scra
 
 </div>
 <p><br></p>
+<div id="recap" class="section level3 unnumbered">
+<h3><i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> <strong>RECAP</strong></h3>
+<blockquote>
+<ul>
+<li><p>What packages have we added to our <code>library</code>?</p></li>
+<li><p>What new functions have we learned?</p></li>
+</ul>
+</blockquote>
+</div>
 </div>
 </div>
 <div id="return-to-homebase" class="section level1 unnumbered">
