@@ -238,6 +238,9 @@ library(dplyr)
 # Get data
 scrap <- read_csv("data/starwars_scrap_jakku.csv")
 
+# Clean dta
+scrap <- filter(scrap, Origin != "All")
+
 ## Add your name as a column
 scrap <- mutate(scrap, scrap_finder = "Your name")
 
@@ -642,13 +645,13 @@ group_by(scrap, Origin) %>% mutate(origin_mean_price = mean(Price_per_Ton, na.rm
 Let’s visualize the data with some more plots.
 
 
-#| Make a `ggplot()` sandwich
+#| `ggplot()` sandwich
 <hr>
 
-![](images/auto_plot.gif){style="float: right; margin-top: -20px; width: 105%;"}
+![](images/auto_plot.gif){style="margin-top: -22px; max-width: 108%;"}
 
+<span class="h6" style="font-size: 28px; font-weight: bold;"> The 3 ingredients in a `ggplot` </span>
 
-## The 3 ingredients of a `ggplot` {-}
 
 ### 1. The base plot {-}
 ```{r, echo=F}
@@ -665,8 +668,9 @@ ggplot(scrap)
 > Note when we load the package it’s `library ("ggplot2")`, but the function to make a plot is `ggplot(scrap)`. We admit, it is a bit silly.
 
 
-### 2. The the X, Y _(aesthetics)  {-}
-The _aesthetics_ assign the components from the data you want to use in the chart. These also determine the dimensions of the plot.
+### 2. The the X, Y _aesthetics_  {-}
+
+The _aesthetics_ assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.
 
 ```{r}
 ggplot(scrap, aes(x = Dest, y = Credits)) 
@@ -702,13 +706,23 @@ ggplot(scrap, aes(x = Dest, y = Credits, color = Origin)) +
 ```
 
 
+<br>
+
 This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand.
 ```{r}
 ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) + geom_bar(stat = "sum")
 ```
 
+<br>
 
-What if we want to make it easier to compare sales by origin? Let’s change the position:
+This is the same as `geom_col()`.
+```{r, eval=F}
+ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) + geom_col()
+```
+
+<br>
+
+What if we want to make it easier to compare sales by origin? Let’s change the position.
 ```{r}
 ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) +
   geom_bar(stat = "sum", position = "dodge")
@@ -717,12 +731,23 @@ ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) +
 
 # Homeworld training {-}
 
+![](images/porg.png){style="float: right; margin-top: -10px;"}
+
 1. Load one of the data sets below into R
-    - Porg contamination: `https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/Porg_samples.csv`
-    - Endor air samples: `https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/air_endor.csv`
-    - Or use data from a recent project of yours
-2. Create 2 types of plots using the data. _Don’t worry if it looks really-really weird. Consider it art._
+    - Porg contamination on Ahch-To: https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/Porg_samples.csv
+    - Planet Endor air samples: https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/air_endor.csv
+    - Or use data from a recent project of yours  
+
+<br>
+  
+2. Create 2 plots using the data. _Don’t worry if it looks really weird. Consider it art._  
+  
+<br>
+
 3. Paste the function `runif(1)` into your console. 
-    - If the number you get is bigger than `0.2` e-mail your charts to the rest of the class.
+    - If the number is bigger than `0.2` e-mail your plots to the class.
+
+
+# <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
 
 <br>

@@ -455,6 +455,9 @@ scrap_trade &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, 
 <span class="co"># Get data</span>
 scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/starwars_scrap_jakku.csv&quot;</span>)
 
+<span class="co"># Clean dta</span>
+scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, Origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>)
+
 ## Add your name as a column
 scrap &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap, <span class="dt">scrap_finder =</span> <span class="st">&quot;Your name&quot;</span>)</code></pre></div>
 </div>
@@ -525,11 +528,11 @@ convert &lt;-<span class="st"> </span><span class="kw">read_csv</span>(convert_u
 
 <span class="kw">head</span>(convert, <span class="dv">3</span>)</code></pre></div>
 <pre><code>## # A tibble: 3 x 3
-##   item                     pounds units
-##   &lt;chr&gt;                     &lt;dbl&gt; &lt;chr&gt;
-## 1 Acceleration compensator    1.5 Items
-## 2 Activation cylinder        25   Items
-## 3 Antishock field           153   Items</code></pre>
+##   item                     units pounds
+##   &lt;chr&gt;                    &lt;chr&gt;  &lt;dbl&gt;
+## 1 Acceleration compensator Items    1.5
+## 2 Activation cylinder      Items   25  
+## 3 Antishock field          Items  153</code></pre>
 </div>
 <div id="join-2-tables" class="section level2 unnumbered">
 <h2>Join 2 tables</h2>
@@ -546,13 +549,13 @@ scrap &lt;-<span class="st"> </span><span class="kw">left_join</span>(scrap, con
 
 <span class="kw">head</span>(scrap, <span class="dv">5</span>)</code></pre></div>
 <pre><code>## # A tibble: 5 x 9
-##   Salvage Origin Dest Amount Units Price_per_Ton scrap_finder pounds units
-##   &lt;chr&gt;   &lt;chr&gt;  &lt;ch&gt;  &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;
-## 1 Flight~ Outsk~ Nii~    887 tons           591. Your name        NA Tons 
-## 2 Proxim~ Outsk~ Rai~   7081 tons          1229. Your name        NA Tons 
-## 3 Vitus-~ Reest~ Rai~   4901 tons           226. Your name        NA Tons 
-## 4 Aural ~ Tuanul Rai~    707 tons           145. Your name        NA Tons 
-## 5 Electr~ Tuanul Nii~    107 tons           188. Your name        NA Tons</code></pre>
+##   Salvage Origin Dest Amount Units Price_per_Ton scrap_finder units pounds
+##   &lt;chr&gt;   &lt;chr&gt;  &lt;ch&gt;  &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;  &lt;dbl&gt;
+## 1 Flight~ Outsk~ Nii~    887 tons           591. Your name    Tons      NA
+## 2 Proxim~ Outsk~ Rai~   7081 tons          1229. Your name    Tons      NA
+## 3 Vitus-~ Reest~ Rai~   4901 tons           226. Your name    Tons      NA
+## 4 Aural ~ Tuanul Rai~    707 tons           145. Your name    Tons      NA
+## 5 Electr~ Tuanul Nii~    107 tons           188. Your name    Tons      NA</code></pre>
 <p><br></p>
 <p><strong>Help!</strong> Remeber to type <code>?left_join</code> if you are wondering what the arguments are.</p>
 </div>
@@ -629,7 +632,7 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <pre><code>## # A tibble: 1 x 1
 ##   Total_Credits
 ##           &lt;dbl&gt;
-## 1       1.72e12</code></pre>
+## 1   1426971611.</code></pre>
 </div>
 <div id="mean" class="section level2 unnumbered">
 <h2><code>mean()</code></h2>
@@ -638,7 +641,7 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <pre><code>## # A tibble: 1 x 1
 ##   mean_weight
 ##         &lt;dbl&gt;
-## 1      18751.</code></pre>
+## 1       5390.</code></pre>
 <p><br></p>
 <blockquote>
 <p>Note the <code>na.rm = TRUE</code> in the <code>mean()</code> function. This tells R to ignore empty cells or missing values that show up in R as <code>NA</code>. If you leave <code>na.rm</code> out, the <em>mean</em> funciton will return ‘NA’ when it finds a missing value in the data.</p>
@@ -759,15 +762,14 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <p><br></p>
 <p>Let’s visualize the data with some more plots.</p>
 </div>
-<div id="make-a-ggplot-sandwich" class="section level1">
-<h1><span class="header-section-number">9</span> | Make a <code>ggplot()</code> sandwich</h1>
+<div id="ggplot-sandwich" class="section level1">
+<h1><span class="header-section-number">9</span> | <code>ggplot()</code> sandwich</h1>
 <hr>
 <div class="figure">
-<img src="images/auto_plot.gif" style="float: right; margin-top: -20px; width: 105%;" />
+<img src="images/auto_plot.gif" style="margin-top: -22px; max-width: 108%;" />
 
 </div>
-<div id="the-3-ingredients-of-a-ggplot" class="section level2 unnumbered">
-<h2>The 3 ingredients of a <code>ggplot</code></h2>
+<p><span class="h6" style="font-size: 28px; font-weight: bold;"> The 3 ingredients in a <code>ggplot</code> </span></p>
 <div id="the-base-plot" class="section level3 unnumbered">
 <h3>1. The base plot</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap)</code></pre></div>
@@ -777,8 +779,9 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <p>Note when we load the package it’s <code>library (&quot;ggplot2&quot;)</code>, but the function to make a plot is <code>ggplot(scrap)</code>. We admit, it is a bit silly.</p>
 </blockquote>
 </div>
-<div id="the-the-x-y-_aesthetics---the-aesthetics-assign-the-components-from-the-data-you-want-to-use-in-the-chart.-these-also-determine-the-dimensions-of-the-plot." class="section level3">
-<h3><span class="header-section-number">9.0.1</span> 2. The the X, Y _(aesthetics) {-} The <em>aesthetics</em> assign the components from the data you want to use in the chart. These also determine the dimensions of the plot.</h3>
+<div id="the-the-x-y-aesthetics" class="section level3 unnumbered">
+<h3>2. The the X, Y <em>aesthetics</em></h3>
+<p>The <em>aesthetics</em> assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits)) </code></pre></div>
 <p><img src="02_Day2_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
 </div>
@@ -794,7 +797,6 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> __column1__, <span class="dt">y =</span> __column2__)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 </div>
 </div>
-</div>
 <div id="colors" class="section level2 unnumbered">
 <h2>Colors</h2>
 <hr>
@@ -802,30 +804,48 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">color =</span> Origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="02_Day2_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
+<p><br></p>
 <p>This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">fill =</span> Origin)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;sum&quot;</span>)</code></pre></div>
 <p><img src="02_Day2_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
-<p>What if we want to make it easier to compare sales by origin? Let’s change the position:</p>
+<p><br></p>
+<p>This is the same as <code>geom_col()</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">fill =</span> Origin)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_col</span>()</code></pre></div>
+<p><br></p>
+<p>What if we want to make it easier to compare sales by origin? Let’s change the position.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> Dest, <span class="dt">y =</span> Credits, <span class="dt">fill =</span> Origin)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;sum&quot;</span>, <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
-<p><img src="02_Day2_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
+<p><img src="02_Day2_files/figure-html/unnamed-chunk-20-1.png" width="960" /></p>
 </div>
 </div>
 <div id="homeworld-training" class="section level1 unnumbered">
 <h1>Homeworld training</h1>
+<div class="figure">
+<img src="images/porg.png" style="float: right; margin-top: -10px;" />
+
+</div>
 <ol style="list-style-type: decimal">
 <li>Load one of the data sets below into R
 <ul>
-<li>Porg contamination: <code>https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/Porg_samples.csv</code></li>
-<li>Endor air samples: <code>https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/air_endor.csv</code></li>
+<li>Porg contamination on Ahch-To: <a href="https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/Porg_samples.csv" class="uri">https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/Porg_samples.csv</a></li>
+<li>Planet Endor air samples: <a href="https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/air_endor.csv" class="uri">https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/air_endor.csv</a></li>
 <li>Or use data from a recent project of yours</li>
 </ul></li>
-<li>Create 2 types of plots using the data. <em>Don’t worry if it looks really-really weird. Consider it art.</em></li>
+</ol>
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Create 2 plots using the data. <em>Don’t worry if it looks really weird. Consider it art.</em></li>
+</ol>
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
 <li>Paste the function <code>runif(1)</code> into your console.
 <ul>
-<li>If the number you get is bigger than <code>0.2</code> e-mail your charts to the rest of the class.</li>
+<li>If the number is bigger than <code>0.2</code> e-mail your plots to the class.</li>
 </ul></li>
 </ol>
+</div>
+<div id="return-to-homebase" class="section level1 unnumbered">
+<h1><i class="fa fa-rocket" aria-hidden="true"></i> Return to <a href="index.html">Homebase</a></h1>
 <p><br></p>
 </div>
 
