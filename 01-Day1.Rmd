@@ -1117,7 +1117,7 @@ outskirts_to_niima <- filter(scrap,
 
 <br>
 
-Create a new data frame that only includes `Retrorockets` and `Sublight drives` that are priced higher than 500 credits. Give the new data frame a detailed name, something like `highend_starship_junk`.
+Create a new data frame that only includes `Retrorocket` and `Sublight drive` that are priced higher than 500 credits. Give the new data frame a detailed name, something like `highend_starship_junk`.
 
 _Work with your neighbor to complete the code below and create the new data frame._
 
@@ -1299,23 +1299,15 @@ my_scrap <- arrange(my_scrap, desc(Amount))
 
 
 
-## Great work! {-}
+
+## Congratulations! You’ve completed __Day 1__. {-}
 <hr>
 
+![](https://media1.tenor.com/images/ce269fabe989f148f84d339850ce9a8f/tenor.gif?itemid=3561486)
+
+<br>
+
 You’ve earned a Star Wars film fan award! Hopefully you found a way to help Rey and your home City.
-
-<br>
-
-<details>
-<summary><button class = "btn_code"> __Receive your badge__ </button></summary>
-<p>
-
-
-<img src="https://upload.wikimedia.org/wikipedia/en/6/6d/SWFFA.jpg" width="200" style="margin-top: 10px; margin-right: 30px;">
-
-<br>
-
-</p></details>
 
 
 
@@ -1334,13 +1326,7 @@ Turn off __"Save Workspace"__
 
 
 
-## Congratulations! You’ve completed __Day 1__. {-}
-<hr>
-
-![](https://media1.tenor.com/images/ce269fabe989f148f84d339850ce9a8f/tenor.gif?itemid=3561486)
-
-<br>
-
+<br><br>
 
 ### <i class="fa fa-hourglass-half" aria-hidden="true" style="color:#040707;"></i> __RECAP__ {-}
 
@@ -1348,7 +1334,7 @@ Turn off __"Save Workspace"__
 > - What packages have we added to our `library`?
 >
 > - What new functions have we learned?
-
+>
 
 
 # <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
