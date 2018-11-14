@@ -42,7 +42,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 #| A new day
 <hr>
 
-Welcome to Jakku! You’ve just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. And Rey needs some parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar and track down the parts we need.
+Welcome to Jakku! You've arrived just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. And Rey needs some parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar and track down the parts we need.
 
 <br>
 
@@ -911,8 +911,92 @@ __Your new analysis toolbox__
 | `arrange()`   | Reorder or sort rows by value of a column           |  
 | `filter()`    | Pick a subset of rows by the value of a column      | 
 | `mutate()`    | Add new columns or update existing columns          | 
+| `summarize()` | Calculate a single summary for the entire table     |   
 | `group_by()`  | Split data into groups by values in a column        |  
-| `summarize()` | Calculate a single summary for the entire table |   
+
+
+
+#| Porg examples {.tabset}
+
+## `porgs` {-}
+
+![](images/porgs/porgs_tbl.png){style="width: 85%;"}
+
+<br><hr><br>
+
+## `select`    {-}
+
+![](images/porgs/select.png){style="width: 65%;"}
+
+![](images/porgs/select_tbl.png){style="width: 88%; margin-left: 10%; margin-top: 12px;"}
+
+<br><br>
+
+![](images/porgs/select_drop.png){style="width: 65%;"}
+
+![](images/porgs/select_drop_tbl.png){style="width: 80%; margin-left: 5%; margin-top: 12px;"}
+
+<br><hr><br>
+
+## `arrange`   {-}
+
+![](images/porgs/arrange.png){style="width: 65%;"}
+
+![](images/porgs/arrange_tbl.png){style="width: 88%; margin-left: 10%; margin-top: 12px;"}
+
+<br><br>
+
+![](images/porgs/arrange_desc.png){style="width: 57%;"}
+
+![](images/porgs/arrange_tbl_desc.png){style="width: 88%; margin-left: 10%; margin-top: 12px;"}
+
+<br><hr><br>
+
+## `filter`    {-}
+
+![](images/porgs/filter.png){style="width: 65%;"}
+
+![](images/porgs/filter_tbl.png){style="width: 88%; margin-left: 10%; margin-top: 12px;"}
+
+<br><br>
+
+![](images/porgs/filter2.png){style="width: 75%;"}
+
+![](images/porgs/filter2_tbl.png){style="width: 88%; margin-left: 10%; margin-top: 12px;"}
+
+
+<br><hr><br>
+
+## `mutate`    {-}
+
+![](images/porgs/mutate.png){style="width: 77%;"}
+
+<br>
+
+![](images/porgs/mutate_tbl.png){style="width: 88%; margin-left: 4%; margin-top: 12px;"}
+
+<br><hr><br>
+
+## `summarize` {-}
+
+![](images/porgs/summarize.png){style="width: 77%;"}
+
+<br>
+
+![](images/porgs/summarize_tbl.png){style="width: 88%; margin-left: 4%; margin-top: 12px;"}
+
+<br><hr><br>
+
+## `group_by`  {-}
+
+![](images/porgs/groupby.png){style="width: 77%;"}
+
+<br>
+
+![](images/porgs/groupby_tbl.png){style="width: 94%; margin-left: 2%; margin-top: 12px;"}
+
+<br><hr><br>
+
 
 
 #| `select()`

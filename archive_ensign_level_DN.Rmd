@@ -1,0 +1,239 @@
+---
+title: "Jakku scrap economy"
+output:
+  html_document:
+    toc: false
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    fontsize: 14pt
+    monofont: Source Code Pro
+    monofontoptions: Scale = 1.3
+---
+
+Remember what you should do first when you start your R session?
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r, warning = FALSE, message = FALSE}
+#load packages
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+```
+
+</p></details>
+<br><br>
+
+Start by reading in the data. Remember, when reading in data from the X drive, R reads forward slashes. The X drive location of the file is "X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_clean.csv".
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+clean_scrap <- read_csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_clean.csv")
+```
+
+</p></details>
+<br><br>
+
+Did it load successfully? The data frame should have 573 rows and 6 columns.
+
+
+
+Take a couple of minutes to get an overview of the data. Do you remember some of the functions to do that?
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r, eval = F}
+View(clean_scrap)
+glimpse(clean_scrap)
+summary(Clean_scrap)
+```
+
+</p></details>
+<br><br>
+
+What if you only want to keep the items and amount_tons fields? Create a new data frame keeping only those columns and save it as an object.
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+select_scrap <- select(clean_scrap, items, amount_tons)
+```
+
+</p></details>
+<br><br>
+
+Order the data frame you just created by amount_tons from highest to lowest. Which item had the highest weight?
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r, warning = FALSE}
+select_scrap <- arrange(select_scrap, desc(amount_tons))
+```
+
+</p></details>
+<br><br>
+
+Filter your select data set to only items weighing more than 1000 tons. Call the dataset filter_scrap
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+filter_scrap <- filter(select_scrap, amount_tons > 1000)
+```
+
+</p></details>
+<br><br>
+
+Add a filter to to the amount_tons > 1000 dataset. Include only "Proximity sensor" and "Hyperdrive"
+
+Hint: Use %in% and c().
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+filter_scrap <- filter(select_scrap, amount_tons > 1000,
+                       items %in% c("Proximity sensor", "Hyperdrive"))
+```
+
+</p></details>
+<br><br>
+
+Add a column with your favorite StarWars character your filtered data frame.
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+filter_scrap <- mutate(filter_scrap, my_favorite_character = "Admiral Ackbar")
+```
+
+</p></details>
+<br><br>
+
+We've got all the amount of items in tons in our data set, and we have our favorite StarWars character, but we want to include the amount of items in pounds. Calculate the number of pounds in your filtered dataset and add it as a column. Call that column amount_pounds.
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+filter_scrap <- mutate(filter_scrap, amount_pounds = amount_tons * 2000)
+```
+
+</p></details>
+<br><br>
+
+
+We want to make a table of recommendations to our Junk Boss Unkar Plutt. In our filtered dataset, we want to buy scrap if if it's a Hyperdrive and ignore scrap if its a Proximity sensor. Remember, we filtered our table to only those two types of scrap. Make a column that reports "buy" if the item is a Hyperdrive and "ignore" if the item is a Proximity sensor. Call this new column do_this.
+
+Hint: Remeber how to use `ifelse`?
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+filter_scrap <- mutate(filter_scrap, do_this = ifelse(items == "Hyperdrive", "buy", "ignore"))
+```
+
+</p></details>
+<br><br>
+
+Let's take a closer look at our full dataset now (clean_scrap). We want to give the Junk Boss a summary of all of this data, since he doesn't have the patience to really look at a lot of data. He hates numbers! He likes money. He wants to know the following things: 1. The sum of all the money potentially earned by item, 2. The maximum money potentially earned by item, 3. The number of reports of each item, and 4. The 35th percentile of the price by item. [We don't even know how he learned about "quantile", we are pretty sure someone told him about this just to test our abilities. If we don't provide this summarized dataset, Unkar Plutt is likely going to shoot us into space rendering us...dead. We don't want that. Let's make a summary table.] 
+
+Hint: You will need the pipe %>%, group_by(), summarize(), sum(), max(), quantile(), and n().
+
+<details>
+<summary class = "btn_code_blue">_Show hint_</summary>
+<p>
+
+```{r, eval = F}
+summary_scrap <- clean_scrap %>%
+  group_by() %>%
+  summarize()
+```
+
+</p></details>
+<br><br>
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+summary_scrap <- clean_scrap %>%
+  group_by(items) %>%
+  summarize(sum_price = sum(total_price),
+            max_price = max(total_price),
+            count_price = n(),
+            price_35th = quantile(total_price, 0.35))
+```
+
+</p></details>
+<br><br>
+
+Now old Unkar has learned about plots. He wants a plot of the maximum total prices by item. We will make this plot or perish. Try both geom_col and geom_point to see which make a more simple look at the price maxima.
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+ggplot(data = summary_scrap, aes(items, max_price)) +
+  geom_col()
+
+ggplot(data = summary_scrap, aes(items, max_price)) +
+  geom_point()
+```
+
+</p></details>
+<br><br>
+
+
+Try coord_flip to make the plot more readable.
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+ggplot(data = summary_scrap, aes(items, max_price)) +
+  geom_col() +
+  coord_flip()
+```
+
+</p></details>
+<br><br>
+
+This plot might look a lot better if the maximum data were sorted. Try reorder() to make this chart way more readable. Type in ?reorder to learn more about that function.
+
+<details>
+<summary class = "btn_code_blue">_Show solution_</summary>
+<p>
+
+```{r}
+ggplot(data = summary_scrap, aes(reorder(items, max_price), max_price)) +
+  geom_col() +
+  coord_flip()
+```
+
+</p></details>
+            

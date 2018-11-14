@@ -270,7 +270,7 @@ div.tocify {
 <div id="a-new-day" class="section level1">
 <h1><span class="header-section-number">1</span> | A new day</h1>
 <hr>
-<p>Welcome to Jakku! You’ve just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. And Rey needs some parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar and track down the parts we need.</p>
+<p>Welcome to Jakku! You’ve arrived just in time. The Junk boss Unkar is being an awful meany-pants and has started skimping on rations. And Rey needs some parts to build a star ship to escape Jakku and fight with the New Republic. Luckily for us, BB8 was able snag a transfer log from Unkar’s droid showing all of his recent shipments. Let’s power on our Datapad and see if we can’t make some trouble for Unkar and track down the parts we need.</p>
 <p><br></p>
 <p><strong>Start a new project</strong></p>
 <ul>
@@ -983,18 +983,145 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 <td align="left">Add new columns or update existing columns</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>group_by()</code></td>
-<td align="left">Split data into groups by values in a column</td>
-</tr>
-<tr class="even">
 <td align="left"><code>summarize()</code></td>
 <td align="left">Calculate a single summary for the entire table</td>
+</tr>
+<tr class="even">
+<td align="left"><code>group_by()</code></td>
+<td align="left">Split data into groups by values in a column</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div id="select" class="section level1">
-<h1><span class="header-section-number">7</span> | <code>select()</code></h1>
+<div id="porg-examples" class="section level1 tabset">
+<h1><span class="header-section-number">7</span> | Porg examples</h1>
+<div id="porgs" class="section level2 unnumbered">
+<h2><code>porgs</code></h2>
+<div class="figure">
+<img src="images/porgs/porgs_tbl.png" style="width: 85%;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+<div id="select" class="section level2 unnumbered">
+<h2><code>select</code></h2>
+<div class="figure">
+<img src="images/porgs/select.png" style="width: 65%;" />
+
+</div>
+<div class="figure">
+<img src="images/porgs/select_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" />
+
+</div>
+<p><br><br></p>
+<div class="figure">
+<img src="images/porgs/select_drop.png" style="width: 65%;" />
+
+</div>
+<div class="figure">
+<img src="images/porgs/select_drop_tbl.png" style="width: 80%; margin-left: 5%; margin-top: 12px;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+<div id="arrange" class="section level2 unnumbered">
+<h2><code>arrange</code></h2>
+<div class="figure">
+<img src="images/porgs/arrange.png" style="width: 65%;" />
+
+</div>
+<div class="figure">
+<img src="images/porgs/arrange_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" />
+
+</div>
+<p><br><br></p>
+<div class="figure">
+<img src="images/porgs/arrange_desc.png" style="width: 57%;" />
+
+</div>
+<div class="figure">
+<img src="images/porgs/arrange_tbl_desc.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+<div id="filter" class="section level2 unnumbered">
+<h2><code>filter</code></h2>
+<div class="figure">
+<img src="images/porgs/filter.png" style="width: 65%;" />
+
+</div>
+<div class="figure">
+<img src="images/porgs/filter_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" />
+
+</div>
+<p><br><br></p>
+<div class="figure">
+<img src="images/porgs/filter2.png" style="width: 75%;" />
+
+</div>
+<div class="figure">
+<img src="images/porgs/filter2_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+<div id="mutate" class="section level2 unnumbered">
+<h2><code>mutate</code></h2>
+<div class="figure">
+<img src="images/porgs/mutate.png" style="width: 77%;" />
+
+</div>
+<p><br></p>
+<div class="figure">
+<img src="images/porgs/mutate_tbl.png" style="width: 88%; margin-left: 4%; margin-top: 12px;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+<div id="summarize" class="section level2 unnumbered">
+<h2><code>summarize</code></h2>
+<div class="figure">
+<img src="images/porgs/summarize.png" style="width: 77%;" />
+
+</div>
+<p><br></p>
+<div class="figure">
+<img src="images/porgs/summarize_tbl.png" style="width: 88%; margin-left: 4%; margin-top: 12px;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+<div id="group_by" class="section level2 unnumbered">
+<h2><code>group_by</code></h2>
+<div class="figure">
+<img src="images/porgs/groupby.png" style="width: 77%;" />
+
+</div>
+<p><br></p>
+<div class="figure">
+<img src="images/porgs/groupby_tbl.png" style="width: 94%; margin-left: 2%; margin-top: 12px;" />
+
+</div>
+<br>
+<hr>
+<p><br></p>
+</div>
+</div>
+<div id="select-1" class="section level1">
+<h1><span class="header-section-number">8</span> | <code>select()</code></h1>
 <hr>
 <p>Use the <code>select()</code> function to:</p>
 <ul>
@@ -1083,8 +1210,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 ## # ... with 212 more rows</code></pre>
 </div>
 </div>
-<div id="arrange" class="section level1">
-<h1><span class="header-section-number">8</span> | <code>arrange()</code></h1>
+<div id="arrange-1" class="section level1">
+<h1><span class="header-section-number">9</span> | <code>arrange()</code></h1>
 <hr>
 <p>That’s helpful, but Rey wants to know what the highest priced Salvage items are. Use <code>arrange()</code> to find the origin city with the most highest priced Salvage item.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># find the least expensive Salvage items</span>
@@ -1142,8 +1269,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 </div>
 </div>
 </div>
-<div id="filter" class="section level1">
-<h1><span class="header-section-number">9</span> | <code>filter()</code></h1>
+<div id="filter-1" class="section level1">
+<h1><span class="header-section-number">10</span> | <code>filter()</code></h1>
 <hr>
 <p>The <code>filter()</code> function creates a subset of the data based on the value of one or more columns. Let’s take a look at the “All” category records.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(scrap, Origin <span class="op">==</span><span class="st"> &quot;All&quot;</span>)</code></pre></div>
@@ -1155,7 +1282,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 </blockquote>
 </div>
 <div id="comparisons" class="section level2">
-<h2><span class="header-section-number">9.1</span> Comparisons</h2>
+<h2><span class="header-section-number">10.1</span> Comparisons</h2>
 <hr>
 <p>To use filtering effectively you will want to know how to select observations using various comparison operators.</p>
 <p><br></p>
@@ -1225,7 +1352,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <p>There is still an issue with the data. The item “tons” is written two ways. This happens when multiple field technicians collect data! We will deal with this a bit later.</p>
 </div>
 <div id="multiple-filters" class="section level2">
-<h2><span class="header-section-number">9.2</span> Multiple filters</h2>
+<h2><span class="header-section-number">10.2</span> Multiple filters</h2>
 <hr>
 <p>We can add multiple comparisons to <code>filter()</code> to further restrict the data we pull from a larger data set. Only the records that pass the conditions of all the comparisons will be pulled into the new data frame.</p>
 <p>The code below filters the data to only scrap records originating in the <code>Outskirts</code> <strong>AND</strong> destined for <code>Niima Outpost</code>.</p>
@@ -1280,7 +1407,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 </div>
 </div>
 <div id="update-from-bb8" class="section level1">
-<h1><span class="header-section-number">10</span> | Update from BB8!</h1>
+<h1><span class="header-section-number">11</span> | Update from BB8!</h1>
 <hr>
 <div class="figure">
 <img src="images/rey_bb8.jpg" align="right" style="margin-top: 0px; margin-left: 15px; margin-right: 0px;" width="276" />
@@ -1313,7 +1440,7 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(file_path)<
 </div>
 </div>
 <div id="glimpse" class="section level1">
-<h1><span class="header-section-number">11</span> | <code>glimpse()</code></h1>
+<h1><span class="header-section-number">12</span> | <code>glimpse()</code></h1>
 <hr>
 <p>Take a minute to look at the full scrap transfer data. An R function called <em>glimpse()</em> is a good place to start.</p>
 <p><br></p>
@@ -1393,7 +1520,7 @@ my_scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(my_scrap,
 </div>
 </div>
 <div id="shutdown-complete" class="section level1">
-<h1><span class="header-section-number">12</span> | Shutdown complete</h1>
+<h1><span class="header-section-number">13</span> | Shutdown complete</h1>
 <p>When you close RStudio it will ask you about saving your <em>workspace</em> and other files. This can get tiresome after awhile. Follow the steps below to set these options once and for always.</p>
 <p>Turn off <strong>“Save Workspace”</strong></p>
 <ul>

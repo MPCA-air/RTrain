@@ -1,0 +1,107 @@
+---
+title: "R Training | Grand Moff - Analysis Outline"
+output: 
+  html_document:
+    toc: false
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    number_sections: false
+    self_contained: false
+    fontsize: 18pt
+    monofont: Source Code Pro
+    monofontoptions: Scale = 1.4
+---
+
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, eval = FALSE)
+knitr::opts_chunk$set(fig.width = 11, fig.height = 6) 
+```
+
+
+## Create a new project
+
+## Open a new R script
+
+Create a `data` folder in your project directory and save your data into the folder
+
+### 1. Read the data into R
+```{r data}
+library(readr)
+
+#Below is an example of reading in a .csv file
+air_data <- read_csv("data/OZONE_samples.csv")
+```
+
+### 2. Plot the data
+```{r view, message = F, fig.width=12, fig.height=4}
+library(ggplot2)
+
+#Remember the ggplot sandwich!
+ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
+    geom_point(alpha = 0.2) +
+    geom_smooth(method = "lm")
+```
+
+
+### 3. Clean the data
+```{r clean}
+library(dplyr)
+
+# Examples of common issues are below
+# Drop values out of range
+air_data <- air_data %>% filter(OZONE > 0, TEMP_F < 199) 
+
+# Convert all samples to PPB
+air_data <- air_data %>% 
+            mutate(OZONE = ifelse(UNITS == "PPM", OZONE * 1000, 
+                                  OZONE)) 
+```
+
+
+
+### 4. View the data from different cuts (i.e by categories, or subsections)
+```{r, fig.width=12, fig.height=4}
+
+# If we facet the data by Site, we can eliminate the noise caused from different sites to gain a better understanding of the relationship
+ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
+    geom_point(alpha = 0.2, size = 3) +
+    geom_smooth(method = "lm") + 
+    facet_wrap(~SITE) +
+    labs(title = "Ozone increases with temperature", 
+         subtitle = "Observations from 2015-2017")
+```
+
+
+### 5. Summarize the data
+```{r summary}
+air_data <- air_data %>% 
+            group_by(SITE, YEAR) %>% 
+            summarize(AVG_OZONE = mean(OZONE) %>% round(2),
+                      AVG_TEMP  = mean(TEMP_F) %>% round(2))
+```
+
+###  6. Save the results
+
+__Save the final data table__
+```{r save-csv}
+air_data %>% write_csv("results/2015-17_ozone_summary.csv")
+```
+
+
+<br>
+
+__Save the site plot__
+```{r save-ch, message=F}
+ggsave("results/2015-2017 - Ozone vs Temp.pdf")
+```
+
+
+
+### 7. Share it with the world
+
+E-mail your script to all of your colleagues, and then create a github account [here](https://github.com/) to share you work with all the R data enthusiasts. 
+

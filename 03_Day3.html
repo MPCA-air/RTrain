@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R Training | Day 3</title>
+
+<script src="03_Day3_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="03_Day3_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="03_Day3_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="03_Day3_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="03_Day3_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="03_Day3_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="03_Day3_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="03_Day3_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="03_Day3_files/navigation-1.1/tabsets.js"></script>
+<link href="03_Day3_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="03_Day3_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="03_Day3_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="css\camp_style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R Training | Day 3</h1>
+
+</div>
+
+
+<div id="welcome-back-jedis" class="section level1 unnumbered">
+<h1>Welcome back, Jedis!</h1>
+<hr>
+<div class="figure">
+<img src="images/day3_sq.png" style="float: left; margin-right: 60px; margin-top: -10px;" width="260" />
+
+</div>
+<p><br><br></p>
+<div id="please-connect-to-your-droid" class="section level3 unnumbered">
+<h3>Please connect to your droid</h3>
+<ul>
+<li>Open the <strong>Start menu</strong> (<em>Click the Windows logo on the bottom left of the screen</em>)</li>
+<li>Select <code>Remote Desktop Connection</code></li>
+<li>Enter <code>w7-your7digit#</code> or <code>R32-your7digit#</code></li>
+<li>Press <em>Connect</em></li>
+</ul>
+<p><br></p>
+<p><strong>Open your RStudio project</strong></p>
+<ul>
+<li><strong>Open</strong> your project folder from last week</li>
+<li>Double click the <strong>.Rproj</strong> file to open RStudio</li>
+<li>Relax…</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="review" class="section level1">
+<h1><span class="header-section-number">1</span> | Review</h1>
+<p>The script below loads the scrap data from the X-drive, cleans the data to make it easier to use, and then saves the new table as a CSV file. Feel free to review to see what we did and copy any helpful snippets.</p>
+<details> <summary class = "btn_code_blue"> Show script </summary>
+<p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<span class="kw">library</span>(dplyr)
+
+<span class="co"># Read the original scrap data</span>
+scrap_full &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars//data/starwars_scrap_jakku_full.csv&quot;</span>)
+
+<span class="co"># Change column names and units to all lowercase letters</span>
+scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">rename_all</span>(tolower) 
+
+<span class="co"># Convert all units to lowercase to make &quot;tons&quot; consistent</span>
+scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">units =</span> <span class="kw">tolower</span>(units))
+
+<span class="co"># Read in the conversion data</span>
+convert &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/conversion_table.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">             </span><span class="kw">select</span>(<span class="op">-</span>units)
+
+<span class="co"># Join conversion table</span>
+scrap_full &lt;-<span class="st"> </span><span class="kw">left_join</span>(scrap_full, convert, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;salvage&quot;</span> =<span class="st"> &quot;item&quot;</span>))
+
+<span class="co"># Add total price column and clean up names</span>
+scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">amount_tons =</span> <span class="kw">ifelse</span>(units <span class="op">==</span><span class="st"> &#39;tons&#39;</span>, amount, amount <span class="op">*</span><span class="st"> </span>pounds <span class="op">/</span><span class="st"> </span><span class="dv">2000</span>),
+                       <span class="dt">total_price =</span> amount_tons <span class="op">*</span><span class="st"> </span>price_per_ton) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">filter</span>(origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">select</span>(<span class="op">-</span>pounds, <span class="op">-</span>units, <span class="op">-</span>amount) <span class="op">%&gt;%</span>
+<span class="st">                </span><span class="kw">rename</span>(<span class="dt">items       =</span> salvage, 
+                       <span class="dt">destination =</span> dest)
+
+<span class="co"># Drop all capital letters for easy typing</span>
+scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">items        =</span> <span class="kw">tolower</span>(items),
+                       <span class="dt">origin       =</span> <span class="kw">tolower</span>(origin),
+                       <span class="dt">destination  =</span> <span class="kw">tolower</span>(destination))
+
+
+<span class="co"># Save data back to X-drive as CSV </span>
+<span class="kw">write_csv</span>(scrap_full, <span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_cleaned.csv&quot;</span>)</code></pre></div>
+<p><br></p>
+</p>
+<p></details></p>
+</div>
+<div id="read-cleaned-scrap-data" class="section level1">
+<h1><span class="header-section-number">2</span> | Read cleaned scrap data</h1>
+<p>Today we’ll read data from the <code>X-drive</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load packages</span>
+<span class="kw">library</span>(readr)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(ggplot2)
+
+<span class="co"># Read cleaned scrap data</span>
+clean_data  &lt;-<span class="st">  </span><span class="kw">read_csv</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_clean.csv&quot;</span>)
+
+<span class="co"># Get to know the data</span>
+<span class="kw">names</span>(clean_data)</code></pre></div>
+<pre><code>## [1] &quot;items&quot;         &quot;origin&quot;        &quot;destination&quot;   &quot;price_per_ton&quot;
+## [5] &quot;amount_tons&quot;   &quot;total_price&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(clean_data)</code></pre></div>
+<pre><code>## Observations: 573
+## Variables: 6
+## $ items         &lt;chr&gt; &quot;electrotelescope&quot;, &quot;atmospheric thrusters&quot;, &quot;bu...
+## $ origin        &lt;chr&gt; &quot;outskirts&quot;, &quot;cratertown&quot;, &quot;cratertown&quot;, &quot;blowba...
+## $ destination   &lt;chr&gt; &quot;trade caravan&quot;, &quot;niima outpost&quot;, &quot;raiders&quot;, &quot;tr...
+## $ price_per_ton &lt;dbl&gt; 849.79, 56.21, 1004.83, 597.85, 590.93, 1229.03,...
+## $ amount_tons   &lt;dbl&gt; 868.4280, 33978.1545, 644.7285, 1960.6650, 887.0...
+## $ total_price   &lt;dbl&gt; 737981.43, 1909912.06, 647842.54, 1172183.57, 52...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(clean_data)</code></pre></div>
+<pre><code>##     items              origin          destination       
+##  Length:573         Length:573         Length:573        
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
+##  price_per_ton      amount_tons        total_price      
+##  Min.   :  29.15   Min.   :    0.01   Min.   :       5  
+##  1st Qu.: 314.23   1st Qu.:  238.99   1st Qu.:  128921  
+##  Median : 629.28   Median : 1298.00   Median :  757656  
+##  Mean   :1010.85   Mean   : 3724.23   Mean   : 3483802  
+##  3rd Qu.:1329.05   3rd Qu.: 4678.44   3rd Qu.: 2631778  
+##  Max.   :7211.01   Max.   :60116.67   Max.   :83712615</code></pre>
+</div>
+<div id="ggplot" class="section level1">
+<h1><span class="header-section-number">3</span> | <code>ggplot()</code></h1>
+<hr>
+<p>Diving deeper into making plots.</p>
+<div id="the-ggplot-sandwich" class="section level2 unnumbered">
+<h2>The <code>ggplot()</code> sandwich</h2>
+<hr>
+<div class="figure">
+<img src="images/auto_plot.gif" style="margin-top: -22px; max-width: 108%;" />
+
+</div>
+<p><span class="h6" style="font-size: 28px; font-weight: bold;"> The 3 ingredients in a <code>ggplot</code> </span></p>
+<p><br></p>
+<div id="the-base-plot" class="section level3 unnumbered">
+<h3>1. The base plot</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-2-1.png" width="1056" /></p>
+<p><br></p>
+<p>Remember to load the package!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<p><br></p>
+</div>
+<div id="the-the-x-y-aesthetics" class="section level3 unnumbered">
+<h3>2. The the X, Y <em>aesthetics</em></h3>
+<p>The <em>aesthetics</em> assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) </code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-4-1.png" width="1056" /></p>
+</div>
+<div id="the-layers-or-geometries" class="section level3 unnumbered">
+<h3>3. The layers or <em>geometries</em></h3>
+<p>The geometries (abbreviated geom) are the things that actually fill the space. They are based on the aesthetics you provide in the <code>ggplot()</code> call by default; however, you can provide different aesthetics for each geometry if you need to.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-5-1.png" width="1056" /></p>
+<p><br><br></p>
+</div>
+<div id="pro-tip" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p>When you add more layers using <code>+</code> remember to place it at the end of each line.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This will work</span>
+<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()
+
+<span class="co"># So will this</span>
+<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+
+<span class="co"># But this won&#39;t</span>
+<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price))
+  <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+</div>
+</div>
+<div id="colors" class="section level2 unnumbered">
+<h2>Colors</h2>
+<hr>
+<p>Now let’s use color to show the destinations of the scrap</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">color =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-7-1.png" width="1056" /></p>
+<p><br></p>
+<div id="pro-tip-1" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p>An easy way to experiment with colors is to add layers like <code>scale_fill_brewer</code> or <code>scale_colour_brewer</code> to your plot which will link to RcolorBrewer palettes so you can have accessible color schemes.</p>
+</blockquote>
+<p><br></p>
+</div>
+</div>
+<div id="bar-charts" class="section level2 unnumbered">
+<h2>Bar charts</h2>
+<p>This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand. Note that we use fill in aes() instead of color. If we used color, we’d get a colorful outline and grey (or is it gray?) bars.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-8-1.png" width="1056" /></p>
+<p><br></p>
+<p>What if we want to make it easier to compare sales by destination for each origin? Let’s change the position of the bars. Remember, you can use <code>help(geom_col)</code> to learn about different options for the function. You can do the same with any other <code>ggplot2</code> function.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-9-1.png" width="1056" /></p>
+<p><br></p>
+</div>
+<div id="facet-wrap" class="section level2 unnumbered">
+<h2>Facet wrap</h2>
+<p>What if we want to make the chart less crowded? Let’s use the <code>facet wrap</code> function to put each origin on a separate chart.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-10-1.png" width="1056" /></p>
+<p><br></p>
+</div>
+<div id="themes" class="section level2 unnumbered">
+<h2>Themes</h2>
+<p>You may not like the appearance of these plots. <code>ggplot2</code> uses <code>theme</code> functions to change the appearance of a plot. Try some different themes out.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-11-1.png" width="1056" /></p>
+<p><br></p>
+</div>
+<div id="labels" class="section level2 unnumbered">
+<h2>Labels</h2>
+<p>You can also change the axis and title labels using the <code>labs</code> function</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Scrap sales by origin and destination&quot;</span>, 
+       <span class="dt">x     =</span> <span class="st">&quot;Origin&quot;</span>, 
+       <span class="dt">y     =</span> <span class="st">&quot;Total sales&quot;</span>)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-12-1.png" width="1056" /></p>
+<p><br></p>
+</div>
+<div id="drop-scientific-notation" class="section level2 unnumbered">
+<h2>Drop scientific notation</h2>
+<p>What if we want to get rid of that ugly scientific notation? We can use <code>options(scipen = 999)</code>. Note that this is a general setting in R and not part of the ggplot. Once you use <code>options(scipen = 999)</code> in your current session, you don’t have to use it again (like loading a package, you need to run the line each time you start a new R session).</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>)
+
+<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Scrap sales by origin and destination&quot;</span>, 
+       <span class="dt">x     =</span> <span class="st">&quot;Origin&quot;</span>, 
+       <span class="dt">y     =</span> <span class="st">&quot;Total sales $$&quot;</span>)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-13-1.png" width="1056" /></p>
+<p><br></p>
+<p>What if we don’t like the zeros and want the labels in millions? Any ideas?</p>
+<p><br><br></p>
+<div id="exercise" class="section level4 unnumbered">
+<h4><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<p>We’ve covered how to do a scatterplot with <code>geom_point</code> and a bar chart with <code>geom_col</code>, but now we want to do a boxplot of the total price for each destination. But we’re not telling you which function to use. You’re on your own here. Feel free to add colors ,<code>facet_wrap</code>, <code>theme</code>, and <code>labs</code> to your boxplots. May the force be with you.</p>
+<p><br></p>
+</div>
+</div>
+<div id="save-plots" class="section level2 unnumbered">
+<h2>Save plots</h2>
+<p>You’ve (hopefully) had fun making all of these plots, so let’s learn to save them so we can cherish them forever. There’s a function called <code>ggsave</code> to do just that. How do we <code>ggsave</code> our plots? HELP! (no really, we can type <code>help(ggsave)</code>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get help</span>
+<span class="kw">help</span>(ggsave)
+?ggsave
+
+<span class="co"># Copy and paste the r code of your favorite plot here</span>
+<span class="kw">ggplot</span>(data, <span class="kw">aes</span>()) <span class="op">+</span>
+<span class="st">   </span>.... <span class="op">+</span>
+<span class="st">   </span>....
+
+
+<span class="co"># Save your plot to a png file of your choosing</span>
+<span class="kw">ggsave</span>(<span class="st">&quot;your_results_folder/plot_name.png&quot;</span>)</code></pre></div>
+<p><br></p>
+<div id="pro-tip-2" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<blockquote>
+<p>What if you don’t want to save just the last plot you’ve made? Instead, you want to make a plot and save it for later.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The ggplot you want to save</span>
+my_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(...)
+  
+<span class="co"># The name of the file the chart will be saved to.</span>
+where_to_save_it &lt;-<span class="st"> &quot;___.png&quot;</span>
+
+<span class="co"># Save it!</span>
+<span class="kw">ggsave</span>(<span class="dt">filename =</span> where_to_save_it, <span class="dt">plot =</span> my_plot)</code></pre></div>
+<p><br></p>
+<p>In a future workshops we’ll show how to create a ton of plots at once and save them all in a folder so you’ll be able to generate a giant PDF book of all your beautiful plots. You could even make it into a book for your coffee table.</p>
+<p><em>Learn more about saving plots:</em> <a href="http://stat545.com/block017_write-figure-to-file.html">http://stat545.com/</a></p>
+</div>
+</div>
+</div>
+<div id="glossary" class="section level1">
+<h1><span class="header-section-number">4</span> | Glossary</h1>
+<p><strong>Table of <code>aesthetics</code></strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">aes()</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>x =</code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>y =</code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>alpha =</code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>fill =</code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>color =</code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code>size =</code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>linetype =</code></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><strong>Table of <code>geoms</code></strong></p>
+<div class="figure">
+<img src="images/geoms_1var.png" />
+
+</div>
+<div class="figure">
+<img src="images/geoms_diagram.png" />
+
+</div>
+<p><br></p>
+<p><strong>Table of <code>themes</code></strong></p>
+<p>You can customize the look of your plot by adding a <code>theme()</code> function.</p>
+<div class="figure">
+<img src="images/ggplot_themes.png" />
+
+</div>
+</div>
+<div id="questions" class="section level1">
+<h1><span class="header-section-number">5</span> | Questions</h1>
+<div style="font-size: 15px;">
+<ul>
+<li>How to modify the gridlines behind your chart?
+<ul>
+<li>Try the different themes at the end of this lesson: <code>theme_light()</code> or <code>theme_bw()</code>.</li>
+<li>Or modify the color and size with <code>theme(panel.grid.minor = element_line(colour = &quot;white&quot;, size = 0.5))</code>.</li>
+<li>There’s even <code>theme_excel()</code></li>
+</ul></li>
+<li>How do you set the x and y scale manually?
+<ul>
+<li>Here is an example with a scatter plot: <code>ggplot() + geom_point() + xlim(beginning, end) + ylim(beginning, end)</code></li>
+<li><strong>Warning:</strong> Values above or below the limits you set will not be shown. This is another great way to lie with data.</li>
+</ul></li>
+<li>How do you get rid of the legend if you don’t need it?
+<ul>
+<li><code>geom_point(aes(color = facility_name), show.legend = FALSE)</code></li>
+<li>The R cookbook shows a number of ways to get rid of legends: <a href="http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/" class="uri">http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/</a></li>
+</ul></li>
+<li>I only like dashed lines. How do you change the linetype to a <em>dashed</em> line?
+<ul>
+<li><code>geom_line(aes(color = facility_name), linetype = &quot;dashed&quot;)</code></li>
+<li>You should also try <code>&quot;dotted&quot;</code> and <code>&quot;dotdash&quot;</code>, or maybe<code>&quot;twodash&quot;</code> if you really want to go wild. -How many colors are there in R? How does R know <code>hotpink</code> is a color?</li>
+<li>There is an R color cheatsheet: <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf" class="uri">https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf</a></li>
+<li>As well as some basic color names here: <a href="http://www.r-graph-gallery.com/42-colors-names/" class="uri">http://www.r-graph-gallery.com/42-colors-names/</a></li>
+<li><code>library(viridis)</code> provides some great default color palettes for charts and maps.</li>
+<li>This web tool will give you palette ideas and color Hex numbers: <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3" class="uri">http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</a></li>
+</ul></li>
+<li>What are some handy keyboard shortcuts in R? How do I find them?
+<ul>
+<li>There is a shortcut cheat sheet online: <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf</a></li>
+<li>Or in RStudio, you can go to <em>Help</em> &gt; <em>Keyboard Shortcuts Help</em></li>
+</ul></li>
+</ul>
+</div>
+<p><br></p>
+</div>
+<div id="your-turn" class="section level1">
+<h1><span class="header-section-number">6</span> | Your turn</h1>
+<hr>
+<div id="working-your-way-up" class="section level2 unnumbered">
+<h2>Working your way up</h2>
+<p>Let’s start applying what we’ve learned to new data. When you’re ready to earn Grand Molf status, explore some of your own data to create a summary from scratch.</p>
+<div class="row3" style="margin-top: 20px;">
+<div class="column3">
+<span style="margin-left: 0;"> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <strong>ENSIGN</strong> </span>
+</div>
+<div class="column3">
+<span style="margin-left: 0;"> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <strong>COMMODORE</strong> </span>
+</div>
+<div class="column3">
+<span style="margin-left: 0;"><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <strong>GRAND MOFF</strong> </span>
+</div>
+</div>
+<div class="row3">
+<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
+<p><a href="Example_Data_ensign_level.html"><img src="images/jakku_sq.PNG" width="250"></a></p>
+</div>
+<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
+<p><a href="porg_exposure.html"><img src="images/fly_porgs_sq.jpg" width="250"></a></p>
+</div>
+<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
+<p><a href="example_outline.html"><img src="images/death_star_sq.PNG" width="250"></a></p>
+</div>
+</div>
+<div class="row3" style="margin-top: 22px;">
+<div class="column3">
+<p>Explore the scrap and salvage economy on Jakku.</p>
+<p>Media: <code>solid waste</code><br />
+Planet: <code>Jakku</code></p>
+</div>
+<div class="column3">
+<p>Study the effects of jet-fuel on Porg reflexes.</p>
+<p>Media: <code>biological</code><br />
+Planet: <code>Ahch-To</code></p>
+</div>
+<div class="column3">
+<p>Travel back to Earth to discover your own data set.</p>
+<p>Media: <code>all</code><br />
+Planet: <code>Earth</code></p>
+</div>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="return-to-rcamp" class="section level1 unnumbered">
+<h1>Return to <a href="index.html">RCamp</a></h1>
+<p><br></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
