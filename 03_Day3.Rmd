@@ -407,7 +407,7 @@ You can customize the look of your plot by adding a `theme()` function.
 #| Questions 
 
 
-<div style="font-size: 15px;">
+<div style="font-size: 16px;">
 
 - How to modify the gridlines behind your chart?
     - Try the different themes at the end of this lesson: `theme_light()` or `theme_bw()`.
@@ -421,8 +421,10 @@ You can customize the look of your plot by adding a `theme()` function.
     - The R cookbook shows a number of ways to get rid of legends: http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/
 - I only like dashed lines. How do you change the linetype to a _dashed_ line? 
     - `geom_line(aes(color = facility_name), linetype = "dashed")`
-    - You should also try `"dotted"` and `"dotdash"`, or maybe`"twodash"` if you really want to go wild.
--How many colors are there in R? How does R know `hotpink` is a color?
+    - You should also try `"dotted"` and `"dotdash"`, or maybe`"twodash"`
+  
+  
+- How many colors are there in R? How does R know `hotpink` is a color?
     - There is an R color cheatsheet: https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf 
     - As well as some basic color names here: http://www.r-graph-gallery.com/42-colors-names/
     - `library(viridis)` provides some great default color palettes for charts and maps.
@@ -433,7 +435,6 @@ You can customize the look of your plot by adding a `theme()` function.
 
 </div>
 
-<br>
 
 #| Your turn
 <hr>
@@ -443,15 +444,15 @@ Let's start applying what we've learned. Choose one of the paths below to put yo
 
 <div class="row3" style = "margin-top: 20px;">
 
-<div class="column3"><span style="margin-left: 0;">
+<div class="column3"><span style="margin-left: 2px;">
 <a href="Example_Data_ensign_level.html"> __ENSIGN__ </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
 </span></div> 
 
-<div class="column3"> <span style="margin-left: 0;">
+<div class="column3"> <span style="margin-left: 2px;">
 <a href="porg_exposure.html"> __COMMODORE__ </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
 </span></div> 
 
-<div class="column3"> <span style="margin-left: 0;">
+<div class="column3"> <span style="margin-left: 2px;">
 <a href="example_outline.html"> __GRAND MOFF__ </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
 </span></div>
 </div>
