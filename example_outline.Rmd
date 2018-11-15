@@ -1,5 +1,5 @@
 ---
-title: "R Training | Grand Moff - Analysis Outline"
+title: "R Training | Analysis Outline"
 output: 
   html_document:
     toc: false
@@ -15,25 +15,46 @@ output:
     monofontoptions: Scale = 1.4
 ---
 
-
 ```{r setup, include=F}
 knitr::opts_chunk$set(echo = TRUE, warning = F, message = F, eval = FALSE)
 knitr::opts_chunk$set(fig.width = 11, fig.height = 6) 
 ```
 
 
-## Create a new project
+You're ready to blast off on your own. The example outline below includes some __placeholder__ code based on ozone measurements and is presented as a helpful starting point for your analysis. The script snippets will not run successfully as is. They will need to be updated with the name of your own dataframe and its specific column names.
 
-## Open a new R script
+_Good luck!_
 
-Create a `data` folder in your project directory and save your data into the folder
+## Set up your project
+<hr>
 
-### 1. Read the data into R
+- Open a new project
+- Open a new R script
+- Create a `data` folder in your project directory 
+- Copy your data into the folder
+
+## Begin your analysis
+<hr>
+
+<br>
+
+### 1. Read data into R
 ```{r data}
 library(readr)
 
-#Below is an example of reading in a .csv file
+# Read in a CSV file
 air_data <- read_csv("data/OZONE_samples.csv")
+
+
+# Have an EXCEL file?
+## You can use read_excel() from the readxl package
+install.packages(readxl)
+
+library(readxl)
+
+# Read in EXCEL file
+air_data <- read_excel("data/OZONE_samples.xlsx")
+
 ```
 
 ### 2. Plot the data
@@ -51,27 +72,37 @@ ggplot(air_data, aes(x = TEMP_F, y = OZONE)) +
 ```{r clean}
 library(dplyr)
 
-# Examples of common issues are below
-# Drop values out of range
+# Examples of common issues 
+
+## Drop values out of range
 air_data <- air_data %>% filter(OZONE > 0, TEMP_F < 199) 
 
-# Convert all samples to PPB
+## Convert all samples to PPB
 air_data <- air_data %>% 
             mutate(OZONE = ifelse(UNITS == "PPM", OZONE * 1000, 
                                   OZONE)) 
 ```
 
 
+### 4. View the data again
 
-### 4. View the data from different cuts (i.e by categories, or subsections)
-```{r, fig.width=12, fig.height=4}
+Look at the data from different angles (e.g. by category, site, County, or facility). 
 
-# If we facet the data by Site, we can eliminate the noise caused from different sites to gain a better understanding of the relationship
+- The plotting function `facet_wrap()` is great for this.
+
+```{r}
+#
+# Are some sites different?  
+#
+# We can facet the data by 'Site' to eliminate any noise 
+# caused by mixing data from different sites, and learn 
+# if the pattern between ozone and temperature varies.
+
 ggplot(air_data, aes(x = TEMP_F, y = OZONE)) + 
     geom_point(alpha = 0.2, size = 3) +
     geom_smooth(method = "lm") + 
     facet_wrap(~SITE) +
-    labs(title = "Ozone increases with temperature", 
+    labs(title    = "Ozone increases with temperature", 
          subtitle = "Observations from 2015-2017")
 ```
 
@@ -84,6 +115,7 @@ air_data <- air_data %>%
                       AVG_TEMP  = mean(TEMP_F) %>% round(2))
 ```
 
+
 ###  6. Save the results
 
 __Save the final data table__
@@ -94,7 +126,7 @@ air_data %>% write_csv("results/2015-17_ozone_summary.csv")
 
 <br>
 
-__Save the site plot__
+__Save the plots__
 ```{r save-ch, message=F}
 ggsave("results/2015-2017 - Ozone vs Temp.pdf")
 ```
@@ -103,5 +135,10 @@ ggsave("results/2015-2017 - Ozone vs Temp.pdf")
 
 ### 7. Share it with the world
 
-E-mail your script to all of your colleagues, and then create a github account [here](https://github.com/) to share you work with all the R data enthusiasts. 
+E-mail your script to all of your colleagues and create a github account [here](https://github.com/) to share your work with other R enthusiasts. 
+
+
+## Congrats!!
+
+<br><br>
 

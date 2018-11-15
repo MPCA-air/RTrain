@@ -438,24 +438,21 @@ You can customize the look of your plot by adding a `theme()` function.
 #| Your turn
 <hr>
 
-## Working your way up {-}
+Let's start applying what we've learned. Choose one of the paths below to put your new hard-earned R skills to use. When you're feeling ready, choose the Grand Moff path and begin exploring some of your own data. 
 
-Let's start applying what we've learned to new data. When you're ready to earn Grand Molf status, explore some of your own data to create a summary from scratch. 
 
 <div class="row3" style = "margin-top: 20px;">
 
 <div class="column3"><span style="margin-left: 0;">
-<i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
-__ENSIGN__ 
+<a href="Example_Data_ensign_level.html"> __ENSIGN__ </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
 </span></div> 
 
 <div class="column3"> <span style="margin-left: 0;">
-<i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
-__COMMODORE__ 
+<a href="porg_exposure.html"> __COMMODORE__ </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
 </span></div> 
 
-<div class="column3"> <span style="margin-left: 0;"><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
-__GRAND MOFF__ 
+<div class="column3"> <span style="margin-left: 0;">
+<a href="example_outline.html"> __GRAND MOFF__ </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> 
 </span></div>
 </div>
 

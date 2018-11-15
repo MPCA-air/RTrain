@@ -10,9 +10,9 @@ output:
     css: css/camp_style.css
     number_sections: true
     self_contained: false
-fontsize: 18pt
-monofont: Source Code Pro
-monofontoptions: Scale = 1.4
+    fontsize: 18pt
+    monofont: Source Code Pro
+    monofontoptions: Scale = 1.4
 ---
 
 ```{r setup, include=FALSE}
