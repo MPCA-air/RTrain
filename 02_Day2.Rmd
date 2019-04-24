@@ -1091,7 +1091,7 @@ mag_endor <- mutate(mag_endor, day = wday(date, label = TRUE), month = month(dat
 
 
 ```{r, calendar_year, fig.width=13, fig.height=7, out.width=1000}
-ggplot(mag_endor, aes(day, reorder(month_text, -month), fill = Result)) +
+ggplot(mag_endor, aes(date, reorder(month_text, -month), fill = Result)) +
   geom_tile(color = "gray") +
   facet_wrap(~year) +
   geom_label(aes(label = mday(date)), colour = "white", size = 8) +

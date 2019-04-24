@@ -457,34 +457,34 @@ air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cl
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left">27-137-7001</td>
+<td align="left">2017-09-12</td>
+<td align="right">9</td>
+<td align="right">48.8</td>
+</tr>
+<tr class="even">
 <td align="left">27-137-7554</td>
-<td align="left">2018-09-04</td>
+<td align="left">2016-08-09</td>
+<td align="right">22</td>
+<td align="right">75.2</td>
+</tr>
+<tr class="odd">
+<td align="left">27-137-7554</td>
+<td align="left">2016-10-15</td>
+<td align="right">11</td>
+<td align="right">57.2</td>
+</tr>
+<tr class="even">
+<td align="left">27-137-7554</td>
+<td align="left">2016-10-09</td>
 <td align="right">7</td>
-<td align="right">72.8</td>
-</tr>
-<tr class="even">
-<td align="left">27-137-7554</td>
-<td align="left">2018-06-17</td>
-<td align="right">12</td>
-<td align="right">80.0</td>
+<td align="right">47.6</td>
 </tr>
 <tr class="odd">
 <td align="left">27-137-7554</td>
-<td align="left">2017-05-26</td>
-<td align="right">31</td>
-<td align="right">83.0</td>
-</tr>
-<tr class="even">
-<td align="left">27-137-7001</td>
-<td align="left">2016-04-10</td>
-<td align="right">16</td>
-<td align="right">51.2</td>
-</tr>
-<tr class="odd">
-<td align="left">27-137-7001</td>
-<td align="left">2016-04-22</td>
-<td align="right">12</td>
-<td align="right">51.8</td>
+<td align="left">2018-10-31</td>
+<td align="right">3</td>
+<td align="right">37.4</td>
 </tr>
 </tbody>
 </table>
@@ -547,38 +547,38 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 <tr class="odd">
 <td align="left">27-137-7001</td>
 <td align="right">2016</td>
-<td align="right">11.47</td>
-<td align="right">61.02</td>
+<td align="right">11.31</td>
+<td align="right">60.60</td>
 </tr>
 <tr class="even">
 <td align="left">27-137-7001</td>
 <td align="right">2017</td>
-<td align="right">11.10</td>
-<td align="right">60.68</td>
+<td align="right">11.51</td>
+<td align="right">61.06</td>
 </tr>
 <tr class="odd">
 <td align="left">27-137-7001</td>
 <td align="right">2018</td>
-<td align="right">11.16</td>
-<td align="right">60.69</td>
+<td align="right">11.02</td>
+<td align="right">60.83</td>
 </tr>
 <tr class="even">
 <td align="left">27-137-7554</td>
 <td align="right">2016</td>
-<td align="right">12.20</td>
-<td align="right">61.11</td>
+<td align="right">12.27</td>
+<td align="right">61.13</td>
 </tr>
 <tr class="odd">
 <td align="left">27-137-7554</td>
 <td align="right">2017</td>
-<td align="right">12.08</td>
-<td align="right">61.13</td>
+<td align="right">12.80</td>
+<td align="right">61.10</td>
 </tr>
 <tr class="even">
 <td align="left">27-137-7554</td>
 <td align="right">2018</td>
-<td align="right">13.00</td>
-<td align="right">61.07</td>
+<td align="right">12.20</td>
+<td align="right">61.27</td>
 </tr>
 </tbody>
 </table>
@@ -1436,7 +1436,7 @@ mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor
 <p>Sometimes with air data we want to know if there is seasonality in the data, this is also true for magnetic storm data from Endor. Calendar plots are great for this. We will use <code>ggplot()</code> and bring out the <code>geom_tile()</code> to organize our data by dates and find when adn if that storm happened.</p>
 <p>First we will pull more information out of those dates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, <span class="dt">day =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>), <span class="dt">month =</span> <span class="kw">month</span>(date), <span class="dt">month_text =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>), <span class="dt">year =</span> <span class="kw">year</span>(date))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(day, <span class="kw">reorder</span>(month_text, <span class="op">-</span>month), <span class="dt">fill =</span> Result)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(date, <span class="kw">reorder</span>(month_text, <span class="op">-</span>month), <span class="dt">fill =</span> Result)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_tile</span>(<span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>year) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">mday</span>(date)), <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>) <span class="op">+</span>
