@@ -80,7 +80,7 @@ __Day 3__
     - Create a new project and R script
     - Install R packages
     - Create variables, lists, data frames
-1. __Read data__ into R.
+1. __Read data__ into R
     - Arrange, select and __filter__ data 
     - Look for errors and outliers
 1. Data transformations
@@ -144,7 +144,6 @@ Planets visited: `Ahch-To`
 <hr>
 
 Each of these workshops dives into more detail on a common data anlaysis task. 
-
 
 <div class="row3" style = "margin-top: 20px;">
 

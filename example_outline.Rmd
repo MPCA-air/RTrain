@@ -32,9 +32,17 @@ _Good luck!_
 - Open a new R script
 - Create a `data` folder in your project directory 
 - Copy your data into the folder
+- Open a new R script
 
 ## Begin your analysis
 <hr>
+
+If you'd like, you can try doing your analysis in an `Rmarkdown` document instead of an R script. Rmarkdown lets you add text and images to your analysis, as well as share your work as a Word document, a website, or even a PDF. Download a version of the analysis outline below can be downloaded here.
+
+
+<a href="https://itep-r.netlify.com/page/star_data/Rmarkdown_outline.Rmd">
+<span class = "btn_code_blue"> __DOWNLOAD__  </span></a> -  Rmarkdown Analysis Outline
+
 
 <br>
 

@@ -45,7 +45,7 @@ __Please connect to your droid__
 <br><br><br>
 
 
-# Good morning _Empire minions!_ 
+# Good morning! 
 <hr>
 
 <div class="row3">
@@ -76,8 +76,9 @@ We like __R__.
 
 We are not computer scientists. 
 
-Also, we make lots of mistakes. You will see us make mistakes. Feel free to laugh at us. It's okay. Really.
+We make lots of mistakes. You will see us make mistakes. Feel free to laugh at them. It's okay. Really.
 
+We aren't related.
 
 <br><br>
 
@@ -123,7 +124,7 @@ wordcloud2(data.frame(word = names, freq = frequency), size = 1, color = 'random
 ## Introductions {-}
 <hr>
 
-Let’s introduce ourselves and the data we love.
+Let’s introduce ourselves and the data we love or don't.
 
 <br>
 
@@ -135,7 +136,7 @@ Let’s introduce ourselves and the data we love.
 > - Your name  
 > - Your fave Star Wars character
 > - Type of data you have
-> - Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? __Hint!__ _This is something we can automate on the third day._ 
+> - Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? __Hint!__ _This is something we can automate._ 
 
 
 <br>
@@ -145,8 +146,6 @@ You are the all in this together. Use each other as a resource. Share ideas, sha
 <br>
 
 __Here's one:__  _What program do Jedi use to open PDF files?_
-
-
 
 <br>
 

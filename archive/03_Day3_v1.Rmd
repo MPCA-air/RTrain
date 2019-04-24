@@ -1,0 +1,510 @@
+---
+title: "R Training | Day 3"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    theme: readable
+    highlight: tango
+    css: css/camp_style.css
+    number_sections: true
+    self_contained: false
+    fontsize: 18pt
+    monofont: Source Code Pro
+    monofontoptions: Scale = 1.4
+---
+
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+knitr::opts_chunk$set(fig.width = 11, fig.height = 6) 
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+
+# Welcome back, Jedis! {-}
+<hr>
+
+![](images/day3_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -10px;"}
+
+<br><br>
+
+### Please connect to your droid {-}
+
+- Open the __Start menu__  (_Click the Windows logo on the bottom left of the screen_)
+- Select ` Remote Desktop Connection `
+- Enter ` w7-your7digit# ` or ` R32-your7digit# `
+- Press _Connect_
+
+<br>
+
+__Open your RStudio project__
+
+- __Open__ your project folder from last week
+- Double click the __.Rproj__ file to open RStudio
+
+<br>
+
+
+#| Review
+
+The script below loads the scrap data from the X-drive, cleans the data to make it easier to use, and then saves the new table as a CSV file. Feel free to review to see what we did and copy any helpful snippets.
+
+<details>
+<summary class = "btn_code_blue"> Show script </summary>
+<p>
+
+```{r clean-up-data, eval=F}
+library(readr)
+library(dplyr)
+
+# Read the original scrap data
+scrap_full <- read_csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars//data/starwars_scrap_jakku_full.csv")
+
+# Change column names and units to all lowercase letters
+scrap_full <- scrap_full %>% 
+                rename_all(tolower) 
+
+# Convert all units to lowercase to make "tons" consistent
+scrap_full <- scrap_full %>% 
+                mutate(units = tolower(units))
+
+# Read in the conversion data
+convert <- read_csv("https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/conversion_table.csv") %>% 
+             select(-units)
+
+# Join conversion table
+scrap_full <- left_join(scrap_full, convert, by = c("salvage" = "item"))
+
+# Add total price column and clean up names
+scrap_full <- scrap_full %>% 
+                mutate(amount_tons = ifelse(units == 'tons', amount, amount * pounds / 2000),
+                       total_price = amount_tons * price_per_ton) %>%
+                filter(origin != "All") %>%
+                select(-pounds, -units, -amount) %>%
+                rename(items       = salvage, 
+                       destination = dest)
+
+# Drop all capital letters for easy typing
+scrap_full <- scrap_full %>% 
+                mutate(items        = tolower(items),
+                       origin       = tolower(origin),
+                       destination  = tolower(destination))
+
+
+# Save data back to X-drive as CSV 
+write_csv(scrap_full, "X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_cleaned.csv")
+
+```
+
+<br>
+
+</p></details>
+
+
+
+#| Read cleaned scrap data
+
+Today we'll read data from the `X-drive`.
+
+```{r}
+# Load packages
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+# Read cleaned scrap data
+clean_data  <-  read_csv("X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_clean.csv")
+
+# Get to know the data
+names(clean_data)
+glimpse(clean_data)
+summary(clean_data)
+
+```
+
+
+
+#| `ggplot()`
+<hr>
+
+Diving deeper into making plots. 
+
+
+## The `ggplot()` sandwich {-}
+<hr>
+
+![](images/auto_plot.gif){style="margin-top: -22px; max-width: 108%;"}
+
+<span class="h6" style="font-size: 28px; font-weight: bold;"> The 3 ingredients in a `ggplot` </span>
+
+
+<br>
+
+### 1. The base plot {-}
+
+```{r}
+ggplot(clean_data)
+```
+
+<br>
+
+Remember to load the package!
+```{r, eavl=F}
+library(ggplot2)
+```
+
+<br>
+
+### 2. The the X, Y _aesthetics_  {-}
+
+The _aesthetics_ assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price)) 
+```
+
+
+### 3. The layers or _geometries_  {-}
+
+The geometries (abbreviated geom) are the things that actually fill the space. They are based on the aesthetics you provide in the `ggplot()` call by default; however, you can provide different aesthetics for each geometry if you need to.
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price)) +
+  geom_point()
+```
+
+<br><br>
+
+
+
+### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> When you add more layers using `+` remember to place it at the end of each line.
+
+```{r, eval=F}
+# This will work
+ggplot(clean_data, aes(x = origin, y = total_price)) +
+  geom_point()
+
+# So will this
+ggplot(clean_data, aes(x = origin, y = total_price)) + geom_point()
+
+# But this won't
+ggplot(clean_data, aes(x = origin, y = total_price))
+  + geom_point()
+
+```
+
+
+
+## Colors {-}
+<hr>
+
+
+Now let's use color to show the destinations of the scrap
+
+<br>
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price, color = destination)) +
+  geom_point()
+```
+
+<br>
+
+### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> An easy way to experiment with colors is to add layers like `scale_fill_brewer` or `scale_colour_brewer`
+to your plot which will link to RcolorBrewer palettes so you can have accessible color schemes.
+
+<br>
+
+## Bar charts {-}
+
+This is a too much detail. Let's make a bar chart and add up the sales to make it easier to understand. Note that we use fill in aes() instead of color. If we used color, we'd get a colorful outline and grey (or is it gray?) bars.
+
+<br>
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price, fill = destination)) +
+  geom_col()
+```
+
+<br>
+
+What if we want to make it easier to compare sales by destination for each origin? Let's change the position of the bars. Remember, you can use `help(geom_col)` to learn about different options for the function. You can do the same with any other `ggplot2` function.
+
+<br>
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price, fill = destination)) +
+  geom_col(position = "dodge")
+```
+
+<br>
+
+## Facet wrap {-}
+
+What if we want to make the chart less crowded? Let's use the `facet wrap` function to put each origin on a separate chart.
+
+<br>
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price, fill = destination)) +
+  geom_col(position = "dodge") +
+  facet_wrap("destination")
+```
+
+<br>
+
+
+## Themes {-}
+
+You may not like the appearance of these plots. `ggplot2` uses `theme` functions to change the appearance of a plot. Try some different themes out.
+
+<br>
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price, fill = destination)) +
+  geom_col(position = "dodge") +
+  facet_wrap("destination") +
+  theme_bw()
+```
+
+<br>
+
+## Labels {-}
+
+You can also change the axis and title labels using the `labs` function
+
+<br>
+
+```{r}
+ggplot(clean_data, aes(x = origin, y = total_price, fill = destination)) +
+  geom_col(position = "dodge") +
+  facet_wrap("destination") +
+  theme_bw() +
+  labs(title = "Scrap sales by origin and destination", 
+       x     = "Origin", 
+       y     = "Total sales")
+```
+
+<br>
+
+## Drop scientific notation {-}
+
+What if we want to get rid of that ugly scientific notation? We can use `options(scipen = 999)`. Note that this is a general setting in R and not part of the ggplot. Once you use `options(scipen = 999)` in your current session, you don't have to use it again (like loading a package, you need to run the line each time you start a new R session).
+
+<br>
+
+
+```{r}
+options(scipen = 999)
+
+ggplot(clean_data, aes(x = origin, y = total_price, fill = destination)) +
+  geom_col(position = "dodge") +
+  facet_wrap("destination") +
+  theme_bw() +
+  labs(title = "Scrap sales by origin and destination", 
+       x     = "Origin", 
+       y     = "Total sales $$")
+```
+
+<br>
+
+What if we don't like the zeros and want the labels in millions? Any ideas?
+
+<br><br>
+
+
+#### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
+
+We've covered how to do a scatterplot with `geom_point` and a bar chart with `geom_col`, but now we want to do a boxplot of the total price for each destination. But we're not telling you which function to use. You're on your own here. Feel free to add colors ,`facet_wrap`, `theme`, and `labs` to your boxplots. May the force be with you.
+
+<br>
+
+
+## Save plots {-}
+
+You've (hopefully) had fun making all of these plots, so let's learn to save them so we can cherish them forever. There's a function called `ggsave` to do just that. How do we `ggsave` our plots? HELP! (no really, we can type `help(ggsave)`)
+
+```{r ggsave, eval = F}
+# Get help
+help(ggsave)
+?ggsave
+
+# Copy and paste the r code of your favorite plot here
+ggplot(data, aes()) +
+   .... +
+   ....
+
+
+# Save your plot to a png file of your choosing
+ggsave("your_results_folder/plot_name.png")
+```
+
+
+<br>
+
+
+### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+> What if you don't want to save just the last plot you've made? Instead, you want to make a plot and save it for later. 
+
+```{r ggsave objects, eval = F}
+
+# The ggplot you want to save
+my_plot <- ggplot(...)
+  
+# The name of the file the chart will be saved to.
+where_to_save_it <- "___.png"
+
+# Save it!
+ggsave(filename = where_to_save_it, plot = my_plot)
+```
+
+<br>
+
+In a future workshops we'll show how to create a ton of plots at once and save them all in a folder so you'll be able to generate a giant PDF book of all your beautiful plots. You could even make it into a book for your coffee table.
+
+_Learn more about saving plots:_ [http://stat545.com/](http://stat545.com/block017_write-figure-to-file.html)
+
+
+#| Glossary
+
+__Table of `aesthetics`__
+
+| aes()         |    |  
+|:--------------|:---|  
+| `x = `        |    |  
+| `y = `        |    |  
+| `alpha = `    |    | 
+| `fill = `     |    |  
+| `color = `    |    |   
+| `size = `     |    |   
+| `linetype = ` |    |    
+
+
+<br>
+
+__Table of `geoms`__
+
+![](images/geoms_1var.png)
+
+![](images/geoms_diagram.png)
+
+<br>
+
+__Table of `themes`__
+
+You can customize the look of your plot by adding a `theme()` function.
+
+![](images/ggplot_themes.png)
+
+
+
+
+#| Questions 
+
+
+<div style="font-size: 16px;">
+
+- How to modify the gridlines behind your chart?
+    - Try the different themes at the end of this lesson: `theme_light()` or `theme_bw()`.
+    - Or modify the color and size with `theme(panel.grid.minor = element_line(colour = "white", size = 0.5))`.
+    - There's even `theme_excel()`
+- How do you set the x and y scale manually?
+    - Here is an example with a scatter plot: `ggplot() + geom_point() + xlim(beginning, end) + ylim(beginning, end)`
+    - __Warning:__ Values above or below the limits you set will not be shown. This is another great way to lie with data. 
+- How do you get rid of the legend if you don't need it?
+    - `geom_point(aes(color = facility_name), show.legend = FALSE)`
+    - The R cookbook shows a number of ways to get rid of legends: http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/
+- I only like dashed lines. How do you change the linetype to a _dashed_ line? 
+    - `geom_line(aes(color = facility_name), linetype = "dashed")`
+    - You should also try `"dotted"` and `"dotdash"`, or maybe`"twodash"`
+  
+  
+- How many colors are there in R? How does R know `hotpink` is a color?
+    - There is an R color cheatsheet: https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf 
+    - As well as some basic color names here: http://www.r-graph-gallery.com/42-colors-names/
+    - `library(viridis)` provides some great default color palettes for charts and maps.
+    - This web tool will give you palette ideas and color Hex numbers: http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
+- What are some handy keyboard shortcuts in R? How do I find them?
+    - There is a shortcut cheat sheet online: https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf
+    - Or in RStudio, you can go to _Help_ > _Keyboard Shortcuts Help_
+
+</div>
+
+
+#| Your turn
+<hr>
+
+Let's start applying what we've learned. Choose one of the paths below to put your new hard-earned R skills to use. When you're feeling ready, choose the Grand Moff path and begin exploring some of your own data. 
+
+
+<div class="row3" style = "margin-top: 20px;">
+
+<div class="column3"><span style="margin-left: 2px;">
+<a href="Example_Data_ensign_level.html"><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i>  __ENSIGN__ </a>
+</span></div> 
+
+<div class="column3"> <span style="margin-left: 2px;">
+<a href="porg_exposure.html"> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> __COMMODORE__ </a> 
+</span></div> 
+
+<div class="column3"> <span style="margin-left: 2px;">
+<a href="example_outline.html"><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> __GRAND MOFF__ </a>
+</span></div>
+</div>
+
+
+<div class="row3">
+
+<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
+<a href="Example_Data_ensign_level.html"><img src="images/jakku_sq.PNG" width="250"></a>
+</div>
+
+
+<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
+<a href="porg_exposure.html"><img src="images/fly_porgs_sq.jpg" width="250"></a>
+</div>
+
+
+<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
+<a href="example_outline.html"><img src="images/death_star_sq.PNG" width="250"></a>
+</div>
+
+</div>
+
+
+<div class="row3" style = "margin-top: 22px;">
+<div class="column3">
+
+Explore the scrap and salvage economy on Jakku.
+
+Media: `solid waste`  
+Planet: `Jakku`
+</div>
+
+
+<div class="column3">
+Study the effects of jet-fuel on Porg reflexes.
+
+Media: `biological`  
+Planet: `Ahch-To`
+</div> 
+
+
+<div class="column3">
+Travel back to Earth to discover your own data set.
+
+Media: `all`  
+Planet: `Earth`
+</div>
+
+</div>
+ 
+<br>
+
+# Return to [RCamp](index.html) {-}
+
+<br>

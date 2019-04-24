@@ -23,13 +23,12 @@
 <link href="03_Day3_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="03_Day3_files/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="03_Day3_files/navigation-1.1/tabsets.js"></script>
-<link href="03_Day3_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="03_Day3_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="03_Day3_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="03_Day3_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="03_Day3_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -65,7 +64,29 @@ code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Doc
 code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -102,9 +123,7 @@ h6 {
 
 <link rel="stylesheet" href="css\camp_style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -129,21 +148,82 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -232,6 +312,16 @@ div.tocify {
 
 </style>
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
 <div class="col-xs-12 col-sm-4 col-md-3">
@@ -254,7 +344,7 @@ div.tocify {
 
 
 <div id="welcome-back-jedis" class="section level1 unnumbered">
-<h1>Welcome back, Jedis!</h1>
+<h1>Welcome back Jedis!</h1>
 <hr>
 <div class="figure">
 <img src="images/day3_sq.png" style="float: left; margin-right: 60px; margin-top: -10px;" width="260" />
@@ -266,7 +356,7 @@ div.tocify {
 <ul>
 <li>Open the <strong>Start menu</strong> (<em>Click the Windows logo on the bottom left of the screen</em>)</li>
 <li>Select <code>Remote Desktop Connection</code></li>
-<li>Enter <code>w7-your7digit#</code> or <code>R32-your7digit#</code></li>
+<li>Enter <code>R32-your7digit#</code> or <code>w7-your7digit#</code></li>
 <li>Press <em>Connect</em></li>
 </ul>
 <p><br></p>
@@ -274,245 +364,633 @@ div.tocify {
 <ul>
 <li><strong>Open</strong> your project folder from last week</li>
 <li>Double click the <strong>.Rproj</strong> file to open RStudio</li>
-<li>Relax…</li>
 </ul>
+</div>
+<div id="schedule" class="section level2 unnumbered">
+<h2>Schedule</h2>
+<div class="well">
+<ul>
+<li>Review</li>
+<li>Join 2 tables</li>
+<li>Convert units</li>
+<li>Summarize by group</li>
+<li><code>ifelse()</code></li>
+<li>In depth plots
+<ul>
+<li>Set geometries</li>
+<li>Add geoms</li>
+<li>Set colors</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="porg-review" class="section level2 unnumbered">
+<h2>Porg review</h2>
+<p>The <em>poggle</em> of porgs has returned to help us review the <code>dplyr</code> functions. Follow along by downloading the <strong>porg</strong> data from the URL below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+porgs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/porg_data.csv&quot;</span>)</code></pre></div>
 <p><br></p>
+<ul class="nav nav-pills" id="myTab" role="tablist" style="margin-top: 18px;">
+<li class="nav-item active">
+<a class="nav-link" id="porgs-tab" data-toggle="tab" href="#porgs" role="tab" aria-controls="porgs" aria-selected="true"> porgs </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="select-tab" data-toggle="tab" href="#select" role="tab" aria-controls="select" aria-selected="false"> <code>select</code> </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="arrange-tab" data-toggle="tab" href="#arrange" role="tab" aria-controls="arrange" aria-selected="false"> <code>arrange</code></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="filter-tab" data-toggle="tab" href="#filter" role="tab" aria-controls="filter" aria-selected="false"> <code>filter</code></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="mutate3-tab" data-toggle="tab" href="#mutate3" role="tab" aria-controls="mutate3" aria-selected="false"> <code>mutate</code></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="summarize-tab" data-toggle="tab" href="#summarize" role="tab" aria-controls="summarize" aria-selected="false"> <code>summarize</code></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="group_by-tab" data-toggle="tab" href="#group_by" role="tab" aria-controls="group_by" aria-selected="false"> <code>group_by</code></a>
+</li>
+</ul>
+<div id="myTabContent" class="well tab-content" style="background-color: white;">
+<div id="porgs" class="tab-pane fade active in" role="tabpanel" aria-labelledby="porgs-tab">
+<img src="images/porgs/porgs_tbl.png" style="width: 85%;" /> <br><br>
+</div>
+<div id="select" class="tab-pane fade" role="tabpanel" aria-labelledby="select-tab">
+<img src="images/porgs/select.png" style="width: 65%;" /> <img src="images/porgs/select_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" /> <br><br> <img src="images/porgs/select_drop.png" style="width: 65%;" /> <img src="images/porgs/select_drop_tbl.png" style="width: 80%; margin-left: 5%; margin-top: 12px;" /> <br><br>
+</div>
+<div id="arrange" class="tab-pane fade" role="tabpanel" aria-labelledby="arrange-tab">
+<img src="images/porgs/arrange.png" style="width: 65%;" /> <img src="images/porgs/arrange_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" /> <br><br> <img src="images/porgs/arrange_desc.png" style="width: 57%;" /> <img src="images/porgs/arrange_tbl_desc.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" /> <br><br>
+</div>
+<div id="filter" class="tab-pane fade" role="tabpanel" aria-labelledby="filter-tab">
+<img src="images/porgs/filter.png" style="width: 65%;" /> <img src="images/porgs/filter_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" /> <br><br> <img src="images/porgs/filter2.png" style="width: 75%;" /> <img src="images/porgs/filter2_tbl.png" style="width: 88%; margin-left: 10%; margin-top: 12px;" /> <br><br>
+</div>
+<div id="mutate3" class="tab-pane fade" role="tabpanel" aria-labelledby="mutate3-tab">
+<img src="images/porgs/mutate.png" style="width: 77%;" /> <br> <img src="images/porgs/mutate_tbl.png" style="width: 88%; margin-left: 4%; margin-top: 12px;" /> <br><br>
+</div>
+<div id="summarize" class="tab-pane fade" role="tabpanel" aria-labelledby="summarize-tab">
+<img src="images/porgs/summarize.png" style="width: 77%;" /> <br> <img src="images/porgs/summarize_tbl.png" style="width: 88%; margin-left: 4%; margin-top: 12px;" /> <br><br>
+</div>
+<div id="group_by" class="tab-pane fade" role="tabpanel" aria-labelledby="group_by-tab">
+<img src="images/porgs/groupby.png" style="width: 77%;" /> <br> <img src="images/porgs/groupby_tbl.png" style="width: 94%; margin-left: 2%; margin-top: 12px;" /> <br><br>
 </div>
 </div>
-<div id="review" class="section level1">
-<h1><span class="header-section-number">1</span> | Review</h1>
-<p>The script below loads the scrap data from the X-drive, cleans the data to make it easier to use, and then saves the new table as a CSV file. Feel free to review to see what we did and copy any helpful snippets.</p>
-<details> <summary class = "btn_code_blue"> Show script </summary>
-<p>
+<p><br></p>
+<p><strong>So where were we? Oh right, we we’re enjoying our time on beautiful lush Endor. But aren’t we missing somebody?</strong></p>
+</div>
+</div>
+<div id="finn-needs-us" class="section level1 unnumbered">
+<h1>Finn needs us!</h1>
+<p>That’s enough <em>scuttlebutting</em> around on Endor, Finn needs us back on Jakku. It turns out we forgot to pick-up Finn when we left. Now he’s being held ransom by Junk Boss Plutt. We’ll need to act fast to get to him before the Empire does. <strong>Blast off!</strong></p>
+<div class="figure">
+<img src="images/finn_run.gif" />
+
+</div>
+<div id="update-from-bb8" class="section level2 unnumbered">
+<h2>Update from BB8!</h2>
+<hr>
+<p>On our flight back to Jakku BB8 was able to recover a <strong>full</strong> set of scrap records from the notorious Unkar Plutt. Let’s take a look.</p>
+<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
 <span class="kw">library</span>(dplyr)
 
-<span class="co"># Read the original scrap data</span>
-scrap_full &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars//data/starwars_scrap_jakku_full.csv&quot;</span>)
-
-<span class="co"># Change column names and units to all lowercase letters</span>
-scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">                </span><span class="kw">rename_all</span>(tolower) 
-
-<span class="co"># Convert all units to lowercase to make &quot;tons&quot; consistent</span>
-scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">units =</span> <span class="kw">tolower</span>(units))
-
-<span class="co"># Read in the conversion data</span>
-convert &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/conversion_table.csv&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">             </span><span class="kw">select</span>(<span class="op">-</span>units)
-
-<span class="co"># Join conversion table</span>
-scrap_full &lt;-<span class="st"> </span><span class="kw">left_join</span>(scrap_full, convert, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;salvage&quot;</span> =<span class="st"> &quot;item&quot;</span>))
-
-<span class="co"># Add total price column and clean up names</span>
-scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">amount_tons =</span> <span class="kw">ifelse</span>(units <span class="op">==</span><span class="st"> &#39;tons&#39;</span>, amount, amount <span class="op">*</span><span class="st"> </span>pounds <span class="op">/</span><span class="st"> </span><span class="dv">2000</span>),
-                       <span class="dt">total_price =</span> amount_tons <span class="op">*</span><span class="st"> </span>price_per_ton) <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">filter</span>(origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">select</span>(<span class="op">-</span>pounds, <span class="op">-</span>units, <span class="op">-</span>amount) <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">rename</span>(<span class="dt">items       =</span> salvage, 
-                       <span class="dt">destination =</span> dest)
-
-<span class="co"># Drop all capital letters for easy typing</span>
-scrap_full &lt;-<span class="st"> </span>scrap_full <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">items        =</span> <span class="kw">tolower</span>(items),
-                       <span class="dt">origin       =</span> <span class="kw">tolower</span>(origin),
-                       <span class="dt">destination  =</span> <span class="kw">tolower</span>(destination))
-
-
-<span class="co"># Save data back to X-drive as CSV </span>
-<span class="kw">write_csv</span>(scrap_full, <span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_cleaned.csv&quot;</span>)</code></pre></div>
+<span class="co"># Read in the full scrap database</span>
+scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/starwars_scrap_jakku_full.csv&quot;</span>)</code></pre></div>
 <p><br></p>
-</p>
-<p></details></p>
 </div>
-<div id="read-cleaned-scrap-data" class="section level1">
-<h1><span class="header-section-number">2</span> | Read cleaned scrap data</h1>
-<p>Today we’ll read data from the <code>X-drive</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load packages</span>
-<span class="kw">library</span>(readr)
-<span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(ggplot2)
-
-<span class="co"># Read cleaned scrap data</span>
-clean_data  &lt;-<span class="st">  </span><span class="kw">read_csv</span>(<span class="st">&quot;X:/Agency_Files/Outcomes/Risk_Eval_Air_Mod/_Air_Risk_Evaluation/R/R_Camp/Intro to R/RTrain - Star Wars/data/starwars_scrap_jakku_clean.csv&quot;</span>)
-
-<span class="co"># Get to know the data</span>
-<span class="kw">names</span>(clean_data)</code></pre></div>
-<pre><code>## [1] &quot;items&quot;         &quot;origin&quot;        &quot;destination&quot;   &quot;price_per_ton&quot;
-## [5] &quot;amount_tons&quot;   &quot;total_price&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(clean_data)</code></pre></div>
-<pre><code>## Observations: 573
-## Variables: 6
-## $ items         &lt;chr&gt; &quot;electrotelescope&quot;, &quot;atmospheric thrusters&quot;, &quot;bu...
-## $ origin        &lt;chr&gt; &quot;outskirts&quot;, &quot;cratertown&quot;, &quot;cratertown&quot;, &quot;blowba...
-## $ destination   &lt;chr&gt; &quot;trade caravan&quot;, &quot;niima outpost&quot;, &quot;raiders&quot;, &quot;tr...
-## $ price_per_ton &lt;dbl&gt; 849.79, 56.21, 1004.83, 597.85, 590.93, 1229.03,...
-## $ amount_tons   &lt;dbl&gt; 868.4280, 33978.1545, 644.7285, 1960.6650, 887.0...
-## $ total_price   &lt;dbl&gt; 737981.43, 1909912.06, 647842.54, 1172183.57, 52...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(clean_data)</code></pre></div>
-<pre><code>##     items              origin          destination       
-##  Length:573         Length:573         Length:573        
-##  Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character  
-##                                                          
-##                                                          
-##                                                          
-##  price_per_ton      amount_tons        total_price      
-##  Min.   :  29.15   Min.   :    0.01   Min.   :       5  
-##  1st Qu.: 314.23   1st Qu.:  238.99   1st Qu.:  128921  
-##  Median : 629.28   Median : 1298.00   Median :  757656  
-##  Mean   :1010.85   Mean   : 3724.23   Mean   : 3483802  
-##  3rd Qu.:1329.05   3rd Qu.: 4678.44   3rd Qu.: 2631778  
-##  Max.   :7211.01   Max.   :60116.67   Max.   :83712615</code></pre>
 </div>
-<div id="ggplot" class="section level1">
-<h1><span class="header-section-number">3</span> | <code>ggplot()</code></h1>
+<div id="back-on-jakku" class="section level1">
+<h1><span class="header-section-number">1</span> | Back on Jakku</h1>
+<p>Okay, we’re back on the big ol’ dust bucket. Let’s try not to forget anything while were here this time. I have a feeling we’re quickly running out of friends on this planet.</p>
+<div id="scrappy-ransom" class="section level2 unnumbered">
+<h2>Scrappy ransom</h2>
+<p>Plutt is demanding <strong>10,000 items</strong> of scrap for Finn. Lucky for us he didn’t clarify the exact items. Maybe we can find the scrap that weighs the least per item and make this transaction as effortless as possible. Let’s look at our new scrap data and see if we have the mass of all the items.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># What unit types are in the data?</span>
+<span class="kw">unique</span>(scrap<span class="op">$</span>units)</code></pre></div>
+<pre><code>## [1] &quot;Cubic Yards&quot; &quot;Items&quot;       &quot;Tons&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">distinct</span>(scrap, units)</code></pre></div>
+<pre><code>## # A tibble: 3 x 1
+##   units      
+##   &lt;chr&gt;      
+## 1 Cubic Yards
+## 2 Items      
+## 3 Tons</code></pre>
+<p><br></p>
+<p><em>Hmmm….</em> So how much does a cubic yard of <code>Hull Panel</code>s weigh?</p>
+<p>Don’t look at me! I think we’re going to need some more data.</p>
+<div class="well">
+<p><strong>“BB8. go do your data thing.”</strong></p>
+</div>
+</div>
+<div id="item-to-mass-conversion" class="section level2 unnumbered">
+<h2>Item to mass conversion</h2>
+<div class="figure">
+<img src="images/rey_bb8.jpg" align="right" style="width: 35%; margin-top: 0px; margin-left: 15px; margin-right: 0px;" />
+
+</div>
+<p>It took a while, but with a few droid bribes BB8 was finally able to track down a <code>Mass conversion table</code> from his old droid buddies. Our current data shows the total cubic yards for some scrap shipments, but not how much the shipment weighs.</p>
+<div id="read-the-weight-conversion-table" class="section level3 unnumbered">
+<h3>Read the weight conversion table</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The data&#39;s URL</span>
+convert_url &lt;-<span class="st"> &quot;https://itep-r.netlify.com/data/conversion_table.csv&quot;</span>
+
+<span class="co"># Read the conversion data</span>
+convert &lt;-<span class="st"> </span><span class="kw">read_csv</span>(convert_url)
+
+<span class="kw">head</span>(convert, <span class="dv">3</span>)</code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   item               units       pounds
+##   &lt;chr&gt;              &lt;chr&gt;        &lt;dbl&gt;
+## 1 Bulkhead           Cubic Yards    321
+## 2 Hull Panel         Cubic Yards    641
+## 3 Repulsorlift array Cubic Yards    467</code></pre>
+<p><br></p>
+<p>Let’s join the new conversion table to the scrap data. For that we’ll need to make a new friend, say <strong>Hello</strong> to <code>left_join()</code>!</p>
+</div>
+</div>
+</div>
+<div id="join-tables-with-left_join" class="section level1">
+<h1><span class="header-section-number">2</span> | Join tables with <code>left_join()</code></h1>
+<div class="figure">
+<img src="images/left_join_venn.png" style="width: 55%; margin-left: 18%;" />
+
+</div>
+<br>
 <hr>
-<p>Diving deeper into making plots.</p>
-<div id="the-ggplot-sandwich" class="section level2 unnumbered">
-<h2>The <code>ggplot()</code> sandwich</h2>
+<p><code>left_join()</code> works like a zipper and combines two tables based on one or more variables. They can have the same name or not. Since it’s <code>left_join</code>, the entire table on the left side is retained. Anything that matches from the right side is also kept, but the rest will be ignored.</p>
+<div id="join-2-tables" class="section level2 unnumbered">
+<h2>Join 2 tables</h2>
+<div id="left_jointable1-table2-by-ccolumns-to-join-by" class="section level3 unnumbered">
+<h3><code>left_join(table1, table2, by = c(&quot;columns to join by&quot;))</code></h3>
+<p><br></p>
+</div>
+<div id="adding-porg-names" class="section level3 unnumbered">
+<h3>Adding porg names</h3>
+<p>Remember our porg friends? How rude of us not to share their names. <strong>Wups!</strong></p>
+<p>Here’s a table of their names.</p>
+<div style="margin-left: 10px; margin-top: 24px; width: 37%; margin-bottom: 34px;">
+<div class="figure">
+<img src="images/porgs/porg_names_tbl.png" />
+
+</div>
+</div>
+<div style="clear: both;">
+
+</div>
+<p><strong>Hey now!</strong> That’s not very helpful. Who’s who? Let’s join their names to the rest of the data.</p>
+<p><br></p>
+<div class="figure">
+<img src="images/porgs/porg_join.png" style="width: 85%;" />
+
+</div>
+<p><br></p>
+</div>
+<div id="whats-the-result" class="section level3 unnumbered">
+<h3><strong>What’s the result?</strong></h3>
+<div class="well">
+<div class="figure">
+<img src="images/porgs/porgs_and_names.png" style="width: 85%; max-width: 85%;" />
+
+</div>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="back-to-scrap-land" class="section level2 unnumbered">
+<h2>Back to scrap land</h2>
+<p>Let’s apply our new <code>left_join()</code> skills to our scrap data.</p>
+<p><br></p>
+<div id="join-the-conversion-table-to-the-scrap" class="section level3 unnumbered">
+<h3>Join the conversion table to the scrap</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span><span class="kw">left_join</span>(scrap, convert, 
+                   <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;item&quot;</span> =<span class="st"> &quot;item&quot;</span>, <span class="st">&quot;units&quot;</span> =<span class="st"> &quot;units&quot;</span>))</code></pre></div>
+<p><br></p>
+<blockquote>
+<p>Want to skimp on typing?</p>
+</blockquote>
+<p>When the 2 tables share column names that are the same, <code>left_join()</code> will automatically search for matching columns if you don’t use the <code>by=</code> argument. So the code below does the same as above.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span><span class="kw">left_join</span>(scrap, convert)
+
+<span class="kw">head</span>(scrap, <span class="dv">4</span>)</code></pre></div>
+<pre><code>## # A tibble: 4 x 8
+##   receipt_date item  origin destination amount units price_per_pound pounds
+##   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;
+## 1 4/1/2013     Bulk~ Crate~ Raiders       4017 Cubi~           1005.    321
+## 2 4/2/2013     Star~ Outsk~ Trade cara~   1249 Cubi~           1129.    637
+## 3 4/3/2013     Star~ Outsk~ Niima Outp~   4434 Cubi~           1129.    637
+## 4 4/4/2013     Hull~ Crate~ Raiders        286 Cubi~            843.    641</code></pre>
+<p><br></p>
+<p><strong>Help!</strong> You can type <code>?left_join</code> to see all the arguments and options.</p>
+<p><br></p>
+<div id="exercise" class="section level4 unnumbered">
+<h4><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<ul class="nav nav-pills" id="myTab" role="tablist" style="margin-top: 18px;">
+<li class="nav-item active">
+<a class="nav-link" id="totalcredits-tab" data-toggle="tab" href="#totalcredits" role="tab" aria-controls="totalcredits" aria-selected="true">Total credits</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="showhint-tab" data-toggle="tab" href="#showhint" role="tab" aria-controls="showhint" aria-selected="false">Show hint</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" id="showcode-tab" data-toggle="tab" href="#showcode" role="tab" aria-controls="showcode" aria-selected="false">Show code</a>
+</li>
+</ul>
+<div id="myTabContent" class="well tab-content" style="background-color: white;">
+<div id="totalcredits" class="tab-pane fade active in" role="tabpanel" aria-labelledby="totalcredits-tab">
+<h4>
+Total credits
+</h4>
+<p>We now have the amount sold, the weight of that amount in pounds, and the price in credits per pound. Let’s use these 3 pieces of information to find the total amount of credits for each transaction. How do we calculate that?</p>
+<pre class="sourceCode r">
+
+# Calculate the total credits for each transaction
+scrap <- scrap %>% 
+         mutate(_______ = _______________)
+         
+</pre>
+</div>
+<div id="showhint" class="tab-pane fade" role="tabpanel" aria-labelledby="showhint-tab">
+<h4>
+Total credits
+</h4>
+<p>We need to do some serious multiplication. We now have the amount sold, the conversion to pounds, and the credits per pound, but we want to know the total amount of credits for each transaction. How would we calculate that?</p>
+<pre class="sourceCode r">
+
+# Calculate the total credits for each transaction
+scrap <- scrap %>% 
+         mutate(credits = _______ * _______ * ________)
+
+</pre>
+</div>
+<div id="showcode" class="tab-pane fade" role="tabpanel" aria-labelledby="showcode-tab">
+<h4>
+Total credits
+</h4>
+<p>We need to do some serious multiplication. We now have the amount sold, the conversion to pounds, and the credits per pound, but we want to know the total amount of credits for each transaction. How would we calculate that?</p>
+<pre class="sourceCode r">
+
+# Calculate the total credits for each transaction
+scrap <- scrap %>% 
+         mutate(credits = amount * pounds * price_per_pound)
+         
+</pre>
+</div>
+</div>
+<p><br></p>
+<div class="note">
+<p>Data analysts often get asked questions similar to:</p>
+<ul>
+<li>What’s the highest number?</li>
+<li>What’s the lowest number?</li>
+<li>So what’s the average tonnage of scrap from Cratertown this year?</li>
+<li>Who’s making the most money this year?</li>
+</ul>
+<h4 id="so-let-us-move-on-to-summarize." class="unnumbered">So let us move on to <code>summarize()</code>.</h4>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="summarize-this" class="section level1">
+<h1><span class="header-section-number">3</span> | <code>summarize()</code> this</h1>
 <hr>
 <div class="figure">
-<img src="images/auto_plot.gif" style="margin-top: -22px; max-width: 108%;" />
+<img src="images/summarize_diagram.png" width="490" />
 
 </div>
-<p><span class="h6" style="font-size: 28px; font-weight: bold;"> The 3 ingredients in a <code>ggplot</code> </span></p>
-<p><br></p>
-<div id="the-base-plot" class="section level3 unnumbered">
-<h3>1. The base plot</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data)</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-2-1.png" width="1056" /></p>
-<p><br></p>
-<p>Remember to load the package!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
-<p><br></p>
+<p><code>summarize()</code> allows you to apply a summary function like <code>median()</code> to a column and collapse your data down to a single row. To really dig into <code>summarize</code> you’ll want to know some common summary functions, such as <code>sum()</code>, <code>mean()</code>, <code>median()</code>, <code>min()</code>, and <code>max()</code>.</p>
+<div id="sum" class="section level2 unnumbered">
+<h2><code>sum()</code></h2>
+<p>Use <code>summarize()</code> and <code>sum()</code> to find the total credits from all the scrap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">total_credits =</span> <span class="kw">sum</span>(credits))</code></pre></div>
 </div>
-<div id="the-the-x-y-aesthetics" class="section level3 unnumbered">
-<h3>2. The the X, Y <em>aesthetics</em></h3>
-<p>The <em>aesthetics</em> assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) </code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-4-1.png" width="1056" /></p>
+<div id="mean" class="section level2 unnumbered">
+<h2><code>mean()</code></h2>
+<p>Use <code>summarize()</code> and <code>mean()</code> to calculate the <em>mean</em> <code>price_per_pound</code> in the scrap report.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, <span class="dt">mean_price =</span> <span class="kw">mean</span>(price_per_pound, <span class="dt">na.rm =</span> T))</code></pre></div>
+<p><br></p>
+<blockquote>
+<p>Note the <code>na.rm = TRUE</code> in the <code>mean()</code> function. This tells R to ignore empty cells or missing values that show up in R as <code>NA</code>. If you leave <code>na.rm</code> out, the <em>mean</em> function will return ‘NA’ if it finds a missing value in the data.</p>
+</blockquote>
 </div>
-<div id="the-layers-or-geometries" class="section level3 unnumbered">
-<h3>3. The layers or <em>geometries</em></h3>
-<p>The geometries (abbreviated geom) are the things that actually fill the space. They are based on the aesthetics you provide in the <code>ggplot()</code> call by default; however, you can provide different aesthetics for each geometry if you need to.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-5-1.png" width="1056" /></p>
-<p><br><br></p>
+<div id="median" class="section level2 unnumbered">
+<h2><code>median()</code></h2>
+<p>Use summarize to calculate the <em>median</em> price_per_pound in the scrap report.</p>
+<p><code>summarize(scrap, median_price = median(price_per_pound, na.rm = T))</code></p>
 </div>
+<div id="max" class="section level2 unnumbered">
+<h2><code>max()</code></h2>
+<p>Use summarize to calculate the <em>maximum</em> price per pound any scrapper got for their scrap.</p>
+<p><code>summarize(scrap, max_price = max(price_per_pound, na.rm = T))</code></p>
+</div>
+<div id="min" class="section level2 unnumbered">
+<h2><code>min()</code></h2>
+<p>Use summarize to calculate the <em>minimum</em> price per pound any scrapper got for their scrap.</p>
+</div>
+<div id="nth" class="section level2 unnumbered">
+<h2><code>nth()</code></h2>
+<p>Use <code>summarize()</code> and <code>nth(Origin, 12)</code> to find the name of the Origin City that got the <em>12th</em> highest scrapper haul.</p>
+<p><em>Hint: Use <code>arrange()</code> first.</em></p>
+<p><code>arrange(scrap, desc(credits)) %&gt;% summarize(price_12 = nth(origin, 12))</code></p>
+</div>
+<div id="n" class="section level2 unnumbered">
+<h2><code>n()</code></h2>
+<p><code>n()</code> stands for <em>count</em>.</p>
+<p>Use summarize and <code>n()</code> to count the number of reported scrap records going to <code>Niima outpost</code>.</p>
+<p><strong>Hint:</strong> Use <code>filter()</code> first.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">niima_scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, destination <span class="op">==</span><span class="st"> &quot;Niima Outpost&quot;</span>) 
+
+niima_scrap &lt;-<span class="st"> </span><span class="kw">summarize</span>(niima_scrap, <span class="dt">scrap_records =</span> <span class="kw">n</span>())</code></pre></div>
+</div>
+<div id="quantile" class="section level2 unnumbered">
+<h2><code>quantile()</code></h2>
+<p><em>Quantiles</em> are useful for finding the upper or lower range of a column. Use the <code>quantile()</code> function to find the the 5th and 95th quantile of the prices.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summarize</span>(scrap, 
+          <span class="dt">price_5th_pctile  =</span> <span class="kw">quantile</span>(price_per_pound, <span class="fl">0.05</span>, <span class="dt">na.rm =</span> T),
+          <span class="dt">price_95th_pctile =</span> <span class="kw">quantile</span>(price_per_pound, <span class="fl">0.95</span>))</code></pre></div>
+<p><strong>Hint:</strong> Add <code>na.rm = T</code> to <code>quantile()</code>.</p>
+<p><br></p>
+<div id="exercise-1" class="section level3 unnumbered">
+<h3><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<p>Create a summary of the scrap data that includes 3 of the summary functions above. The following is one example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary &lt;-<span class="st"> </span><span class="kw">summarize</span>(scrap, 
+                     <span class="dt">max_credits      =</span> __________,
+                     <span class="dt">mean_credits     =</span> __________,
+                     <span class="dt">count_of_records =</span> __________ )</code></pre></div>
+<p><br></p>
+<div class="note">
+<h4 id="shut-me-down" class="unnumbered"><strong>Shut me down!</strong></h4>
+<p>That was a whole lot of summarizing. Do we really have to filter to the Origin City that we’re interested in every time?</p>
+<p>It sure would be nice if we could easily find the mean price for every Origin City. Then we could summarize once and be done with it.</p>
+<h4 id="its-time-for-group_by" class="unnumbered">It’s time for <code>group_by()</code>!</h4>
+</div>
+</div>
+</div>
+</div>
+<div id="group_by" class="section level1">
+<h1><span class="header-section-number">4</span> | <code>group_by()</code></h1>
+<hr>
+<div id="bargain-hunters" class="section level2 unnumbered">
+<h2>Bargain hunters</h2>
+<p>Who’s selling goods for cheap? Use <code>group_by</code> with the column <em>Origin</em>, and then use<code>summarize</code> to find the <code>mean(price_per_pound)</code> at each Origin City.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap_summary &lt;-<span class="st"> </span><span class="kw">group_by</span>(scrap, origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                 </span><span class="kw">summarize</span>(<span class="dt">mean_price =</span>  <span class="kw">mean</span>(price_per_pound, <span class="dt">na.rm =</span> T)) </code></pre></div>
+<p><br></p>
+<p><details> <summary class="btn_code_blue"> EXPLORE: Rounding digits </summary></p>
+<div class="note">
+<p>
+<p>You can round the prices to a certain number of digits using the <code>round()</code> function. We can finish by adding the <code>arrange()</code> function to sort the table by our new column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap_means &lt;-<span class="st"> </span><span class="kw">group_by</span>(scrap, origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                 </span><span class="kw">summarize</span>(<span class="dt">mean_price       =</span>  <span class="kw">mean</span>(price_per_pound, <span class="dt">na.rm =</span> T),
+                           <span class="dt">mean_price_round =</span> <span class="kw">round</span>(mean_price, <span class="dt">digits =</span> <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">                 </span><span class="kw">arrange</span>(mean_price_round) <span class="op">%&gt;%</span>
+<span class="st">                 </span><span class="kw">ungroup</span>()</code></pre></div>
+<p><br></p>
+<p><strong>Special note</strong></p>
+<p>The <code>round()</code> function in R does not automatically round values ending in 5 up. Instead it uses scientific rounding, which rounds values ending in 5 to the nearest even number. So 2.5 rounded to the nearest whole number rounds down to 2, and 3.5 rounded to the nearest whole number rounds up 4.</p>
+</p>
+</div>
+<p></details></p>
+<p><br></p>
+<p>So who’s making lots of transactions? Try using <code>group_by</code> with the column <em>origin</em> and then <code>summarize</code> to count the number of scrap records for each origin city.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap_counts &lt;-<span class="st"> </span><span class="kw">group_by</span>(scrap, origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">summarize</span>(<span class="dt">origin_count  =</span>  <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                </span><span class="kw">ungroup</span>()</code></pre></div>
+<p><br></p>
 <div id="pro-tip" class="section level3 unnumbered">
 <h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<div class="well">
+<p>Ending with <code>ungroup()</code> is good practice. This prevents your data from staying grouped after the summarizing has been completed.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="save-files" class="section level1">
+<h1><span class="header-section-number">5</span> | Save files</h1>
+<hr>
+<p>Let’s save the mean price summary table we created to a <em>CSV</em>. That way we can transfer it to a <em>droid courier</em> for delivery to Rey. To save a data frame we can use the <code>write_csv()</code> function from our favorite <code>readr</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Write the file to your results folder</span>
+<span class="kw">write_csv</span>(scrap_summary, <span class="st">&quot;results/prices_by_origin.csv&quot;</span>)</code></pre></div>
+<p><br></p>
+<div id="warning" class="section level3 unnumbered">
+<h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> <strong>Warning!</strong></h3>
+<div class="well">
+<p>By default, when saving R will overwrite a file if the file already exists in the same folder. It will not ask for confirmation. To be safe, save processed data to a new folder called <code>results/</code> and not to your raw <code>data/</code> folder.</p>
+</div>
+</div>
+</div>
+<div id="ifelse" class="section level1">
+<h1><span class="header-section-number">6</span> | <code>ifelse()</code></h1>
+<div id="if-this-thing-is-true-do-this-otherwise-do-this" class="section level3 unnumbered">
+<h3><code>[If this thing is true]</code>, <code>&quot;Do this&quot;</code>, <code>&quot;Otherwise do this&quot;</code></h3>
+<p><br></p>
+<div class="figure">
+<img src="images/yoda_lightsaber.jpg" style="width: 44%; margin-top: -8px; margin-bottom: 12px;" align="center" />
+
+</div>
+Here’s a handy <code>ifelse</code> statement to help you identify lightsabers.
+<div class="well">
+<p><code>ifelse(</code><strong>Is lightsaber</strong> <span style="color: green;"><strong>GREEN</strong>?</span>, <strong>Yes!</strong> <code>Then it's Yoda's,</code> <strong>No!</strong> <code>Then it's not Yoda's)</code></p>
+</div>
+<p><br></p>
+<p>Say you want convert lbs to tons, but only for the rows that aren’t in tons already. In other words, you want the value of a new column to depend on the value of an existing column. We use <code>ifelse()</code> for this.</p>
+<p>Another example would be if you have measurements in both PPB and PPM, and you want to convert all the PPM measurements to PPB. Or maybe you have a list of expensive and inexpensive scrap ion engines, and you want to flag only the ones that cost less than 500 credits. In both cases <code>ifelse</code> is great tool.</p>
+</div>
+<div id="mutate-ifelse-is-powerful" class="section level2 unnumbered">
+<h2><code>mutate()</code> + <code>ifelse()</code> is powerful!</h2>
+<div class="figure">
+<img src="images/yoda_rise_sm.png" style="width: 78%;" align="center" />
+
+</div>
+<p><br></p>
+<div id="units-update" class="section level3 unnumbered">
+<h3>Units update</h3>
+<p>To start off, let’s make sure the units for Tons is always written the same way in our data. We can use <code>mutate</code> and <code>ifelse</code> to change any row with units <code>TONS</code> to units <code>Tons</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(readr)
+
+<span class="co"># Get the data</span>
+scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/starwars_scrap_jakku.csv&quot;</span>)
+
+<span class="co"># Convert the TONS in all capital letters to title case &quot;Tons&quot;</span>
+<span class="co"># On Day 1 we did this using tolower()</span>
+
+scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">mutate</span>(<span class="dt">units =</span> <span class="kw">ifelse</span>(units <span class="op">==</span><span class="st"> &quot;TONS&quot;</span>, <span class="st">&quot;Tons&quot;</span>, units))</code></pre></div>
+<p><br></p>
+</div>
+<div id="calibration-error" class="section level3 unnumbered">
+<h3>Calibration error</h3>
+<div class="figure">
+<img src="images/cratertown.png" align="left" style="width: 44%; margin-top: 18px; margin-right: 24px;" />
+
+</div>
+<p><br></p>
+<p>We just received news that Cratertown’s scale was rigged. It was miscalibrated to overestimate the tons of outgoing scrap. <strong>Smart!</strong> But that means we have some bad junk data mixed in with our scrap data. Let’s use <code>ifelse</code> to reduce the tonnage by <code>10%</code>, but only for the scrap coming from <code>Cratertown</code>.</p>
+<p><br></p>
+<div style="clear: both;">
+
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reduce the amount of scrap from Cratertown by 10%</span>
+## Multiply the column &quot;amount&quot; * 0.90 
+## Use ifelse() to only select rows where the origin == &quot;Cratertown&quot;
+scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">         </span><span class="kw">mutate</span>(<span class="dt">amount =</span> <span class="kw">ifelse</span>(origin <span class="op">==</span><span class="st"> &quot;Cratertown&quot;</span>, amount <span class="op">*</span><span class="st"> </span><span class="fl">0.90</span>, amount))</code></pre></div>
+<p><br></p>
+<div class="tip" style="clear: both;">
+<p><strong>Congratulations</strong> of galactic proportions to you.</p>
+<p>We now have a clean and tidy data set. If BB8 receives new data to append, we can re-run this script and in 5 seconds we’ll have cleaned up data again!</p>
+</div>
+<p><br><br></p>
+<p><br></p>
+<div style="clear: both;">
+
+</div>
+</div>
+</div>
+</div>
+<div id="plots-with-ggplot2" class="section level1">
+<h1><span class="header-section-number">7</span> | Plots with <em>ggplot2</em></h1>
+<hr>
+<div id="plot-the-data-plot-the-data-plot-the-data" class="section level4 unnumbered">
+<h4><em>Plot the data, Plot the data, Plot the data</em></h4>
+<p><br></p>
+<div class="figure">
+<img src="images/ggplot2_hex.png" align="right" style="margin-right: 70px; margin-top: -124px;" width="180" />
+
+</div>
+</div>
+<div id="the-ggplot-sandwich" class="section level2 unnumbered">
+<h2>The <code>ggplot()</code> sandwich</h2>
+<div class="figure">
+<img src="images/auto_plot.gif" style="margin-top: -2px; max-width: 106%;" />
+
+</div>
+<h5 style="font-size: 28px; font-weight: bold; margin-top: -42px;">
+The 3 ingredients of a <code>ggplot</code>
+</h5>
+</div>
+<div id="the-base-plot" class="section level2 unnumbered">
+<h2>1. The base plot</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-9-1.png" width="1056" /></p>
+<p><br></p>
 <blockquote>
-<p>When you add more layers using <code>+</code> remember to place it at the end of each line.</p>
+<p>Note when we load the package it’s <code>library (ggplot2)</code>, but the function to make a plot is <code>ggplot(scrap)</code>. We admit, it is a bit silly.</p>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This will work</span>
-<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>()
-
-<span class="co"># So will this</span>
-<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
-
-<span class="co"># But this won&#39;t</span>
-<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price))
-  <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+</div>
+<div id="the-the-x-y-aesthetics" class="section level2 unnumbered">
+<h2>2. The the X, Y <em>aesthetics</em></h2>
+<p>The <em>aesthetics</em> assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits)) </code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-10-1.png" width="1056" /></p>
+</div>
+<div id="the-layers-or-geometries" class="section level2 unnumbered">
+<h2>3. The layers or <em>geometries</em></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-11-1.png" width="1056" /></p>
+<p><br></p>
+<div class="tip">
+<h4 id="exercise-2" class="unnumbered"><i class="fa fa-cogs" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<p>Try making a scatterplot of any two columns.</p>
+<p><em>Hint: Numeric variables will be more informative.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> __column1__, <span class="dt">y =</span> __column2__)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
 </div>
 </div>
 <div id="colors" class="section level2 unnumbered">
 <h2>Colors</h2>
 <hr>
-<p>Now let’s use color to show the destinations of the scrap</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">color =</span> destination)) <span class="op">+</span>
+<p>Now let’s use color to show the destination of the scrap</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">color =</span> destination)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-7-1.png" width="1056" /></p>
-<p><br></p>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-13-1.png" width="1056" /></p>
 <div id="pro-tip-1" class="section level3 unnumbered">
 <h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
-<blockquote>
-<p>An easy way to experiment with colors is to add layers like <code>scale_fill_brewer</code> or <code>scale_colour_brewer</code> to your plot which will link to RcolorBrewer palettes so you can have accessible color schemes.</p>
-</blockquote>
-<p><br></p>
+<div class="well">
+<p>An easy way to experiment with colors is to add layers like <code>+ scale_fill_brewer()</code> or <code>+ scale_colour_brewer()</code> to your plot which will link to RcolorBrewer palettes so you can have accessible color schemes.</p>
 </div>
 </div>
-<div id="bar-charts" class="section level2 unnumbered">
-<h2>Bar charts</h2>
-<p>This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand. Note that we use fill in aes() instead of color. If we used color, we’d get a colorful outline and grey (or is it gray?) bars.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+</div>
+<div id="columns-charts" class="section level2 unnumbered">
+<h2>Columns charts</h2>
+<p>Yikes! That point chart had too much detail. Let’s make a column chart and add up the sales to make it easier to understand. Note that we used <code>fill =</code> instead of <code>color =</code>. Try using color instead and see what happens.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">fill =</span> destination)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-8-1.png" width="1056" /></p>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-14-1.png" width="1056" /></p>
 <p><br></p>
-<p>What if we want to make it easier to compare sales by destination for each origin? Let’s change the position of the bars. Remember, you can use <code>help(geom_col)</code> to learn about different options for the function. You can do the same with any other <code>ggplot2</code> function.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<p>We can change the position of the bars to make it easier to compare sales by destination for each origin. For that we’ll use the – <em>drum roll please</em> – <code>position</code> argument. Remember, you can use <code>help(geom_col)</code> to learn about the different options for that type of plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">fill =</span> destination)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-9-1.png" width="1056" /></p>
-<p><br></p>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-15-1.png" width="1056" /></p>
 </div>
 <div id="facet-wrap" class="section level2 unnumbered">
 <h2>Facet wrap</h2>
-<p>What if we want to make the chart less crowded? Let’s use the <code>facet wrap</code> function to put each origin on a separate chart.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<p>Does the chart feel crowded to you? Let’s use <code>facet wrap</code> to put each origin in a separate chart.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">fill =</span> destination)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>)</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-10-1.png" width="1056" /></p>
-<p><br></p>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-16-1.png" width="1056" /></p>
 </div>
 <div id="themes" class="section level2 unnumbered">
 <h2>Themes</h2>
 <p>You may not like the appearance of these plots. <code>ggplot2</code> uses <code>theme</code> functions to change the appearance of a plot. Try some different themes out.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">fill =</span> destination)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-11-1.png" width="1056" /></p>
-<p><br></p>
+<span class="st">  </span><span class="kw">theme_dark</span>()</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-17-1.png" width="1056" /></p>
 </div>
 <div id="labels" class="section level2 unnumbered">
 <h2>Labels</h2>
-<p>You can also change the axis and title labels using the <code>labs</code> function</p>
+<p>You can set the axis and title labels using the <code>labs</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title    =</span> <span class="st">&quot;Scrap sales by origin and destination&quot;</span>, 
+       <span class="dt">subtitle =</span> <span class="st">&quot;Planet Jakku&quot;</span>,
+       <span class="dt">x        =</span> <span class="st">&quot;Origin&quot;</span>, 
+       <span class="dt">y        =</span> <span class="st">&quot;Total sales&quot;</span>,
+       <span class="dt">caption  =</span> <span class="st">&quot;Data gracefully provided by BB8&quot;</span>)</code></pre></div>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-18-1.png" width="1056" /></p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
+</div>
+<div id="drop-1.0e10-scientific-notation" class="section level2 unnumbered">
+<h2>Drop <code>1.0e+10</code> scientific notation</h2>
+<p>Is your boss scared of scientific notation? To hide it we can use <code>options(scipen = 999)</code>. Note that this is a general setting in R. Once you use <code>options(scipen = 999)</code> in your current session you won’t have to use it again. Like loading a package, you only need to run the line once when you start RStudio.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>)
+
+<span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits, <span class="dt">fill =</span> destination)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Scrap sales by origin and destination&quot;</span>, 
        <span class="dt">x     =</span> <span class="st">&quot;Origin&quot;</span>, 
        <span class="dt">y     =</span> <span class="st">&quot;Total sales&quot;</span>)</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-12-1.png" width="1056" /></p>
+<p><img src="03_Day3_files/figure-html/unnamed-chunk-19-1.png" width="1056" /></p>
 <p><br></p>
+<div class="note">
+<p><strong>CHALLENGE</strong></p>
+<p>Let’s say we don’t like printing so many zeros and want the labels to be in <strong>Millions</strong> of credits. Any ideas on how to make it happen?</p>
+<p><br></p>
+<details><summary> [Click here for a HINT] </summary>
+<p>
+<p><em>Sorry, the hint is missing. You’re on your own!</em></p>
+</p>
+<p></details></p>
 </div>
-<div id="drop-scientific-notation" class="section level2 unnumbered">
-<h2>Drop scientific notation</h2>
-<p>What if we want to get rid of that ugly scientific notation? We can use <code>options(scipen = 999)</code>. Note that this is a general setting in R and not part of the ggplot. Once you use <code>options(scipen = 999)</code> in your current session, you don’t have to use it again (like loading a package, you need to run the line each time you start a new R session).</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">scipen =</span> <span class="dv">999</span>)
-
-<span class="kw">ggplot</span>(clean_data, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> total_price, <span class="dt">fill =</span> destination)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;destination&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Scrap sales by origin and destination&quot;</span>, 
-       <span class="dt">x     =</span> <span class="st">&quot;Origin&quot;</span>, 
-       <span class="dt">y     =</span> <span class="st">&quot;Total sales $$&quot;</span>)</code></pre></div>
-<p><img src="03_Day3_files/figure-html/unnamed-chunk-13-1.png" width="1056" /></p>
-<p><br></p>
-<p>What if we don’t like the zeros and want the labels in millions? Any ideas?</p>
-<p><br><br></p>
-<div id="exercise" class="section level4 unnumbered">
-<h4><i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise</h4>
-<p>We’ve covered how to do a scatterplot with <code>geom_point</code> and a bar chart with <code>geom_col</code>, but now we want to do a boxplot of the total price for each destination. But we’re not telling you which function to use. You’re on your own here. Feel free to add colors ,<code>facet_wrap</code>, <code>theme</code>, and <code>labs</code> to your boxplots. May the force be with you.</p>
-<p><br></p>
+<div class="tip">
+<h3 id="exercise-3" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<p>Be brave and make a boxplot. We’ve covered how to do a scatterplot with <code>geom_point</code> and a bar chart with <code>geom_col</code>, but how would you make a boxplot showing the prices at each destination? You’re on your own here. Feel free to add <code>color</code> ,<code>facet_wrap</code>, <code>theme</code>, and <code>labs</code> to your boxplots.</p>
+<p>May the force be with you.</p>
 </div>
 </div>
 <div id="save-plots" class="section level2 unnumbered">
 <h2>Save plots</h2>
-<p>You’ve (hopefully) had fun making all of these plots, so let’s learn to save them so we can cherish them forever. There’s a function called <code>ggsave</code> to do just that. How do we <code>ggsave</code> our plots? HELP! (no really, we can type <code>help(ggsave)</code>)</p>
+<p>You’ve hopefully made some plots you’re proud of, so let’s learn to save them so we can cherish them forever. There’s a function called <code>ggsave</code> to do just that. How do we <code>ggsave</code> our plots? HELP! Let’s type <code>help(ggsave)</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get help</span>
 <span class="kw">help</span>(ggsave)
 ?ggsave
@@ -528,9 +1006,8 @@ clean_data  &lt;-<span class="st">  </span><span class="kw">read_csv</span>(<spa
 <p><br></p>
 <div id="pro-tip-2" class="section level3 unnumbered">
 <h3><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
-<blockquote>
-<p>What if you don’t want to save just the last plot you’ve made? Instead, you want to make a plot and save it for later.</p>
-</blockquote>
+<div class="note">
+<p>Sometimes you may want to make a plot and save it for later. For that, you give your plot a name. Any name will do.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The ggplot you want to save</span>
 my_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(...)
   
@@ -540,49 +1017,42 @@ where_to_save_it &lt;-<span class="st"> &quot;___.png&quot;</span>
 <span class="co"># Save it!</span>
 <span class="kw">ggsave</span>(<span class="dt">filename =</span> where_to_save_it, <span class="dt">plot =</span> my_plot)</code></pre></div>
 <p><br></p>
-<p>In a future workshops we’ll show how to create a ton of plots at once and save them all in a folder so you’ll be able to generate a giant PDF book of all your beautiful plots. You could even make it into a book for your coffee table.</p>
-<p><em>Learn more about saving plots:</em> <a href="http://stat545.com/block017_write-figure-to-file.html">http://stat545.com/</a></p>
+<p><em>Learn more about saving plots at</em> <a href="http://stat545.com/block017_write-figure-to-file.html">http://stat545.com/</a></p>
+<p><br></p>
+</div>
 </div>
 </div>
 </div>
 <div id="glossary" class="section level1">
-<h1><span class="header-section-number">4</span> | Glossary</h1>
+<h1><span class="header-section-number">8</span> | Glossary</h1>
 <p><strong>Table of <code>aesthetics</code></strong></p>
 <table>
 <thead>
 <tr class="header">
 <th align="left">aes()</th>
-<th align="left"></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left"><code>x =</code></td>
-<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left"><code>y =</code></td>
-<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>alpha =</code></td>
-<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left"><code>fill =</code></td>
-<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>color =</code></td>
-<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left"><code>size =</code></td>
-<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left"><code>linetype =</code></td>
-<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -604,14 +1074,45 @@ where_to_save_it &lt;-<span class="st"> &quot;___.png&quot;</span>
 
 </div>
 </div>
-<div id="questions" class="section level1">
-<h1><span class="header-section-number">5</span> | Questions</h1>
+<div id="homeworld-training" class="section level1 unnumbered">
+<h1>Homeworld training</h1>
+<div class="figure">
+<img src="images/porg.png" style="float: right; margin-top: -14px;" />
+
+</div>
+<ol style="list-style-type: decimal">
+<li>Load one of the data sets below into R
+<ul>
+<li>Porg contamination on Ahch-To: <a href="https://itep-r.netlify.com/data/porg_samples.csv" class="uri">https://itep-r.netlify.com/data/porg_samples.csv</a></li>
+<li>Planet Endor air samples: <a href="https://itep-r.netlify.com/data/air_endor.csv" class="uri">https://itep-r.netlify.com/data/air_endor.csv</a></li>
+<li>Or use data from a recent project of yours</li>
+</ul></li>
+<li>Create 2 plots using the data.</li>
+<li><em>Don’t worry if it looks</em> <strong>really weird</strong>. <em>Consider it art and make another one.</em></li>
+</ol>
+<div class="note">
+<h3 id="pro-tip-3" class="unnumbered"><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip!</h3>
+<p>When you add more layers using <code>+</code> remember to place it at the end of each line.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This will work</span>
+<span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()
+
+<span class="co"># So will this</span>
+<span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+
+<span class="co"># But this won&#39;t</span>
+<span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> origin, <span class="dt">y =</span> credits))
+  <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+</div>
+</div>
+<div id="plot-questions" class="section level1 unnumbered">
+<h1><i class="far fa-question-circle" aria-hidden="true"></i> Plot Questions</h1>
 <div style="font-size: 16px;">
 <ul>
 <li>How to modify the gridlines behind your chart?
 <ul>
-<li>Try the different themes at the end of this lesson: <code>theme_light()</code> or <code>theme_bw()</code>.</li>
-<li>Or modify the color and size with <code>theme(panel.grid.minor = element_line(colour = &quot;white&quot;, size = 0.5))</code>.</li>
+<li>Try the different themes at the end of this lesson: <code>theme_light()</code> or <code>theme_bw()</code></li>
+<li>Or modify the color and size with <code>theme(panel.grid.minor = element_line(colour = &quot;white&quot;, size = 0.5))</code></li>
 <li>There’s even <code>theme_excel()</code></li>
 </ul></li>
 <li>How do you set the x and y scale manually?
@@ -622,76 +1123,33 @@ where_to_save_it &lt;-<span class="st"> &quot;___.png&quot;</span>
 <li>How do you get rid of the legend if you don’t need it?
 <ul>
 <li><code>geom_point(aes(color = facility_name), show.legend = FALSE)</code></li>
-<li>The R cookbook shows a number of ways to get rid of legends: <a href="http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/" class="uri">http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/</a></li>
+<li>The <a href="http://www.cookbook-r.com/Graphs/Legends_(ggplot2)/">R Cookbook</a> shows a number of ways to get rid of legends.</li>
 </ul></li>
 <li>I only like dashed lines. How do you change the linetype to a <em>dashed</em> line?
 <ul>
 <li><code>geom_line(aes(color = facility_name), linetype = &quot;dashed&quot;)</code></li>
-<li>You should also try <code>&quot;dotted&quot;</code> and <code>&quot;dotdash&quot;</code>, or maybe<code>&quot;twodash&quot;</code></li>
+<li>You can also try <code>&quot;dotted&quot;</code> and <code>&quot;dotdash&quot;</code>, or even<code>&quot;twodash&quot;</code></li>
 </ul></li>
 <li>How many colors are there in R? How does R know <code>hotpink</code> is a color?
 <ul>
-<li>There is an R color cheatsheet: <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf" class="uri">https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf</a></li>
-<li>As well as some basic color names here: <a href="http://www.r-graph-gallery.com/42-colors-names/" class="uri">http://www.r-graph-gallery.com/42-colors-names/</a></li>
+<li>There is an <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">R color cheatsheet</a><br />
+</li>
+<li>As well as a list of <a href="http://www.r-graph-gallery.com/42-colors-names/">R color names</a></li>
 <li><code>library(viridis)</code> provides some great default color palettes for charts and maps.</li>
-<li>This web tool will give you palette ideas and color Hex numbers: <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3" class="uri">http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</a></li>
+<li>This <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">Color web tool</a> has palette ideas and color codes you can use in your plots</li>
 </ul></li>
-<li>What are some handy keyboard shortcuts in R? How do I find them?
+<li>Keyboard shortcuts for RStudio
 <ul>
-<li>There is a shortcut cheat sheet online: <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf" class="uri">https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf</a></li>
-<li>Or in RStudio, you can go to <em>Help</em> &gt; <em>Keyboard Shortcuts Help</em></li>
+<li>There is a <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">Shortcut cheatsheet</a></li>
+<li>In RStudio you can go to <em>Help</em> &gt; <em>Keyboard Shortcuts Help</em></li>
 </ul></li>
 </ul>
 </div>
-</div>
-<div id="your-turn" class="section level1">
-<h1><span class="header-section-number">6</span> | Your turn</h1>
-<hr>
-<p>Let’s start applying what we’ve learned. Choose one of the paths below to put your new hard-earned R skills to use. When you’re feeling ready, choose the Grand Moff path and begin exploring some of your own data.</p>
-<div class="row3" style="margin-top: 20px;">
-<div class="column3">
-<span style="margin-left: 2px;"> <a href="Example_Data_ensign_level.html"> <strong>ENSIGN</strong> </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> </span>
-</div>
-<div class="column3">
-<span style="margin-left: 2px;"> <a href="porg_exposure.html"> <strong>COMMODORE</strong> </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> </span>
-</div>
-<div class="column3">
-<span style="margin-left: 2px;"> <a href="example_outline.html"> <strong>GRAND MOFF</strong> </a><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> </span>
-</div>
-</div>
-<div class="row3">
-<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
-<p><a href="Example_Data_ensign_level.html"><img src="images/jakku_sq.PNG" width="250"></a></p>
-</div>
-<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
-<p><a href="porg_exposure.html"><img src="images/fly_porgs_sq.jpg" width="250"></a></p>
-</div>
-<div class="column3" style="border: 1px solid grey; height: 232px; max-height: 232px;">
-<p><a href="example_outline.html"><img src="images/death_star_sq.PNG" width="250"></a></p>
-</div>
-</div>
-<div class="row3" style="margin-top: 22px;">
-<div class="column3">
-<p>Explore the scrap and salvage economy on Jakku.</p>
-<p>Media: <code>solid waste</code><br />
-Planet: <code>Jakku</code></p>
-</div>
-<div class="column3">
-<p>Study the effects of jet-fuel on Porg reflexes.</p>
-<p>Media: <code>biological</code><br />
-Planet: <code>Ahch-To</code></p>
-</div>
-<div class="column3">
-<p>Travel back to Earth to discover your own data set.</p>
-<p>Media: <code>all</code><br />
-Planet: <code>Earth</code></p>
-</div>
-</div>
+<p><br></p>
+<div id="return-to-homebase" class="section level2 unnumbered">
+<h2><i class="fa fa-rocket" aria-hidden="true"></i> Return to <a href="index.html">Homebase</a></h2>
 <p><br></p>
 </div>
-<div id="return-to-rcamp" class="section level1 unnumbered">
-<h1>Return to <a href="index.html">RCamp</a></h1>
-<p><br></p>
 </div>
 
 

@@ -21,733 +21,1097 @@ knitr::opts_chunk$set(fig.width = 10, fig.height = 5.2)
 htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
-
 # Good morning, young Jedis! {-}
 <hr>
 
 ![](images/day2_bb8_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -10px;"}
 
+## Schedule  {-}
+
+    - Review
+    - Ozone analysis example
+    - Explore your data tables
+    - Arrange and filter data
+    - Join two tables by one or more variables
+    - Add new columns calculated from other columns
+    - Save data
+    - Heatmap plots
+
 <br><br>
 
-### Please connect to your droid {-}
+# Review Day 1 {-}
+<hr>
 
-- Open the __Start menu__  (_Click the Windows logo on the bottom left of the screen_)
-- Select ` Remote Desktop Connection `
-- Enter ` w7-your7digit# ` or ` R32-your7digit# `
-- Press _Connect_
+<br>
+
+  - First we made a wordcloud with the package wordcloud2. 
+  - This exercise taught us to write in command line and how to install and open packages in R Studio.
+  - And it was beautiful!
+  
+  <br>
+  
+
+![](images/name_cloud_mpca.png){style="width: 100%; margin-top: 12px;"}
+
+
+
+
+<br>
+
+  - Next we took a tour of R Studio.
+  - We took a tour of R Studio.
+  - Are there are any remaining questions about that?
+  
+<br>
+  
+
+![](images/rstudio.png){style="width: 85%;"}
+
+
+
+
+<br>
+
+
+
+  - Later we learned about objects, the assignment operator, and how to remove objects from your environment.
+
+  - We made lists with `c()`
+
+  - Then, big dramatic pause here, we made a table known as a data.frame.
+  
+  <br>
+  
+
+![](images/vector_to_dataframe.png){width="510" style="margin-left: 100px;"}
+
+
+
+<br>
+
+
+
+
+  - We read in data using `readr()`
+
+<br>
+
+
+![](images/readr-hexbin-sticker-from-rstudio.png){align="left" width="145" style="margin-right:18px; margin-bottom: 12px;"}
+
+
+
+<br>
+
+
+
+
+
+  - And then we made our first plot with the `ggplot()` function using the *ggplot2 package*.
+  
+  <br>
+  
+  
+
+![](images/ggplot2_hex.png){width="164" style="float: left; margin-right: 26px; margin-top: 10px;  margin-left: 0;"}
+
+
+<br>
+
+
+
+
+  - Are there any questions?
+
+  - Any questions at all..no matter how large or how small...
+
+  - Ask them now, because we are moving on...
+  
+
+<br>
+
+![](images/moving_on.jpg){align="left" width="400" style="margin-right:18px; margin-bottom: 12px;"}
+
+
+
 
 <br><br><br>
 
-__Open your RStudio project__
 
-- __Open__ your project folder from last week
-- Double click the __.Rproj__ file to open RStudio
-- Relax...
+
+
+
+# Analysis demo {-}
+
+Imagine we just received 3 years worth of ozone monitoring data to summarize. __Fun!__ Below is an example workflow we might follow using R.
+
+### 0. Start a new project {-}
+
+Let's be creative and name our project: `"2019_Ozone"`
+
+```{r create, include=F, echo=F}
+library(readxl)
+library(tidyverse)
+
+# Prepare example data
+aqs <- read_excel("data/2014_AQS_FondduLac.xlsx") %>%
+       mutate(Date = as.Date(Date))
+
+met <- read_csv("data/COQ 2014 Processed MET -ASOS.csv") %>% 
+       mutate(Date  = as.Date(paste(Year, Month, Day, sep = "-")),
+              Month = as.numeric(Month),
+              Hour  = as.numeric(Hour)) %>% 
+       group_by(Date, Month, Day, Hour) %>% 
+       summarize(TEMP_F = mean(TempF, na.rm = T))
+
+aqs <- left_join(aqs, met)
+
+aqs <- filter(aqs, Parameter == 88101, !is.na(TEMP_F))
+
+aqs <- rename(aqs, OZONE = Conc, YEAR = Year, SITE = site_catid) %>%
+       rowwise() %>%
+       mutate(YEAR = 2017 - sample(-1:1, 1),
+              Date = as.Date(paste(YEAR, Month, Day, sep = "-")))
+
+aqs <- aqs %>%
+       select(SITE, Date, Hour, OZONE, TEMP_F, everything()) %>%
+       filter(Month > 3, Month < 11) %>% 
+       group_by(SITE, Date) %>%
+       mutate(OZONE  = max(OZONE, na.rm = T),
+              TEMP_F = max(TEMP_F, na.rm = T)) %>% 
+       slice(1)
+
+aqs$UNITS <- "PPB"
+
+aqs$UNITS[6] <- "PPM"
+aqs$OZONE[6] <- aqs$OZONE[6] / 1000
+
+write_csv(aqs, "data/OZONE_samples_demo.csv")
+```
+
+
+### 1. Read the data {-}
+```{r data, message=F, warning=F}
+library(readr)
+
+# Read a file from the web
+air_data <- read_csv("https://itep-r.netlify.com/data/OZONE_samples.csv")
+
+# Read a local file
+air_data <- read_csv("data/OZONE_samples_demo.csv")
+```
+
+```{r tbl, echo=F}
+library(knitr)
+
+air_data %>% sample_n(5) %>% select(SITE, Date, OZONE, TEMP_F) %>% kable()
+```
+
+
+### 2. Clean the names {-}
+```{r clean-names, message=F, fig.width=12, fig.height=4}
+library(janitor)
+
+# Capital letters and spaces make things more difficult
+# Let's clean them out
+air_data <- clean_names(air_data)
+```
+
+
+### 3. Plot the data {-}
+```{r view, message=F, fig.width=12, fig.height=4}
+library(ggplot2)
+
+ggplot(air_data, aes(x = temp_f, y = ozone)) + 
+    geom_point(alpha = 0.2) +
+    geom_smooth(method = "lm")
+```
+
+
+### 4. Clean the data {-}
+```{r clean, eval=T}
+library(dplyr)
+
+# Drop values out of range
+air_data <- air_data %>% filter(ozone > 0, temp_f < 199) 
+
+# Convert all samples to PPB
+air_data <- air_data %>% 
+            mutate(OZONE = ifelse(units == "PPM", ozone * 1000, 
+                                  ozone)) 
+```
+
+
+### 5. View the data __closer__ {-}
+```{r, fig.width=12, fig.height=4}
+ggplot(air_data, aes(x = temp_f, y = ozone)) + 
+    geom_point(alpha = 0.2, size = 3) +
+    geom_smooth(method = "lm") + 
+    facet_wrap(~site) +
+    labs(title = "Ozone increases with temperature", 
+         subtitle = "Observations from 2015-2017")
+```
+
+
+### 6. Summarize the data {-}
+```{r summary}
+air_data <- air_data %>% 
+            group_by(site, year) %>% 
+            summarize(avg_ozone = mean(ozone) %>% round(2),
+                      avg_temp  = mean(temp_f) %>% round(2))
+```
+
+
+```{r, echo=F}
+air_data %>% kable()
+```
+
+
+###  7. Save the results {-}
+
+__Save the final data table__
+```{r save-csv, eval=F}
+air_data %>% write_csv("results/2015-17_ozone_summary.csv")
+```
+
 
 <br>
 
+__Save the site plot to PDF__
+```{r save-pdf, eval=F}
+ggsave("results/2015-2017 - Ozone vs Temp.pdf")
+```
 
-<details>
-<summary class="btn_code"> __Don’t have a project yet?__ </summary><p>
 
-<div class="quiz">
-<br>
+### 8. Share with the world {-}
 
-<a href="https://github.com/MPCA-air/RTrain/blob/master/data/junk_data.zip?raw=true"><span class = "btn btn-info"> __DOWNLOAD__  </span></a> —  The Day 1 project files  
+<a href = "https://github.com/dKvale/ex__OZONE__Project">
+![](images/github_example_ozone.png){style="width: 95%;"}
+</a>
 
-- __Open__ the `.zip` file
-- __Copy__ the "junk_data" folder to your Desktop 
-- __Open__ the folder
-- Double click the __.Rproj__ file to open RStudio
 
-<br>
+<br><br>
 
-<hr>
+<div class="well">
+
+Having an exact record of what you did can serve as great documentation for yourself and others. So next year when your coworker asks why they're getting a different answer for the average ozone concentration in 2016, or why you dropped some values from the data, you'll be able to tell them. 
+
+Or when the lab gets back to you and lets you know the ozone observations were okay on the day that the instrument recorded ridiculously high temperatures, you can update that line in the script and push re-run.
 </div>
 
-</p></details>
 
+# Read scrap data {-}
 
+It's time to jump back in to where we left off on __Day 1__.
+```{r starwars_csv_name, eval=T, message=F}
+# Read in scrap data and set name to "scrap"
+scrap <- read_csv("https://itep-r.netlify.com/data/starwars_scrap_jakku.csv")
+```
 
-## Day 2 schedule  {-}
+# Plot scrap data {-}
 
-1. Data transformations
-    - Add new columns
-    - Summarize your data
-    - Split groups and categories in your data
-    - Save data
-    
-![](images/starwars_sleeping.png){width="260" align="right" style="margin-top:-58px; margin-left:20px; margin-right:6px;"}
+Last time we made a column plot showing the amount of scrap coming from each town.
+```{r, fig.width=12}
+library(ggplot2)
 
-2. Continue to make __plots__
-    - Scatter plots and transparency
-    - Add a smoothed trend line to the plot
-    - Add titles, colors, and axis labels
-    - Bar charts
-    - Histograms
-    - Box plots
-    - Log transform your chart axis
- 
-<br>
-
-
-<details>
-<summary class="btn_code_blue"> __Day 1 review__ </summary>
-<p>
-
-<br>
-
-__1. Load your packages__
-
-__Hint:__ Put the packages you need at the top of every script.
-
-```{r top-packages, eval=F}
-library("readr")
-library("dplyr")
-
-# Your code starts here
-#...
+ggplot(scrap, aes(y = amount, x = origin)) + 
+  geom_col() +
+  theme_gray()
 
 ```
 
-<br>
 
-__2. Load data with `read_csv()`__
+# Data exploration {-} 
 
-```{r, eval=F}
-my_scrap_data <- "data/starwars_scrap_jakku_full.csv"
-
-scrap <- read_csv(my_scrap_data)
-
-scrap <- filter(scrap, Origin != "All")
-```
-
-<br>
-
-<div class="note">
-__Read a CSV file using base R__
-
-There’s often more ways than one to solve a puzzle in R. If one way doesn’t work for you data or is moving slowly, there is likely another way to go about things. You don’t always need a package to read CSVs into R. You can also do this in _base_ R with the function `read.csv()`, also known as "read __dot__ csv". 
-
-The code below will also read in the Jakku scrap data file from Day 1.
-```{r, eval=F}
-
-data <- read.csv("data/starwars_scrap_jakku.csv", stringsAsFactors = F)
-
-```
-
-</div>
-
-<br>
-
-__3. `select()` and `arrange()` your data__
-```{r select-arrange-review, eval=F}
-
-# Sort from low to high
-arrange(scrap, Amount)
-
-# Sort from high to low
-arrange(scrap, desc(Amount))
-
-##Select just the Origin cities and Destination (receiving) groups
-select(scrap, c(Origin, Dest))
-
-```
-
-<br>
-
-
-__4. Filter your data with `filter()`__
-
-__Hint:__ Numbers don’t need quotes.
-
-```{r filter-review, eval=F}
-
-# Filter to Salvage items to only those with Amounts of 299
-scrap_299 <- filter(scrap, Amount == 299)
-
-# Filter to Salvage items that went to trade caravans and raiders
-scrap_trade <- filter(scrap, Dest %in% c("Trade caravan", "Raiders"))
-
-```
-
-<br>
-
-__Questions from Day 1__
-
-- Finding new packages and functions?
-    - Use __Cheatsheets__ to find common functions: 
-        - Go to _Help_ > _Cheatsheets_. 
-        - _Data Transformation_ is what we’re learning now. 
-        - _Data Visualization_ is also good. 
-    - To search for functions 
-        - [google.com](www.google.com): include `r` or `rstats` + `the question`
-        - [stackoverflow.com](https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs) + use the `[r]` tag
-        - To search packages in R get the: [CRANsearcher](https://github.com/RhoInc/CRANsearcher)
-
-- Where’s my _History_?
-    - Push the `UP ARROW` in the console to scroll through your recent command history.
-    - To view your entire history, select the `History` tab in the upper right next to the `Environment` tab.
-
-- Get function help inside R: `?arrange()` 
-
-<br>
-
-</p>
-</details>
-
-
-
-# Data transformation {-}
+# | dplyr
 <hr>
 
+![](images/dplyr_hex.png){width="128" align="left" style="margin-right: 32px; margin-top: 8px; margin-bottom: 20px;"}
 
-Let’s calculate some new columns to help prioritize Rey’s scavenging work.
+<br><br>
 
+_You've unlocked a new package!_  
 
-#| `mutate()`
-<hr>
+<br>
 
-`mutate() `can edit existing columns in a data frame or add new columns calculated from the existing data.
+<div style="clear: both; margin-top: 22px;"></div>
+
+The _dplyr_ package is the go-to tool for exploring, re-arranging, and summarizing data.  
+
+Use `install.packages("dplyr")` to add _dplyr_ to your library.  
 
 
 ## Get to know your data frame {-}
 
-Use these quick functions to describe your data frame.
+Use these simple functions to describe your data.
 
-### Data frame info {-}
+| Function | Information             |  
+|:------|:---------------------------|  
+| `names(scrap)`  | column names            |  
+| `nrow(...)`     | number of rows          |  
+| `ncol(...)`     | number of columns       | 
+| `summary(...)`  | summary of all column values (ex. _max_, _mean_, _median_)  | 
+| `glimpse(...)`  | column names + a glimpse of first values (requires _dplyr_ package)   |  
 
-| Function          | Information             |  
-|:------------------|:------------------------|  
-| `names(scrap)`    | column names            |  
-| `nrow(scrap)`     | number of rows          |  
-| `ncol(scrap)`     | number of columns       | 
-| `summary(scrap)`  | summary of all columns  | 
-| `glimpse(scrap)`  | column names + a glimpse of first few values (requires loading _dplyr_ package)   |  
 
+# | `glimpse()` and `summary()`
+<hr>
+
+Use the `glimpse()` function to find out what type and how much data you have.
+
+Use the `summary()` function to get a quick report on your numeric data.
+
+<br><br>
+
+### Let's read the data into R and give these a whirl. {-}
+
+```{r glimpse, warning = F, message = F}
+library(dplyr)
+library(readr)
+
+scrap <- read_csv("https://itep-r.netlify.com/data/starwars_scrap_jakku.csv")
+
+# View your whole dataframe and the types of data it contains
+glimpse(scrap)
+```
+
+```{r summary-scrap, warning = F, message = F}
+# Use the summary function to get a quick of idea of means and maxima for your numeric data
+summary(scrap)
+```
+
+```{r summary-try, eval=F}
+
+# Try the rest on your own, I dare you!
+
+nrow()
+
+ncol()
+
+names()
+
+```
+
+<br>
+
+
+### Your new analysis toolbox <i class="fa fa-toolbox" aria-hidden="true" style="color: darkgray"></i> {-}
+
+<div class="notes">
+
+| Function      | Job                                                 |  
+|:--------------|:----------------------------------------------------|  
+| `select()`    | Select individual columns to drop, keep, or reorder |  
+| `arrange()`   | Reorder or sort rows by the values of a column      |  
+| `filter()`    | Keep only certain rows based on the values of a column | 
+| `mutate()`    | Add new columns or update existing columns          | 
+| `summarize()` | Calculate a single summary for the entire table     |   
+| `group_by()`  | Split data into groups by values in a column        |  
+
+</div>
+
+
+# | Porg tables 
+
+A poggle of porgs has volunteered to help us demo the `dplyr` functions. 
+
+```{r porg-tabs, results='asis', echo=F}
+cat(readLines("porg_tabs.txt"))
+```
+
+
+# | `select()`
+<hr>
+
+Use the `select()` function to:
+
+- Drop a column you no longer need
+- Pull-out a few columns to create a new table
+- Rearrange or change the order of columns
+
+
+
+## Drop columns with a minus sign: `-column_name` {-}
+```{r select, warning = F, message = F}
+library(dplyr)
+library(readr)
+
+scrap <- read_csv("https://itep-r.netlify.com/data/starwars_scrap_jakku.csv")
+
+# Drop the destination column
+select(scrap, -destination)
+```
+
+
+## Keep only three columns {-}
+```{r arrange3, warning = F, message = F}
+
+# Keep the item, amount and price_per_pound columns
+select(scrap, c(item, amount, price_per_pound))
+```
+
+
+## `everything()` {-}
+
+`select()` also works to change the order of columns. The code below puts the `item` column first and then moves the `units` and `amount` columns directly after `item`. We then keep `evertyhing()` else the same. 
+
+```{r select44, warning = F, message = F}
+
+# Make the `item`, `units`, and `amount` columns the first three columns
+# Leave `everything()` else in the same order
+select(scrap, item, units, amount, everything()) %>% head()
+```
+
+
+
+# | `arrange()` 
+<hr>
+
+Rey wants to know what the highest priced items are. Use `arrange()` to find the highest priced scrap item and see which origins might have a lot of them.
+
+```{r select-arrange-price, warning = F}
+# Arrange scrap items by price
+scrap <- arrange(scrap, price_per_pound)
+
+# View the top 6 rows
+head(scrap)
+```
+
+<br>
+
+### Only `145 credits`! That's not very much at all, oh wait... {-}
+
+
+## Big things first: `desc()`  {-}
+
+To arrange a column in descending order with the biggest numbers on top, we use: `desc(price_per_pound)`
+
+```{r desc-arrange, warning = F}
+# Put most expensive items on top
+scrap <- arrange(scrap, desc(price_per_pound))
+
+# View the top 8 rows
+head(scrap, 8)
+```
+
+
+<br>
+
+<div class="data">
+### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
+
+Try arranging by more than one column, such as `price_per_pound` and `amount`. What happens?
+
+__HINT:__ You can view the entire table by clicking on it in the upper-right _Environment_ tab.
+</div>
+
+<br>
+
+### <i class="fas fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+<div class="well">
+
+When you save an arranged data table it maintains its order. This is perfect for sending people a quick __Top 10__ list of pollutants or sites.
+
+</div>
+
+<br>
+
+# | `filter()`
+<hr>
+
+The `filter()` function creates a subset of the data based on the value of one or more columns. Let's take a look at the records with the origin `"All"`.
+
+```{r filter12, eval=T}
+filter(scrap, origin == "All")
+```
+
+
+<br>
+
+### <i class="fas fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
+
+<div class="data">
+
+Use a `==` (double equals sign) for comparing values. A `==` makes the comparison "is it equal to?" and returns a True or False answer. So the code above returns all the rows where the condition `origin == "All"` is TRUE.
+
+A single equals sign `=` is used within functions to set options, for example `read_csv(file = "starwars_scrap_jakku.csv")`. Don't worry too much. If you use the wrong symbol R is often helpful and will let you know which one is needed.
+
+</div>
+
+## Comparisons {-}
+<hr>
+
+Processing data requires many types of filtering. You'll want to know how to select observations in your table by making various comparisons.
+
+__Key comparison operators__
+
+| Symbol| Comparison               |
+|:------|:-------------------------|
+| `>`   | greater than             |
+| `>=`  | greater than or equal to |
+| `<`   | less than                |
+| `<=`  | less than or equal to    |
+| `==`  | equal to                 |
+| `!=`  | NOT equal to             |
+| `%in%`| value is in a list       |
+
+
+## <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
+
+Try comparing some things in the console and see if you get what you'd expect. R doesn't always think like we do.
+
+```{r, eval=F}
+
+4 != 5
+
+4 == 4
+
+4 < 3
+
+4 > c(1, 3, 5)
+
+4 %in% c(1, 3, 5)
+
+```
+
+
+## Dropping rows {-}
+
+Let's look at the data without that pesky _All_ category. Look in the comparison table above to find the `NOT` operator. We're going to filter the data to keep only the origins that are `NOT equal to` "All".
+
+<br>
+
+```{r filter-all}
+scrap <- filter(scrap, origin != "All")
+```
+
+
+<br>
+
+We can arrange the data in ascending order by `item` to confirm that the "All" category is gone.
+
+```{r filter-arrange, message=F, warning=F}
+
+# Arrange data
+scrap <- arrange(scrap, item)
+
+head(scrap)
+
+```
+
+<br>
+
+Now let's take another look at that bar chart. Is there anything else that is less than perfect with our data?
+
+```{r ggplot-noAll}
+library(ggplot2)
+
+ggplot(scrap, aes(x = origin, y = amount)) + geom_col()
+``` 
+
+
+Much better! But... something still might be hidden in the data that is unexpected. Let's take a look at the amount of items in each units category.
+
+```{r ggplot-Units}
+ggplot(scrap, aes(x = units, y = amount)) + geom_col()
+```
+
+<br>
+
+Interesting. The item "tons" is written two ways. This can happen when multiple labs send you data, or protocols change over time. Let's make a note to deal with this a bit later. 
+
+
+## Multiple filters 
+<hr>
+
+We can add multiple comparisons to `filter()` to further restrict the data we pull from a larger data set. Only the records that pass the conditions of all the comparisons will be pulled into the new data frame. 
+
+The code below filters the data to only scrap records with an origin of `Outskirts` __AND__ a destination of `Niima Outpost`.
+
+```{r filter-multi, eval=F}
+
+outskirts_to_niima <- filter(scrap, 
+                             origin        == "Outskirts", 
+                             destination   == "Niima Outpost")
+```
+
+
+<br>
+
+
+
+# Guess Who? {-}
+<h2 style="margin-top: -24px;"> _Star Wars edition_ </h2>
+
+![](images/sw_guesswho.jpg){width="280" align="right" style="margin-top: -65px; margin-left: 24px; margin-right: 8px;"}
+
+> Are you the best Jedi detective out there? Let's play a game to find out. 
+
+<br>
+
+Guess what else comes with the `dplyr` package? A **Star Wars data set**.
+
+You can open the data set with the following steps:
+
+1. Load the `dplyr` package from your `library()`
+1. Pull the Star Wars dataset into your environment.
+    
+
+```{r}
+library(dplyr)
+
+starwars_data <- starwars
+```
+
+
+## <span style="text-decoration: underline;"> The Rules </span> {-}
+
+1. Scroll through the Star Wars dataset and find a character you find interesting.
+   - Or run `sample_n(starwars_data, 1)` to choose your character at random.
+1. __Keep it hidden!__ Don't show your neighbor the character you chose.
+1. Take turns asking each other questions about your partner's Star Wars character. 
+1. Use the answers to build a `filter()` function and narrow down the potential character your neighbor may have picked. 
+
+
+For example: Here's a `filter()` statement that filters the data to the character _Plo Koon_.
+
+<div style="width: 90%; margin-left: 8%">
+```{r, eval=F}
+mr_koon <- filter(starwars_data,
+                  mass       < 100,
+                  eye_color  != "blue",
+                  gender     == "male",
+                  homeworld  == "Dorin",
+                  birth_year > 20)
+
+```
+</div>
+
+5. _Elusive_ answers are encouraged.
+    - For example, if someone asks: _What is your character's mass?_ 
+    - You can respond: _My character's mass is equal to one less than their age._ 
+    - Or if you're feeling generous you can give a more straight forward answer such as: _My character's mass is definitely more than 100 and less that 140._
+6. Sometimes a character will not have a specific attribute. We learned earlier how R stores nulls as `NA`. If your character has a missing value for hair color, one of your filter statements could be `is.na(hair_color)`. 
+
+<br>
+
+<span style="margin-top: 18px; color: green;"> __WINNER!__ </span>
+
+The winner is the first to guess their neighbor's character.
+
+
+<details>
+<summary class = "btn_code_green"> __WINNERS Click here!__ </summary>
+
+<div class="data" style="margin-top: -12px;">
+<p>
+
+![](images/cat_win.jpg){width="96%"}
+
+</p></div>
+</details>
+
+
+<br>
+
+<div class="note">
+
+#### Want to rematch? {-}
+
+How about make it best of __3__ games? Or switch partners and try again.
+
+</div>
+
+<br><br>
+
+
+__Back to Jakku__
+Let's calculate some new columns to help prioritize Rey's scavenging work.
+
+
+# | `mutate()`
+<hr>
+
+`mutate() ` can edit existing columns in a data frame or add new columns calculated from neighboring columns.
 
 ## Add a column {-}
 <hr>
 
-First let’s add a column with our names, so that Rey will thank us personally on Liberation Day. 
-```{r mutate1, echo = T, eval = T}
-library(readr)
-library(ggplot2)
-library(dplyr)
+First, let's add a column with our names. That way Rey can thank us personally when her ship is finally up and running. 
+```{r mutate-1, warning=F, message=F}
+# Add your name as a column
+scrap <- mutate(scrap, scrap_finder = "BB8")
 
-# Get data
-scrap <- read_csv("data/starwars_scrap_jakku.csv")
+```
 
-# Clean dta
-scrap <- filter(scrap, Origin != "All")
 
-## Add your name as a column
-scrap <- mutate(scrap, scrap_finder = "Your name")
+## Add several columns {-}
 
+Let's also add a new column to document the data measurement method.
+
+```{r mutate2columns, echo=T, eval=T}
+#  Add your name as a column and
+#  some information about the method
+scrap <- mutate(scrap, 
+                scrap_finder    = "BB8",
+                measure_method  = "REM-24")
+
+## REM = Republic Equivalent Method
 ```
 
 
 ## Change a column  {-}
 <hr>
 
-![](images/starwars_cleandroid.jpg){width="250" style="float:right; margin-top:-4px; margin-left: 28px; margin-right: 2px;"}
+Remember how the units of Tons was written two ways: "TONS" and "Tons"? We can use `mutate()` together with `tolower()` to make sure all of the scrap units are written in lower case. This will help prevent them from getting grouped separately in our plots and summaries.
 
-Remember how that unit of Tons was written two ways: "TONS" and "Tons"? We can use `mutate()` together with `tolower()` to make sure all of the Salvage scrap is written in lower case. Case matters in R!
+```{r mutate-2000}
 
-```{r mutate-2}
+# Set units to all lower-case
+scrap <- mutate(scrap, units = tolower(units))
 
-scrap <- mutate(scrap, Units = tolower(Units))
-
-# toupper() will change all of the letters in a column to upper case.
+# toupper() changes all of the letters to upper-case.
 ```
 
 
-## Add a calculated column {-}
-In our work we often use `mutate` to calculate new units for measurements. In this case, let’s estimate the pounds for scavenge items that are reported in tons. 
+## Add calculated columns {-}
+
+In our work we often use `mutate` to convert units for measurements. In this case, let's estimate the total pounds for the scrap items that are reported in tons. 
 
 
-### Tons to pounds conversions {-}
-Use `filter()` to subset the data to the items reported in "tons", and then use `mutate()` to convert the `Amount` column to pounds. We can also change the `Units` column to "pounds" to avoid any confusion.
+### Tons `to` Pounds conversion {-}
 
-```{r, eval=F}
+We can use `mutate()` to convert the `amount` column to pounds. Multiply the `amount` column by 2000 to get new values for a column named `amount_lbs`.
 
-scrap_pounds <- filter(scrap, Units == "tons")
+```{r, message=F, warning=F}
 
-scrap_pounds <- mutate(scrap_pounds, 
-                       Amount_lbs = Amount * 2000,
-                       Units      = "pounds")
-```
-
-<br>
-
-
-I have now written `scrap_pounds` like a million times and I am sick of it. Do I have to type this much? I have rebels to protect and I haven’t eaten in 2 days. 
-
-<br>
-
-### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
-> __Error!__  
->`Error in mutate_impl(.data, dots) : `
->
-> If you use `mutate()` and provide a single value for a column such as `5`, every row in the new column will have that value. 
->
-> If you provide a vector of values, such as `lbs = Amount * 2000`, then a unique value will be calculated for each row. 
->
-> An `Error` will occur if you provide a vector that is longer than 1, but has a different length than the number of rows in your data frame. The error message is a helpful reminder that you must provide a vector that is either a single value or the same length as your data frame.
-
-
-
-#| The pipe `%>%`
-
-__Use the `%>%` young Padawan.__
-
-![](https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png){width="155" align="left" style="margin-right: 28px;"}
-
-<br>
-
-Luckily, you __don’t__ have to do ALL that typing. The pipe let’s you can chain the `filter()` and `arrange()` functions together and do everything in one go. 
-
-<br><br>
-
-```{r pipe-time}
-
-my_scrap <- scrap %>%
-            filter(Salvage == "Acceleration compensator") %>%
-            arrange(desc(Amount))
-
-```
-
-
-
-#| `left_join()`
-
-Remember our different units issue? 
-
-Well, we don’t want to convert the units one by one. Luckily for us, BB8 found a unit converter table while surfing the web. How does BB8 keep doing that!?
-
-## Get data directly from the interwebs {-}
-
-```{r read-convert}
-# The data's url
-convert_url <- "https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/conversion_table.csv"
-
-# Read in the conversion data
-convert <- read_csv(convert_url)
-
-head(convert, 3)
-```
-
-
-## Join 2 tables {-}
-
-### `left_join(table1, table2, by = c("columns to join by"))` {-}
-
-<br>
-
-![](images/left_join_image.png){style="width: 85%; max-width: 85%;"}
-
-<br>
-
-```{r join-convert}
-
-# Join the scrap to the conversion table
-scrap <- left_join(scrap, convert, by = c("Salvage" = "item"))
-
-head(scrap, 5)
+scrap_pounds <- mutate(scrap, amount_lbs = amount * 2000)
 ```
 
 
 <br>
 
-__Help!__ Remeber to type `?left_join` if you are wondering what the arguments are.
+## Final stretch! {-}
+
+<br>
+
+It's time to get off this dusty planet and Rey needs an `Ion engine`. Let's __filter__ the data to only that type of item.
+
+<br>
+
+<details>
+<summary class = "btn_code_blue">_Show code_</summary>
+
+<p>
+
+```{r, warning=F, message=F}
+
+# Grab only the items named "Ion engine"
+scrap_pounds <- filter(scrap_pounds, item == "Ion engine")
+
+```
+</p>
+</details>
+
+<br>
+
+Arrange the data in descending order of pounds so Rey knows where the highest amount of scrap comes from. Then she can go there, trade for some discounted parts and __we're free to FLY TO ENDOR!__
+
+<br>
 
 
-#| `ifelse()`
+<details>
+<summary class="btn_code_blue"> _Show code_ </summary>
+<p>
+```{r arrange-final, eval=F, message=F, warning=F}
+
+# Arrange data
+scrap_pounds <- arrange(scrap_pounds, desc(amount_lbs))
+
+# Return the origin of the highest amount_lbs of scrap
+head(scrap_pounds, 1)
+
+# Plot the total amount_lbs by origin
+ggplot(scrap_pounds, aes(x = origin, y = amount_lbs)) + 
+  geom_col()
+
+```
+</p>
+</details>
+
+<br>
+
+
+<div class="quiz">
+### Pop Quiz! {-}
+
+__For the item `Ion engine`, which origin has the highest `amount_lbs`?__
+
+<input type="radio"> _Tuanul_              <br> 
+<input type="radio"> _Cratertown_          <br> 
+<input type="radio"> _Outskirts_           <br> 
+<input type="radio"> _Reestki_             <br> 
+
+<br>
+
+<details>
+<summary class = "btn_code">_Show solution_</summary>
+
+<p>
+<i class="fa fa-check" aria-hidden="true" style="color: green;"></i> `Cratertown`  
+
+_Yes!! You receive the ship parts to repair Rey's Millennium Falcon. Onward!_
+
+</p>
+</details></div>
+
+<div style="clear: both;"> </div>
+
+
+## First mission complete! {-}
+
+
+# | Save data
+
+You can't break your original dataset if you always name it something else. Let's use the `readr` package to save our new CSV with the tons converted to pounds.
+
+```{r write-csv1, eval=F}
+# Save data as a CSV file 
+write_csv(scrap_pounds, "scrap_in_pounds.csv")
+```
+
+<br>
+
+> Where did R save the file? 
+
+Let's create a new `results/` folder to keep our processed data separate from any raw data we receive.
+
+```{r write-csv2, eval=F}
+# Save data as a CSV file to results folder
+write_csv(scrap_pounds, "results/scrap_in_pounds.csv")
+```
+
+
+<br>
+
+### Time to get off this dusty planet, we're flying to Endor! {-}
+
+<br>
+
+
+
+![](images/endor_forest.jpg){width="500"}
+
+
+
+<br>
+
+
+## BB8 has a new mission {-}
+
+BB8 just received new data suggesting there was a large magnetic storm right before Site 1 burned down on Endor. Sounds like we're going to be __STORM CHASERS__!
+
+
+__Get the dataset__
+
+While we're relaxing and flying to Endor let's get set up with our new data.
+
+<a href="https://itep-r.netlify.com/data/air_endor.csv">
+<span class="btn_code_blue" style="margin-bottom: 10px;"> __DOWNLOAD__  </span></a> -  Endor Air data
+
+1. Download the data above.
+1. Create a new folder called "data" in your project folder.
+1. Move the Endor data to there.
+1. Open a new R script called `endor_air.R`
+
+Now we can read in the data from the data folder with our favorite `read_csv` function.
+
+```{r, endor-air-read, eval=F}
+library(readr)
+library(dplyr)
+
+air_endor <- read_csv("data/air_endor.csv")
+```
+
+<br>
+
+<div class="data">
+__NOTE:__ When your project is open, RStudio sets the working directory to your project folder. When reading in files from a folder outside of your project, you'll need to use the full file path location. For example: `C://Programs/Air_Quality/Ozone_data.csv`
+</div>
+
+```{r, endor-air-read2, include=F}
+library(readr)
+library(dplyr)
+
+air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
+```
+
+
+# Welcome to Endor! {-}
+
+![](images/endor_planet.png){align="center" style="width: 62%; margin-top: -4px;"}
+
+
+__Let's get acquainted with the new data set.__ Remember the different ways?
+
+Hint: `summary()`, `glimpse()`, `nrow()`
+
+<br>
+
+
+```{r, endor-air2}
+
+glimpse(air_endor)
+```
+
+<br>
+
+__I see that there are more analytes than we need. Lucky for us, we only want to know about `magnetic_field` data. Let's filter the data down to only that analyte.__ 
+
+<br>
+
+```{r, endor-air-filter}
+
+mag_endor <- filter(air_endor, Analyte == "magnetic_field")
+```
+
+<br>
+
+> __Boom!__ How many rows are left now?
+
+<br>
+
+
+<div class="well">
+When you have this type of time series data it's helpful for R to know which column is the __date__ column. Dates come in many formats and the preferred format in R is `2019-01-15`. We can use the `lubridate` package to help modify and format dates.
+</div>
+
+
+# | Dates 
 <hr>
 
-Sometimes you may want the value of a new column to depend on the value of an existing column, in other words you want to `mutate()` conditionally. We use `ifelse()` to do this.
+### The `lubridate` package {-}
 
-### `ifelse(If this is true, "Do this", "Otherwise do this thing")` {-}
+![](images/lubridate.png){style="width: 22%; float: left; margin-right: 30px; margin-top: 8px; margin-bottom: 12px;"}
 
-<br>
-```{r ifelse}
-
-# Convert the Amount to pounds, but only if the units are not already in tons
-scrap <- scrap %>% 
-         mutate(Ton_Conv = ifelse(Units == 'tons', Amount, 
-                                                   Amount * pounds / 2000))
-
-```
 
 <br>
 
-Congratulations of galactic proportions to you. We have a clean and tidy data set. If BB8 receives new data to append, we can re-run this script and in 5 seconds we will have a cleaned up data set again!
+It's about time! Lubridate makes working with dates easier. 
 
-
-## {- .tabset}
-
-#### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-} 
-
-__Total price__
-
-We now have the amount of tons sold and the price per ton, but we want to know the total amount of credits for each transaction. How would we calculate that?
-
-<br>
-```{r, eval=F}
-
-# Calculate the total credits for each transaction
-scrap <- scrap %>% 
-         mutate(_______ = _______________)
-```
-
-<br><br><hr>
-
-
-#### Show hint {-}
-
-__Total price__
-
-We now have the amount of tons sold and the price per ton, but we want to know the total amount of credits for each transaction. How would we calculate that?
-
-<br>
-```{r, eval=F}
-# Calculate the total credits for each transaction
-scrap <- scrap %>% 
-         mutate(Credits = _______ * _______)
-
-```
-<br><br><hr>
-
-
-#### Show code {-}
-
-__Total price__
-
-We now have the amount of tons sold and the price per ton, but we want to know the total amount of credits for each transaction. How would we calculate that?
-
-<br>
-```{r}
-# Calculate the total credits for each transaction
-scrap <- scrap %>% 
-         mutate(Credits = Ton_Conv * Price_per_Ton)
-
-```
-<br><br><hr>
-
-
-## {-}
+We can find how much time has elapsed, add or subtract days, and find seasonal and day of the week averages. 
 
 <br>
 
-We as data analysts often get questions like, What’s the highest number? What’s the lowest number? What is the mean tonnage from Cratertown? So, let us move on to `summarize()`.
-
-
-#| `summarize()` this
-<hr>
-
-![](images/summarize_diagram.png){width="490"}
-
-`summarize()` allows you to apply a summary function like `median()` to a column and collapse your data down to a single row. To really dig into `summarize` you’ll want to know some common summary functions, such as `sum()`, `mean()`, `median()`, `min()`, and `max()`.
-
-
-
-## `sum()` {-}
-
-Use `summarize()` and `sum()` to find the total credits from all Salvage.
-
-```{r, eval=T}
-summarize(scrap, Total_Credits = sum(Credits))
-```
-
-
-## `mean()` {-}
-Use `summarize()` and `mean()` to calculate the _mean_ weight in tons in the Salvage reports.
-
-```{r, eval=T}
-
-summarize(scrap, mean_weight = mean(Ton_Conv, na.rm = T))
-
-```
+<div style="clear: both;"></div>
 
 <br>
 
-> Note the `na.rm = TRUE` in the `mean()` function. This tells R to ignore empty cells or missing values that show up in R as `NA`. If you leave `na.rm` out, the _mean_ funciton will return 'NA' when it finds a missing value in the data.
+### Extract date elements {-}
 
+| Function   |  Date element                                            |   
+|----|:-----------------------------------------------------------------|  
+|`year()  `  | Year          |  
+|`month  `   | Month as _1,2,3_; For _Jan, Feb, Mar_ use `label=TRUE`  |  
+|`day  `     | Day of the month  |  
+|`wday`      | Day of the week as _1,2,3_; For _Sun, Mon, Tue_ use `label=TRUE` |  
+| _- Time -_   |            | 
+|`hour() `   |  Hour of the day _(24hr)_ |  
+|`minute() ` |  Minutes   |  
+|`second() ` |  Seconds   |  
+|`tz()  `    |  Time zone |  
 
-## `median()` {-}
-Use summarize to calculate the _median_ weight in the Salvage reports.
-
-`summarize(scrap, median_price = median(Ton_Conv, na.rm = T))`
-
-## `max()` {-}
-Use summarize to calculate the _maximum_ price per ton any scrapper got for their Salvage.
-
-`summarize(scrap, max_price = max(Price_per_Ton, na.rm = T))`
-
-## `min()` {-}
-Use summarize to calculate the _minimum_ price per ton any scrapper got for their Salvage.
-
-`summarize(scrap, min_price = min(Price_per_Ton, na.rm = T))`
-
-## `nth()` {-}
-Use `summarize()` and `nth(Origin, 12)` to find the name of the Origin City that got the  _12th_ highest scrapper haul.   
-
-_Hint: Use `arrange()` first._
-
-`arrange(scrap, desc(Ton_Conv)) %>% summarize(price_12 = nth(Origin, 12))`
-
-## `sd()` {-}
-
-What is the _standard deviation_ of the credits?
-
-`summarize(scrap, stdev_Credits = sd(Credits))`
-
-## `quantile()` {-}
-
-_Quantiles_ are useful for finding the upper or lower range of a column. Use the `quantile()` function to find the the 5th and 95th quantile of the prices.
-
-```{r quants, eval = FALSE}
-
-summarize(scrap, 
-          price_5th_pctile  = quantile(Price_per_Ton, 0.05, na.rm = T),
-          price_95th_pctile = quantile(Price_per_Ton, 0.95))
-```
-
-_Hint: add `na.rm = T` to `quantile()`._
-
-
-## `n()` {-}
-
-`n()` stands for _count_.
-
-Use summarize and `n()` to count the number of reported Salvage records going to a Niima outpost. 
-
-_Hint: Use `filter()` first._  
-
-```{r}
-filter(scrap, Dest == "Niima Outpost") %>% summarize(salvage_records = n())
-```
 
 <br>
 
+### Convert text to a *DATE* {-}
 
-### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
-
-Create a summary of the scrap data that includes 3 of the summary functions above. 
-
-```{r, eval=F}
-
-summary <- summarize(scrap, 
-                     max_credits      = __________,
-                     weight_90th_pct  = quantile(Weight, 0.90),
-                     count_records    = __________,
-                     
-```
+| Function    |  Order of date elements                                 |   
+|----|:-----------------------------------------------------------------|  
+|`mdy()  `    | Month-Day-Year :: `05-18-2019` or `05/18/2019`                 |  
+|`dmy()  `    | Day-Month-Year (Euro dates) :: `18-05-2019` or `18/05/2019`    |  
+|`ymd()  `    | Year-Month-Day (science dates) :: `2019-05-18` or `2019/05/18` |  
+|`ymd_hm() `  | Year-Month-Day Hour:Minutes ::  `2019-05-18 8:35 AM`          |  
+|`ymd_hms() ` | Year-Month-Day Hour:Minutes:Seconds ::  `2019-05-18 8:35:22 AM`    | 
 
 
 
-#| `group_by()`
-<hr>
+## Install `lubridate` {-}
 
-> Wouldn’t it be nice if we could easily find the mean price at every Origin City? It’s time for `group_by()`!
+Install the `lubridate` package and use the `mdy()` function to turn the `Start_Run_Date` column into a nicely formatted date.
 
-<br>
 
-Let’s use `group_by` with the column _Origin_ again, but this time use `summarize` to find the `mean(Price_per_Ton)` for each Origin City. 
+## <i class="fa fa-broom" aria-hidden="true"></i> Clean the dates {-}
 
-```{r mean_price-by-origin}
+```{r endor-air-mutate, message=F}
+library(lubridate)
 
-scrap_summary <- group_by(scrap, Origin) %>% 
-                 summarize(mean_price =  mean(Price_per_Ton, na.rm = T)) 
-
+mag_endor <- mutate(mag_endor, date = mdy(Start_Run_Date))
 ```
 
 
 <br>
 
-
-<details><summary class="btn_code"> Rounding digits </summary><p>
-
-You can round the prices to a certain number of digits using the `round()` function. We can finish by adding the `arrange()` function to sort the table by our new column.
-
-```{r mean_price-by-Origin-round}
-
-scrap_means <- group_by(scrap, Origin) %>% 
-                 summarize(mean_price       =  mean(Price_per_Ton, na.rm = T),
-                           mean_price_round = round(mean_price, digits = 2)) %>%  
-                 arrange(mean_price_round) %>%
-                 ungroup()
-
-```
+__According to the request we received, the Resistance is only interested in observations from after the year `2016`. So let's filter the data down to only dates after that year.__ 
 
 <br>
 
-__NOTE:__ The `round()` function in R does not automatically round values ending in 5 up, instead it uses scientific rounding. It rounds values ending in 5 to the nearest even number, so 2.5 rounded to the nearest whole number using `round()` is 2, and 3.5 rounded to the nearest whole number is 4. If you want to round all values ending in 5 up, then you’ll have to use a rounding function from another package.
-
-</p></details>
-
-
-<br>
-
-Try using `group_by` with the column _Origin_ and then use `summarize` to count the number of Salvage reports from each city.  
-
-```{r grp-by-origin, eval = FALSE}
-
-scrap_counts <- group_by(scrap, Origin) %>% 
-                summarize(origin_count  =  n()) %>% 
-                ungroup()
-
+```{r endor-air-filter-year}
+mag_endor <- filter(mag_endor, year(date) > "2016")
 ```
 
 
-<br>
+# | Time series
+```{r endor-time, message=F}
+ggplot(mag_endor, aes(x = date, y = Result)) + 
+  geom_line(color = "tomato", size = 2) + 
+  geom_point(alpha = 0.5, size = 5) 
 
-### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
-> Ending with `ungroup()` is good practice. This will prevent your data from staying grouped after the summarizing has been completed.
+```
+
+Looks like the measurements definitely picked up a signal towards the end of the year. Let's make a different chart to better show when this was exactly. 
+
+
+## Heatmap or calendar plot {-}
+
+Sometimes with air data we want to know if there is seasonality in the data, this is also true for magnetic storm data from Endor. Calendar plots are great for this. 
+We will use `ggplot()` and bring out the `geom_tile()` to organize our data by dates and find when adn if that storm happened.
+
+First we will pull more information out of those dates.
 
 
 
-#| Save files
-<hr>
+```{r, calendar_dates, fig.width=13, fig.height=7, out.width=1000}
 
-Let’s save the mean price summary table we created to a _CSV_. That way we can print it to have it __transmitted through Droid courier__ to Rey. To save a data frame we’ll use the `write_csv()` function from our favorite _readr_ package. 
-```{r, eval = F}
-
-# Write the file to your results folder
-write_csv(scrap_means, "results/Mean_prices_by_origin.csv")
+mag_endor <- mutate(mag_endor, day = wday(date, label = TRUE), month = month(date), month_text = month(date, label = TRUE), year = year(date))
 
 ```
 
 
 
-### <i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> Pro-tip! {-}
-> __Warning!__ By default, R will overwrite a file if the file already exists in a folder. It will not ask for confirmation. To be safe, do not save processed data to your `data\` folder.
->
 
-<br>
-
-
-#| Grouped `mutate()` 
-<br><hr>
-
-We can bring back `mutate` to add a column based on the grouped values in a data set. For example, you may want to add a column showing the mean price by country to the whole table.  
-
-When you combine `group_by` and `mutate` the new column will be calculated based on the values within each group. 
-
-```{r mutate-price, eval=F}
-
-group_by(scrap, Origin) %>% mutate(origin_mean_price = mean(Price_per_Ton, na.rm = T)) %>% ungroup()
+```{r, calendar_year, fig.width=13, fig.height=7, out.width=1000}
+ggplot(mag_endor, aes(day, reorder(month_text, -month), fill = Result)) +
+  geom_tile(color = "gray") +
+  facet_wrap(~year) +
+  geom_label(aes(label = mday(date)), colour = "white", size = 8) +
+  ylab(NULL)
 
 ```
 
-<br>
-
-Let’s visualize the data with some more plots.
-
-
-#| `ggplot()` sandwich
-<hr>
-
-![](images/auto_plot.gif){style="margin-top: -22px; max-width: 108%;"}
-
-<span class="h6" style="font-size: 28px; font-weight: bold;"> The 3 ingredients in a `ggplot` </span>
-
-
-### 1. The base plot {-}
-```{r, echo=F}
-library(ggplot2)
-```
-
-
-```{r}
-ggplot(scrap)
-```
-
-<br>
-
-> Note when we load the package it’s `library ("ggplot2")`, but the function to make a plot is `ggplot(scrap)`. We admit, it is a bit silly.
-
-
-### 2. The the X, Y _aesthetics_  {-}
-
-The _aesthetics_ assign the components from the data that you want to use in the chart. These also determine the dimensions of the plot.
-
-```{r}
-ggplot(scrap, aes(x = Dest, y = Credits)) 
-```
-
-
-### 3. The layers or _geometries_  {-}
-```{r}
-ggplot(scrap, aes(x = Dest, y = Credits)) + geom_point()
-```
-
-<br>
-
-
-#### <i class="fa fa-starwars" aria-hidden="true" style="color: green"></i> Exercise {-}
-
-Try making a scatterplot of any two columns.
-
-_Hint: Numeric variables will be more informative._
-
-```{r, eval=F}
-ggplot(scrap, aes(x = __column1__, y = __column2__)) + geom_point()
-```
-
-## Colors {-}
-<hr>
-
-
-Now let’s use color to show the origins of the scrap
-```{r}
-ggplot(scrap, aes(x = Dest, y = Credits, color = Origin)) +
-  geom_point()
-```
 
 
 <br>
 
-This is a too much detail. Let’s make a bar chart and add up the sales to make it easier to understand.
-```{r}
-ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) + geom_bar(stat = "sum")
-```
+### Mission complete! {-}
+
+It looks like there really were high magnetic field readings in November of Galactic year 2017. With luck, the Resistance will reward us handsomely for this information.
+
+
 
 <br>
 
-This is the same as `geom_col()`.
-```{r, eval=F}
-ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) + geom_col()
-```
 
-<br>
-
-What if we want to make it easier to compare sales by origin? Let’s change the position.
-```{r}
-ggplot(scrap, aes(x = Dest, y = Credits, fill = Origin)) +
-  geom_bar(stat = "sum", position = "dodge")
-```
-
-
-# Homeworld training {-}
-
-![](images/porg.png){style="float: right; margin-top: -10px;"}
-
-1. Load one of the data sets below into R
-    - Porg contamination on Ahch-To: https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/Porg_samples.csv
-    - Planet Endor air samples: https://raw.githubusercontent.com/MPCA-air/RTrain/master/data/air_endor.csv
-    - Or use data from a recent project of yours  
-
-<br>
-  
-2. Create 2 plots using the data. _Don’t worry if it looks really weird. Consider it art._  
-  
-<br>
-
-3. Paste the function `runif(1)` into your console. 
-    - If the number is bigger than `0.2` e-mail your plots to the class.
-
-
-# <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
+## <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
 
 <br>

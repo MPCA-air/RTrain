@@ -1,12 +1,13 @@
-library(dplyr)
+library(tidyverse)
 
-porgs <- data.frame(id = 1:5,
-                      minion = c("Carl", "Phil", "Tom", "Tim", "Jerry"),
-                      color  = c("yellow", "yellow", "purple", "purple","yellow"),
-                      age    = c(5,6,11,12,3),
-                      mass   = c(36,41,39,43,39),
-                      height = c(66,72,58,53,79))
+porgs <- data.frame(id     = 1:5,
+                    #porg   = c("Carl", "Phil", "Tom", "Tim", "Jerry"),
+                    color  = c("yellow", "yellow", "purple", "purple","yellow"),
+                    age    = c(5,6,11,12,3),
+                    mass   = c(36,41,39,43,39),
+                    height = c(66,72,58,53,79))
 
+write_csv(porgs, "data/porg_observations.csv")
 
 summarize(porgs, avg_age = mean(age))
 
