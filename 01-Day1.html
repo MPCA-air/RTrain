@@ -343,121 +343,151 @@ div.tocify {
 </div>
 
 
+<div class="well">
+<h1 style="margin-top: 7px; margin-bottom: 16px; font-size: 30px;">
+Welcome!
+</h1>
+<p><em>The <code style="color: hotpink;"> force </code> is strong with you. Join us, learn <code style="color: hotpink;">R</code>, and use your powers for good.</em></p>
+</div>
+<p><br></p>
+<div id="power-on-your-droids" class="section level2 unnumbered">
+<h2>Power on your droids</h2>
+<div class="figure">
+<img src="images/day1_bb8_sq.png" style="float: left; margin-right: 34px; margin-bottom: 28px; margin-top: 0px;" width="220" />
+
+</div>
+<p><br></p>
+<p>You and BB8 arrived just in time. Rey needs your help!</p>
+<p>The Junk boss Unkar is up to no-good once again and Rey needs some parts to repair her starship. With your help she can escape Jakku and join forces with the New Republic.</p>
+<div style="clear: both;">
+
+</div>
+<div class="well">
+<p><strong>Connect to your droid</strong></p>
+<ul>
+<li>Open the <strong>Start menu</strong> <em>(the Windows logo on the bottom left of the screen)</em></li>
+<li>Select <code>Remote Desktop Connection</code> <em>(you may need to search for it the 1st time)</em></li>
+<li>Enter your desktop’s ID: <code>w7-your7digit#</code> or <code>R32-your7digit#</code></li>
+<li>Press <em>Connect</em></li>
+</ul>
+</div>
+</div>
+<div id="open-rstudio" class="section level2 unnumbered">
+<h2>Open <em>RStudio</em></h2>
+<div style="width: 48%; float: left; margin-right: 5%; margin-top: -14px;">
+<div class="figure">
+<img src="images/rstudio_logo.png" style="width: 88%; margin-top: -35px; margin-bottom: -6px;" />
+
+</div>
+<ul>
+<li><strong>Where’s my R?</strong> <em>Do you need to install <strong>R</strong> or <strong>RStudio</strong>? There’s a nice workaround for you below.</em></li>
+</ul>
+</div>
+<p><br></p>
+<div class="figure">
+<img src="images/rstudio_open.png" style="width: 34%; margin-top: -80px;" />
+
+</div>
+<div style="clear: both;">
+
+</div>
+<details style="margin-top: -54px;"> <summary class = "btn_code_blue" style="font-size: 17px;"> <strong>Get R!</strong> <em>(workaround)</em> </summary>
+<div class="note" style="margin-top: 0px; border-radius: 0;">
+<p>
+<p>This is a temporary solution to get <code>R</code> + <code>RStudio</code> on your computer for the training.</p>
+<h3 id="open-the-r-versions-folder-on-the-x-drive" class="unnumbered">1. Open the R versions folder on the X-drive</h3>
+<ul>
+<li><code style="font-size: 76%;"> <code>\\pca.state.mn.us\xdrive\Agency_Files\Data_Services\DAU\Data Analytics User Group\Shared\r\versions</code> </code></li>
+</ul>
+<h3 id="select-and-copy-these-2-folders" class="unnumbered">2. Select and copy these 2 folders</h3>
+<div class="figure">
+<img src="images/install/shared_r_folder.png" style="margin-left: 7%; width: 74%" />
+
+</div>
+<h3 id="open-your-documents-folder" class="unnumbered">3. Open your <em>Documents</em> folder</h3>
+<div class="figure">
+<img src="images/install/open_documents.png" style="margin-left: 7%; width: 74%" />
+
+</div>
+<h3 id="paste-in-the-copied-folders" class="unnumbered">4. Paste in the copied folders</h3>
+<div class="figure">
+<img src="images/install/paste_to_documents.png" style="margin-left: 7%; width: 74%" />
+
+</div>
+<p><br></p>
+<h3 id="test-for-success" class="unnumbered">Test for success</h3>
+<ul>
+<li>Open <code>RStudio.exe</code> in the <em>RStudio</em> folder</li>
+</ul>
+<div class="figure">
+<img src="images/install/rstudio_exe.png" style="margin-left: 7%; width: 74%" />
+
+</div>
+<p><br></p>
+<ul>
+<li>If you see the screen below - Great work! You’re ready to go.</li>
+</ul>
+<div class="figure">
+<img src="images/install/rstudio_open.png" style="margin-left: 7%; width: 85%" />
+
+</div>
+</p>
+</div>
+<p></details></p>
+<p><br></p>
+</div>
 <div id="blast-off" class="section level1 unnumbered">
 <h1>Blast off!</h1>
-<p>Let’s launch ourselves into the unknown and use R to make a <code>Word Cloud</code>. With a little copy and pasting we can make a fun image out of everyone’s name in the class.</p>
-<p>Since you’re such a big deal, we’re going to be helping you make your name really <span style="font-size: 26px;"> <strong>BIG</strong> </span> in the word cloud below.</p>
 <div class="figure">
-<img src="images/name_cloud_mpca.png" style="width: 100%; margin-top: 12px;" />
+<img src="images/name_cloud_mpca.png" style="width: 90%; margin-left: 4%; margin-bottom: -18px; margin-top: -24px;" />
 
-</div>
-<hr style="margin-top: 4px;">
-<div id="instructions" class="section level3 unnumbered">
-<h3>INSTRUCTIONS</h3>
-<ol style="list-style-type: decimal">
-<li>Open R Studio</li>
-</ol>
-<div class="figure">
-<img src="images/rstudio_open.png" style="width: 35%;" />
-
-</div>
-<p><br></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Copy the code below into your script in RStudio. Start with the line <code>install.packages</code> and end with the line <code>color = 'random-dark')</code>.</li>
-</ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;wordcloud2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>))
-<span class="kw">library</span>(wordcloud2)
-<span class="kw">library</span>(dplyr)
-
-           <span class="co">#---- Class names ----# </span>
-class &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Steve&quot;</span>    =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Mike&quot;</span>     =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Eric&quot;</span>     =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Carma&quot;</span>    =<span class="st"> </span><span class="dv">9</span>, 
-           <span class="st">&quot;Sarah&quot;</span>    =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Phil&quot;</span>     =<span class="st"> </span><span class="dv">9</span>, 
-           <span class="st">&quot;Min&quot;</span>      =<span class="st"> </span><span class="dv">9</span>, 
-           <span class="st">&quot;Shane&quot;</span>    =<span class="st"> </span><span class="dv">9</span>,
-           <span class="st">&quot;Nick&quot;</span>     =<span class="st"> </span><span class="dv">9</span>,
-           <span class="st">&quot;Tyler&quot;</span>    =<span class="st"> </span><span class="dv">9</span>,
-           <span class="co">#---- Fun names ----#</span>
-           <span class="st">&quot;R&quot;</span>        =<span class="st"> </span><span class="dv">26</span>, 
-           <span class="st">&quot;2019&quot;</span>     =<span class="st"> </span><span class="dv">20</span>,
-           <span class="st">&quot;MPCA&quot;</span>     =<span class="st"> </span><span class="dv">16</span>,
-           <span class="st">&quot;Porgs!&quot;</span>    =<span class="st"> </span><span class="dv">84</span>,
-           <span class="st">&quot;Endor&quot;</span>     =<span class="st"> </span><span class="dv">10</span>,
-           <span class="st">&quot;Jakku&quot;</span>     =<span class="st"> </span><span class="dv">10</span>,
-           <span class="st">&quot;BB8&quot;</span>       =<span class="st"> </span><span class="dv">12</span>,
-           <span class="st">&quot;Rey&quot;</span>       =<span class="st"> </span><span class="dv">8</span>,
-           <span class="st">&quot;Derek&quot;</span>     =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Kristie&quot;</span>   =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Barbara&quot;</span>   =<span class="st"> </span><span class="dv">8</span>, 
-           <span class="st">&quot;Dorian&quot;</span>    =<span class="st"> </span><span class="dv">8</span>)
-
-<span class="co"># Add 20 Star Wars names as small text, size = 4</span>
-class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class="kw">rep</span>(<span class="dv">4</span>, <span class="dv">20</span>))
-
-<span class="kw">names</span>(class)[(<span class="kw">length</span>(class) <span class="op">-</span><span class="st"> </span><span class="dv">19</span>)<span class="op">:</span><span class="kw">length</span>(class)] &lt;-<span class="st"> </span><span class="kw">sample_n</span>(starwars, <span class="dv">20</span>)<span class="op">$</span>name      
-
-<span class="co"># Plot the Word Cloud with the &quot;random-dark&quot; color theme</span>
-<span class="kw">wordcloud2</span>(<span class="kw">data.frame</span>(<span class="dt">word =</span> <span class="kw">names</span>(class), <span class="dt">freq =</span> class), 
-           <span class="dt">size  =</span> <span class="dv">1</span>, 
-           <span class="dt">color =</span> <span class="st">&#39;random-dark&#39;</span>)</code></pre></div>
-<p><br></p>
-<ol start="3" style="list-style-type: decimal">
-<li>In R Studio click on <strong>File &gt; New File &gt; R Script</strong>. You will see a code editor window open.</li>
-</ol>
-<div class="figure">
-<img src="images/new_script_file.png" style="width: 65%; margin-bottom: 18px;" />
-
-</div>
-<ol start="4" style="list-style-type: decimal">
-<li>Paste the copied code into the upper left hand window. This is your code editor.<br />
-</li>
-<li>Highlight all of the code and hit <code>CTRL + ENTER</code>.</li>
-<li>You should see a Word Cloud pop up in the lower right of RStudio.</li>
-<li>Now try increasing the number next to your name.<br />
-</li>
-<li>Run the code again.
-<ul>
-<li>You may need to increase the size of the <code>Viewer</code> window shown below to make enough room for your name to appear. You can also click the <code>Zoom</code> icon to create a bigger word cloud.</li>
-</ul></li>
-<li>Make your name even <strong>BIGGER!</strong></li>
-</ol>
-<div class="figure">
-<img src="images/rstudio_viewer_wordcloud.png" style="width:75.0%" />
-
-</div>
-<p><br></p>
-<div class="tip" style="margin-top: 12px; padding-top: 0px; padding-bottom: 4px;">
-<h4 id="congrats-rebel-droid" class="unnumbered">Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i></h4>
-</div>
 </div>
 </div>
 <div id="introductions" class="section level1 unnumbered">
 <h1>Introductions</h1>
-<hr>
-<p>Let’s introduce ourselves and the data we love. Find a partner and learn 3 things about them.</p>
+<p>Let’s introduce ourselves and the data we love. Find a <strong>partner</strong> and get to know 3 things about them.</p>
+<p><br></p>
 <div class="figure">
 <img src="images/starwars_group.jpg" align="right" style="width: 54%; margin-left: 26px; margin-top: 10px;" />
 
 </div>
-<p><strong>Please learn:</strong></p>
+<p><strong>Things to share</strong></p>
 <div class="note" style="margin-top: -2px;">
 <ul>
-<li>Their name<br />
-</li>
-<li>Types of data they have</li>
-<li>Who they share it with</li>
-<li>The messiest, weirdest, funniest part of their data</li>
-<li>Something they have to do over and over again</li>
+<li>Your name or Star Wars alias</li>
+<li>Types of data you have</li>
+<li>Who you share it with</li>
+<li>What you want to get from the workshop</li>
+<li>The messiest &amp; funniest part of your data</li>
+<li>Something you get to do over and over again</li>
 </ul>
-<p><strong>Hint:</strong> <em>Maybe this is something you can automate with R.</em></p>
+<p><strong>Hint:</strong> <em>Maybe this is something you can automate with R</em></p>
 </div>
 <p><br></p>
+<div id="whats-my-name" class="section level3 unnumbered">
+<h3>What’s my name?</h3>
+<div class="row3">
+<div class="column4" style="border: 0;">
+<p><img src="images/barbara.png" height="220" width="200"></p>
 </div>
-<div id="why-r" class="section level1">
-<h1><span class="header-section-number">1</span> Why R?</h1>
+<div class="column4" style="border: 0;">
+<p><img src="images/kristie.jpeg" height="240" width="200"></p>
+</div>
+<div class="column4" style="border: 0;">
+<p><img src="images/dorian.jpg" height="220" width="200"></p>
+</div>
+<div class="column4" style="border: 0;">
+<p><img src="images/derek.jpg" height="200" width="200"></p>
+</div>
+</div>
+<p><br></p>
+<p>We are <strong>Barbara</strong>, <strong>Kristie</strong>, <strong>Dorian</strong>, and <strong>Derek</strong>.</p>
+<p>We aren’t computer scientists and that’s okay!</p>
+<p>We make lots of mistakes. Mistakes are funny. You can laugh with us.</p>
+</div>
+</div>
+<div id="why-r" class="section level1 unnumbered">
+<h1>Why R?</h1>
 <hr>
 <div class="figure">
 <img src="images/rladies_map.gif" style="width: 95%;" />
@@ -465,16 +495,15 @@ class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class
 </div>
 <div id="r-community" class="section level2 unnumbered">
 <h2>R Community</h2>
-<p>See the <a href="community.html">R Community</a> page.</p>
 <ul>
-<li><a href="https://itep-r.netlify.com/page/community.html">R support and community</a></li>
-<li>MPCA R question board (<a href="https://github.com/MPCA-air/R-questions" class="uri">https://github.com/MPCA-air/R-questions</a>)</li>
-<li>Finding R Help <a href="https://itep-r.netlify.com/page/help.html" class="uri">https://itep-r.netlify.com/page/help.html</a></li>
-<li>R cheatsheet / function cards</li>
+<li>See the <a href="https://itep-r.netlify.com/page/community.html">R Community</a> page.</li>
+<li>MPCA sharing + questions - <a href="https://github.com/MPCA-air/R-questions">R questions</a></li>
+<li>Finding R Help - <a href="help.html">Get Help!</a></li>
+<li>R cheatsheets</li>
 </ul>
 </div>
-<div id="when-to-use-r" class="section level2 unnumbered">
-<h2>When to use R?</h2>
+<div id="when-we-use-r" class="section level2 unnumbered">
+<h2>When we use R?</h2>
 <ul>
 <li>To connect to databases</li>
 <li>To read data from the web</li>
@@ -501,7 +530,8 @@ class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class
 </div>
 </div>
 <div id="a-grand-tour" class="section level1">
-<h1><span class="header-section-number">2</span> | A grand tour</h1>
+<h1><span class="header-section-number">1</span> | A grand tour</h1>
+<hr>
 <div class="figure">
 <img src="images/rstudio.png" style="width: 85%;" />
 
@@ -539,13 +569,13 @@ class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class
 </ul></li>
 </ol>
 <p><img src="images/font_change.png" style="width: 65%; margin-top: 14px; margin-left: 2%;"></p>
-<p><br></p>
+<p><br><br></p>
 <div class="well">
 <p>Now that we’re ready, let’s go forth and make some trouble. While BB8 works on tracking down some data for us from his droid friends, we’ll get to know our way around his internal computer.</p>
 </div>
 </div>
-<div id="data-awaits" class="section level3 unnumbered">
-<h3>Data awaits …</h3>
+<div id="data-awaits-us" class="section level3 unnumbered">
+<h3>Data awaits us…</h3>
 <div class="figure">
 <img src="images/rey_bb8_sand_dunes.gif" style="width: 70%; margin-left: 10%;" />
 
@@ -574,7 +604,7 @@ class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class
 </div>
 </div>
 <div id="names-and-things" class="section level1">
-<h1><span class="header-section-number">3</span> | Names and things</h1>
+<h1><span class="header-section-number">2</span> | Names and things</h1>
 <hr>
 <p>You can assign values to new objects using the “left arrow” <code>&lt;-</code>, which is written by typing a less-than sign followed by a hyphen. It’s more officially known as the <em>assignment operator</em>. Try adding the code below to your R script to assign a value to an object called <code>droid</code>.</p>
 <p>To run a line of code in your script, move the cursor to that line and press <strong>CTRL+ENTER</strong>.</p>
@@ -792,7 +822,7 @@ starwars_df<span class="op">$</span>ages</code></pre></div>
 </div>
 </div>
 <div id="read-data" class="section level1">
-<h1><span class="header-section-number">4</span> | Read data</h1>
+<h1><span class="header-section-number">3</span> | Read data</h1>
 <hr>
 <p>The first step of a good scrap audit is reading in some data to figure out where all the scrap is coming from. Here is a small dataset showing the scrap economy on Jakku. It was salvaged from a crash site, but the transfer was incomplete.</p>
 <table>
@@ -1068,7 +1098,7 @@ Show me the <em>arguments</em>!
 </div>
 </div>
 <div id="ggplot2" class="section level1">
-<h1><span class="header-section-number">5</span> | ggplot2</h1>
+<h1><span class="header-section-number">4</span> | ggplot2</h1>
 <hr>
 <div id="plot-the-data-plot-the-data-plot-the-data" class="section level3 unnumbered">
 <h3><em>Plot the data, Plot the data, Plot the data</em></h3>
@@ -1087,7 +1117,7 @@ Show me the <em>arguments</em>!
 <p><strong>NOTE</strong></p>
 <p>You can also install packages from the <code>Packages</code> tab in the lower right window of RStudio.</p>
 <div class="figure">
-<img src="images/install_packages.png" style="width: 500px; height: 200px; margin-left: 10%;" />
+<img src="images/install_packages.png" style="width: 450px; height: 180px; margin-left: 10%;" />
 
 </div>
 </div>
@@ -1095,9 +1125,9 @@ Show me the <em>arguments</em>!
 <div id="a-column-plot" class="section level2 unnumbered">
 <h2>A column plot</h2>
 <p>Here’s a simple chart showing the total amount of scrap for each origin location.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)</code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">y =</span> amount, <span class="dt">x =</span> origin)) <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+<span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">y =</span> amount, <span class="dt">x =</span> origin)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme_gray</span>()</code></pre></div>
 <pre><code>## Warning: Removed 910 rows containing missing values (position_stack).</code></pre>
@@ -1112,13 +1142,13 @@ Show me the <em>arguments</em>!
 </div>
 </div>
 <div id="get-help" class="section level1">
-<h1><span class="header-section-number">6</span> | Get help <i class="far fa-question-circle" aria-hidden="true"> </i></h1>
+<h1><span class="header-section-number">5</span> | Get help <i class="far fa-question-circle" aria-hidden="true"> </i></h1>
 <hr>
 <p>Is something not working or behaving strangely and you don’t know why?</p>
 <p>See the <a href="help.html">Help!</a> page.</p>
 </div>
 <div id="operation-shut-down" class="section level1">
-<h1><span class="header-section-number">7</span> | Operation Shut Down</h1>
+<h1><span class="header-section-number">6</span> | Operation Shut Down</h1>
 <p>When you close R for the first time you will see some options about saving your workspace and other files. In general, we advise against saving these files. It’s easy enough to re-run your script next time you open your project. This will help RStudio open a fresh and clean environment every time you start it.</p>
 <p>Follow these steps to set these options permanently.</p>
 <p><strong>Turn off “Save Workspace”</strong></p>
@@ -1250,6 +1280,95 @@ ages_sum</code></pre></div>
 </tbody>
 </table>
 <p><br></p>
+<details> <summary class = "btn_code" style="font-size: 15px;"> <strong>Build your own Word Cloud</strong> </summary>
+<div class="quiz" style="margin-top: 0;">
+<p>
+<p>Let’s launch ourselves into the unknown and use R to make a <code>Word Cloud</code>. With a little copy-pasting we can make a fun image out of everyone’s name in the class.</p>
+<p>Since you’re such a big deal, we can also help you make your name really <span style="font-size: 26px;"> <strong>BIG</strong> </span>.</p>
+<hr style="margin-top: 4px;">
+<div id="instructions" class="section level3 unnumbered">
+<h3>INSTRUCTIONS</h3>
+<ol style="list-style-type: decimal">
+<li><p>Open R Studio</p></li>
+<li><p>Copy the code below into your script in RStudio. Start with the line <code>install.packages</code> and end with the line <code>color = 'random-dark')</code>.</p></li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;wordcloud2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>))
+<span class="kw">library</span>(wordcloud2)
+<span class="kw">library</span>(dplyr)
+
+           <span class="co">#---- Class names ----# </span>
+class &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Steve&quot;</span>    =<span class="st"> </span><span class="dv">8</span>, 
+           <span class="st">&quot;Mike&quot;</span>     =<span class="st"> </span><span class="dv">9</span>, 
+           <span class="st">&quot;Eric&quot;</span>     =<span class="st"> </span><span class="dv">8</span>, 
+           <span class="st">&quot;Hannah&quot;</span>   =<span class="st"> </span><span class="dv">9</span>, 
+           <span class="st">&quot;Jon&quot;</span>      =<span class="st"> </span><span class="dv">8</span>, 
+           <span class="st">&quot;Mary&quot;</span>     =<span class="st"> </span><span class="dv">9</span>, 
+           <span class="st">&quot;Min&quot;</span>      =<span class="st"> </span><span class="dv">9</span>, 
+           <span class="st">&quot;Aida&quot;</span>     =<span class="st"> </span><span class="dv">9</span>,
+           <span class="st">&quot;Matthias&quot;</span> =<span class="st"> </span><span class="dv">8</span>,
+           <span class="st">&quot;Gao&quot;</span>      =<span class="st"> </span><span class="dv">9</span>,
+           <span class="st">&quot;Ben&quot;</span>      =<span class="st"> </span><span class="dv">9</span>,
+           <span class="st">&quot;Eva&quot;</span>      =<span class="st"> </span><span class="dv">9</span>,
+           <span class="st">&quot;James&quot;</span>    =<span class="st"> </span><span class="dv">10</span>,
+           <span class="st">&quot;Kitty&quot;</span>    =<span class="st"> </span><span class="dv">11</span>,
+           <span class="st">&quot;Zeb&quot;</span>      =<span class="st"> </span><span class="dv">9</span>,
+           <span class="co">#---- Fun names ----#</span>
+           <span class="st">&quot;R&quot;</span>        =<span class="st"> </span><span class="dv">26</span>, 
+           <span class="st">&quot;2019&quot;</span>     =<span class="st"> </span><span class="dv">20</span>,
+           <span class="st">&quot;MPCA&quot;</span>     =<span class="st"> </span><span class="dv">16</span>,
+           <span class="st">&quot;Porgs!&quot;</span>    =<span class="st"> </span><span class="dv">84</span>,
+           <span class="st">&quot;Endor&quot;</span>     =<span class="st"> </span><span class="dv">10</span>,
+           <span class="st">&quot;Jakku&quot;</span>     =<span class="st"> </span><span class="dv">10</span>,
+           <span class="st">&quot;BB8&quot;</span>       =<span class="st"> </span><span class="dv">12</span>,
+           <span class="st">&quot;Rey&quot;</span>       =<span class="st"> </span><span class="dv">8</span>,
+           <span class="st">&quot;Derek&quot;</span>     =<span class="st"> </span><span class="dv">8</span>, 
+           <span class="st">&quot;Kristie&quot;</span>   =<span class="st"> </span><span class="dv">8</span>, 
+           <span class="st">&quot;Barbara&quot;</span>   =<span class="st"> </span><span class="dv">8</span>, 
+           <span class="st">&quot;Dorian&quot;</span>    =<span class="st"> </span><span class="dv">8</span>)
+
+<span class="co"># Add 20 Star Wars names as small text, size = 4</span>
+class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class="kw">rep</span>(<span class="dv">4</span>, <span class="dv">20</span>))
+
+<span class="kw">names</span>(class)[(<span class="kw">length</span>(class) <span class="op">-</span><span class="st"> </span><span class="dv">19</span>)<span class="op">:</span><span class="kw">length</span>(class)] &lt;-<span class="st"> </span><span class="kw">sample_n</span>(starwars, <span class="dv">20</span>)<span class="op">$</span>name      
+
+<span class="co"># Plot the Word Cloud with the &quot;random-dark&quot; color theme</span>
+<span class="kw">wordcloud2</span>(<span class="kw">data.frame</span>(<span class="dt">word =</span> <span class="kw">names</span>(class), <span class="dt">freq =</span> class), 
+           <span class="dt">size  =</span> <span class="dv">1</span>, 
+           <span class="dt">color =</span> <span class="st">&#39;random-dark&#39;</span>)</code></pre></div>
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>In R Studio click on <strong>File &gt; New File &gt; R Script</strong>. You will see a code editor window open.</li>
+</ol>
+<div class="figure">
+<img src="images/new_script_file.png" style="width: 65%; margin-bottom: 18px;" />
+
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Paste the copied code into the upper left hand window. This is your code editor.<br />
+</li>
+<li>Highlight all of the code and hit <code>CTRL + ENTER</code>.</li>
+<li>You should see a Word Cloud pop up in the lower right of RStudio.</li>
+<li>Now try increasing the number next to your name.<br />
+</li>
+<li>Run the code again.
+<ul>
+<li>You may need to increase the size of the <code>Viewer</code> window shown below to make enough room for your name to appear. You can also click the <code>Zoom</code> icon to create a bigger word cloud.</li>
+</ul></li>
+<li>Make your name even <strong>BIGGER!</strong></li>
+</ol>
+<div class="figure">
+<img src="images/rstudio_viewer_wordcloud.png" style="width:75.0%" />
+
+</div>
+<p><br></p>
+<div class="tip" style="margin-top: 12px; padding-top: 0px; padding-bottom: 4px;">
+<h4 id="congrats-rebel-droid" class="unnumbered">Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i></h4>
+</div>
+</p>
+</div>
+<p></details></p>
+<p><br></p>
+</div>
 <div id="return-to-homebase" class="section level2 unnumbered">
 <h2><i class="fa fa-rocket" aria-hidden="true"></i> Return to <a href="index.html">Homebase</a></h2>
 <p><br></p>

@@ -20,9 +20,8 @@
 <script src="index_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="index_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="index_files/navigation-1.1/tabsets.js"></script>
-<link href="index_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="index_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="index_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="index_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="index_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 
@@ -56,9 +55,7 @@ h6 {
 
 <link rel="stylesheet" href="css\camp_style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -83,22 +80,92 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -116,26 +183,26 @@ $(document).ready(function () {
 <div id="get-r" class="section level2">
 <h2>Get R!</h2>
 <hr>
-<p>Go to — <a href="https://mpca-air.github.io/RCamp/00-Install.html">Install R</a> — for instructions on installing the latest version of R and RStudio.</p>
+<p>Go to — <a href="https://itep-r.netlify.com/page/install.html">Install R</a> — to get the latest version of R and RStudio.</p>
 <p><br></p>
 <div id="updates" class="section level4">
 <h4>Updates</h4>
-<p>Go to — <a href="https://mpca-air.github.io/RTrain/00-Update.html">Update R</a> — if you already have R installed but haven’t used it in awhile.</p>
+<p>Go to — <a href="https://itep-r.netlify.com/page/install.html#update-r">Update R</a> — if you already have R but haven’t used it in awhile.</p>
 </div>
 </div>
 <div id="intro-to-r" class="section level2">
 <h2>Intro to R</h2>
 <hr>
-<p>This series of tutorials teaches the basics of importing data, using new packages, cleaning and summarizing data with <strong>tidy</strong> tools, and using <code>ggplot2</code> to make charts and other data visualizations.</p>
+<p>This series teaches the basics of importing data, using new packages, cleaning and summarizing data with <strong>tidy</strong> tools, and using <code>ggplot2</code> to make charts, maps and other data visualizations.</p>
 <div class="row3" style="margin-top: 20px;">
 <div class="column3">
-<span style="margin-left: 32%;"><i class="fa fa-star" aria-hidden="true" style="color: #f17405;"></i> <strong>Day 1</strong> <i class="fa fa-star" aria-hidden="true" style="color: #f17405;"></i></span>
+<a href="01-Day1.html"><span style="margin-left: 32%;"><i class="fa fa-star" aria-hidden="true" style="color: #f17405;"></i> <strong>Day 1</strong> <i class="fa fa-star" aria-hidden="true" style="color: #f17405;"></i></span></a>
 </div>
 <div class="column3">
-<span style="margin-left: 32%;&gt;&lt;i class=" fa="" fa-star"="" aria-hidden="true" style="color: #2a5ea9;"><i class="fa fa-star" aria-hidden="true" style="color: #2a5ea9;"></i> <strong>Day 2</strong> <i class="fa fa-star" aria-hidden="true" style="color: #2a5ea9;"></i></span>
+<a href="02_Day2.html"><span style="margin-left: 32%;&gt;&lt;i class=" fa="" fa-star"="" aria-hidden="true" style="color: #2a5ea9;"><i class="fa fa-star" aria-hidden="true" style="color: #2a5ea9;"></i> <strong>Day 2</strong> <i class="fa fa-star" aria-hidden="true" style="color: #2a5ea9;"></i></span></a>
 </div>
 <div class="column3">
-<span style="margin-left: 32%;&gt;&lt;i class=" fa="" fa-star"="" aria-hidden="true" style="color: #fa970c;"><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <strong>Day 3</strong> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i></span>
+<a href="03_Day3.html"><span style="margin-left: 32%;&gt;&lt;i class=" fa="" fa-star"="" aria-hidden="true" style="color: #fa970c;"><i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i> <strong>Day 3</strong> <i class="fa fa-star" aria-hidden="true" style="color: #fa970c;"></i></span></a>
 </div>
 </div>
 <div class="row3">
@@ -159,17 +226,12 @@ $(document).ready(function () {
 <li>Install R packages</li>
 <li>Create variables, lists, data frames</li>
 </ul></li>
-<li><strong>Read data</strong> into R.
+<li><strong>Read data</strong> into R
 <ul>
 <li>Arrange, select and <strong>filter</strong> data</li>
 <li>Look for errors and outliers</li>
 </ul></li>
-<li>Data transformations
-<ul>
-<li>Add <strong>new columns</strong> and convert units</li>
-<li>Summarize data</li>
-<li>Save data</li>
-</ul></li>
+<li>Plot the data!</li>
 </ol>
 <p>Packages: <code>readr</code>, <code>dplyr</code><br />
 Planets visited: <code>Jakku</code></p>
@@ -177,56 +239,43 @@ Planets visited: <code>Jakku</code></p>
 <div class="column3-txt">
 <ol style="list-style-type: decimal">
 <li>Data cleaning</li>
+<li>Data transformations
+<ul>
+<li>Add <strong>new columns</strong> and convert units</li>
+<li>Summarize data</li>
+<li>Save data</li>
+</ul></li>
 <li>Group the data
 <ul>
 <li>Answers for each group and category</li>
 </ul></li>
-<li>Make <strong>plots</strong>
-<ul>
-<li>Scatter plots and box plots</li>
-<li>Trend lines</li>
-<li>Add titles, colors, and labels</li>
-<li>Histograms</li>
-</ul></li>
-<li>More <strong>plots</strong>
-<ul>
-<li>Log transform</li>
-<li>Reference lines</li>
-<li>Save charts to different formats</li>
-</ul></li>
-<li>Flip tables from wide to long</li>
+<li>Working with <strong>Dates</strong></li>
+<li>More <strong>plots</strong>!</li>
 </ol>
-<p>Packages: <code>ggplot2</code>, <code>tidyr</code><br />
+<p>Packages: <code>dplyr</code>, <code>lubridate</code>,<br />
 Planets visited: <code>Endor</code></p>
 </div>
 <div class="column3-txt">
 <ol style="list-style-type: decimal">
-<li>Make <strong>maps</strong>
+<li>Make <strong>plots</strong></li>
+<li>Join tables</li>
+<li><code>ifelse()</code> do this</li>
+<li>More <strong>plots</strong>
 <ul>
-<li>Reading/saving shapefiles</li>
-<li>Interactive web maps</li>
+<li>Scatter plots <code>+</code> box plots</li>
+<li>Trend lines</li>
+<li>Add titles, colors, and labels</li>
+<li>Reference lines</li>
 </ul></li>
-<li>Pull data from <strong>Excel</strong> and Access</li>
-<li>Connect to <strong>databases</strong>
-<ul>
-<li>View tables</li>
-<li>Read data</li>
-</ul></li>
-<li>Save the <strong>porgs</strong></li>
-<li>Working with <strong>dates</strong>
-<ul>
-<li>Time/Twilight zones</li>
-</ul></li>
+<li>Save plots</li>
 <li><strong>Your data</strong>
 <ul>
-<li>Create a report</li>
-<li>Clean your data</li>
-<li>Chart &amp; map your data</li>
-<li>Summarize &amp; save</li>
+<li>Connect to databases</li>
+<li>Tidy your data</li>
+<li>Map your data</li>
 </ul></li>
 </ol>
-<p>Packages: <code>readxl</code>, <code>leaflet</code>, <code>lubridate</code><br />
-Planets visited: <code>Ahch-To</code></p>
+<p>Packages: <code>ggplot2</code>, <code>readxl</code> Planets visited: <code>Ahch-To</code></p>
 </div>
 </div>
 </div>

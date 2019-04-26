@@ -51,19 +51,19 @@ __Please connect to your droid__
 <div class="row3">
 
 <div class="column4" style="border: 0px solid grey;">
-<img src="images/barbara.png" height="220" width="200"></a>
+<img src="images/barbara.png" height="220" width="200">
 </div>
 
 <div class="column4" style="border: 0px solid grey;">
-<img src="images/kristie.jpeg" height="240" width="200"></a>
+<img src="images/kristie.jpeg" height="240" width="200">
 </div>
 
 <div class="column4" style="border: 0px solid grey;">
-<img src="images/dorian.jpg" height="220" width="200"></a>
+<img src="images/dorian.jpg" height="220" width="200">
 </div>
 
 <div class="column4" style="border: 0px solid grey;">
-<img src="images/derek.jpg" height="200" width="200"></a>
+<img src="images/derek.jpg" height="200" width="200">
 </div>
 
 </div>

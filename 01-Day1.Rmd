@@ -22,131 +22,172 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 ```
 
 
-# Blast off! {-}
-
-Let's launch ourselves into the unknown and use R to make a `Word Cloud`. With a little copy and pasting we can make a fun image out of everyone's name in the class. 
-
-Since you're such a big deal, we're going to be helping you make your name really <span style="font-size: 26px;"> __BIG__ </span> in the word cloud below.
-
-![](images/name_cloud_mpca.png){style="width: 100%; margin-top: 12px;"}
-
-<hr style="margin-top: 4px;">
-
-### INSTRUCTIONS {-}
-
-1. Open R Studio
-
-![](images/rstudio_open.png){style="width: 35%;"}
+<div class="well">
+<h1 style="margin-top: 7px; margin-bottom: 16px; font-size: 30px;"> Welcome! </h1>
+_The <code style="color: hotpink;"> force </code> is strong with you. Join us, learn <code style="color: hotpink;">R</code>, and use your powers for good._
+</div>
 
 <br>
 
-2. Copy the code below into your script in RStudio. Start with the line `install.packages` and end with the line `color = 'random-dark')`.
 
-```{r wordcloud, eval=F}
-install.packages(c("wordcloud2", "dplyr"))
-library(wordcloud2)
-library(dplyr)
+## Power on your droids {-}
 
-           #---- Class names ----# 
-class <- c("Steve"    = 8, 
-           "Mike"     = 8, 
-           "Eric"     = 8, 
-           "Carma"    = 9, 
-           "Sarah"    = 8, 
-           "Phil"     = 9, 
-           "Min"      = 9, 
-           "Shane"    = 9,
-           "Nick"     = 9,
-           "Tyler"    = 9,
-           #---- Fun names ----#
-           "R"        = 26, 
-           "2019"     = 20,
-           "MPCA"     = 16,
-           "Porgs!"    = 84,
-           "Endor"     = 10,
-           "Jakku"     = 10,
-           "BB8"       = 12,
-           "Rey"       = 8,
-           "Derek"     = 8, 
-           "Kristie"   = 8, 
-           "Barbara"   = 8, 
-           "Dorian"    = 8)
-
-# Add 20 Star Wars names as small text, size = 4
-class <- c(class, rep(4, 20))
-
-names(class)[(length(class) - 19):length(class)] <- sample_n(starwars, 20)$name      
-
-# Plot the Word Cloud with the "random-dark" color theme
-wordcloud2(data.frame(word = names(class), freq = class), 
-           size  = 1, 
-           color = 'random-dark')
-
-```
+![](images/day1_bb8_sq.png){width="220" style="float: left; margin-right: 34px; margin-bottom: 28px; margin-top: 0px;"}
 
 <br>
 
-3. In R Studio click on __File > New File > R Script__. You will see a code editor window open. 
+You and BB8 arrived just in time. Rey needs your help!
 
-![](images/new_script_file.png){style="width: 65%; margin-bottom: 18px;"}
+The Junk boss Unkar is up to no-good once again and Rey needs some parts to repair her starship. With your help she can escape Jakku and join forces with the New Republic.
 
-4. Paste the copied code into the upper left hand window. This is your code editor.  
-5. Highlight all of the code and hit `CTRL + ENTER`.
-6. You should see a Word Cloud pop up in the lower right of RStudio.
-7. Now try increasing the number next to your name.  
-8. Run the code again.
-    - You may need to increase the size of the `Viewer` window shown below to make enough room for your name to appear. You can also click the `Zoom` icon to create a bigger word cloud.
-9. Make your name even __BIGGER!__
- 
+<div style="clear: both;"></div>
 
+<div class="well">
 
-![](images/rstudio_viewer_wordcloud.png){width="75%"}
+__Connect to your droid__
 
-<br>
-
-<div class="tip" style="margin-top: 12px; padding-top: 0px; padding-bottom: 4px;">
-#### Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i>  {-}
+- Open the __Start menu__  _(the Windows logo on the bottom left of the screen)_
+- Select ` Remote Desktop Connection ` _(you may need to search for it the 1st time)_
+- Enter your desktop's ID: ` w7-your7digit# ` or ` R32-your7digit# `
+- Press _Connect_
 
 </div>
 
-# Introductions {-}
-<hr>
 
-Let's introduce ourselves and the data we love. Find a partner and learn 3 things about them.
+## Open _RStudio_ {-}
+
+<div style="width: 48%; float: left; margin-right: 5%; margin-top: -14px;">
+
+![](images/rstudio_logo.png){style="width: 88%; margin-top: -35px; margin-bottom: -6px;"}
+
+- __Where's my R?__ _Do you need to install __R__ or __RStudio__? There's a nice workaround for you below._
+
+</div>
+
+<br>
+
+![](images/rstudio_open.png){style="width: 34%; margin-top: -80px;"}
+
+<div style="clear: both;"></div>
+
+<details style="margin-top: -54px;">
+<summary class = "btn_code_blue" style="font-size: 17px;"> **Get R!** _(workaround)_ </summary>
+<div class="note" style="margin-top: 0px; border-radius: 0;">
+<p>
+
+This is a temporary solution to get `R` + `RStudio` on your computer for the training.
+
+### 1.	Open the R versions folder on the X-drive  {-}
+
+- <code style="font-size: 76%;"> `\\pca.state.mn.us\xdrive\Agency_Files\Data_Services\DAU\Data Analytics User Group\Shared\r\versions` </code>
+
+### 2.	Select and copy these 2 folders {-}
+
+![](images/install/shared_r_folder.png){style="margin-left: 7%; width: 74%"}
+
+
+### 3. Open your _Documents_ folder  {-}
+
+![](images/install/open_documents.png){style="margin-left: 7%; width: 74%"}
+
+### 4. Paste in the copied folders {-}
+
+![](images/install/paste_to_documents.png){style="margin-left: 7%; width: 74%"}
+
+<br>
+
+### Test for success {-}
+
+- Open `RStudio.exe` in the _RStudio\bin_ folder
+
+![](images/install/rstudio_exe.png){style="margin-left: 7%; width: 74%"}
+
+<br>
+
+- If you see the screen below - Great work!  You're ready to go.
+
+![](images/install/rstudio_open.png){style="margin-left: 7%; width: 85%"}
+
+</p></div></details>
+
+<br>
+
+
+# Blast off! {-}
+
+![](images/name_cloud_mpca.png){style="width: 90%; margin-left: 4%; margin-bottom: -18px; margin-top: -24px;"}
+
+
+# Introductions {-}
+
+Let's introduce ourselves and the data we love. Find a __partner__ and get to know 3 things about them.
+
+<br>
+
+__Things to share__  
 
 ![](images/starwars_group.jpg){align="right" style="width: 54%; margin-left: 26px; margin-top: 10px;"}
 
-__Please learn:__  
-
 <div class="note" style="margin-top: -2px;">
 
-- Their name  
-- Types of data they have
-- Who they share it with
-- The messiest, weirdest, funniest part of their data
-- Something they have to do over and over again
+- Your name or Star Wars alias 
+- Types of data you have
+- Who you share it with
+- What you want to get from the workshop
+- The messiest & funniest part of your data
+- Something you get to do over and over again
 
-__Hint:__ _Maybe this is something you can automate with R._ 
+__Hint:__ _Maybe this is something you can automate with R_ 
 
 </div>
 
 <br>
 
+### What's my name? {-}
 
-# Why R? 
+<div class="row3">
+
+<div class="column4" style="border: 0;">
+<img src="images/barbara.png" height="220" width="200">
+</div>
+
+<div class="column4" style="border: 0;">
+<img src="images/kristie.jpeg" height="240" width="200">
+</div>
+
+<div class="column4" style="border: 0;">
+<img src="images/dorian.jpg" height="220" width="200">
+</div>
+
+<div class="column4" style="border: 0;">
+<img src="images/derek.jpg" height="200" width="200">
+</div>
+
+</div>
+
+<br>
+
+We are __Barbara__, __Kristie__, __Dorian__, and __Derek__.   
+
+We aren't computer scientists and that's okay! 
+
+We make lots of mistakes. Mistakes are funny. You can laugh with us. 
+
+
+
+# Why R? {-}
 <hr>
 
 ![](images/rladies_map.gif){style="width: 95%;"}
 
 ## R Community {-}
-See the [R Community](community.html) page.
 
-- [R support and community](https://itep-r.netlify.com/page/community.html)
-- MPCA R question board (https://github.com/MPCA-air/R-questions) 
-- Finding R Help https://itep-r.netlify.com/page/help.html
-- R cheatsheet / function cards
+- See the [R Community](https://itep-r.netlify.com/page/community.html) page.
+- MPCA sharing + questions - [R questions](https://github.com/MPCA-air/R-questions) 
+- Finding R Help - [Get Help!](help.html)
+- R cheatsheets
 
-## When to use R? {-}
+## When we use R? {-}
 
 - To connect to databases
 - To read data from the web
@@ -166,11 +207,13 @@ Lucky for us, programming doesn't have to be a bunch of math equations. R allows
 
 <br>
 
+
 ## It begins! {-}
 
 <br>
 
 # | A grand tour 
+<hr>
 
 ![](images/rstudio.png){style="width: 85%;"}
 
@@ -218,13 +261,13 @@ Let's add a little style so R Studio feels like home. Follow these steps to chan
 
 <img src="images/font_change.png" style="width: 65%; margin-top: 14px; margin-left: 2%;">
 
-<br>
+<br><br>
 
 <div class="well">
 Now that we're ready, let's go forth and make some trouble. While BB8 works on tracking down some data for us from his droid friends, we'll get to know our way around his internal computer. 
 </div>
 
-### Data awaits ... {-}
+### Data awaits us... {-}
 
 ![](images/rey_bb8_sand_dunes.gif){style="width: 70%; margin-left: 10%;"}
 
@@ -250,6 +293,7 @@ __Step 2:__ Open a new script
 - __File > New File > R Script__
 - Click the _floppy disk_ save icon
 - Give it a name: `jakku.R` or `lesson1.R` will work well
+
 
 
 # | Names and things
@@ -846,7 +890,7 @@ __NOTE__
 
 You can also install packages from the `Packages` tab in the lower right window of RStudio.
 
-![](images/install_packages.png){style="width: 500px; height: 200px; margin-left: 10%;"}
+![](images/install_packages.png){style="width: 450px; height: 180px; margin-left: 10%;"}
 
 
 </div>
@@ -1048,6 +1092,99 @@ R assumes that the first argument (the data file) is `scrap_file` and that the 2
 |`library  `| The name of the folder that stores all your packages, and the function used to load a package.  |  
 |`function  `| Functions perform an operation on your data and returns a result. The function `sum()` takes a series of values and returns the sum for you.  |  
 |`argument  `| Arguments are options or inputs that you pass to a function to change how it behaves. The argument `skip = 1` tells the `read_csv()` function to ignore the first row when reading in a data file. To see the default values for a function you can type `?read_csv` in the console.  |  
+
+<br>
+
+<details>
+<summary class = "btn_code" style="font-size: 15px;"> **Build your own Word Cloud** </summary>
+<div class="quiz" style="margin-top: 0;">
+<p>
+
+Let's launch ourselves into the unknown and use R to make a `Word Cloud`. With a little copy-pasting we can make a fun image out of everyone's name in the class. 
+
+Since you're such a big deal, we can also help you make your name really <span style="font-size: 26px;"> __BIG__ </span>.
+
+<hr style="margin-top: 4px;">
+
+### INSTRUCTIONS {-}
+
+1. Open R Studio
+
+2. Copy the code below into your script in RStudio. Start with the line `install.packages` and end with the line `color = 'random-dark')`.
+
+```{r wordcloud, eval=F}
+install.packages(c("wordcloud2", "dplyr"))
+library(wordcloud2)
+library(dplyr)
+
+           #---- Class names ----# 
+class <- c("Steve"    = 8, 
+           "Mike"     = 9, 
+           "Eric"     = 8, 
+           "Hannah"   = 9, 
+           "Jon"      = 8, 
+           "Mary"     = 9, 
+           "Min"      = 9, 
+           "Aida"     = 9,
+           "Matthias" = 8,
+           "Gao"      = 9,
+           "Ben"      = 9,
+           "Eva"      = 9,
+           "James"    = 10,
+           "Kitty"    = 11,
+           "Zeb"      = 9,
+           #---- Fun names ----#
+           "R"        = 26, 
+           "2019"     = 20,
+           "MPCA"     = 16,
+           "Porgs!"    = 84,
+           "Endor"     = 10,
+           "Jakku"     = 10,
+           "BB8"       = 12,
+           "Rey"       = 8,
+           "Derek"     = 8, 
+           "Kristie"   = 8, 
+           "Barbara"   = 8, 
+           "Dorian"    = 8)
+
+# Add 20 Star Wars names as small text, size = 4
+class <- c(class, rep(4, 20))
+
+names(class)[(length(class) - 19):length(class)] <- sample_n(starwars, 20)$name      
+
+# Plot the Word Cloud with the "random-dark" color theme
+wordcloud2(data.frame(word = names(class), freq = class), 
+           size  = 1, 
+           color = 'random-dark')
+
+```
+
+<br>
+
+3. In R Studio click on __File > New File > R Script__. You will see a code editor window open. 
+
+![](images/new_script_file.png){style="width: 65%; margin-bottom: 18px;"}
+
+4. Paste the copied code into the upper left hand window. This is your code editor.  
+5. Highlight all of the code and hit `CTRL + ENTER`.
+6. You should see a Word Cloud pop up in the lower right of RStudio.
+7. Now try increasing the number next to your name.  
+8. Run the code again.
+    - You may need to increase the size of the `Viewer` window shown below to make enough room for your name to appear. You can also click the `Zoom` icon to create a bigger word cloud.
+9. Make your name even __BIGGER!__
+ 
+
+
+![](images/rstudio_viewer_wordcloud.png){width="75%"}
+
+<br>
+
+<div class="tip" style="margin-top: 12px; padding-top: 0px; padding-bottom: 4px;">
+#### Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i>  {-}
+
+</div>
+
+</p></div></details>
 
 <br>
 

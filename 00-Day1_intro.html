@@ -20,13 +20,12 @@
 <script src="00-Day1_intro_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="00-Day1_intro_files/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="00-Day1_intro_files/navigation-1.1/tabsets.js"></script>
-<link href="00-Day1_intro_files/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="00-Day1_intro_files/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="00-Day1_intro_files/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="00-Day1_intro_files/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="00-Day1_intro_files/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -62,7 +61,29 @@ code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Doc
 code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -99,9 +120,7 @@ h6 {
 
 <link rel="stylesheet" href="css\camp_style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -126,22 +145,92 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -174,8 +263,8 @@ $(document).ready(function () {
 </ul>
 <p><br><br><br><br><br><br><br> <br><br><br></p>
 </div>
-<div id="good-morning-empire-minions" class="section level1">
-<h1>Good morning <em>Empire minions!</em></h1>
+<div id="good-morning" class="section level1">
+<h1>Good morning!</h1>
 <hr>
 <div class="row3">
 <div class="column4" style="border: 0px solid grey;">
@@ -195,7 +284,8 @@ $(document).ready(function () {
 <p>We are <strong>Barbara</strong>, <strong>Kristie</strong>, <strong>Dorian</strong>, and <strong>Derek</strong>.</p>
 <p>We like <strong>R</strong>.</p>
 <p>We are not computer scientists.</p>
-<p>Also, we make lots of mistakes. You will see us make mistakes. Feel free to laugh at us. It’s okay. Really.</p>
+<p>We make lots of mistakes. You will see us make mistakes. Feel free to laugh at them. It’s okay. Really.</p>
+<p>We aren’t related.</p>
 <p><br><br></p>
 <div id="you-are-the-great-cohort-of-2018" class="section level3 unnumbered">
 <h3>You are the great cohort of   <span style="font-size: 1.6em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span> <span style="font-size: 2em;">2018</span><span style="font-size: 1.6em;"><i class="fa fa-group" aria-hidden="true" style="color: steelblue;"></i></span></h3>
@@ -207,7 +297,7 @@ $(document).ready(function () {
 <div id="introductions" class="section level2 unnumbered">
 <h2>Introductions</h2>
 <hr>
-<p>Let’s introduce ourselves and the data we love.</p>
+<p>Let’s introduce ourselves and the data we love or don’t.</p>
 <p><br></p>
 <div class="figure">
 <img src="images/robot_1.jpg" align="left" style="margin-right:34px;" width="272" />
@@ -220,7 +310,7 @@ $(document).ready(function () {
 </li>
 <li>Your fave Star Wars character</li>
 <li>Type of data you have</li>
-<li>Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? <strong>Hint!</strong> <em>This is something we can automate on the third day.</em></li>
+<li>Messiest/weirdest/funniest part of your data? Or something you have to do over and over again? <strong>Hint!</strong> <em>This is something we can automate.</em></li>
 </ul>
 </blockquote>
 <p><br></p>
@@ -263,19 +353,20 @@ $(document).ready(function () {
 ## cols(
 ##   SITE = col_character(),
 ##   Date = col_date(format = &quot;&quot;),
-##   Hour = col_integer(),
-##   OZONE = col_integer(),
+##   Hour = col_double(),
+##   OZONE = col_double(),
 ##   TEMP_F = col_double(),
-##   StateCode = col_integer(),
-##   CountyCode = col_integer(),
-##   SiteNum = col_integer(),
+##   StateCode = col_double(),
+##   CountyCode = col_double(),
+##   SiteNum = col_double(),
 ##   Latitude = col_double(),
 ##   Longitude = col_double(),
 ##   Time = col_datetime(format = &quot;&quot;),
-##   Parameter = col_integer(),
-##   YEAR = col_integer(),
-##   Month = col_integer(),
-##   Day = col_character()
+##   Parameter = col_double(),
+##   YEAR = col_double(),
+##   Month = col_double(),
+##   Day = col_character(),
+##   UNITS = col_character()
 ## )</code></pre>
 </div>
 <div id="plot-the-data" class="section level3">
@@ -311,15 +402,18 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 <span class="st">            </span><span class="kw">group_by</span>(SITE, YEAR) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">            </span><span class="kw">summarize</span>(<span class="dt">AVG_OZONE =</span> <span class="kw">mean</span>(OZONE) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>),
                       <span class="dt">AVG_TEMP  =</span> <span class="kw">mean</span>(TEMP_F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>))</code></pre></div>
-<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
 </div>
 <div id="save-the-results" class="section level3">
 <h3>6. Save the results</h3>
 <p><strong>Save the final data table</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">write_csv</span>(<span class="st">&quot;results/2015-17_ozone_summary.csv&quot;</span>)</code></pre></div>
+<pre><code>## Warning in open.connection(path, &quot;wb&quot;): cannot open file &#39;results/
+## 2015-17_ozone_summary.csv&#39;: No such file or directory</code></pre>
+<pre><code>## Error in open.connection(path, &quot;wb&quot;): cannot open the connection</code></pre>
 <p><br></p>
 <p><strong>Save the site plot</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;results/2015-2017 - Ozone vs Temp.pdf&quot;</span>)</code></pre></div>
+<pre><code>## Error in grDevices::pdf(file = filename, ..., version = version): cannot open file &#39;results/2015-2017 - Ozone vs Temp.pdf&#39;</code></pre>
 </div>
 <div id="share-it-with-the-world" class="section level3">
 <h3>7. Share it with the world</h3>
