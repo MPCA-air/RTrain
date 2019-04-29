@@ -23,7 +23,7 @@ output:
 __Cheatsheets__
 
 <a href="https://www.rstudio.com/wp-content/uploads/2018/08/data-visualization-2.1.png">
-![](https://itep-r.netlify.com/images/cheatsheet_ggplot.jpg){style="width: 47%; float: right; margin-left: 20px; margin-top: -16px;"}
+![](https://itep-r.netlify.com/images/cheatsheet_ggplot.jpg){style="width: 48%; float: right; margin-left: 20px; margin-top: -16px;"}
 </a>
 
 Use cheatsheets to refresh your memory and find new functions or plots. 
@@ -64,8 +64,7 @@ __Inside R__
 
 __E-mail__
 
-- Post a question on the [ITEP R hub](https://github.com/itep-data/R-questions/issues)  
-- Ask the R class _(coming soon...)_
+- Post a question on the [MPCA R-questions](https://github.com/mpca-air/R-questions)  
 - Ask us!
     - Kristie Ellickson [✉️](mailto:kristie.ellickson@state.mn.us?Subject=I%20have%20a%20R%20question)
     - Dorian Kvale [✉️](mailto:dorian.kvale@state.mn.us?Subject=I%20have%20a%20R%20question)
