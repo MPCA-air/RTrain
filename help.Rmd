@@ -64,10 +64,12 @@ __Inside R__
 
 __E-mail__
 
-- Post a question on the [MPCA R-questions](https://github.com/mpca-air/R-questions)  
+- Post a question to MPCA's [R-questions](https://github.com/mpca-air/R-questions)  
 - Ask us!
     - Kristie Ellickson [✉️](mailto:kristie.ellickson@state.mn.us?Subject=I%20have%20a%20R%20question)
+    - Barbara Monaco [✉️](mailto:Barbara.Monaco@state.mn.us?Subject=I%20have%20a%20R%20question)
     - Dorian Kvale [✉️](mailto:dorian.kvale@state.mn.us?Subject=I%20have%20a%20R%20question)
+    - Derek Nagel [✉️](mailto:Derek.Nagel@state.mn.us?Subject=I%20have%20a%20R%20question)
 
 
 ## Troubleshooting
