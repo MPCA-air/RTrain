@@ -60,7 +60,9 @@ __Connect to your droid__
 
 ![](images/rstudio_logo.png){style="width: 88%; margin-top: -35px; margin-bottom: -6px;"}
 
-- __Where's my R?__ _Do you need to install __R__ or __RStudio__? There's a nice workaround for you below._
+<br>
+
+__Where's my R?__ _Do you need to install __R__ or __RStudio__? There's a nice workaround for you below._
 
 </div>
 
@@ -68,10 +70,10 @@ __Connect to your droid__
 
 ![](images/rstudio_open.png){style="width: 34%; margin-top: -80px;"}
 
-<div style="clear: both;"></div>
+<div style="clear: both;"> <br> &nbsp; </div>
 
-<details style="margin-top: -54px;">
-<summary class = "btn_code_blue" style="font-size: 17px;"> **Get R!** _(workaround)_ </summary>
+<details style="margin-top: -60px;">
+<summary class="btn_code_blue" style="font-size: 17px;"> **Get R!** _(workaround)_ </summary>
 <div class="note" style="margin-top: 0px; border-radius: 0;">
 <p>
 
@@ -112,13 +114,15 @@ This is a temporary solution to get `R` + `RStudio` on your computer for the tra
 
 <br>
 
+__Still no R?__ _No worries. You can use R online at [RStudio Cloud](https://rstudio.cloud/)._
 
-# Blast off! {-}
-
-![](images/name_cloud_mpca.png){style="width: 90%; margin-left: 4%; margin-bottom: -18px; margin-top: -24px;"}
 
 
 # Introductions {-}
+
+![](images/name_cloud_mpca.png){style="width: 90%; margin-left: 4%; margin-bottom: -10px; margin-top: -24px;"}
+
+<br>
 
 Let's introduce ourselves and the data we love. Find a __partner__ and get to know 3 things about them.
 
@@ -148,26 +152,26 @@ __Hint:__ _Maybe this is something you can automate with R_
 <div class="row3">
 
 <div class="column4" style="border: 0;">
-<img src="images/barbara.png" height="220" width="200">
+<img src="images/barbara_sq.png" width="200">
 </div>
 
 <div class="column4" style="border: 0;">
-<img src="images/kristie.jpeg" height="240" width="200">
+<img src="images/dorian.jpg" width="200">
 </div>
 
 <div class="column4" style="border: 0;">
-<img src="images/dorian.jpg" height="220" width="200">
+<img src="images/kristie_sq.png" width="200">
 </div>
 
 <div class="column4" style="border: 0;">
-<img src="images/derek.jpg" height="200" width="200">
+<img src="images/yoda_sq.png" width="200">
 </div>
 
 </div>
 
 <br>
 
-We are __Barbara__, __Kristie__, __Dorian__, and __Derek__.   
+We are __Barbara__, __Kristie__, __Dorian__, and __Derek__. Yes, we look exactly like our profile photos above.   
 
 We aren't computer scientists and that's okay! 
 
@@ -187,13 +191,13 @@ We make lots of mistakes. Mistakes are funny. You can laugh with us.
 - Finding R Help - [Get Help!](help.html)
 - R cheatsheets
 
-## When we use R? {-}
+## When do we use R? {-}
 
 - To connect to databases
-- To read data from the web
+- To read data from websites
 - To document and share methods
-- When your data will have frequent updates
-- When you want to improve a process over time.
+- When data will have frequent updates
+- When we want to improve a process over time
 
 
 ## R is for reading {-}
@@ -202,17 +206,15 @@ We make lots of mistakes. Mistakes are funny. You can laugh with us.
 
 Lucky for us, programming doesn't have to be a bunch of math equations. R allows you to write your data analysis in a step-by-step fashion, much like creating a recipe for cookies. And just like a recipe, we can start at the top and read our way down to the bottom. 
 
-
 <div style="clear: both;"></div>
 
-<br>
+<br><hr>
 
+<h2 style="font-size: 34px; margin-top: 12px;"> Blast off! </h2>
 
-## It begins! {-}
+<hr>
 
-<br>
-
-# | A grand tour 
+# | RStudio - The grand tour 
 <hr>
 
 ![](images/rstudio.png){style="width: 85%;"}
@@ -327,7 +329,9 @@ wookie <- Chewbacca
 ```
 
 
-<div class="red-note">
+<div class="red-note" style="width: 63%;">
+__ERROR__
+
 Without quotes, R looks for an object called Chewbacca, and then lets you know that it couldn't find one. 
 </div>
 
@@ -619,8 +623,7 @@ __BB8:__ _I intercepted a large scrapper data set from droid 4P-L of Junk Boss P
 
 Receiving data now...
 
-<details>
-<summary class = "btn_code_green"> View data </summary><p>
+<br>
 
 __scrap_records.csv__ 
 
@@ -637,14 +640,15 @@ Electromagnetic filter,Tuanul,Niima Outpost,107,Tons,188.2
 
 __You:__ _Yikes! This looks like a mess! What can I do with this?_
 
-</p></details></p></details>
-</tip>
-
+</div>
+</p></details>
 
 
 ## CSV to the rescue {-}
 
-The main data format used in R is the __CSV__ _(comma-separated values)_. A __CSV__ is a simple text file that can be opened in R and most other stats software, including Excel. It looks squished together as plain text, but that's okay! When opened in R, the text becomes a familiar looking table with columns and rows. But before we launch ahead, let's add a _package_ to R that will help us read __CSV__ files.
+The main data format used in R is the __CSV__ _(comma-separated values)_. A __CSV__ is a simple text file that can be opened in R and most other stats software, including Excel. It looks squished together as plain text, but that's okay! When opened in R, the text becomes a familiar looking table with columns and rows. 
+
+Before we launch ahead, let's add a _package_ to R that will help us read __CSV__ files.
 
 <br>
 
@@ -924,13 +928,11 @@ You can view all of the available theme options at [ggplot2 themes](https://ggpl
 
 
 
-# | Get help <i class="far fa-question-circle" aria-hidden="true"> </i>
+# | <i class="far fa-question-circle" aria-hidden="true"></i> Get help
 <hr>
 
-Is something not working or behaving strangely and you don't know why? 
-
-See the [Help!](help.html) page.
-
+Lost in an ERROR message? Is something behaving strangely and want to know why? 
+See the [Help!](help.html) page for some troubleshooting options.
 
 
 # | Operation Shut Down
@@ -939,7 +941,7 @@ When you close R for the first time you will see some options about saving your 
 
 Follow these steps to set these options permanently.
 
-__Turn off “Save Workspace”__
+__Turn off *Save Workspace* __
 
 1. Go to ` Tools > Global Options.... `  on the top RStudio navigation bar
 1. On the first screen:
@@ -1084,10 +1086,10 @@ R assumes that the first argument (the data file) is `scrap_file` and that the 2
 <br>
 
 
-# <i class="fas fa-key fa-xs" style="color: #c81888;" aria-hidden="true"> </i> Key terms from today {-} 
+# <i class="fas fa-key fa-xs" style="color: #c81888;" aria-hidden="true"> </i> Key terms {-} 
 
 |    |                                                                  |   
-|----|:----------------------------------------------------------------:|  
+|----|:-----------------------------------------------------------------|  
 |`package  `| An add-on for R that contains new functions that someone created to help you. It's like an App for R.  |  
 |`library  `| The name of the folder that stores all your packages, and the function used to load a package.  |  
 |`function  `| Functions perform an operation on your data and returns a result. The function `sum()` takes a series of values and returns the sum for you.  |  
@@ -1096,7 +1098,7 @@ R assumes that the first argument (the data file) is `scrap_file` and that the 2
 <br>
 
 <details>
-<summary class = "btn_code" style="font-size: 15px;"> **Build your own Word Cloud** </summary>
+<summary class = "btn_code" style="font-size: 15px;"> <i class="fa fa-star"></i> BONUS <i class="fa fa-star"></i> Build your own Word Cloud </summary>
 <div class="quiz" style="margin-top: 0;">
 <p>
 
@@ -1106,7 +1108,7 @@ Since you're such a big deal, we can also help you make your name really <span s
 
 <hr style="margin-top: 4px;">
 
-### INSTRUCTIONS {-}
+<h3> INSTRUCTIONS </h3>
 
 1. Open R Studio
 
@@ -1174,13 +1176,12 @@ wordcloud2(data.frame(word = names(class), freq = class),
 9. Make your name even __BIGGER!__
  
 
-
 ![](images/rstudio_viewer_wordcloud.png){width="75%"}
 
 <br>
 
 <div class="tip" style="margin-top: 12px; padding-top: 0px; padding-bottom: 4px;">
-#### Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i>  {-}
+<h3> Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i>  </h3>
 
 </div>
 
@@ -1188,6 +1189,6 @@ wordcloud2(data.frame(word = names(class), freq = class),
 
 <br>
 
-## <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
+# <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
 
 <br>

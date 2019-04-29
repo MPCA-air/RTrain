@@ -379,9 +379,8 @@ Welcome!
 <img src="images/rstudio_logo.png" style="width: 88%; margin-top: -35px; margin-bottom: -6px;" />
 
 </div>
-<ul>
-<li><strong>Where’s my R?</strong> <em>Do you need to install <strong>R</strong> or <strong>RStudio</strong>? There’s a nice workaround for you below.</em></li>
-</ul>
+<p><br></p>
+<p><strong>Where’s my R?</strong> <em>Do you need to install <strong>R</strong> or <strong>RStudio</strong>? There’s a nice workaround for you below.</em></p>
 </div>
 <p><br></p>
 <div class="figure">
@@ -389,9 +388,9 @@ Welcome!
 
 </div>
 <div style="clear: both;">
-
+<br>  
 </div>
-<details style="margin-top: -54px;"> <summary class = "btn_code_blue" style="font-size: 17px;"> <strong>Get R!</strong> <em>(workaround)</em> </summary>
+<details style="margin-top: -60px;"> <summary class="btn_code_blue" style="font-size: 17px;"> <strong>Get R!</strong> <em>(workaround)</em> </summary>
 <div class="note" style="margin-top: 0px; border-radius: 0;">
 <p>
 <p>This is a temporary solution to get <code>R</code> + <code>RStudio</code> on your computer for the training.</p>
@@ -435,23 +434,22 @@ Welcome!
 </div>
 <p></details></p>
 <p><br></p>
-</div>
-<div id="blast-off" class="section level1 unnumbered">
-<h1>Blast off!</h1>
-<div class="figure">
-<img src="images/name_cloud_mpca.png" style="width: 90%; margin-left: 4%; margin-bottom: -18px; margin-top: -24px;" />
-
-</div>
+<p><strong>Still no R?</strong> <em>No worries. You can use R online at <a href="https://rstudio.cloud/">RStudio Cloud</a>.</em></p>
 </div>
 <div id="introductions" class="section level1 unnumbered">
 <h1>Introductions</h1>
+<div class="figure">
+<img src="images/name_cloud_mpca.png" style="width: 90%; margin-left: 4%; margin-bottom: -10px; margin-top: -24px;" />
+
+</div>
+<p><br></p>
 <p>Let’s introduce ourselves and the data we love. Find a <strong>partner</strong> and get to know 3 things about them.</p>
 <p><br></p>
+<p><strong>Things to share</strong></p>
 <div class="figure">
 <img src="images/starwars_group.jpg" align="right" style="width: 54%; margin-left: 26px; margin-top: 10px;" />
 
 </div>
-<p><strong>Things to share</strong></p>
 <div class="note" style="margin-top: -2px;">
 <ul>
 <li>Your name or Star Wars alias</li>
@@ -468,20 +466,20 @@ Welcome!
 <h3>What’s my name?</h3>
 <div class="row3">
 <div class="column4" style="border: 0;">
-<p><img src="images/barbara.png" height="220" width="200"></p>
+<p><img src="images/barbara_sq.png" width="200"></p>
 </div>
 <div class="column4" style="border: 0;">
-<p><img src="images/kristie.jpeg" height="240" width="200"></p>
+<p><img src="images/dorian.jpg" width="200"></p>
 </div>
 <div class="column4" style="border: 0;">
-<p><img src="images/dorian.jpg" height="220" width="200"></p>
+<p><img src="images/kristie_sq.png" width="200"></p>
 </div>
 <div class="column4" style="border: 0;">
-<p><img src="images/derek.jpg" height="200" width="200"></p>
+<p><img src="images/yoda_sq.png" width="200"></p>
 </div>
 </div>
 <p><br></p>
-<p>We are <strong>Barbara</strong>, <strong>Kristie</strong>, <strong>Dorian</strong>, and <strong>Derek</strong>.</p>
+<p>We are <strong>Barbara</strong>, <strong>Kristie</strong>, <strong>Dorian</strong>, and <strong>Derek</strong>. Yes, we look exactly like our profile photos above.</p>
 <p>We aren’t computer scientists and that’s okay!</p>
 <p>We make lots of mistakes. Mistakes are funny. You can laugh with us.</p>
 </div>
@@ -502,14 +500,14 @@ Welcome!
 <li>R cheatsheets</li>
 </ul>
 </div>
-<div id="when-we-use-r" class="section level2 unnumbered">
-<h2>When we use R?</h2>
+<div id="when-do-we-use-r" class="section level2 unnumbered">
+<h2>When do we use R?</h2>
 <ul>
 <li>To connect to databases</li>
-<li>To read data from the web</li>
+<li>To read data from websites</li>
 <li>To document and share methods</li>
-<li>When your data will have frequent updates</li>
-<li>When you want to improve a process over time.</li>
+<li>When data will have frequent updates</li>
+<li>When we want to improve a process over time</li>
 </ul>
 </div>
 <div id="r-is-for-reading" class="section level2 unnumbered">
@@ -522,15 +520,16 @@ Welcome!
 <div style="clear: both;">
 
 </div>
-<p><br></p>
+<br>
+<hr>
+<h2 style="font-size: 34px; margin-top: 12px;">
+Blast off!
+</h2>
+<hr>
 </div>
-<div id="it-begins" class="section level2 unnumbered">
-<h2>It begins!</h2>
-<p><br></p>
 </div>
-</div>
-<div id="a-grand-tour" class="section level1">
-<h1><span class="header-section-number">1</span> | A grand tour</h1>
+<div id="rstudio---the-grand-tour" class="section level1">
+<h1><span class="header-section-number">1</span> | RStudio - The grand tour</h1>
 <hr>
 <div class="figure">
 <img src="images/rstudio.png" style="width: 85%;" />
@@ -625,7 +624,8 @@ wookie</code></pre></div>
 <span class="co"># Try this:</span>
 wookie &lt;-<span class="st"> </span>Chewbacca</code></pre></div>
 <pre><code>## Error in eval(expr, envir, enclos): object &#39;Chewbacca&#39; not found</code></pre>
-<div class="red-note">
+<div class="red-note" style="width: 63%;">
+<p><strong>ERROR</strong></p>
 <p>Without quotes, R looks for an object called Chewbacca, and then lets you know that it couldn’t find one.</p>
 </div>
 <p><br></p>
@@ -876,8 +876,7 @@ starwars_df<span class="op">$</span>ages</code></pre></div>
 <p><strong>BB8:</strong> <em>I intercepted a large scrapper data set from droid 4P-L of Junk Boss Plutt.</em></p>
 <p><br></p>
 <p>Receiving data now…</p>
-<details> <summary class = "btn_code_green"> View data </summary>
-<p>
+<p><br></p>
 <p><strong>scrap_records.csv</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">item,origin,destination,amount,units,price_per_pound  
 Flight recorder,Outskirts,Niima Outpost,<span class="dv">887</span>,Tons,<span class="fl">590.93</span>  
@@ -887,15 +886,14 @@ Electromagnetic filter,Tuanul,Niima Outpost,<span class="dv">107</span>,Tons,<sp
 ...  </code></pre></div>
 <p><br></p>
 <p><strong>You:</strong> <em>Yikes! This looks like a mess! What can I do with this?</em></p>
+</div>
 </p>
-</details>
-</p>
-</details>
-</tip>
+<p></details></p>
 </div>
 <div id="csv-to-the-rescue" class="section level2 unnumbered">
 <h2>CSV to the rescue</h2>
-<p>The main data format used in R is the <strong>CSV</strong> <em>(comma-separated values)</em>. A <strong>CSV</strong> is a simple text file that can be opened in R and most other stats software, including Excel. It looks squished together as plain text, but that’s okay! When opened in R, the text becomes a familiar looking table with columns and rows. But before we launch ahead, let’s add a <em>package</em> to R that will help us read <strong>CSV</strong> files.</p>
+<p>The main data format used in R is the <strong>CSV</strong> <em>(comma-separated values)</em>. A <strong>CSV</strong> is a simple text file that can be opened in R and most other stats software, including Excel. It looks squished together as plain text, but that’s okay! When opened in R, the text becomes a familiar looking table with columns and rows.</p>
+<p>Before we launch ahead, let’s add a <em>package</em> to R that will help us read <strong>CSV</strong> files.</p>
 <p><br></p>
 <p><details><summary class = "btn_code_blue"> How to save a CSV from Excel </summary></p>
 <div class="note">
@@ -1142,16 +1140,15 @@ Show me the <em>arguments</em>!
 </div>
 </div>
 <div id="get-help" class="section level1">
-<h1><span class="header-section-number">5</span> | Get help <i class="far fa-question-circle" aria-hidden="true"> </i></h1>
+<h1><span class="header-section-number">5</span> | <i class="far fa-question-circle" aria-hidden="true"></i> Get help</h1>
 <hr>
-<p>Is something not working or behaving strangely and you don’t know why?</p>
-<p>See the <a href="help.html">Help!</a> page.</p>
+<p>Lost in an ERROR message? Is something behaving strangely and want to know why? See the <a href="help.html">Help!</a> page for some troubleshooting options.</p>
 </div>
 <div id="operation-shut-down" class="section level1">
 <h1><span class="header-section-number">6</span> | Operation Shut Down</h1>
 <p>When you close R for the first time you will see some options about saving your workspace and other files. In general, we advise against saving these files. It’s easy enough to re-run your script next time you open your project. This will help RStudio open a fresh and clean environment every time you start it.</p>
 <p>Follow these steps to set these options permanently.</p>
-<p><strong>Turn off “Save Workspace”</strong></p>
+<p><strong>Turn off <em>Save Workspace</em> </strong></p>
 <ol style="list-style-type: decimal">
 <li>Go to <code>Tools &gt; Global Options....</code> on the top RStudio navigation bar</li>
 <li>On the first screen:
@@ -1253,8 +1250,8 @@ ages_sum</code></pre></div>
 <p><br></p>
 </div>
 </div>
-<div id="key-terms-from-today" class="section level1 unnumbered">
-<h1><i class="fas fa-key fa-xs" style="color: #c81888;" aria-hidden="true"> </i> Key terms from today</h1>
+<div id="key-terms" class="section level1 unnumbered">
+<h1><i class="fas fa-key fa-xs" style="color: #c81888;" aria-hidden="true"> </i> Key terms</h1>
 <table>
 <colgroup>
 <col width="6%" />
@@ -1263,31 +1260,32 @@ ages_sum</code></pre></div>
 <tbody>
 <tr class="odd">
 <td><code>package</code></td>
-<td align="center">An add-on for R that contains new functions that someone created to help you. It’s like an App for R.</td>
+<td align="left">An add-on for R that contains new functions that someone created to help you. It’s like an App for R.</td>
 </tr>
 <tr class="even">
 <td><code>library</code></td>
-<td align="center">The name of the folder that stores all your packages, and the function used to load a package.</td>
+<td align="left">The name of the folder that stores all your packages, and the function used to load a package.</td>
 </tr>
 <tr class="odd">
 <td><code>function</code></td>
-<td align="center">Functions perform an operation on your data and returns a result. The function <code>sum()</code> takes a series of values and returns the sum for you.</td>
+<td align="left">Functions perform an operation on your data and returns a result. The function <code>sum()</code> takes a series of values and returns the sum for you.</td>
 </tr>
 <tr class="even">
 <td><code>argument</code></td>
-<td align="center">Arguments are options or inputs that you pass to a function to change how it behaves. The argument <code>skip = 1</code> tells the <code>read_csv()</code> function to ignore the first row when reading in a data file. To see the default values for a function you can type <code>?read_csv</code> in the console.</td>
+<td align="left">Arguments are options or inputs that you pass to a function to change how it behaves. The argument <code>skip = 1</code> tells the <code>read_csv()</code> function to ignore the first row when reading in a data file. To see the default values for a function you can type <code>?read_csv</code> in the console.</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
-<details> <summary class = "btn_code" style="font-size: 15px;"> <strong>Build your own Word Cloud</strong> </summary>
+<details> <summary class = "btn_code" style="font-size: 15px;"> <i class="fa fa-star"></i> BONUS <i class="fa fa-star"></i> Build your own Word Cloud </summary>
 <div class="quiz" style="margin-top: 0;">
 <p>
 <p>Let’s launch ourselves into the unknown and use R to make a <code>Word Cloud</code>. With a little copy-pasting we can make a fun image out of everyone’s name in the class.</p>
 <p>Since you’re such a big deal, we can also help you make your name really <span style="font-size: 26px;"> <strong>BIG</strong> </span>.</p>
 <hr style="margin-top: 4px;">
-<div id="instructions" class="section level3 unnumbered">
-<h3>INSTRUCTIONS</h3>
+<h3>
+INSTRUCTIONS
+</h3>
 <ol style="list-style-type: decimal">
 <li><p>Open R Studio</p></li>
 <li><p>Copy the code below into your script in RStudio. Start with the line <code>install.packages</code> and end with the line <code>color = 'random-dark')</code>.</p></li>
@@ -1362,17 +1360,18 @@ class &lt;-<span class="st"> </span><span class="kw">c</span>(class, <span class
 </div>
 <p><br></p>
 <div class="tip" style="margin-top: 12px; padding-top: 0px; padding-bottom: 4px;">
-<h4 id="congrats-rebel-droid" class="unnumbered">Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i></h4>
+<h3>
+Congrats rebel droid! <i class="fa fa-android" style="font-size: 44px;"></i>
+</h3>
 </div>
 </p>
 </div>
 <p></details></p>
 <p><br></p>
 </div>
-<div id="return-to-homebase" class="section level2 unnumbered">
-<h2><i class="fa fa-rocket" aria-hidden="true"></i> Return to <a href="index.html">Homebase</a></h2>
+<div id="return-to-homebase" class="section level1 unnumbered">
+<h1><i class="fa fa-rocket" aria-hidden="true"></i> Return to <a href="index.html">Homebase</a></h1>
 <p><br></p>
-</div>
 </div>
 
 

@@ -959,6 +959,6 @@ ggplot(scrap, aes(x = origin, y = credits))
 
 <br>
 
-## <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
+# <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
 
 <br>
