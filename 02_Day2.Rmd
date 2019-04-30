@@ -71,20 +71,17 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
   
 
 <div style="clear: both;"></div>
-<br>
-
-<div class="well">
-<h3><i class="fas fa-mitten"></i></h3>
-
-Are there any questions? Any questions at all. No matter how large or terribly small... Last chance, we are about to move on...
-</div>
-
-<br>
-
-![](images/moving_on.jpg){width="50%" style="margin-left: 7%; margin-bottom: 10px;"}
 
 
 # Analysis workflow {-}
+
+Here's an example air monitoring project from start to finish. 
+
+<details>
+<summary class = "btn_code"> __EXAMPLE__  Ozone data project </summary>
+<div class="quiz" style="margin-top: 0; background-color: white;">
+<p>
+<br>
 
 Imagine we just received 3 years worth of ozone monitoring data to summarize. __Fun!__ Below is an example workflow we might follow using R.
 
@@ -236,6 +233,21 @@ ggsave("results/2015-2017 - Ozone vs Temp.pdf")
 <div class="well">
 Having an exact record of what you did can be great documentation for yourself and others. It's also handy when you want to repeat the same analysis on new data. Then you only need to copy the script, update the read data line, and push run to get a whole new set of fancy charts.
 </div>
+
+</p>
+</div></details>
+
+<br>
+
+<div class="well">
+<h4> <i class="fa fa-mitten" aria-hidden="true"></i> QUESTIONS</h4>
+
+Any questions? Any questions at all. No matter how large or terribly small... Last chance, we are about to move on...
+</div>
+
+<br>
+
+![](images/moving_on.jpg){style="margin-left: 12%; margin-bottom: 10px; width: 75%"}
 
 
 # Read scrap data {-}

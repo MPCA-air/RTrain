@@ -393,29 +393,19 @@ div.tocify {
 <div style="clear: both;">
 
 </div>
-<p><br></p>
-<div class="well">
-<h3>
-<i class="fas fa-mitten"></i>
-</h3>
-<p>Are there any questions? Any questions at all. No matter how large or terribly small… Last chance, we are about to move on…</p>
-</div>
-<p><br></p>
-<div class="figure">
-<img src="images/moving_on.jpg" style="margin-left: 7%; margin-bottom: 10px;" style="width:50.0%" />
-
-</div>
 </div>
 </div>
 <div id="analysis-workflow" class="section level1 unnumbered">
 <h1>Analysis workflow</h1>
+<p>Here’s an example air monitoring project from start to finish.</p>
+<details> <summary class = "btn_code"> <strong>EXAMPLE</strong> Ozone data project </summary>
+<div class="quiz" style="margin-top: 0; background-color: white;">
+<p>
+<p><br></p>
 <p>Imagine we just received 3 years worth of ozone monitoring data to summarize. <strong>Fun!</strong> Below is an example workflow we might follow using R.</p>
-<div id="start-a-new-project" class="section level3 unnumbered">
-<h3>0. Start a new project</h3>
+<h3 id="start-a-new-project" class="unnumbered">0. Start a new project</h3>
 <p>Let’s be creative and name our project: <code>&quot;2019_Ozone&quot;</code></p>
-</div>
-<div id="read-the-data" class="section level3 unnumbered">
-<h3>1. Read the data</h3>
+<h3 id="read-the-data" class="unnumbered">1. Read the data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
 
 <span class="co"># Read a file from the web</span>
@@ -432,56 +422,50 @@ air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cl
 <tbody>
 <tr class="odd">
 <td align="left">27-137-7554</td>
-<td align="left">2017-09-23</td>
-<td align="right">15</td>
+<td align="left">2018-04-09</td>
+<td align="right">18</td>
+<td align="right">55.4</td>
+</tr>
+<tr class="even">
+<td align="left">27-137-7554</td>
+<td align="left">2016-04-17</td>
+<td align="right">8</td>
+<td align="right">37.4</td>
+</tr>
+<tr class="odd">
+<td align="left">27-137-7554</td>
+<td align="left">2016-06-21</td>
+<td align="right">12</td>
+<td align="right">72.2</td>
+</tr>
+<tr class="even">
+<td align="left">27-137-7001</td>
+<td align="left">2017-09-09</td>
+<td align="right">11</td>
 <td align="right">71.6</td>
 </tr>
-<tr class="even">
-<td align="left">27-137-7001</td>
-<td align="left">2018-09-11</td>
-<td align="right">17</td>
-<td align="right">49.4</td>
-</tr>
-<tr class="odd">
-<td align="left">27-137-7554</td>
-<td align="left">2017-07-31</td>
-<td align="right">22</td>
-<td align="right">78.8</td>
-</tr>
-<tr class="even">
-<td align="left">27-137-7554</td>
-<td align="left">2018-05-17</td>
-<td align="right">17</td>
-<td align="right">64.4</td>
-</tr>
 <tr class="odd">
 <td align="left">27-137-7001</td>
-<td align="left">2018-09-17</td>
+<td align="left">2017-07-01</td>
 <td align="right">10</td>
-<td align="right">69.2</td>
+<td align="right">69.8</td>
 </tr>
 </tbody>
 </table>
-</div>
-<div id="clean-the-names" class="section level3 unnumbered">
-<h3>2. Clean the names</h3>
+<h3 id="clean-the-names" class="unnumbered">2. Clean the names</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(janitor)
 
 <span class="co"># Capital letters and spaces make things more difficult</span>
 <span class="co"># Let&#39;s clean them out</span>
 air_data &lt;-<span class="st"> </span><span class="kw">clean_names</span>(air_data)</code></pre></div>
-</div>
-<div id="plot-the-data" class="section level3 unnumbered">
-<h3>3. Plot the data</h3>
+<h3 id="plot-the-data" class="unnumbered">3. Plot the data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
 <span class="kw">ggplot</span>(air_data, <span class="kw">aes</span>(<span class="dt">x =</span> temp_f, <span class="dt">y =</span> ozone)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>)</code></pre></div>
 <p><img src="02_Day2_files/figure-html/view-1.png" width="1152" /></p>
-</div>
-<div id="clean-the-data" class="section level3 unnumbered">
-<h3>4. Clean the data</h3>
+<h3 id="clean-the-data" class="unnumbered">4. Clean the data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 <span class="co"># Drop values out of range</span>
@@ -491,9 +475,7 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">            </span><span class="kw">mutate</span>(<span class="dt">OZONE =</span> <span class="kw">ifelse</span>(units <span class="op">==</span><span class="st"> &quot;PPM&quot;</span>, ozone <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>, 
                                   ozone)) </code></pre></div>
-</div>
-<div id="view-the-data-closer" class="section level3 unnumbered">
-<h3>5. View the data <strong>closer</strong></h3>
+<h3 id="view-the-data-closer" class="unnumbered">5. View the data <strong>closer</strong></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(air_data, <span class="kw">aes</span>(<span class="dt">x =</span> temp_f, <span class="dt">y =</span> ozone)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) <span class="op">+</span><span class="st"> </span>
@@ -501,9 +483,7 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 <span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Ozone increases with temperature&quot;</span>, 
          <span class="dt">subtitle =</span> <span class="st">&quot;Observations from 2015-2017&quot;</span>)</code></pre></div>
 <p><img src="02_Day2_files/figure-html/unnamed-chunk-1-1.png" width="1152" /></p>
-</div>
-<div id="summarize-the-data" class="section level3 unnumbered">
-<h3>6. Summarize the data</h3>
+<h3 id="summarize-the-data" class="unnumbered">6. Summarize the data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">            </span><span class="kw">group_by</span>(site, year) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">            </span><span class="kw">summarize</span>(<span class="dt">avg_ozone =</span> <span class="kw">mean</span>(ozone) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>),
@@ -556,22 +536,32 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 </tr>
 </tbody>
 </table>
-</div>
-<div id="save-the-results" class="section level3 unnumbered">
-<h3>7. Save the results</h3>
+<h3 id="save-the-results" class="unnumbered">7. Save the results</h3>
 <p><strong>Save the final data table</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">write_csv</span>(<span class="st">&quot;results/2015-17_ozone_summary.csv&quot;</span>)</code></pre></div>
 <p><br></p>
 <p><strong>Save the site plot to PDF</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggsave</span>(<span class="st">&quot;results/2015-2017 - Ozone vs Temp.pdf&quot;</span>)</code></pre></div>
-</div>
-<div id="share-with-friends" class="section level3 unnumbered">
-<h3>8. Share with friends</h3>
+<h3 id="share-with-friends" class="unnumbered">8. Share with friends</h3>
 <p><a href = "https://github.com/dKvale/ex__OZONE__Project"> <img src="images/github_example_ozone.png" style="width: 95%;" /> </a></p>
 <p><br></p>
 <div class="well">
 <p>Having an exact record of what you did can be great documentation for yourself and others. It’s also handy when you want to repeat the same analysis on new data. Then you only need to copy the script, update the read data line, and push run to get a whole new set of fancy charts.</p>
 </div>
+</p>
+</div>
+<p></details></p>
+<p><br></p>
+<div class="well">
+<h4>
+<i class="fa fa-mitten" aria-hidden="true"></i> QUESTIONS
+</h4>
+<p>Any questions? Any questions at all. No matter how large or terribly small… Last chance, we are about to move on…</p>
+</div>
+<p><br></p>
+<div class="figure">
+<img src="images/moving_on.jpg" style="margin-left: 12%; margin-bottom: 10px; width: 75%" />
+
 </div>
 </div>
 <div id="read-scrap-data" class="section level1 unnumbered">
