@@ -85,7 +85,7 @@ __So where were we? Oh right, we we're enjoying our time on beautiful lush Endor
 
 That's enough _scuttlebutting_ around on Endor, Finn needs us back on Jakku. It turns out we forgot to pick-up Finn when we left. Now he's being held ransom by Junk Boss Plutt. We'll need to act fast to get to him before the Empire does. __Blast off!__ 
 
-![](images/finn_run.gif)
+![](images/finn_run.gif){style="margin-left: 22%; width: 50%;"}
 
 
 ## Update from BB8! {-}

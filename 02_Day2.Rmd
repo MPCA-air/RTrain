@@ -513,8 +513,13 @@ Try comparing some things in the console and see if you get what you'd expect. R
 
 4 > c(1, 3, 5)
 
-4 %in% c(1, 3, 5)
+5 == c(1, 3, 5)
 
+5 %in% c(1, 3, 5)
+
+2 %in% c(1, 3, 5)
+
+2 == NA
 ```
 
 
@@ -552,16 +557,6 @@ library(ggplot2)
 ggplot(scrap, aes(x = origin, y = amount)) + geom_col()
 ``` 
 
-
-Much better! But... something still might be hidden in the data that is unexpected. Let's take a look at the amount of items in each units category.
-
-```{r ggplot-Units}
-ggplot(scrap, aes(x = units, y = amount)) + geom_col()
-```
-
-<br>
-
-Interesting. The item "tons" is written two ways. This can happen when multiple labs send you data, or protocols change over time. Let's make a note to deal with this a bit later. 
 
 
 ## Multiple filters 
@@ -858,8 +853,7 @@ write_csv(scrap_pounds, "results/scrap_in_pounds.csv")
 
 
 
-![](images/endor_forest.jpg){width="500"}
-
+![](images/blast_off_ship_jakku.gif){style="margin-left: 13%; width: 72%;"}
 
 
 <br>
@@ -907,7 +901,7 @@ air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
 
 # Welcome to Endor! {-}
 
-![](https://itep-r.netlify.com/images/planet_endor.jpg){align="center" style="width: 62%; margin-top: -4px;"}
+![](https://itep-r.netlify.com/images/planet_endor.jpg){style="width: 75%; margin-top: -4px; margin-left: 11%;"}
 
 <br>
 

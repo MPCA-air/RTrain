@@ -35,9 +35,8 @@
 
 <div class="tab-pane fade" id="select" role="tabpanel" aria-labelledby="select-tab">
 
-![](images/porgs/select.png){style="width: 65%;"}
+![](images/porgs/select_card.png){style="width: 90%;"}
 
-![](images/porgs/select_tbl.png){style="width: 88%; margin-left: 10%; margin-top: 12px;"}
 
 <br><br>
 
@@ -85,11 +84,7 @@
 <div class="tab-pane fade" id="mutate3" role="tabpanel" aria-labelledby="mutate3-tab">
 
 
-![](images/porgs/mutate.png){style="width: 77%;"}
-
-<br>
-
-![](images/porgs/mutate_tbl.png){style="width: 88%; margin-left: 4%; margin-top: 12px;"}
+![](images/porgs/mutate_card.png){style="width: 88%;"}
 
 <br><br>
 
@@ -97,11 +92,8 @@
 
 <div class="tab-pane fade" id="summarize" role="tabpanel" aria-labelledby="summarize-tab">
 
-![](images/porgs/summarize.png){style="width: 77%;"}
+![](images/porgs/summarize_card.png){style="width: 88%;"}
 
-<br>
-
-![](images/porgs/summarize_tbl.png){style="width: 88%; margin-left: 4%; margin-top: 12px;"}
 
 <br><br>
 
@@ -109,11 +101,7 @@
 
 <div class="tab-pane fade" id="group_by" role="tabpanel" aria-labelledby="group_by-tab">
 
-![](images/porgs/groupby.png){style="width: 77%;"}
-
-<br>
-
-![](images/porgs/groupby_tbl.png){style="width: 94%; margin-left: 2%; margin-top: 12px;"}
+![](images/porgs/groupby_card.png){style="width: 92%;"}
 
 <br><br>
 
