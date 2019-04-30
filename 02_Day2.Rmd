@@ -234,7 +234,7 @@ ggsave("results/2015-2017 - Ozone vs Temp.pdf")
 <br>
 
 <div class="well">
-Having an exact record of what you did can be great documentation for yourself and others. It's also handy for when you want to repeat the same analysis on new data. Then all you need to do is copy the script, update the one read data line, and push run to get your new set of fancy charts.
+Having an exact record of what you did can be great documentation for yourself and others. It's also handy when you want to repeat the same analysis on new data. Then you only need to copy the script, update the read data line, and push run to get a whole new set of fancy charts.
 </div>
 
 
@@ -384,7 +384,7 @@ select(scrap, c(item, amount, price_per_pound))
 
 ## `everything()` {-}
 
-`select()` also works to change the order of columns. The code below puts the `item` column first and then moves the `units` and `amount` columns directly after `item`. We then keep `evertyhing()` else the same. 
+`select()` also works to change the order of columns. The code below puts the `item` column first and then moves the `units` and `amount` columns directly after `item`. We then keep `everything()` else the same. 
 
 ```{r select44, warning = F, message = F}
 
@@ -617,12 +617,14 @@ mr_koon <- filter(starwars_data,
 
 ```
 </div>
+<br>
 
-6. _Elusive_ answers are encouraged.
-    - For example, if someone asks: _What is your character's mass?_ 
-    - You can respond: _My character's mass is equal to one less than their age._ 
-    - Or if you're feeling generous you can give a more straight forward answer such as: _My character's mass is definitely more than 100 and less that 140._
-7. Sometimes a character will not have a specific attribute. We learned earlier how R stores nulls as `NA`. If your character has a missing value for hair color, one of your filter statements could be `is.na(hair_color)`. 
+Elusive answers are allowed. For example, if someone asks: _What is your character's mass?_ 
+
+- You can respond: _My character's mass is equal to one less than their age._ 
+- Or if you're feeling generous you can give a straight forward answer such as: _My character's mass is definitely more than 100 and less that 140._
+
+Sometimes a character will not have a specific attribute. We learned earlier how R stores nulls as `NA`. If your character has a missing value for hair color, one of your filter statements could be `is.na(hair_color)`. 
 
 <br>
 
@@ -653,11 +655,24 @@ How about make it best of __3__ games? Or switch partners and try again.
 
 </div>
 
+<br>
+
+
+## <i class="far fa-question-circle"></i> Mystery messenger {-}
+
+An unknown someone was sent to Jakku to deliver Rey a message, but unfortunately we only have a few clues about what they look like. Work with your partner and the starwars data to find the messenger's name. And with that, BB8 can track down where our messenger is.  
+
+<br>
+
+Are you ready? The clock starts... ticking... now.
+
+- __Step 1:__ Ask Derek for the clues.
+
 <br><br>
 
-
-__Back to Jakku__
-Let's calculate some new columns to help prioritize Rey's scavenging work.
+> __Back to Jakku__
+>
+> Let's calculate some new columns to help focus Rey's scavenging work.
 
 
 # | `mutate()`
@@ -944,9 +959,9 @@ We can find how much time has elapsed, add or subtract days, and find seasonal a
 | Function   |  Date element                                            |   
 |----|:-----------------------------------------------------------------|  
 |`year()  `  | Year          |  
-|`month  `   | Month as _1,2,3_; For _Jan, Feb, Mar_ use `label=TRUE`  |  
-|`day  `     | Day of the month  |  
-|`wday`      | Day of the week as _1,2,3_; For _Sun, Mon, Tue_ use `label=TRUE` |  
+|`month()`   | Month as _1,2,3_; For _Jan, Feb, Mar_ use `label=TRUE`  |  
+|`day()`     | Day of the month  |  
+|`wday()`    | Day of the week as _1,2,3_; For _Sun, Mon, Tue_ use `label=TRUE` |  
 | _- Time -_   |            | 
 |`hour() `   |  Hour of the day _(24hr)_ |  
 |`minute() ` |  Minutes   |  
@@ -970,10 +985,11 @@ We can find how much time has elapsed, add or subtract days, and find seasonal a
 
 ## Install `lubridate` {-}
 
-Install the `lubridate` package and use the `mdy()` function to turn the `Start_Run_Date` column into a nicely formatted date.
-
+First, type or copy and paste `install.packages("lubridate")` into RStudio.
 
 ## <i class="fa fa-broom" aria-hidden="true"></i> Clean the dates {-}
+
+Let's use the `mdy()` function to turn the `Start_Run_Date` column into a nicely formatted date.
 
 ```{r endor-air-mutate, message=F}
 library(lubridate)
@@ -993,7 +1009,7 @@ mag_endor <- filter(mag_endor, year(date) == "2017")
 ```
 
 
-# | Time series
+## Time series {-}
 ```{r endor-time, message=F}
 ggplot(mag_endor, aes(x = date, y = Result)) + 
   geom_line(color = "tomato", size = 2) + 
@@ -1001,46 +1017,34 @@ ggplot(mag_endor, aes(x = date, y = Result)) +
 
 ```
 
-Looks like the measurements definitely picked up a signal towards the end of the year. Let's make a different chart to better show when this was exactly. 
+Looks like the measurements definitely picked up a signal towards the end of the year. Let's make a different chart to show when this occurred. 
 
 
 ## Heatmap or calendar plot {-}
 
 Sometimes with air data we want to know if there is seasonality in the data, this is also true for magnetic storm data from Endor. Calendar plots are great for this. 
+
 We will use `ggplot()` and bring out the `geom_tile()` to organize our data by dates and find when and if that storm happened.
 
 First we will pull more information out of those dates.
 
-
-
 ```{r, calendar_dates, fig.width=13, fig.height=7, out.width=1000}
 
 mag_endor <- mutate(mag_endor, 
-                    day_text = wday(date, label = TRUE), 
-                    day = day(date),
-                    week_month = day/7, 
+                    week_day   = wday(date, label = TRUE),
+                    week_month = day(date)/7, 
                     month_text = month(date, label = TRUE), 
-                    year = year(date),
-                    week = week(date))
-
+                    week       = week(date))
 ```
-
-
 
 
 ```{r, calendar_year, fig.width=13, fig.height=7, out.width=1000}
-ggplot(mag_endor, aes(day_text, desc(week_month), fill = Result)) +
+ggplot(mag_endor, aes(x = week_day, y = week_month, fill = Result)) +
   geom_tile(color = "gray") +
   facet_wrap(~month_text) +
-  geom_label(aes(label = mday(date)), colour = "white", size = 8) +
-  xlab(NULL) +
-  ylab(NULL) +
-  theme(axis.ticks = element_blank(),
-        axis.text.y = element_blank())
+  geom_label(aes(label = mday(date)), color = "white", size = 8)
 
 ```
-
-
 
 <br>
 
@@ -1049,8 +1053,95 @@ ggplot(mag_endor, aes(day_text, desc(week_month), fill = Result)) +
 It looks like there really were high magnetic field readings in November of Galactic year 2017. With luck, the Resistance will reward us handsomely for this information.
 
 
+# | The pipe operator
+
+### ...I wish I could type the data frame name less often. {-}
+
+You can! You can chain functions together to make your script more streamlined by using the `%>%`. Also known as the _pipe operator_.
+
+
+![](https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png){width="115" align="left" style="margin-right:20px;"}
 
 <br>
+
+Here are two ways the `%>%` operator is helpful. First, it eliminates the need for nested parentheses. 
+
+<div style="clear: both;"></div>
+
+Say you wanted to take the sum of 3 numbers and then take the log and then round the final result.
+```{r maths, eval=F}
+round(log(sum(c(10,20,30,40))))
+
+```
+
+<br>
+
+The code doesn't look much like the words we used to describe it. Let's see if it's easier to read when we pipe one function to another.
+```{r maths_better, eval = F}
+c(10,20,30,50) %>% sum() %>% log10() %>% round()
+```
+
+<br>
+
+Second, it eliminates the need to and refer to the data frame each time you create a new line to apply a function to your data.
+
+<br>
+
+Here's all of the functions we have applied to the scrap data so far:
+
+```{r review, eval = F}
+
+scrap <- read_csv("https://itep-r.netlify.com/data/starwars_scrap_jakku.csv")
+
+scrap <- arrange(scrap, desc(price_per_pound))
+
+scrap <- filter(scrap, origin != "All")
+
+scrap <- mutate(scrap, 
+                scrap_finder    = "BB8",
+                measure_method  = "REM-24")
+
+scrap_pounds <- mutate(scrap, amount_lbs = amount * 2000)
+
+```
+
+<br>
+
+
+Now, let's use the `%>%` operator and write it this way.
+
+```{r review_better, eval = F}
+
+scrap_pounds <- scrap %>%
+                arrange(desc(price_per_pound)) %>%
+                filter(origin != "All") %>%
+                mutate(scrap_finder    = "BB8",
+                       measure_method  = "REM-24",
+                       amount_lbs      = amount * 2000)
+
+```
+
+<br>
+
+<div class="tip">
+### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
+
+Make the Endor air data scripts more efficient by using the pipe.
+
+```{r better_endor, eval = F}
+
+air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
+
+mag_endor <- filter(air_endor, Analyte == "magnetic_field")
+
+mag_endor <- mutate(mag_endor, date = mdy(Start_Run_Date))
+
+mag_endor <- filter(mag_endor, year(date) == "2017")
+
+```
+
+<br>
+</div>
 
 
 # <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
