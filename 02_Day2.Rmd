@@ -887,8 +887,12 @@ air_endor <- read_csv("data/air_endor.csv")
 
 <br>
 
-<div class="data">
-__NOTE:__ When your project is open, RStudio sets the working directory to your project folder. When reading in files from a folder outside of your project, you'll need to use the full file path location. For example: `C://Programs/Air_Quality/Ozone_data.csv`
+<div class="tip">
+__NOTE__ 
+
+When your project is open, RStudio sets the working directory to your project folder. When reading files from a folder outside of your project, you'll need to use the full file path location. 
+
+For example: `X://Programs/Air_Quality/Ozone_data.csv`
 </div>
 
 ```{r, endor-air-read2, include=F}
@@ -1045,34 +1049,43 @@ mag_endor <- mutate(mag_endor,
 
 
 ```{r, calendar_year, fig.width=13, fig.height=7, out.width=1000}
-ggplot(mag_endor, aes(x = week_day, y = week_month, fill = Result)) +
+ggplot(mag_endor, aes(x = week_day, y = desc(week_month), fill = Result)) +
   geom_tile(color = "gray") +
-  facet_wrap(~month_text) +
-  geom_label(aes(label = mday(date)), color = "white", size = 8)
-
+  geom_label(aes(label = mday(date)), color = "white", size = 8) +
+  facet_wrap(~month_text)
 ```
 
 <br>
 
-### Mission complete! {-}
 
-It looks like there really were high magnetic field readings in November of Galactic year 2017. With luck, the Resistance will reward us handsomely for this information.
+<div class="note">
+## Mission complete! {-}
+
+Aha! There really were high magnetic field readings in November. Hopefully, the _Resistance_ will reward us handsomely for this information.
+
+</div>
 
 
 # | The pipe operator
 
-### ...I wish I could type the data frame name less often. {-}
-
-You can! You can chain functions together to make your script more streamlined by using the `%>%`. Also known as the _pipe operator_.
-
-
-![](https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png){width="115" align="left" style="margin-right:20px;"}
+#### _...I wish I could type the data frame name less often._ {-}
 
 <br>
 
-Here are two ways the `%>%` operator is helpful. First, it eliminates the need for nested parentheses. 
+
+![](https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png){style="margin-right: 20px; width: 130px; float: left;"}
+
+__Now you can!__ 
+
+We use the `%>%` to chain functions together and make our scripts more streamlined. We call it the _pipe_.
+
+Here are 2 examples of how the `%>%` operator is helpful. 
+
+<br>
 
 <div style="clear: both;"></div>
+
+__`#1:`__ It eliminates the need for nested parentheses. 
 
 Say you wanted to take the sum of 3 numbers and then take the log and then round the final result.
 ```{r maths, eval=F}
@@ -1082,18 +1095,18 @@ round(log(sum(c(10,20,30,40))))
 
 <br>
 
-The code doesn't look much like the words we used to describe it. Let's see if it's easier to read when we pipe one function to another.
+The code doesn't look much like the words we used to describe it. Let's pipe it so we can read the code from left to right.
 ```{r maths_better, eval = F}
 c(10,20,30,50) %>% sum() %>% log10() %>% round()
 ```
 
 <br>
 
-Second, it eliminates the need to and refer to the data frame each time you create a new line to apply a function to your data.
+__`#2:`__ We can combine many processing steps into one cohesive chunk.
 
 <br>
 
-Here's all of the functions we have applied to the scrap data so far:
+Here are the functions we've applied to the scrap data so far:
 
 ```{r review, eval = F}
 
@@ -1132,7 +1145,7 @@ scrap_pounds <- scrap %>%
 <div class="tip">
 ### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
 
-Make the Endor air data scripts more efficient by using the pipe.
+Similar to above, use the `%>%` to make the Endor script shorter.
 
 ```{r better_endor, eval = F}
 
@@ -1146,10 +1159,9 @@ mag_endor <- filter(mag_endor, year(date) == "2017")
 
 ```
 
-<br>
 </div>
 
 
-# <i class="fa fa-rocket" aria-hidden="true"></i> Return to [Homebase](index.html) {-}
+# <i class="fa fa-rocket" aria-hidden="true"></i> Go to [Day 3](03_Day3.html) {-}
 
 <br>

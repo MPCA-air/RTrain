@@ -422,33 +422,33 @@ air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cl
 <tbody>
 <tr class="odd">
 <td align="left">27-137-7001</td>
-<td align="left">2016-09-08</td>
-<td align="right">9</td>
-<td align="right">72.2</td>
+<td align="left">2018-09-20</td>
+<td align="right">14</td>
+<td align="right">66.8</td>
 </tr>
 <tr class="even">
 <td align="left">27-137-7001</td>
-<td align="left">2016-07-27</td>
-<td align="right">9</td>
+<td align="left">2016-10-18</td>
+<td align="right">6</td>
+<td align="right">47.0</td>
+</tr>
+<tr class="odd">
+<td align="left">27-137-7001</td>
+<td align="left">2016-06-22</td>
+<td align="right">8</td>
 <td align="right">62.6</td>
 </tr>
-<tr class="odd">
-<td align="left">27-137-7554</td>
-<td align="left">2017-07-10</td>
-<td align="right">32</td>
-<td align="right">79.4</td>
-</tr>
 <tr class="even">
-<td align="left">27-137-7001</td>
-<td align="left">2017-08-21</td>
-<td align="right">7</td>
-<td align="right">66.2</td>
+<td align="left">27-137-7554</td>
+<td align="left">2018-08-11</td>
+<td align="right">12</td>
+<td align="right">67.4</td>
 </tr>
 <tr class="odd">
 <td align="left">27-137-7001</td>
-<td align="left">2016-04-20</td>
-<td align="right">22</td>
-<td align="right">66.2</td>
+<td align="left">2017-06-28</td>
+<td align="right">14</td>
+<td align="right">81.2</td>
 </tr>
 </tbody>
 </table>
@@ -1240,8 +1240,10 @@ scrap_pounds &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap
 
 air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/air_endor.csv&quot;</span>)</code></pre></div>
 <p><br></p>
-<div class="data">
-<p><strong>NOTE:</strong> When your project is open, RStudio sets the working directory to your project folder. When reading in files from a folder outside of your project, you’ll need to use the full file path location. For example: <code>C://Programs/Air_Quality/Ozone_data.csv</code></p>
+<div class="tip">
+<p><strong>NOTE</strong></p>
+<p>When your project is open, RStudio sets the working directory to your project folder. When reading files from a folder outside of your project, you’ll need to use the full file path location.</p>
+<p>For example: <code>X://Programs/Air_Quality/Ozone_data.csv</code></p>
 </div>
 </div>
 </div>
@@ -1413,41 +1415,44 @@ mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor
                     <span class="dt">week_month =</span> <span class="kw">day</span>(date)<span class="op">/</span><span class="dv">7</span>, 
                     <span class="dt">month_text =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>), 
                     <span class="dt">week       =</span> <span class="kw">week</span>(date))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(<span class="dt">x =</span> week_day, <span class="dt">y =</span> week_month, <span class="dt">fill =</span> Result)) <span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(<span class="dt">x =</span> week_day, <span class="dt">y =</span> <span class="kw">desc</span>(week_month), <span class="dt">fill =</span> Result)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_tile</span>(<span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>month_text) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">mday</span>(date)), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">mday</span>(date)), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>month_text)</code></pre></div>
 <p><img src="02_Day2_files/figure-html/calendar_year-1.png" width="1000" /></p>
 <p><br></p>
-<div id="mission-complete" class="section level3 unnumbered">
-<h3>Mission complete!</h3>
-<p>It looks like there really were high magnetic field readings in November of Galactic year 2017. With luck, the Resistance will reward us handsomely for this information.</p>
+<div class="note">
+<h2 id="mission-complete" class="unnumbered">Mission complete!</h2>
+<p>Aha! There really were high magnetic field readings in November. Hopefully, the <em>Resistance</em> will reward us handsomely for this information.</p>
 </div>
 </div>
 </div>
 <div id="the-pipe-operator" class="section level1">
 <h1><span class="header-section-number">10</span> | The pipe operator</h1>
-<div id="i-wish-i-could-type-the-data-frame-name-less-often." class="section level3 unnumbered">
-<h3>…I wish I could type the data frame name less often.</h3>
-<p>You can! You can chain functions together to make your script more streamlined by using the <code>%&gt;%</code>. Also known as the <em>pipe operator</em>.</p>
+<div id="i-wish-i-could-type-the-data-frame-name-less-often." class="section level4 unnumbered">
+<h4><em>…I wish I could type the data frame name less often.</em></h4>
+<p><br></p>
 <div class="figure">
-<img src="https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png" align="left" style="margin-right:20px;" width="115" />
+<img src="https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png" style="margin-right: 20px; width: 130px; float: left;" />
 
 </div>
+<p><strong>Now you can!</strong></p>
+<p>We use the <code>%&gt;%</code> to chain functions together and make our scripts more streamlined. We call it the <em>pipe</em>.</p>
+<p>Here are 2 examples of how the <code>%&gt;%</code> operator is helpful.</p>
 <p><br></p>
-<p>Here are two ways the <code>%&gt;%</code> operator is helpful. First, it eliminates the need for nested parentheses.</p>
 <div style="clear: both;">
 
 </div>
+<p><strong><code>#1:</code></strong> It eliminates the need for nested parentheses.</p>
 <p>Say you wanted to take the sum of 3 numbers and then take the log and then round the final result.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">round</span>(<span class="kw">log</span>(<span class="kw">sum</span>(<span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>))))</code></pre></div>
 <p><br></p>
-<p>The code doesn’t look much like the words we used to describe it. Let’s see if it’s easier to read when we pipe one function to another.</p>
+<p>The code doesn’t look much like the words we used to describe it. Let’s pipe it so we can read the code from left to right.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">log10</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>()</code></pre></div>
 <p><br></p>
-<p>Second, it eliminates the need to and refer to the data frame each time you create a new line to apply a function to your data.</p>
+<p><strong><code>#2:</code></strong> We can combine many processing steps into one cohesive chunk.</p>
 <p><br></p>
-<p>Here’s all of the functions we have applied to the scrap data so far:</p>
+<p>Here are the functions we’ve applied to the scrap data so far:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/starwars_scrap_jakku.csv&quot;</span>)
 
 scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(price_per_pound))
@@ -1470,7 +1475,7 @@ scrap_pounds &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap,
 <p><br></p>
 <div class="tip">
 <h3 id="exercise-2" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
-<p>Make the Endor air data scripts more efficient by using the pipe.</p>
+<p>Similar to above, use the <code>%&gt;%</code> to make the Endor script shorter.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/air_endor.csv&quot;</span>)
 
 mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(air_endor, Analyte <span class="op">==</span><span class="st"> &quot;magnetic_field&quot;</span>)
@@ -1478,12 +1483,11 @@ mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(air_endor
 mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, <span class="dt">date =</span> <span class="kw">mdy</span>(Start_Run_Date))
 
 mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(mag_endor, <span class="kw">year</span>(date) <span class="op">==</span><span class="st"> &quot;2017&quot;</span>)</code></pre></div>
-<p><br></p>
 </div>
 </div>
 </div>
-<div id="return-to-homebase" class="section level1 unnumbered">
-<h1><i class="fa fa-rocket" aria-hidden="true"></i> Return to <a href="index.html">Homebase</a></h1>
+<div id="go-to-day-3" class="section level1 unnumbered">
+<h1><i class="fa fa-rocket" aria-hidden="true"></i> Go to <a href="03_Day3.html">Day 3</a></h1>
 <p><br></p>
 </div>
 

@@ -6,6 +6,11 @@ hr {
   margin-bottom: 24px;
 }
 
+2-line {
+  margin-top: -26px;
+  margin-bottom: 20px;
+}
+
 .title {
   font-size: 50px !important;
   margin-top: 22px;
