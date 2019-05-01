@@ -1084,6 +1084,7 @@ Here are 2 examples of how the `%>%` operator is helpful.
 <br>
 
 <div style="clear: both;"></div>
+<br>
 
 __`#1:`__ It eliminates the need for nested parentheses. 
 
