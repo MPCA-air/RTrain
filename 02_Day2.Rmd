@@ -73,7 +73,7 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 <div style="clear: both;"></div>
 
 
-# Analysis workflow {-}
+## Example workflow {-}
 
 Here's an example air monitoring project from start to finish. 
 
@@ -295,7 +295,7 @@ The _dplyr_ package is our go-to tool for exploring, re-arranging, and summarizi
 | `glimpse(...)`  | column names + a glimpse of first values (requires _dplyr_ package)   |  
 
 
-# | `glimpse()` and `summary()`
+# | `glimpse()` the columns
 <hr>
 
 Use the `glimpse()` function to find out what type and how much data you have.
@@ -881,8 +881,28 @@ Now we can read in the data from the data folder with our favorite `read_csv` fu
 ```{r, endor-air-read, eval=F}
 library(readr)
 library(dplyr)
+library(janitor)
 
 air_endor <- read_csv("data/air_endor.csv")
+
+names(air_endor)
+
+# Clean the column names
+air_endor <- clean_names(air_endor)
+
+names(air_endor)
+```
+
+```{r, endor-air-read2, echo=F, message=F}
+library(readr)
+library(dplyr)
+library(janitor)
+
+air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
+
+air_endor <- clean_names(air_endor)
+
+names(air_endor)
 ```
 
 <br>
@@ -895,13 +915,6 @@ When your project is open, RStudio sets the working directory to your project fo
 For example: `X://Programs/Air_Quality/Ozone_data.csv`
 </div>
 
-```{r, endor-air-read2, include=F}
-library(readr)
-library(dplyr)
-
-air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
-```
-
 
 # Welcome to Endor! {-}
 
@@ -909,9 +922,13 @@ air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
 
 <br>
 
-__Let's get acquainted with our new Endor data set.__ Remember the different ways?
+__Let's get acquainted with our new Endor data set.__ 
 
-Hint: `summary()`, `glimpse()`, `nrow()`
+__Remember the different ways?__
+
+<br>
+
+Hint: `summary()`, `glimpse()`, `nrow()`, `distinct`
 
 <br>
 
@@ -922,14 +939,18 @@ glimpse(air_endor)
 ```
 
 <br>
+```{r, dis}
+distinct(air_endor, analyte)
+```
+<br>
 
-__I see that there are more analytes than we need. Lucky for us, we only want to know about `magnetic_field` data. Let's filter the data down to only that analyte.__ 
+__Woah. I see that there are many more analytes than we need. Lucky for us, we only want to know about `magnetic_field` data. Let's filter the data down to only that analyte.__ 
 
 <br>
 
 ```{r, endor-air-filter}
 
-mag_endor <- filter(air_endor, Analyte == "magnetic_field")
+mag_endor <- filter(air_endor, analyte == "magnetic_field")
 ```
 
 <br>
@@ -940,7 +961,9 @@ mag_endor <- filter(air_endor, Analyte == "magnetic_field")
 
 
 <div class="well">
-When you have this type of time series data it's helpful for R to know which column is the __date__ column. Dates come in many formats and the preferred format in R is `2019-01-15`. We can use the `lubridate` package to help modify and format dates.
+With time series data it's helpful for R to know which column is the __date__ column. Dates come in many formats and the standard format in R is `2019-01-15`, also referred to as _Year-Month-Day_ format.
+
+We'll use the `lubridate` package to help modify and format dates.
 </div>
 
 
@@ -964,6 +987,18 @@ We can find how much time has elapsed, add or subtract days, and find seasonal a
 
 <br>
 
+### Convert text to a *DATE* {-}
+
+| Function    |  Order of date elements                                 |   
+|----|:-----------------------------------------------------------------|  
+|`mdy()  `    | Month-Day-Year :: `05-18-2019` or `05/18/2019`                 |  
+|`dmy()  `    | Day-Month-Year (Euro dates) :: `18-05-2019` or `18/05/2019`    |  
+|`ymd()  `    | Year-Month-Day (science dates) :: `2019-05-18` or `2019/05/18` |  
+|`ymd_hm() `  | Year-Month-Day Hour:Minutes ::  `2019-05-18 8:35 AM`          |  
+|`ymd_hms() ` | Year-Month-Day Hour:Minutes:Seconds ::  `2019-05-18 8:35:22 AM`    | 
+
+<br>
+
 ### Get date parts {-}
 
 | Function   |  Date element                                            |   
@@ -981,17 +1016,6 @@ We can find how much time has elapsed, add or subtract days, and find seasonal a
 
 <br>
 
-### Convert text to a *DATE* {-}
-
-| Function    |  Order of date elements                                 |   
-|----|:-----------------------------------------------------------------|  
-|`mdy()  `    | Month-Day-Year :: `05-18-2019` or `05/18/2019`                 |  
-|`dmy()  `    | Day-Month-Year (Euro dates) :: `18-05-2019` or `18/05/2019`    |  
-|`ymd()  `    | Year-Month-Day (science dates) :: `2019-05-18` or `2019/05/18` |  
-|`ymd_hm() `  | Year-Month-Day Hour:Minutes ::  `2019-05-18 8:35 AM`          |  
-|`ymd_hms() ` | Year-Month-Day Hour:Minutes:Seconds ::  `2019-05-18 8:35:22 AM`    | 
-
-
 
 ## Install `lubridate` {-}
 
@@ -999,12 +1023,13 @@ First, type or copy and paste `install.packages("lubridate")` into RStudio.
 
 ## <i class="fa fa-broom" aria-hidden="true"></i> Clean the dates {-}
 
-Let's use the `mdy()` function to turn the `Start_Run_Date` column into a nicely formatted date.
+Let's use the `mdy()` function to turn the `start_run_date` column into a nicely formatted date.
 
 ```{r endor-air-mutate, message=F}
 library(lubridate)
 
-mag_endor <- mutate(mag_endor, date = mdy(Start_Run_Date))
+mag_endor <- mutate(mag_endor, date = mdy(start_run_date),
+                               year = year(date))
 ```
 
 
@@ -1015,15 +1040,15 @@ __According to the request we received, the Resistance is only interested in obs
 <br>
 
 ```{r endor-air-filter-year}
-mag_endor <- filter(mag_endor, year(date) == "2017")
+mag_endor <- filter(mag_endor, year == "2017")
 ```
 
 
 ## Time series {-}
 ```{r endor-time, message=F}
-ggplot(mag_endor, aes(x = date, y = Result)) + 
-  geom_line(color = "tomato", size = 2) + 
-  geom_point(alpha = 0.5, size = 5) 
+ggplot(mag_endor, aes(x = date, y = result)) + 
+  geom_line(size = 2, color = "tomato") + 
+  geom_point(size = 5, alpha = 0.5)  # alpha changes transparency
 
 ```
 
@@ -1036,23 +1061,23 @@ Sometimes with air data we want to know if there is seasonality in the data, thi
 
 We will use `ggplot()` and bring out the `geom_tile()` to organize our data by dates and find when and if that storm happened.
 
-First we will pull more information out of those dates.
+First, we'll pull more information out of the dates.
 
 ```{r, calendar_dates, fig.width=13, fig.height=7, out.width=1000}
 
 mag_endor <- mutate(mag_endor, 
-                    week_day   = wday(date, label = TRUE),
-                    week_month = day(date)/7, 
-                    month_text = month(date, label = TRUE), 
-                    week       = week(date))
+                    day_of_week   = wday(date, label = TRUE),
+                    day_of_month  = mday(date),
+                    week_of_month = day(date)/7, 
+                    month         = month(date, label = TRUE))
 ```
 
 
-```{r, calendar_year, fig.width=13, fig.height=7, out.width=1000}
-ggplot(mag_endor, aes(x = week_day, y = desc(week_month), fill = Result)) +
+```{r, calendar_year, fig.width=13, fig.height=7}
+ggplot(mag_endor, aes(x = day_of_week, y = desc(week_of_month), fill = result)) +
   geom_tile(color = "gray") +
-  geom_label(aes(label = mday(date)), color = "white", size = 8) +
-  facet_wrap(~month_text)
+  geom_label(aes(label = day_of_month), size = 8, color = "white") +
+  facet_wrap("month")
 ```
 
 <br>
@@ -1066,24 +1091,26 @@ Aha! There really were high magnetic field readings in November. Hopefully, the 
 </div>
 
 
+
 # | The pipe operator
 
-#### _...I wish I could type the data frame name less often._ {-}
+#### _...I wish I could type the name of the data frame less often._ {-}
 
 <br>
 
 
-![](https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png){style="margin-right: 20px; width: 130px; float: left;"}
+![](images/pipe.png){style="margin-right: 20px; width: 136px; float: left;"}
 
 __Now you can!__ 
 
 We use the `%>%` to chain functions together and make our scripts more streamlined. We call it the _pipe_.
 
-Here are 2 examples of how the `%>%` operator is helpful. 
-
 <br>
 
 <div style="clear: both;"></div>
+
+Here are 2 examples of how the `%>%` operator is helpful. 
+
 <br>
 
 __`#1:`__ It eliminates the need for nested parentheses. 
@@ -1107,11 +1134,9 @@ __`#2:`__ We can combine many processing steps into one cohesive chunk.
 
 <br>
 
-Here are the functions we've applied to the scrap data so far:
+Here are some of the functions we've applied to the scrap data so far:
 
-```{r review, eval = F}
-
-scrap <- read_csv("https://itep-r.netlify.com/data/starwars_scrap_jakku.csv")
+```{r review, eval=F}
 
 scrap <- arrange(scrap, desc(price_per_pound))
 
@@ -1120,24 +1145,20 @@ scrap <- filter(scrap, origin != "All")
 scrap <- mutate(scrap, 
                 scrap_finder    = "BB8",
                 measure_method  = "REM-24")
-
-scrap_pounds <- mutate(scrap, amount_lbs = amount * 2000)
-
 ```
 
 <br>
 
 
-Now, let's use the `%>%` operator and write it this way.
+We can use the `%>%` operator and write it this way.
 
-```{r review_better, eval = F}
+```{r review-better, eval=F}
 
-scrap_pounds <- scrap %>%
-                arrange(desc(price_per_pound)) %>%
-                filter(origin != "All") %>%
-                mutate(scrap_finder    = "BB8",
-                       measure_method  = "REM-24",
-                       amount_lbs      = amount * 2000)
+scrap <- scrap %>%
+           arrange(desc(price_per_pound)) %>%
+           filter(origin != "All") %>%
+           mutate(scrap_finder    = "BB8",
+                  measure_method  = "REM-24")
 
 ```
 
@@ -1146,17 +1167,13 @@ scrap_pounds <- scrap %>%
 <div class="tip">
 ### <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
 
-Similar to above, use the `%>%` to make the Endor script shorter.
+Similar to above, use the `%>%` to combine the two Endor lines below.
 
-```{r better_endor, eval = F}
+```{r better_endor, eval=F}
 
-air_endor <- read_csv("https://itep-r.netlify.com/data/air_endor.csv")
+mag_endor <- filter(air_endor, analyte == "magnetic_field")
 
-mag_endor <- filter(air_endor, Analyte == "magnetic_field")
-
-mag_endor <- mutate(mag_endor, date = mdy(Start_Run_Date))
-
-mag_endor <- filter(mag_endor, year(date) == "2017")
+mag_endor <- mutate(mag_endor, date = mdy(start_run_date))
 
 ```
 

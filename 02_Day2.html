@@ -394,9 +394,8 @@ div.tocify {
 
 </div>
 </div>
-</div>
-<div id="analysis-workflow" class="section level1 unnumbered">
-<h1>Analysis workflow</h1>
+<div id="example-workflow" class="section level2 unnumbered">
+<h2>Example workflow</h2>
 <p>Here’s an example air monitoring project from start to finish.</p>
 <details> <summary class = "btn_code"> <strong>EXAMPLE</strong> Ozone data project </summary>
 <div class="quiz" style="margin-top: 0; background-color: white;">
@@ -421,34 +420,34 @@ air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cl
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">27-137-7001</td>
-<td align="left">2017-09-13</td>
-<td align="right">11</td>
-<td align="right">54.2</td>
-</tr>
-<tr class="even">
 <td align="left">27-137-7554</td>
-<td align="left">2017-06-29</td>
-<td align="right">12</td>
-<td align="right">79.4</td>
-</tr>
-<tr class="odd">
-<td align="left">27-137-7001</td>
-<td align="left">2016-09-12</td>
-<td align="right">5</td>
-<td align="right">48.8</td>
-</tr>
-<tr class="even">
-<td align="left">27-137-7554</td>
-<td align="left">2018-09-28</td>
-<td align="right">37</td>
-<td align="right">78.8</td>
-</tr>
-<tr class="odd">
-<td align="left">27-137-7554</td>
-<td align="left">2016-08-12</td>
+<td align="left">2017-10-14</td>
 <td align="right">9</td>
-<td align="right">75.8</td>
+<td align="right">62.6</td>
+</tr>
+<tr class="even">
+<td align="left">27-137-7554</td>
+<td align="left">2018-04-18</td>
+<td align="right">20</td>
+<td align="right">39.2</td>
+</tr>
+<tr class="odd">
+<td align="left">27-137-7554</td>
+<td align="left">2016-04-30</td>
+<td align="right">3</td>
+<td align="right">39.2</td>
+</tr>
+<tr class="even">
+<td align="left">27-137-7001</td>
+<td align="left">2016-04-11</td>
+<td align="right">13</td>
+<td align="right">53.0</td>
+</tr>
+<tr class="odd">
+<td align="left">27-137-7001</td>
+<td align="left">2016-08-05</td>
+<td align="right">11</td>
+<td align="right">77.0</td>
 </tr>
 </tbody>
 </table>
@@ -564,6 +563,7 @@ air_data &lt;-<span class="st"> </span>air_data <span class="op">%&gt;%</span><s
 
 </div>
 </div>
+</div>
 <div id="read-scrap-data" class="section level1 unnumbered">
 <h1>Read scrap data</h1>
 <p>It’s time to jump back in to where we left off on <strong>Day 1</strong>.</p>
@@ -633,8 +633,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 </table>
 </div>
 </div>
-<div id="glimpse-and-summary" class="section level1">
-<h1><span class="header-section-number">2</span> | <code>glimpse()</code> and <code>summary()</code></h1>
+<div id="glimpse-the-columns" class="section level1">
+<h1><span class="header-section-number">2</span> | <code>glimpse()</code> the columns</h1>
 <hr>
 <p>Use the <code>glimpse()</code> function to find out what type and how much data you have.</p>
 <p>Use the <code>summary()</code> function to get a quick report on your numeric data.</p>
@@ -1237,8 +1237,18 @@ scrap_pounds &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap
 <p>Now we can read in the data from the data folder with our favorite <code>read_csv</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
 <span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(janitor)
 
-air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/air_endor.csv&quot;</span>)</code></pre></div>
+air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/air_endor.csv&quot;</span>)
+
+<span class="kw">names</span>(air_endor)
+
+<span class="co"># Clean the column names</span>
+air_endor &lt;-<span class="st"> </span><span class="kw">clean_names</span>(air_endor)
+
+<span class="kw">names</span>(air_endor)</code></pre></div>
+<pre><code>## [1] &quot;analyte&quot;        &quot;lab_code&quot;       &quot;units&quot;          &quot;start_run_date&quot;
+## [5] &quot;site_name&quot;      &quot;long_site_name&quot; &quot;planet&quot;         &quot;result&quot;</code></pre>
 <p><br></p>
 <div class="tip">
 <p><strong>NOTE</strong></p>
@@ -1254,31 +1264,50 @@ air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span c
 
 </div>
 <p><br></p>
-<p><strong>Let’s get acquainted with our new Endor data set.</strong> Remember the different ways?</p>
-<p>Hint: <code>summary()</code>, <code>glimpse()</code>, <code>nrow()</code></p>
+<p><strong>Let’s get acquainted with our new Endor data set.</strong></p>
+<p><strong>Remember the different ways?</strong></p>
+<p><br></p>
+<p>Hint: <code>summary()</code>, <code>glimpse()</code>, <code>nrow()</code>, <code>distinct</code></p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(air_endor)</code></pre></div>
 <pre><code>## Observations: 1,190
 ## Variables: 8
-## $ Analyte        &lt;chr&gt; &quot;1-Methylnaphthalene&quot;, &quot;1-Methylnaphthalene&quot;, &quot;...
+## $ analyte        &lt;chr&gt; &quot;1-Methylnaphthalene&quot;, &quot;1-Methylnaphthalene&quot;, &quot;...
 ## $ lab_code       &lt;chr&gt; &quot;HV-403&quot;, &quot;HV-408&quot;, &quot;HV-411&quot;, &quot;HV-415&quot;, &quot;HV-418...
-## $ Units          &lt;chr&gt; &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;n...
-## $ Start_Run_Date &lt;chr&gt; &quot;7/11/2016&quot;, &quot;7/23/2016&quot;, &quot;8/5/2016&quot;, &quot;8/16/201...
-## $ Site.Name      &lt;chr&gt; &quot;battlesite1&quot;, &quot;battlesite1&quot;, &quot;battlesite1&quot;, &quot;b...
-## $ Long.Site.Name &lt;chr&gt; &quot;Endor_Tana_forestmoon_battlesite1&quot;, &quot;Endor_Tan...
-## $ Planet         &lt;chr&gt; &quot;Endor&quot;, &quot;Endor&quot;, &quot;Endor&quot;, &quot;Endor&quot;, &quot;Endor&quot;, &quot;E...
-## $ Result         &lt;dbl&gt; 0.00291, 0.00000, 0.00000, 0.00608, 0.00000, 0....</code></pre>
+## $ units          &lt;chr&gt; &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;ng/m3&quot;, &quot;n...
+## $ start_run_date &lt;chr&gt; &quot;7/11/2016&quot;, &quot;7/23/2016&quot;, &quot;8/5/2016&quot;, &quot;8/16/201...
+## $ site_name      &lt;chr&gt; &quot;battlesite1&quot;, &quot;battlesite1&quot;, &quot;battlesite1&quot;, &quot;b...
+## $ long_site_name &lt;chr&gt; &quot;Endor_Tana_forestmoon_battlesite1&quot;, &quot;Endor_Tan...
+## $ planet         &lt;chr&gt; &quot;Endor&quot;, &quot;Endor&quot;, &quot;Endor&quot;, &quot;Endor&quot;, &quot;Endor&quot;, &quot;E...
+## $ result         &lt;dbl&gt; 0.00291, 0.00000, 0.00000, 0.00608, 0.00000, 0....</code></pre>
 <p><br></p>
-<p><strong>I see that there are more analytes than we need. Lucky for us, we only want to know about <code>magnetic_field</code> data. Let’s filter the data down to only that analyte.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">distinct</span>(air_endor, analyte)</code></pre></div>
+<pre><code>## # A tibble: 27 x 1
+##    analyte             
+##    &lt;chr&gt;               
+##  1 1-Methylnaphthalene 
+##  2 2-Methylnaphthalene 
+##  3 5-Methylchrysene    
+##  4 Acenaphthene        
+##  5 Anthanthrene        
+##  6 Benz[a]anthracene   
+##  7 Benzo[a]pyrene      
+##  8 Benzo[c]fluorene    
+##  9 Benzo[e]pyrene      
+## 10 Benzo[g,h,i]perylene
+## # ... with 17 more rows</code></pre>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(air_endor, Analyte <span class="op">==</span><span class="st"> &quot;magnetic_field&quot;</span>)</code></pre></div>
+<p><strong>Woah. I see that there are many more analytes than we need. Lucky for us, we only want to know about <code>magnetic_field</code> data. Let’s filter the data down to only that analyte.</strong></p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(air_endor, analyte <span class="op">==</span><span class="st"> &quot;magnetic_field&quot;</span>)</code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Boom!</strong> How many rows are left now?</p>
 </blockquote>
 <p><br></p>
 <div class="well">
-<p>When you have this type of time series data it’s helpful for R to know which column is the <strong>date</strong> column. Dates come in many formats and the preferred format in R is <code>2019-01-15</code>. We can use the <code>lubridate</code> package to help modify and format dates.</p>
+<p>With time series data it’s helpful for R to know which column is the <strong>date</strong> column. Dates come in many formats and the standard format in R is <code>2019-01-15</code>, also referred to as <em>Year-Month-Day</em> format.</p>
+<p>We’ll use the <code>lubridate</code> package to help modify and format dates.</p>
 </div>
 </div>
 <div id="dates" class="section level1">
@@ -1297,6 +1326,40 @@ air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span c
 <div style="clear: both;">
 
 </div>
+<p><br></p>
+</div>
+<div id="convert-text-to-a-date" class="section level3 unnumbered">
+<h3>Convert text to a <em>DATE</em></h3>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th align="left">Order of date elements</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mdy()</code></td>
+<td align="left">Month-Day-Year :: <code>05-18-2019</code> or <code>05/18/2019</code></td>
+</tr>
+<tr class="even">
+<td><code>dmy()</code></td>
+<td align="left">Day-Month-Year (Euro dates) :: <code>18-05-2019</code> or <code>18/05/2019</code></td>
+</tr>
+<tr class="odd">
+<td><code>ymd()</code></td>
+<td align="left">Year-Month-Day (science dates) :: <code>2019-05-18</code> or <code>2019/05/18</code></td>
+</tr>
+<tr class="even">
+<td><code>ymd_hm()</code></td>
+<td align="left">Year-Month-Day Hour:Minutes :: <code>2019-05-18 8:35 AM</code></td>
+</tr>
+<tr class="odd">
+<td><code>ymd_hms()</code></td>
+<td align="left">Year-Month-Day Hour:Minutes:Seconds :: <code>2019-05-18 8:35:22 AM</code></td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div id="get-date-parts" class="section level3 unnumbered">
@@ -1349,59 +1412,27 @@ air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span c
 </table>
 <p><br></p>
 </div>
-<div id="convert-text-to-a-date" class="section level3 unnumbered">
-<h3>Convert text to a <em>DATE</em></h3>
-<table>
-<thead>
-<tr class="header">
-<th>Function</th>
-<th align="left">Order of date elements</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>mdy()</code></td>
-<td align="left">Month-Day-Year :: <code>05-18-2019</code> or <code>05/18/2019</code></td>
-</tr>
-<tr class="even">
-<td><code>dmy()</code></td>
-<td align="left">Day-Month-Year (Euro dates) :: <code>18-05-2019</code> or <code>18/05/2019</code></td>
-</tr>
-<tr class="odd">
-<td><code>ymd()</code></td>
-<td align="left">Year-Month-Day (science dates) :: <code>2019-05-18</code> or <code>2019/05/18</code></td>
-</tr>
-<tr class="even">
-<td><code>ymd_hm()</code></td>
-<td align="left">Year-Month-Day Hour:Minutes :: <code>2019-05-18 8:35 AM</code></td>
-</tr>
-<tr class="odd">
-<td><code>ymd_hms()</code></td>
-<td align="left">Year-Month-Day Hour:Minutes:Seconds :: <code>2019-05-18 8:35:22 AM</code></td>
-</tr>
-</tbody>
-</table>
-</div>
 <div id="install-lubridate" class="section level2 unnumbered">
 <h2>Install <code>lubridate</code></h2>
 <p>First, type or copy and paste <code>install.packages(&quot;lubridate&quot;)</code> into RStudio.</p>
 </div>
 <div id="clean-the-dates" class="section level2 unnumbered">
 <h2><i class="fa fa-broom" aria-hidden="true"></i> Clean the dates</h2>
-<p>Let’s use the <code>mdy()</code> function to turn the <code>Start_Run_Date</code> column into a nicely formatted date.</p>
+<p>Let’s use the <code>mdy()</code> function to turn the <code>start_run_date</code> column into a nicely formatted date.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
 
-mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, <span class="dt">date =</span> <span class="kw">mdy</span>(Start_Run_Date))</code></pre></div>
+mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, <span class="dt">date =</span> <span class="kw">mdy</span>(start_run_date),
+                               <span class="dt">year =</span> <span class="kw">year</span>(date))</code></pre></div>
 <p><br></p>
 <p><strong>According to the request we received, the Resistance is only interested in observations from the year <code>2017</code>. So let’s filter the data down to only dates within that year.</strong></p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(mag_endor, <span class="kw">year</span>(date) <span class="op">==</span><span class="st"> &quot;2017&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(mag_endor, year <span class="op">==</span><span class="st"> &quot;2017&quot;</span>)</code></pre></div>
 </div>
 <div id="time-series" class="section level2 unnumbered">
 <h2>Time series</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> Result)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.5</span>, <span class="dt">size =</span> <span class="dv">5</span>) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> result)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">2</span>, <span class="dt">color =</span> <span class="st">&quot;tomato&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)  <span class="co"># alpha changes transparency</span></code></pre></div>
 <p><img src="02_Day2_files/figure-html/endor-time-1.png" width="960" /></p>
 <p>Looks like the measurements definitely picked up a signal towards the end of the year. Let’s make a different chart to show when this occurred.</p>
 </div>
@@ -1409,17 +1440,17 @@ mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor
 <h2>Heatmap or calendar plot</h2>
 <p>Sometimes with air data we want to know if there is seasonality in the data, this is also true for magnetic storm data from Endor. Calendar plots are great for this.</p>
 <p>We will use <code>ggplot()</code> and bring out the <code>geom_tile()</code> to organize our data by dates and find when and if that storm happened.</p>
-<p>First we will pull more information out of those dates.</p>
+<p>First, we’ll pull more information out of the dates.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, 
-                    <span class="dt">week_day   =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>),
-                    <span class="dt">week_month =</span> <span class="kw">day</span>(date)<span class="op">/</span><span class="dv">7</span>, 
-                    <span class="dt">month_text =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>), 
-                    <span class="dt">week       =</span> <span class="kw">week</span>(date))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(<span class="dt">x =</span> week_day, <span class="dt">y =</span> <span class="kw">desc</span>(week_month), <span class="dt">fill =</span> Result)) <span class="op">+</span>
+                    <span class="dt">day_of_week   =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>),
+                    <span class="dt">day_of_month  =</span> <span class="kw">mday</span>(date),
+                    <span class="dt">week_of_month =</span> <span class="kw">day</span>(date)<span class="op">/</span><span class="dv">7</span>, 
+                    <span class="dt">month         =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mag_endor, <span class="kw">aes</span>(<span class="dt">x =</span> day_of_week, <span class="dt">y =</span> <span class="kw">desc</span>(week_of_month), <span class="dt">fill =</span> result)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_tile</span>(<span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> <span class="kw">mday</span>(date)), <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">8</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>month_text)</code></pre></div>
-<p><img src="02_Day2_files/figure-html/calendar_year-1.png" width="1000" /></p>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="kw">aes</span>(<span class="dt">label =</span> day_of_month), <span class="dt">size =</span> <span class="dv">8</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="st">&quot;month&quot;</span>)</code></pre></div>
+<p><img src="02_Day2_files/figure-html/calendar_year-1.png" width="1248" /></p>
 <p><br></p>
 <div class="note">
 <h2 id="mission-complete" class="unnumbered">Mission complete!</h2>
@@ -1429,20 +1460,20 @@ mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor
 </div>
 <div id="the-pipe-operator" class="section level1">
 <h1><span class="header-section-number">10</span> | The pipe operator</h1>
-<div id="i-wish-i-could-type-the-data-frame-name-less-often." class="section level4 unnumbered">
-<h4><em>…I wish I could type the data frame name less often.</em></h4>
+<div id="i-wish-i-could-type-the-name-of-the-data-frame-less-often." class="section level4 unnumbered">
+<h4><em>…I wish I could type the name of the data frame less often.</em></h4>
 <p><br></p>
 <div class="figure">
-<img src="https://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/9302/medium/1447173978/rstudio-hex-pipe-dot-psd.png" style="margin-right: 20px; width: 130px; float: left;" />
+<img src="images/pipe.png" style="margin-right: 20px; width: 136px; float: left;" />
 
 </div>
 <p><strong>Now you can!</strong></p>
 <p>We use the <code>%&gt;%</code> to chain functions together and make our scripts more streamlined. We call it the <em>pipe</em>.</p>
-<p>Here are 2 examples of how the <code>%&gt;%</code> operator is helpful.</p>
 <p><br></p>
 <div style="clear: both;">
 
 </div>
+<p>Here are 2 examples of how the <code>%&gt;%</code> operator is helpful.</p>
 <p><br></p>
 <p><strong><code>#1:</code></strong> It eliminates the need for nested parentheses.</p>
 <p>Say you wanted to take the sum of 3 numbers and then take the log and then round the final result.</p>
@@ -1453,37 +1484,28 @@ mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor
 <p><br></p>
 <p><strong><code>#2:</code></strong> We can combine many processing steps into one cohesive chunk.</p>
 <p><br></p>
-<p>Here are the functions we’ve applied to the scrap data so far:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/starwars_scrap_jakku.csv&quot;</span>)
-
-scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(price_per_pound))
+<p>Here are some of the functions we’ve applied to the scrap data so far:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span class="kw">desc</span>(price_per_pound))
 
 scrap &lt;-<span class="st"> </span><span class="kw">filter</span>(scrap, origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>)
 
 scrap &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap, 
                 <span class="dt">scrap_finder    =</span> <span class="st">&quot;BB8&quot;</span>,
-                <span class="dt">measure_method  =</span> <span class="st">&quot;REM-24&quot;</span>)
-
-scrap_pounds &lt;-<span class="st"> </span><span class="kw">mutate</span>(scrap, <span class="dt">amount_lbs =</span> amount <span class="op">*</span><span class="st"> </span><span class="dv">2000</span>)</code></pre></div>
+                <span class="dt">measure_method  =</span> <span class="st">&quot;REM-24&quot;</span>)</code></pre></div>
 <p><br></p>
-<p>Now, let’s use the <code>%&gt;%</code> operator and write it this way.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap_pounds &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">arrange</span>(<span class="kw">desc</span>(price_per_pound)) <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">filter</span>(origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">                </span><span class="kw">mutate</span>(<span class="dt">scrap_finder    =</span> <span class="st">&quot;BB8&quot;</span>,
-                       <span class="dt">measure_method  =</span> <span class="st">&quot;REM-24&quot;</span>,
-                       <span class="dt">amount_lbs      =</span> amount <span class="op">*</span><span class="st"> </span><span class="dv">2000</span>)</code></pre></div>
+<p>We can use the <code>%&gt;%</code> operator and write it this way.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">arrange</span>(<span class="kw">desc</span>(price_per_pound)) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">filter</span>(origin <span class="op">!=</span><span class="st"> &quot;All&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">           </span><span class="kw">mutate</span>(<span class="dt">scrap_finder    =</span> <span class="st">&quot;BB8&quot;</span>,
+                  <span class="dt">measure_method  =</span> <span class="st">&quot;REM-24&quot;</span>)</code></pre></div>
 <p><br></p>
 <div class="tip">
 <h3 id="exercise-2" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
-<p>Similar to above, use the <code>%&gt;%</code> to make the Endor script shorter.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">air_endor &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://itep-r.netlify.com/data/air_endor.csv&quot;</span>)
+<p>Similar to above, use the <code>%&gt;%</code> to combine the two Endor lines below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(air_endor, analyte <span class="op">==</span><span class="st"> &quot;magnetic_field&quot;</span>)
 
-mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(air_endor, Analyte <span class="op">==</span><span class="st"> &quot;magnetic_field&quot;</span>)
-
-mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, <span class="dt">date =</span> <span class="kw">mdy</span>(Start_Run_Date))
-
-mag_endor &lt;-<span class="st"> </span><span class="kw">filter</span>(mag_endor, <span class="kw">year</span>(date) <span class="op">==</span><span class="st"> &quot;2017&quot;</span>)</code></pre></div>
+mag_endor &lt;-<span class="st"> </span><span class="kw">mutate</span>(mag_endor, <span class="dt">date =</span> <span class="kw">mdy</span>(start_run_date))</code></pre></div>
 </div>
 </div>
 </div>
