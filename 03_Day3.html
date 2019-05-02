@@ -453,7 +453,7 @@ porgs &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 </div>
 </div>
 <div id="finn-needs-us" class="section level1 unnumbered">
-<h1>Finn needs us!</h1>
+<h1>| Finn needs us!</h1>
 <p>That’s enough <em>scuttlebutting</em> around on Endor, Finn needs us back on Jakku. It turns out we forgot to pick-up Finn when we left. Now he’s being held ransom by Junk Boss Plutt. We’ll need to act fast to get to him before the Empire does. <strong>Blast off!</strong></p>
 <p><br></p>
 <div class="figure">
@@ -484,10 +484,11 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 <div id="a-scrappy-ransom" class="section level2 unnumbered">
 <h2>A scrappy ransom</h2>
 <p>Mr. Baddy Plutt is demanding <strong>10,000 items</strong> of scrap for Finn. Sounds expensive, but lucky for us he didn’t clarify the exact items. Let’s find the scrap that weighs the least per shipment and try to make this transaction as light as possible.</p>
-<p>Take a look at our <strong>NEW</strong> scrap data and see if we have the mass of all the items.</p>
+<p>Take a look at our <strong>NEW</strong> scrap data and see if we have the weight of all the items.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># What unit types are in the data?</span>
 <span class="kw">unique</span>(scrap<span class="op">$</span>units)</code></pre></div>
 <pre><code>## [1] &quot;Cubic Yards&quot; &quot;Items&quot;       &quot;Tons&quot;</code></pre>
+<p><strong>Or return results as a data frame</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">distinct</span>(scrap, units)</code></pre></div>
 <pre><code>## # A tibble: 3 x 1
 ##   units      
@@ -501,8 +502,8 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 <p>I think we’re going to need some more data.</p>
 <p><br></p>
 <div class="tip">
-<p>__“Hey BB8!__</p>
-<p>__Please go do your magic data finding thing.“__</p>
+<p><strong>“Hey BB8!”</strong></p>
+<p><strong>“Please do your magic data finding thing.”</strong></p>
 </div>
 </div>
 <div id="get-the-weights" class="section level2 unnumbered">
@@ -511,9 +512,9 @@ scrap &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class
 <img src="images/rey_bb8.jpg" align="right" style="width: 35%; margin-top: 0px; margin-left: 15px; margin-right: 0px;" />
 
 </div>
-<p>It took a while, but with a few droid bribes BB8 was able to track down a <code>Mass conversion table</code> from his old droid buddies. Our current data shows the total cubic yards for some scrap shipments, but not how much the shipment weighs.</p>
-<div id="read-the-mass-conversion-table" class="section level3 unnumbered">
-<h3>Read the mass conversion table</h3>
+<p>It took a while, but with a few droid bribes BB8 was able to track down a <em>Weight conversion table</em> from his old droid buddies. Our current data shows the total cubic yards for some scrap shipments, but not how much the shipment weighs.</p>
+<div id="read-the-weight-conversion-table" class="section level3 unnumbered">
+<h3>Read the weight conversion table</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The data&#39;s URL</span>
 convert_url &lt;-<span class="st"> &quot;https://rtrain.netlify.com/data/conversion_table.csv&quot;</span>
 
@@ -534,8 +535,8 @@ convert &lt;-<span class="st"> </span><span class="kw">read_csv</span>(convert_u
 </div>
 </div>
 </div>
-<div id="join-tables-with-left_join" class="section level1">
-<h1><span class="header-section-number">2</span> | Join tables with <code>left_join()</code></h1>
+<div id="join-tables" class="section level1">
+<h1><span class="header-section-number">2</span> | Join tables</h1>
 <div class="figure">
 <img src="images/leftjoin_scrap.png" style="width: 55%; margin-left: 18%;" />
 
@@ -632,7 +633,7 @@ convert &lt;-<span class="st"> </span><span class="kw">read_csv</span>(convert_u
 <div id="total-price-per-shipment" class="section level2 unnumbered">
 <h2>Total price per shipment</h2>
 <div class="note">
-<h3 id="exercise" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<h3 id="exercise" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> EXERCISE</h3>
 <ul class="nav nav-pills" id="myTab" role="tablist" style="margin-top: 18px;">
 <li class="nav-item active">
 <a class="nav-link" id="totalprice-tab" data-toggle="tab" href="#totalprice" role="tab" aria-controls="totalprice" aria-selected="true">Total price</a>
@@ -767,7 +768,7 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <p><strong>Hint:</strong> Add <code>na.rm = T</code> to <code>quantile()</code>.</p>
 <p><br></p>
 <div class="tip">
-<h3 id="exercise-1" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<h3 id="exercise-1" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> EXERCISE</h3>
 <p>Create a summary of the scrap data that includes 3 of the summary functions above. The following is one example.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">             </span><span class="kw">summarize</span>(<span class="dt">max_credits      =</span>  __________ ,
@@ -845,7 +846,7 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <div class="note" style="margin-top: -9px;">
 <p>
 <p>You can round the prices to a certain number of digits using the <code>round()</code> function. We can finish by adding the <code>arrange()</code> function to sort the table by our new column.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">scrap_means &lt;-<span class="st"> </span><span class="kw">group_by</span>(scrap, origin) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mean_prices &lt;-<span class="st"> </span><span class="kw">group_by</span>(scrap, origin) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">                 </span><span class="kw">summarize</span>(<span class="dt">mean_price       =</span> <span class="kw">mean</span>(price_per_unit, <span class="dt">na.rm =</span> T),
                            <span class="dt">mean_price_round =</span> <span class="kw">round</span>(mean_price, <span class="dt">digits =</span> <span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st">  </span>
 <span class="st">                 </span><span class="kw">arrange</span>(mean_price_round) <span class="op">%&gt;%</span>
@@ -866,9 +867,9 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <div id="save-files" class="section level1">
 <h1><span class="header-section-number">5</span> | Save files</h1>
 <hr>
-<p>Let’s save the mean price summary table we created to a <em>CSV</em>. That way we can transfer it to a <em>droid courier</em> for delivery to Rey. To save a data frame we can use the <code>write_csv()</code> function from our favorite <code>readr</code> package.</p>
+<p>Let’s save the mean price summary table we created to a <em>CSV</em>. That way we can transfer it to a <em>droid courier</em> for delivery to Rey. To save a data frame we use the <code>write_csv()</code> function from our favorite <code>readr</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Write the file to your results folder</span>
-<span class="kw">write_csv</span>(scrap_summary, <span class="st">&quot;results/prices_by_origin.csv&quot;</span>)</code></pre></div>
+<span class="kw">write_csv</span>(mean_prices, <span class="st">&quot;results/prices_by_origin.csv&quot;</span>)</code></pre></div>
 <p><br></p>
 <div class="red-note">
 <h5 id="warning" class="unnumbered"><i class="fas fa-exclamation-triangle" style="color: #040707;"></i> <strong>WARNING!</strong></h5>
@@ -912,7 +913,7 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">         </span><span class="kw">mutate</span>(<span class="dt">affordable =</span> <span class="kw">ifelse</span>(price_per_unit <span class="op">&lt;</span><span class="st"> </span><span class="dv">500</span>, <span class="st">&quot;Cheap&quot;</span>, <span class="st">&quot;Expensive&quot;</span>))</code></pre></div>
 <div class="tip">
-<h4 id="exercise-2" class="unnumbered"><i class="fa fa-cogs" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<h4 id="exercise-2" class="unnumbered"><i class="fa fa-cogs" aria-hidden="true" style="color: green"></i> EXERCISE</h4>
 <p>Use <code>filter()</code> to create a new <code>cheap_scrap</code> table.</p>
 </div>
 <div class="quiz">
@@ -931,6 +932,7 @@ scrap &lt;-<span class="st"> </span>scrap <span class="op">%&gt;%</span><span cl
 <p><strong>CONGRATULATIONS</strong> of galactic proportions to you.</p>
 <p>We now have a clean and tidy data set. If BB8 receives new data to append, we can re-run this script and in 5 seconds we’ll have cleaned up data again!</p>
 </blockquote>
+<p><br></p>
 </div>
 </div>
 </div>
@@ -977,7 +979,7 @@ A <code>ggplot</code> has 3 ingredients.
 <p><img src="03_Day3_files/figure-html/unnamed-chunk-21-1.png" width="1056" /></p>
 <p><br></p>
 <div class="tip">
-<h4 id="exercise-3" class="unnumbered"><i class="fa fa-cogs" aria-hidden="true" style="color: green"></i> Exercise</h4>
+<h4 id="exercise-3" class="unnumbered"><i class="fa fa-cogs" aria-hidden="true" style="color: green"></i> EXERCISE</h4>
 <p>Try making a scatterplot of any two columns.</p>
 <p><em>Hint: Numeric variables will be more informative.</em></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(scrap, <span class="kw">aes</span>(<span class="dt">x =</span> __column1__, <span class="dt">y =</span> __column2__)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
@@ -1003,7 +1005,7 @@ A <code>ggplot</code> has 3 ingredients.
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre></div>
 <p><img src="03_Day3_files/figure-html/unnamed-chunk-25-1.png" width="1056" /></p>
 <div class="tip">
-<h3 id="exercise-4" class="unnumbered"><i class="fa fa-user-astronaut" aria-hidden="true" style="color:#040707;"></i> EXERCISE</h3>
+<h3 id="exercise-4" class="unnumbered"><i class="fa fa-user-bicycle" aria-hidden="true" style="color:#040707;"></i> EXERCISE</h3>
 <p>An easy way to experiment with colors is to add layers like <code>+ scale_fill_viridis()</code> or <code>+ scale_fill_brewer()</code> to your plot, which will link to RcolorBrewer so you can have accessible color schemes.</p>
 <p>Try adding one of thse to your column plot above.</p>
 </div>
@@ -1030,12 +1032,14 @@ A <code>ggplot</code> has 3 ingredients.
 <p><strong>Step 2:</strong> Make a <code>geom_col()</code> plot of the total pounds of Black boxes shipped to each destination.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(cheap_scrap, <span class="kw">aes</span>(<span class="dt">x =</span>   , <span class="dt">y =</span>    ) ) <span class="op">+</span><span class="st"> </span>
 <span class="st">   </span>geom_</code></pre></div>
-<details> <summary class = "btn_code"><em>Show code</em></summary>
+<p><details> <summary class = "btn_code"><em>Show code</em></summary></p>
+<div class="quiz" style="margin-top: -9px;">
 <p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(cheap_scrap, <span class="kw">aes</span>(<span class="dt">x =</span> destination, <span class="dt">y =</span> total_pounds) ) <span class="op">+</span><span class="st"> </span>
 <span class="st">   </span><span class="kw">geom_col</span>()</code></pre></div>
 <p><img src="03_Day3_files/figure-html/unnamed-chunk-30-1.png" width="1056" /></p>
 </p>
+</div>
 <p></details></p>
 <div class="quiz">
 <h3 id="pop-quiz-2" class="unnumbered">Pop Quiz!</h3>
@@ -1050,8 +1054,8 @@ A <code>ggplot</code> has 3 ingredients.
 </div>
 <p><br><br></p>
 </div>
-<div id="concatulations" class="section level1">
-<h1><span class="header-section-number">9</span> <i class="fa fa-star" aria-hidden="true" style="color: gold"></i> CONCATULATIONS! <i class="fa fa-star" aria-hidden="true" style="color: gold"></i></h1>
+<div id="concatulations" class="section level1 unnumbered">
+<h1><i class="fa fa-star" aria-hidden="true" style="color: gold"></i> CONCATULATIONS! <i class="fa fa-star" aria-hidden="true" style="color: gold"></i></h1>
 <hr>
 <blockquote>
 <p><strong>Clap your hands. You have earned a great award.</strong></p>
@@ -1059,7 +1063,7 @@ A <code>ggplot</code> has 3 ingredients.
 <p><br></p>
 </div>
 <div id="plot-extras" class="section level1">
-<h1><span class="header-section-number">10</span> Plot extras</h1>
+<h1><span class="header-section-number">9</span> | Plot extras</h1>
 <hr>
 <div id="themes" class="section level2 unnumbered">
 <h2>Themes</h2>
@@ -1111,7 +1115,7 @@ A <code>ggplot</code> has 3 ingredients.
 </div>
 <p><br></p>
 <div class="tip">
-<h3 id="exercise-5" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise</h3>
+<h3 id="exercise-5" class="unnumbered"><i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> EXERCISE</h3>
 <p>Be brave and make a boxplot. We’ve covered how to do a scatterplot with <code>geom_point</code> and a bar chart with <code>geom_col</code>, but how would you make a boxplot showing the prices at each destination? You’re on your own here. Feel free to add <code>color</code> ,<code>facet_wrap</code>, <code>theme</code>, and <code>labs</code> to your boxplots.</p>
 <p><em>May the force be with you.</em></p>
 </div>
@@ -1152,7 +1156,7 @@ where_to_save_it &lt;-<span class="st"> &quot;___.png&quot;</span>
 </div>
 </div>
 <div id="glossary" class="section level1">
-<h1><span class="header-section-number">11</span> | Glossary</h1>
+<h1><span class="header-section-number">10</span> | Glossary</h1>
 <p><strong>Table of <code>aesthetics</code></strong></p>
 <table>
 <thead>
