@@ -352,13 +352,13 @@ div.tocify {
 <div id="schedule" class="section level3 unnumbered">
 <h3>Schedule</h3>
 <pre><code>- Review
-- Air data example
+- Example work flow
 - Explore your data tables
 - Arrange and filter data
-- Join two tables by one or more variables
-- Add new columns calculated from other columns
+- Join two tables together - by one or more variables
+- Add a new column calculated from other columns
 - Save data
-- Heatmap plots</code></pre>
+- Make heatmaps to find the Electro-storm</code></pre>
 <p><br><br></p>
 </div>
 <div id="review-day-1" class="section level2 unnumbered">
@@ -420,34 +420,34 @@ air_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span cl
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">27-137-7554</td>
-<td align="left">2017-10-14</td>
-<td align="right">9</td>
-<td align="right">62.6</td>
-</tr>
-<tr class="even">
-<td align="left">27-137-7554</td>
-<td align="left">2018-04-18</td>
-<td align="right">20</td>
-<td align="right">39.2</td>
-</tr>
-<tr class="odd">
-<td align="left">27-137-7554</td>
-<td align="left">2016-04-30</td>
-<td align="right">3</td>
-<td align="right">39.2</td>
+<td align="left">27-137-7001</td>
+<td align="left">2017-04-15</td>
+<td align="right">10</td>
+<td align="right">30.2</td>
 </tr>
 <tr class="even">
 <td align="left">27-137-7001</td>
-<td align="left">2016-04-11</td>
+<td align="left">2016-10-24</td>
 <td align="right">13</td>
-<td align="right">53.0</td>
+<td align="right">59.0</td>
 </tr>
 <tr class="odd">
-<td align="left">27-137-7001</td>
-<td align="left">2016-08-05</td>
-<td align="right">11</td>
-<td align="right">77.0</td>
+<td align="left">27-137-7554</td>
+<td align="left">2017-06-22</td>
+<td align="right">7</td>
+<td align="right">56.6</td>
+</tr>
+<tr class="even">
+<td align="left">27-137-7554</td>
+<td align="left">2018-09-01</td>
+<td align="right">9</td>
+<td align="right">68.0</td>
+</tr>
+<tr class="odd">
+<td align="left">27-137-7554</td>
+<td align="left">2017-08-12</td>
+<td align="right">23</td>
+<td align="right">75.2</td>
 </tr>
 </tbody>
 </table>
@@ -969,6 +969,10 @@ scrap &lt;-<span class="st"> </span><span class="kw">arrange</span>(scrap, <span
 <td align="left"><code>%in%</code></td>
 <td align="left">is value in a list: <code>X %in% c(1,3,5)</code></td>
 </tr>
+<tr class="even">
+<td align="left"><code>is.na(...)</code></td>
+<td align="left">Is the value missing?</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1058,7 +1062,7 @@ starwars_data &lt;-<span class="st"> </span>starwars</code></pre></div>
 <li>Scroll through the Star Wars dataset and find a character you find interesting. <em>(Or run <code>sample_n(starwars_data, 1)</code> to choose your character at random.)</em></li>
 <li><strong>Keep it hidden!</strong> Don’t show your neighbor the character you chose.</li>
 <li>Take turns asking each other questions about your partner’s Star Wars character.</li>
-<li>Use the answers to build a <code>filter()</code> function and narrow down the potential character your neighbor may have picked.</li>
+<li>Use the answers to build a <code>filter()</code> function and narrow down the potential characters your neighbor may have picked.</li>
 </ol>
 <p>For example: Here’s a <code>filter()</code> statement that filters the data to the character <em>Plo Koon</em>.</p>
 <div style="width: 90%; margin-left: 8%">

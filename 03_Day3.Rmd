@@ -824,13 +824,13 @@ scrap <- scrap %>%
 
 ```
 
-```{r, echo = T, eval = T}
+```{r, echo=T, eval=T}
 ggplot(scrap)
 ```
 
 <br>
 
-> Note when we load the package it's `library (ggplot2)`, but the function to make a plot is `ggplot(scrap)`. We admit, it is a bit silly.
+> we load the package `library (ggplot2)`, but the function to make a plot is `ggplot(scrap)`. 
 
 
 ## 2. The the X, Y _aesthetics_  {-}
@@ -857,7 +857,7 @@ Try making a scatterplot of any two columns.
 _Hint: Numeric variables will be more informative._
 
 ```{r, eval = F, echo = T}
-ggplot(scrap, aes(x = __column1__, y = __column2__)) + geom_point()
+ggplot(scrap, aes(x = column1, y = column2 )) + geom_point()
 ```
 </div>
 

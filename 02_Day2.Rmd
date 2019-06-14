@@ -25,16 +25,18 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 ![](images/day2_bb8_sq.png){width="260" style="float: left; margin-right: 60px; margin-top: -4px;"}
 
+
 ### Schedule  {-}
 
     - Review
-    - Air data example
+    - Example work flow
     - Explore your data tables
     - Arrange and filter data
-    - Join two tables by one or more variables
-    - Add new columns calculated from other columns
+    - Join two tables together - by one or more variables
+    - Add a new column calculated from other columns
     - Save data
-    - Heatmap plots
+    - Make heatmaps to find the Electro-storm
+
 
 <br><br>
 
@@ -242,7 +244,7 @@ Having an exact record of what you did can be great documentation for yourself a
 <div class="well">
 <h4> <i class="fa fa-mitten" aria-hidden="true"></i> QUESTIONS</h4>
 
-Any questions? Any questions at all. No matter how large or terribly small... Last chance, we are about to move on...
+Any questions? No matter how large or small... Going once, going twice...
 </div>
 
 <br>
@@ -497,7 +499,7 @@ __Key comparison operators__
 | `==`  | equal to                 |
 | `!=`  | NOT equal to             |
 | `%in%`| is value in a list: `X %in% c(1,3,5)` |
-
+| `is.na(...)`  | Is the value missing? |
 
 ## <i class="fa fa-bicycle" aria-hidden="true" style="color: green"></i> Exercise {-}
 
@@ -608,7 +610,7 @@ starwars_data <- starwars
 1. Scroll through the Star Wars dataset and find a character you find interesting. _(Or run `sample_n(starwars_data, 1)` to choose your character at random.)_
 1. __Keep it hidden!__ Don't show your neighbor the character you chose.
 1. Take turns asking each other questions about your partner's Star Wars character. 
-1. Use the answers to build a `filter()` function and narrow down the potential character your neighbor may have picked. 
+1. Use the answers to build a `filter()` function and narrow down the potential characters your neighbor may have picked. 
 
 
 For example: Here's a `filter()` statement that filters the data to the character _Plo Koon_.
