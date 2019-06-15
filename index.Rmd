@@ -25,17 +25,11 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 Go to — [Install R](https://itep-r.netlify.com/page/install.html) — to get the latest version of R and RStudio.  
 
-<br>  
-  
-#### Updates
-
-Go to — [Update R](https://itep-r.netlify.com/page/install.html#update-r) — if you already have R but haven't used it in awhile.  
-  
     
 ## Intro to R
 <hr>
 
-This series teaches the basics of importing data, using new packages, cleaning and summarizing data with __tidy__ tools, and using `ggplot2` to make charts, maps and other data visualizations. 
+This series of workshops teaches the basics of importing data, using new packages, cleaning and summarizing data with __tidy__ tools, and using `ggplot2` to create charts, maps and other data visualizations. 
 
 <div class="row3" style = "margin-top: 20px;">
 
