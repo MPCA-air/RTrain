@@ -108,7 +108,7 @@ This is a temporary solution to get `R` + `RStudio` on your computer for the tra
 
 - If you see the screen below - Great work!  You're ready to go.
 
-![](images/install/rstudio_open.png){style="margin-left: 7%; width: 85%"}
+![](images/install/rstudio_open1.png){style="margin-left: 7%; width: 85%"}
 
 </p></div></details>
 
