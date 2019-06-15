@@ -75,14 +75,13 @@ __Day 3__
 <div class="row3" style = "margin-top: 30px;">
 <div class="column3-txt">
 
-1. Become a a young Jedi scrap scavenger
+1. Become a Jedi scrap scavenger
 1. __Project__ launch
     - Create a new project and R script
     - Install R packages
     - Create variables, lists, data frames
 1. __Read data__ into R
     - Arrange, select and __filter__ data 
-    - Look for errors and outliers
 1. Plot the data!
 
 Packages: `readr`, `dplyr`  
